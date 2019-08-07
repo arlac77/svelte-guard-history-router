@@ -3,6 +3,13 @@ node_js:
   - 10.16.2
 addons:
   chrome: stable
+  ssh_known_hosts: $UPLOAD_SERVER
+
+before_script:
+  - openssl aes-256-cbc -K $encrypted_d0f036b99c7e_key -iv $encrypted_d0f036b99c7e_iv -in ci/id_rsa.enc -out /tmp/id_rsa -d
+  - eval "$(ssh-agent -s)"
+  - chmod 600 /tmp/id_rsa
+  - ssh-add /tmp/id_rsa
 cache: npm
 jobs:
   include:
@@ -12,7 +19,8 @@ jobs:
         - SERVER_PID=$!
         - npm run test
         - kill $SERVER_PID
-        - ls -l
+        - ls -l *.gng
+        - rsync -v *.png ci_upload@$UPLOAD_SERVER:/tmp
     - stage: doc
       node_js: lts/*
       skip_cleanup: 'true'
