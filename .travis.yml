@@ -16,7 +16,9 @@ jobs:
   include:
     - stage: test
       script:
+        - npm run pretest
         - npx serve -n -l 5000 example/public &
+        - sleep 5
         - SERVER_PID=$!
         - npm run test
         - kill $SERVER_PID
