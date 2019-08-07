@@ -2,13 +2,14 @@ language: node_js
 node_js:
   - 10.16.2
 cache: npm
-script:
-  - npx serve -n -l 5000 example/public &
-  - SERVER_PID=$!
-  - npm run test
-  - kill $SERVER_PID
 jobs:
   include:
+    - stage: test
+      script:
+        - npx serve -n -l 5000 example/public &
+        - SERVER_PID=$!
+        - npm run test
+        - kill $SERVER_PID
     - stage: doc
       node_js: lts/*
       skip_cleanup: 'true'
@@ -22,7 +23,7 @@ jobs:
         provider: script
         skip_cleanup: 'true'
         script:
-          - npx semantic-release
+          - npx xsemantic-release
 branches:
   only:
     - master
