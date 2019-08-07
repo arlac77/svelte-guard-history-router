@@ -1,15 +1,22 @@
-module.exports = {
-  "Demo test Google": client => {
-    client
-      .url("https://www.google.com")
-      .waitForElementVisible("body", 1000)
-      .assert.title("Google")
-      .assert.visible("input[type=text]")
-      .setValue("input[type=text]", "rembrandt van rijn")
-      .waitForElementVisible("button[name=btnG]", 1000)
-      .click("button[name=btnG]")
-      .pause(1000)
-      .assert.containsText("ol#rso li:first-child", "Rembrandt - Wikipedia")
-      .end();
-  }
-};
+const assert = require("assert");
+
+describe("<Router> component", function() {
+  this.slow(2000);
+  this.timeout(3000);
+
+  it("renders on the page", browser => {
+    browser
+      .url("http://localhost:5000")
+      .expect.element("body")
+      .to.be.present.before(1000);
+
+    browser
+      .waitForElementVisible("h1.routetitle")
+      .assert.containsText(
+        "h1.routetitle",
+        "svelte-guard-history-router example"
+      );
+
+    browser.end();
+  });
+});

@@ -10,7 +10,8 @@
   ],
   "scripts": {
     "pretest": "(cd example && rollup -c)",
-    "test": "sirv start --single tests/public & nightwatch tests/simple-test.js",
+    "xstart" : "sirv start --single example/public/ &",
+    "test": "nightwatch tests/simple-test.js",
     "prepare": "rollup -c",
     "start": "rollup -c -w"
   },

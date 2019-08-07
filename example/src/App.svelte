@@ -9,5 +9,10 @@
 </script>
 
 <div>
+  <h1 class="routetitle">svelte-guard-history-router example</h1>
+
+  <Link href="/about">About</Link>
+  <Link href="/">Home</Link>
+  
   <Outlet {router}>nichts gefunden</Outlet>
 </div>
