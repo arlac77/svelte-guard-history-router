@@ -9,9 +9,8 @@
     "router"
   ],
   "scripts": {
-    "cy:run": "cypress run",
-    "cy:open": "cypress open",
-    "test": "(rollup -c tests/rollup.config.js && sirv start --single tests/public & cypress run",
+    "pretest": "(cd example && rollup -c)",
+    "test": "sirv start --single tests/public & nightwatch tests/simple-test.js",
     "prepare": "rollup -c",
     "start": "rollup -c -w"
   },
@@ -19,7 +18,7 @@
     "multi-path-matcher": "^1.3.2"
   },
   "devDependencies": {
-    "cypress": "^3.4.1",
+    "nightwatch": "^1.1.13",
     "rollup": "^1.19.3",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.1.0",
