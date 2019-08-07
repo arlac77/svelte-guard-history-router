@@ -6,6 +6,7 @@ addons:
   ssh_known_hosts: $UPLOAD_SERVER
 
 before_script:
+  - echo "$UPLOAD_SERVER ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBH2TydShl6oPEvF+2gWsCYLbfgps6rpZjbPz889LsWUvZiLnvoQUlmH8C4i1cUAl+eq5CiP7egcbrJ60p7fvM/k=" >> $HOME/.ssh/known_hosts
   - openssl aes-256-cbc -K $encrypted_d0f036b99c7e_key -iv $encrypted_d0f036b99c7e_iv -in ci/id_rsa.enc -out /tmp/id_rsa -d
   - eval "$(ssh-agent -s)"
   - chmod 600 /tmp/id_rsa
@@ -19,7 +20,7 @@ jobs:
         - SERVER_PID=$!
         - npm run test
         - kill $SERVER_PID
-        - ls -l *.gng
+        - ls -l *.png
         - rsync -v *.png ci_upload@$UPLOAD_SERVER:/tmp
     - stage: doc
       node_js: lts/*
