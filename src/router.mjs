@@ -106,11 +106,13 @@ export class Router {
 
     this.context.params = params;
 
-    await Promise.all(
-      route.guards
-        .filter(p => p.enter !== undefined)
-        .map(p => p.enter(this.context))
-    );
+    if (route !== undefined) {
+      await Promise.all(
+        route.guards
+          .filter(p => p.enter !== undefined)
+          .map(p => p.enter(this.context))
+      );
+    }
 
     this.current = route;
 
