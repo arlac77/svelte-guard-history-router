@@ -1,0 +1,11 @@
+build
+tests
+doc
+*.log
+*.tmp
+.test
+.tmp
+.npmrc
+.travis.yml
+.vscode
+.nyc_output
