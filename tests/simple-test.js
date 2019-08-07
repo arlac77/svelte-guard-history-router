@@ -19,4 +19,40 @@ describe("<Router> component", function() {
 
     browser.end();
   });
+
+  it("selecting routes", browser => {
+    browser
+      .url("http://localhost:5000/")
+      .waitForElementVisible("h2.routetitle")
+      .assert.containsText("h2.routetitle", "Home");
+
+    browser
+      .url("http://localhost:5000/index.html")
+      .waitForElementVisible("h2.routetitle")
+      .assert.containsText("h2.routetitle", "Home");
+
+    browser
+      .url("http://localhost:5000/about")
+      .waitForElementVisible("h2.routetitle")
+      .assert.containsText("h2.routetitle", "About");
+
+    browser.end();
+  });
+
+  it("clicking on link", browser => {
+    browser
+      .url("http://localhost:5000/")
+      .waitForElementVisible('a[href="/about"]')
+      .click('a[href="/about"]', () => {
+        browser
+          .waitForElementVisible("h2.routetitle")
+          .assert.containsText("h2.routetitle", "About")
+          .click('a[href="/"]', () => {
+            browser
+              .waitForElementVisible("h2.routetitle")
+              .assert.containsText("h2.routetitle", "Home");
+            browser.end();
+          });
+      });
+  });
 });
