@@ -12,6 +12,7 @@ jobs:
         - SERVER_PID=$!
         - npm run test
         - kill $SERVER_PID
+        - ls -l
     - stage: doc
       node_js: lts/*
       skip_cleanup: 'true'

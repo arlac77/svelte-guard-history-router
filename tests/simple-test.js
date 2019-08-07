@@ -44,10 +44,12 @@ describe("<Router> component", function() {
       .url("http://localhost:5000/")
       .waitForElementVisible('a[href="/about"]')
       .click('a[href="/about"]', () => {
+        browser.saveScreenshot('./click-about.png')
         browser
           .waitForElementVisible("h2.routetitle")
           .assert.containsText("h2.routetitle", "About")
           .click('a[href="/"]', () => {
+            browser.saveScreenshot('./click-home.png')
             browser
               .waitForElementVisible("h2.routetitle")
               .assert.containsText("h2.routetitle", "Home");
