@@ -1,30 +1,14 @@
-let server_path;
-let desiredCapabilities;
-
-server_path = "/usr/bin/safaridriver";
-desiredCapabilities = {
-  browserName: "safari"
-};
-
-server_path = "node_modules/.bin/chromedriver";
-desiredCapabilities = {
-  browserName: "chrome",
-  chromeOptions: {
-    args: ["--headless", "--no-sandbox", "--disable-gpu"]
-  }
+const webdriver = {
+  start_process: true,
+  server_path: "node_modules/.bin/chromedriver",
+  port: 9515,
+  log_path: false
 };
 
 module.exports = {
   src_folders: ["tests"],
 
   output_folder: "result",
-
-  webdriver: {
-    start_process: true,
-    server_path,
-    port: 9515,
-    log_path: false
-  },
 
   test_runner: {
     type: "mocha",
@@ -36,7 +20,22 @@ module.exports = {
 
   test_settings: {
     default: {
-      desiredCapabilities,
+      webdriver: { ...webdriver, server_path: "/usr/bin/safaridriver" },
+
+      desiredCapabilities: {
+        browserName: "safari"
+      }
+    },
+    ci: {
+      webdriver,
+
+      desiredCapabilities: {
+        browserName: "chrome",
+        chromeOptions: {
+          args: ["--headless", "--no-sandbox", "--disable-gpu"]
+        }
+      },
+
       screenshots: {
         enabled: true,
         path: "./",

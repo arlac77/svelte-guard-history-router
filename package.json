@@ -11,7 +11,7 @@
   "scripts": {
     "pretest": "(cd example && rollup -c)",
     "start": "npx serve -u -s -n -l 5000 example/public",
-    "test": "nightwatch tests/simple-test.js"
+    "test": "nightwatch -e ci"
   },
   "dependencies": {
     "multi-path-matcher": "^1.3.2"
