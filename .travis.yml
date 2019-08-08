@@ -23,7 +23,7 @@ jobs:
         - npm run test
         - kill $SERVER_PID
         - ls -l *.png
-        - rsync -avz -e'ssh -v -i /tmp/id_rsa' *.png ci_upload@$UPLOAD_SERVER:/tmp
+        - rsync -avz -e'ssh -v' *.png ci_upload@$UPLOAD_SERVER:/tmp
     - stage: doc
       node_js: lts/*
       skip_cleanup: 'true'
