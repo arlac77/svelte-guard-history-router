@@ -1,6 +1,7 @@
 <script>
   import About from "./About.svelte";
   import Home from "./Home.svelte";
+  import Login from "./Login.svelte";
   import Article from "./Article.svelte";
   import Articles from "./Articles.svelte";
   import ArticleHistory from "./ArticleHistory.svelte";
@@ -15,7 +16,7 @@
 
   Object.keys(articles).forEach(id => (articles[id].id = id));
 
-  const prepareArticles = {
+  const guardArticles = {
     enter: context => {
       console.log('enter articles');
       context.articles = articles;
@@ -26,7 +27,7 @@
     }
   };
 
-  const prepareArticle = {
+  const guardArticle = {
     enter: context => {
       console.log('enter article');
       const article = articles[context.params.article];
@@ -38,12 +39,24 @@
     }
   };
 
+  const guardLogin = {
+    enter: context => {
+      console.log('enter login');
+      context.session = true;
+    },
+    leave: context => {
+      console.log('leave login');
+      delete context.session;
+    }
+  };
+  
   const router = new Router([
-    route("/about", About),
     route("/*", Home),
-    route("/article", prepareArticles, Articles),
-    route("/article/:article", prepareArticle, Article),
-    route("/article/:article/history", prepareArticle, ArticleHistory)
+    route("/about", About),
+    route("/login", Login),
+    route("/article", guardLogin, guardArticles, Articles),
+    route("/article/:article", guardLogin, guardArticle, Article),
+    route("/article/:article/history", guardLogin, guardArticle, ArticleHistory)
   ]);
 </script>
 
