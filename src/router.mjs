@@ -126,6 +126,17 @@ export class Router {
   }
 }
 
+class Route {
+  constructor(path,component,guards=[])
+  {
+    Object.defineProperties(this,{
+      part: { value: path },
+      component: { value: component },
+      guards: { value: guards },
+    });
+  }
+}
+
 export function route(path, ...args) {
   const component = args.pop();
   const route = {
