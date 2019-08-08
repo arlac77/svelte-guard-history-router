@@ -1,27 +1,40 @@
 <script>
   export let context;
 
-  let username;
+  let username = "";
   let password = "";
 
+  let message;
+
   async function submit() {
-    await login(username, password);
-    context.router.push("/");
-   }
-   
-   async function login(username,password) {
-     return new Promise((resolve,reject) => {
-       setTimeout(() => {
-          if(user === 'user1' && password === '1234') 
-          resolve() else reject(); } ,2000);
-     }
-     );
-   }
-   
+    try {
+      await login(username, password);
+      context.router.push("/");
+    } catch (e) {
+      message = e;
+    }
+  }
+
+  async function login(username, password) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (username === "user1" && password === "1234") {
+          resolve();
+        } else {
+          reject(new Error("invalid credentials"));
+        }
+      }, 2000);
+    });
+  }
 </script>
 
 <div>
   <form on:submit|preventDefault={submit}>
+
+    {#if message}
+      <div>{message}</div>
+    {/if}
+
     <fieldset>
       <label>Username</label>
       <input
@@ -41,9 +54,7 @@
     </fieldset>
 
     <div>
-      <button type="submit" disabled={!username || !password}>
-        Login
-      </button>
+      <button type="submit" disabled={!username || !password}>Login</button>
     </div>
   </form>
 </div>
