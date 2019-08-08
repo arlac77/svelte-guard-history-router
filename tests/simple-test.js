@@ -38,9 +38,9 @@ describe("<Router> component", function() {
 
       /*
     browser
-      .url("http://localhost:5000/article/0001")
+      .url("http://localhost:5000/article/01")
       .waitForElementVisible("h2.routetitle")
-      browser.saveScreenshot("./url-article-0001.png")
+      browser.saveScreenshot("./url-article-01.png")
       .assert.containsText("h2.routetitle", "Article Peanutbutter");
 */
     browser.end();
@@ -60,8 +60,8 @@ describe("<Router> component", function() {
             browser
               .waitForElementVisible("h2.routetitle")
               .assert.containsText("h2.routetitle", "Home")
-              .click('a[href="/article/0001"]', () => {
-                browser.saveScreenshot("./click-article-0001.png");
+              .click('a[href="/article/01"]', () => {
+                browser.saveScreenshot("./click-article-01.png");
                 browser
                   .waitForElementVisible("h2.routetitle")
                   .assert.containsText("h2.routetitle", "Article Peanutbutter");
