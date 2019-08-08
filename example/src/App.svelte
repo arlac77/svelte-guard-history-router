@@ -40,8 +40,13 @@
   };
 
   const guardLogin = {
-    enter: context => {
+    enter: async context => {
       console.log('enter login');
+
+      if(!context.session) {
+        await context.router.push('/login');
+      } 
+
       context.session = true;
     },
     leave: context => {

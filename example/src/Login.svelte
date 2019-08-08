@@ -3,7 +3,6 @@
 
   let username = "";
   let password = "";
-
   let message;
 
   async function submit() {
