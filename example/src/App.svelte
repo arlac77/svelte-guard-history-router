@@ -8,7 +8,7 @@
   import ArticleHistory from "./ArticleHistory.svelte";
   import { loadArticles, articles } from "./util.mjs";
 
-  import { Outlet, Link, Router, Route, route, waitingGuard } from "../../src/index.svelte";
+  import { Outlet, Link, Router, param, Route, route, waitingGuard } from "../../src/index.svelte";
 
 
   const guardArticles = {
@@ -65,19 +65,25 @@
         guardArticle,
         ArticleHistory
       )
-    ]);
-    // [paramGuard('article',guardArticle)]
+    ],
+    [param('article')]
+    );
+
+    let article;
+
+    $: article = $router.param.article;
+
 </script>
 
 <div>
   <h1 class="routetitle">svelte-guard-history-router example</h1>
-
+  <div>{article}</div>
   <Link href="/about">About</Link>
   <Link href="/">Home</Link>
   <Link href="/article">List</Link>
   <Link href="/article/01">Article 01</Link>
   <Link href="/article/02">Article 02</Link>
   <Link href="/article/03/history">Article 03 History</Link>
-
+  
   <Outlet {router}>nichts gefunden</Outlet>
 </div>

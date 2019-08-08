@@ -2,11 +2,13 @@ import { compile, matcher } from "multi-path-matcher";
 import { Route } from "./route.mjs";
 
 /**
+ * @property {Route[]} routes
+ * @property {Object} compiledRoutes
+ * @property {Route} current
  * @property {string} prefix
- * @property {Guard[]} paramGuards
  */
 export class Router {
-  constructor(routes = [], paramGuards = [], prefix = "") {
+  constructor(routes = [], params = [], prefix = "") {
     let current;
 
     let compiledRoutes = compile(routes);
@@ -21,14 +23,25 @@ export class Router {
       router: this
     };
 
+    const _params = {};
+
+    for(const param of params) {
+      _params[param.name] = param;
+
+      param.subscriptions = new Set();
+      param.subscribe = (cb) => {
+        param.subscriptions.add(cb);
+        cb(this.context.param[param]);
+        return () => param.subscriptions.delete(cb);
+      };
+    }
+
     Object.defineProperties(this, {
       prefix: { value: prefix },
       subscriptions: { value: new Set() },
       contextSubscriptions: { value: new Set() },
       context: { value: context },
-      paramGuards: {
-        value: paramGuards
-      },
+      params: { value: _params },
       compiledRoutes: {
         get() {
           return compiledRoutes;
@@ -112,26 +125,55 @@ export class Router {
    * @param {string} path where to go
    */
   async push(path) {
+
+    const context = this.context;
+
     const { route, params } = matcher(this.compiledRoutes, path);
 
     if (this.current !== undefined) {
-      await this.current.leave(this.context, route);
+      await this.current.leave(context, route);
     }
 
-    this.context.params = params;
+    const old = context.params;
+    const keys = new Set([...Object.keys(old),...Object.keys(params)]);
+
+    keys.forEach(key => {
+      if(old[key] !== params[key]) {
+        const p = this.params[key];
+        console.log("param", key, p, old[key], params[key]);
+
+        if(p) {
+          p.subscriptions.forEach(subscription =>
+            subscription(params[key])
+          );
+        }
+      }
+    });
+
+    context.params = params;
 
     if (route !== undefined) {
-      await route.enter(this.context, this.current);
+      await route.enter(context, this.current);
     }
 
     this.current = route;
 
     this.contextSubscriptions.forEach(subscription =>
-      subscription(this.context)
+      subscription(context)
     );
   }
 
-  
+  param(name) {
+    this.params 
+    return {
+      subscribe(cb) {
+        this.subscriptions.add(cb);
+        cb(this);
+        return () => this.subscriptions.delete(cb);
+      }
+    }; 
+  }
+
   /**
    * Fired when the route (or the target component changes)
    * @param cb 
@@ -141,4 +183,11 @@ export class Router {
     cb(this);
     return () => this.subscriptions.delete(cb);
   }
+}
+
+
+export function param(name) {
+  return {
+    name: name
+  };
 }
