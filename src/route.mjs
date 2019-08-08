@@ -1,3 +1,8 @@
+/**
+ * @property {string} path
+ * @property {SvelteComponent} component
+ * @property {Guard[]} guards
+ */
 export class Route {
   constructor(path, component, guards = []) {
     Object.defineProperties(this, {
@@ -13,29 +18,36 @@ export class Route {
     }
   }
 
+  hasGuard(guard)
+  {
+    return this.guards.find((g) => g === guard) ? true : false;
+  }
+
   /**
-   * enter the route from a former one
+   * Enter the route from a former one.
+   * Calls guard enter on all guards present in the our gurade but absent in the former one
    * @param {RouterContext} context
    * @param {Route} form
    */
   async enter(context, from) {
     return Promise.all(
       this.guards
-        .filter(p => p.enter !== undefined)
-        .map(p => p.enter(context))
+        .filter(g => g.enter !== undefined && (from === undefined || !from.hasGuard(g)))
+        .map(g => g.enter(context))
     );
   }
 
   /**
-   * leave the route to a new one
+   * Leave the route to a new one.
+   * Calls quard leave on all our guards wich are not in the new route 
    * @param {RouterContext} context
    * @param {Route} to
    */
   async leave(context, to) {
     return Promise.all(
       this.guards
-        .filter(p => p.leave !== undefined)
-        .map(p => p.leave(context))
+        .filter(g => g.leave !== undefined &&(to === undefined || !to.hasGuard(g)))
+        .map(g => g.leave(context))
     );
   }
 }

@@ -17,19 +17,23 @@
 
   const prepareArticles = {
     enter: context => {
+      console.log('enter articles');
       context.articles = articles;
     },
     leave: context => {
+      console.log('leave articles');
       delete context.articles;
     }
   };
 
   const prepareArticle = {
     enter: context => {
+      console.log('enter article');
       const article = articles[context.params.article];
       context.article = article;
     },
     leave: context => {
+      console.log('leave article');
       delete context.article;
     }
   };

@@ -1,5 +1,8 @@
 import { compile, matcher } from "multi-path-matcher";
 
+/**
+ * @property {string} prefix
+ */
 export class Router {
   constructor(routes = [], prefix = "") {
     let current;
@@ -93,6 +96,10 @@ export class Router {
     await this.push(path);
   }
 
+  /**
+   * Leave current route and enter route for given path
+   * @param {string} path where to go
+   */
   async push(path) {
     const { route, params } = matcher(this.compiledRoutes, path);
 
