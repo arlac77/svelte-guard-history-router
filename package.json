@@ -2,7 +2,7 @@
   "name": "svelte-guard-history-router",
   "version": "0.0.0-semantic-release",
   "svelte": "src/index.svelte",
-  "module": "src/router.esm",
+  "module": "src/index.svelte",
   "description": "svelte guarded history router",
   "keywords": [
     "svelte",
@@ -11,8 +11,7 @@
   "scripts": {
     "pretest": "(cd example && rollup -c)",
     "start": "npx serve -u -s -n -l 5000 example/public",
-    "test": "nightwatch tests/simple-test.js",
-    "prepare": "rollup -c"
+    "test": "nightwatch tests/simple-test.js"
   },
   "dependencies": {
     "multi-path-matcher": "^1.3.2"
