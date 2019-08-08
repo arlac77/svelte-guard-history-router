@@ -3,7 +3,7 @@
 
     let article;
 
-    context.subscribe(c => article = c.article);
+    $: article = $context.article;
 </script>
 
 <h2 class="routetitle">Article {article.name}</h2>

@@ -5,7 +5,7 @@
 
   let articles;
 
-  context.subscribe(c => (articles = Object.values(c.articles)));
+  $: articles = Object.values($context.articles);
 </script>
 
 <h2 class="routetitle">Articles</h2>

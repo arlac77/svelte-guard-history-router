@@ -11,8 +11,9 @@ export class Router {
 
     const context = {
       subscribe: cb => {
-        this.contextSubscriptions.push(cb);
+        this.contextSubscriptions.add(cb);
         cb(this.context);
+        return () => this.contextSubscriptions.delete(cb);
       },
       params: {},
       router: this
@@ -20,8 +21,8 @@ export class Router {
 
     Object.defineProperties(this, {
       prefix: { value: prefix },
-      subscriptions: { value: [] },
-      contextSubscriptions: { value: [] },
+      subscriptions: { value: new Set() },
+      contextSubscriptions: { value: new Set() },
       context: { value: context },
       compiledRoutes: {
         get() {
@@ -121,6 +122,8 @@ export class Router {
   }
 
   subscribe(cb) {
-    this.subscriptions.push(cb);
+    this.subscriptions.add(cb);
+    cb(this);
+    return () => this.subscriptions.delete(cb);
   }
 }

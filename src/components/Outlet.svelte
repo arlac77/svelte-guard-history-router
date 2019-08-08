@@ -3,18 +3,13 @@
 
   let component, context;
 
-  router.subscribe(value => {
-    component = router.component;
-  });
-
-  router.context.subscribe(value => {
-    context = value;
-  });
+  $: component = $router.component;
+  $: context = $router.context;
 </script>
 
 <div>
   {#if component}
-    <svelte:component this={component} {context}/>
+    <svelte:component this={component} {context} />
   {:else}
     <slot />
   {/if}
