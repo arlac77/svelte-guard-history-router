@@ -25,7 +25,7 @@ export class Route {
 
   /**
    * Enter the route from a former one.
-   * Calls guard enter on all guards present in the our gurade but absent in the former one
+   * Calls guard enter on all guards present in the our gurad but absent in the former one
    * @param {RouterContext} context
    * @param {Route} form
    */
@@ -52,6 +52,12 @@ export class Route {
   }
 }
 
+/**
+ * 
+ * @param {string} path 
+ * @param {Guard[]} args
+ * @param {SvelteComponent} component 
+ */
 export function route(path, ...args) {
   const component = args.pop();
   return new Route(path, component, args);

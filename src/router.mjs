@@ -1,10 +1,12 @@
 import { compile, matcher } from "multi-path-matcher";
+import { Route } from "./route.mjs";
 
 /**
  * @property {string} prefix
+ * @property {Guard[]} paramGuards
  */
 export class Router {
-  constructor(routes = [], prefix = "") {
+  constructor(routes = [], paramGuards = [], prefix = "") {
     let current;
 
     let compiledRoutes = compile(routes);
@@ -24,6 +26,9 @@ export class Router {
       subscriptions: { value: new Set() },
       contextSubscriptions: { value: new Set() },
       context: { value: context },
+      paramGuards: {
+        value: paramGuards
+      },
       compiledRoutes: {
         get() {
           return compiledRoutes;
@@ -88,6 +93,11 @@ export class Router {
     this.push(path);
   }
 
+  set component(c) {
+    this.current = new Route('',c);
+    this.subscriptions.forEach(subscription => subscription(this));
+  }
+
   get component() {
     const r = this.current;
     return r !== undefined && r.component;
@@ -121,6 +131,11 @@ export class Router {
     );
   }
 
+  
+  /**
+   * Fired when the route (or the target component changes)
+   * @param cb 
+   */
   subscribe(cb) {
     this.subscriptions.add(cb);
     cb(this);
