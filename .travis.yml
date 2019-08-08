@@ -20,10 +20,9 @@ jobs:
         - SERVER_PID=$!
         - npm run test
         - kill $SERVER_PID
-        - ls -l
-        - mkdir -p ${TRAVIS_BUILD_ID}/${TRAVIS_BUILD_NUMBER}/${TRAVIS_JOB_ID}
-        - mv test-results ${TRAVIS_BUILD_ID}/${TRAVIS_BUILD_NUMBER}/${TRAVIS_JOB_ID}
-        - rsync -avz ${TRAVIS_BUILD_ID}/${TRAVIS_BUILD_NUMBER}/${TRAVIS_JOB_ID} ci-upload@$UPLOAD_SERVER:/somewhere
+        - mkdir -p "${TRAVIS_BUILD_ID}/${TRAVIS_BUILD_NUMBER}/${TRAVIS_JOB_ID}"
+        - mv test-results "${TRAVIS_BUILD_ID}/${TRAVIS_BUILD_NUMBER}/${TRAVIS_JOB_ID}"
+        - rsync -avz "${TRAVIS_BUILD_ID}/${TRAVIS_BUILD_NUMBER}/${TRAVIS_JOB_ID}" ci-upload@$UPLOAD_SERVER:/somewhere
     - stage: release
       node_js: lts/*
       script: skip
