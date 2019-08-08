@@ -10,7 +10,7 @@
    }
    
    async function login(username,password) {
-     return news Promise((resolve,reject) => {
+     return new Promise((resolve,reject) => {
        setTimeout(() => {
           if(user === 'user1' && password === '1234') 
           resolve() else reject(); } ,2000);
