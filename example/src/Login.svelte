@@ -22,7 +22,7 @@
         } else {
           reject(new Error("invalid credentials"));
         }
-      }, 2000);
+      }, 500);
     });
   }
 </script>

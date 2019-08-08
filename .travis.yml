@@ -19,11 +19,10 @@ jobs:
         - npm run pretest
         - npx serve -n -l 5000 example/public &
         - SERVER_PID=$!
-        - sleep 3
         - npm run test
         - kill $SERVER_PID
         - ls -l
-        - rsync -avz *.png ci_upload@$UPLOAD_SERVER:/tmp
+        - rsync -avz test-results ci_upload@$UPLOAD_SERVER:/tmp
     - stage: doc
       node_js: lts/*
       skip_cleanup: 'true'

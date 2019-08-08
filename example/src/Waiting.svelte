@@ -1,1 +1,1 @@
-<h2 class="routetitle">Waiting...</h2>
+<h1 class="routetitle">Waiting...</h1>

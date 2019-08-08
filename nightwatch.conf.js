@@ -8,7 +8,7 @@ const webdriver = {
 module.exports = {
   src_folders: ["tests"],
 
-  output_folder: "result",
+  output_folder: "test-results",
 
   test_runner: {
     type: "mocha",
@@ -32,7 +32,7 @@ module.exports = {
       desiredCapabilities: {
         browserName: "chrome",
         chromeOptions: {
-          args: ["--headless", "--no-sandbox", "--disable-gpu"]
+          args: [ "--headless", "--no-sandbox", "--disable-gpu"]
         }
       },
 
