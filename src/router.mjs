@@ -97,21 +97,13 @@ export class Router {
     const { route, params } = matcher(this.compiledRoutes, path);
 
     if (this.current !== undefined) {
-      await Promise.all(
-        this.current.guards
-          .filter(p => p.leave !== undefined)
-          .map(p => p.leave(this.context))
-      );
+      await this.current.leave(this.context, route);
     }
 
     this.context.params = params;
 
     if (route !== undefined) {
-      await Promise.all(
-        route.guards
-          .filter(p => p.enter !== undefined)
-          .map(p => p.enter(this.context))
-      );
+      await route.enter(this.context, this.current);
     }
 
     this.current = route;
@@ -124,32 +116,4 @@ export class Router {
   subscribe(cb) {
     this.subscriptions.push(cb);
   }
-}
-
-class Route {
-  constructor(path,component,guards=[])
-  {
-    Object.defineProperties(this,{
-      part: { value: path },
-      component: { value: component },
-      guards: { value: guards },
-    });
-  }
-}
-
-export function route(path, ...args) {
-  const component = args.pop();
-  const route = {
-    path,
-    component,
-    guards: args
-  };
-
-  route.guards.forEach(guard => {
-    if (guard.attach !== undefined) {
-      guard.attach(route);
-    }
-  });
-
-  return route;
 }
