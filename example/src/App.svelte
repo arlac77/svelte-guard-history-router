@@ -22,18 +22,6 @@
     }
   };
 
-  const guardArticle = {
-    enter: context => {
-      console.log("enter article");
-      const article = articles[context.params.article];
-      context.article = article;
-    },
-    leave: context => {
-      console.log("leave article");
-      delete context.article;
-    }
-  };
-
   const guardLogin = {
     enter: async context => {
       console.log("enter login");
@@ -56,28 +44,48 @@
       route("/*", Home),
       route("/about", About),
       route("/login", Login),
-      route("/article", wg, guardLogin, guardArticles, Articles),
-      route("/article/:article", wg, guardLogin, guardArticle, Article),
+      route("/article", /*guardLogin,*/ guardArticles, Articles),
+      route("/article/:article", guardArticles, Article),
       route(
         "/article/:article/history",
-        wg,
-        guardLogin,
-        guardArticle,
+       /* wg, 
+        guardLogin, */
+        guardArticles,
         ArticleHistory
       )
-    ]);
-    // [paramGuard('article',guardArticle)]
+    ]
+    );
+
+    let article;
+
+    const k = router.keys.get('article');
+
+    $: {
+      article = $k;
+
+      const c = router.context;
+
+      if(c.articles) {
+        c.article = c.articles[article];
+      }
+      else {
+        c.article = {};
+      }
+      console.log("SET article",article, c.article);
+      }
+
 </script>
 
 <div>
   <h1 class="routetitle">svelte-guard-history-router example</h1>
-
   <Link href="/about">About</Link>
   <Link href="/">Home</Link>
   <Link href="/article">List</Link>
   <Link href="/article/01">Article 01</Link>
   <Link href="/article/02">Article 02</Link>
   <Link href="/article/03/history">Article 03 History</Link>
-
+  
   <Outlet {router}>nichts gefunden</Outlet>
+
+  Selected article: <div>{article}</div>
 </div>

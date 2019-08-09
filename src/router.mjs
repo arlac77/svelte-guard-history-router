@@ -2,47 +2,106 @@ import { compile, matcher } from "multi-path-matcher";
 import { Route } from "./route.mjs";
 
 /**
+ * @typedef Key {Object}
+ * @property {string} name
+ * @property {any} value
+ */
+
+/**
+ * @property {Route[]} routes
+ * @property {Map<string,key>} keys
+ * @property {Object} params Object mapping from keys
+ * @property {Object} context
+ * @property {Route} current
  * @property {string} prefix
- * @property {Guard[]} paramGuards
  */
 export class Router {
-  constructor(routes = [], paramGuards = [], prefix = "") {
+  constructor(routes = [], prefix = "") {
     let current;
 
-    let compiledRoutes = compile(routes);
+    routes = compile(routes);
+
+    const contextSubscriptions = new Set();
+    const keys = new Map();
+    const params = {};
+
+    for (const key of routes.reduce(
+      (a, r) => new Set([...r.keys, ...a]),
+      new Set()
+    )) {
+      const subscriptions = new Set();
+      let value;
+
+      const o = {
+        name: key,
+        subscribe: cb => {
+          subscriptions.add(cb);
+          cb(value);
+          return () => subscriptions.delete(cb);
+        },
+        set(v) {
+          o.value = v;
+        }
+      };
+
+      Object.defineProperties(o, {
+        value: {
+          get() {
+            return value;
+          },
+          set(v) {
+            value = v;
+            console.log("set", key, value);
+            subscriptions.forEach(subscription => subscription(value));
+          }
+        }
+      });
+
+      keys.set(key, o);
+    }
 
     const context = {
       subscribe: cb => {
-        this.contextSubscriptions.add(cb);
+        contextSubscriptions.add(cb);
         cb(this.context);
-        return () => this.contextSubscriptions.delete(cb);
-      },
-      params: {},
-      router: this
+        return () => contextSubscriptions.delete(cb);
+      }
     };
+
+    Object.defineProperties(context, {
+      router: { value: this },
+      params: {
+        set(np) {
+          const all = new Set([...Object.keys(params), ...Object.keys(np)]);
+
+          let changed = false;
+          all.forEach(key => {
+            if (params[key] !== np[key]) {
+              const k = keys.get(key);
+              k.value = np[key];
+              changed = true;
+            }
+          });
+
+          if (changed) {
+            contextSubscriptions.forEach(subscription =>
+              subscription(this.context)
+            );
+          }
+        },
+        get() {
+          return params;
+        }
+      }
+    });
 
     Object.defineProperties(this, {
       prefix: { value: prefix },
       subscriptions: { value: new Set() },
-      contextSubscriptions: { value: new Set() },
       context: { value: context },
-      paramGuards: {
-        value: paramGuards
-      },
-      compiledRoutes: {
-        get() {
-          return compiledRoutes;
-        }
-      },
-      routes: {
-        get() {
-          return routes;
-        },
-        set(value) {
-          routes = value;
-          compiledRoutes = compile(routes);
-        }
-      },
+      keys: { value: keys },
+      params: { value: params },
+      routes: { value: routes },
       current: {
         get() {
           return current;
@@ -50,6 +109,7 @@ export class Router {
         set(value) {
           current = value;
           this.subscriptions.forEach(subscription => subscription(this));
+          contextSubscriptions.forEach(subscription => subscription(context));
         }
       }
     });
@@ -69,7 +129,6 @@ export class Router {
     });
 
     window.addEventListener("popstate", event => {
-      console.log("POPSTATE", event);
       if (event.state) {
         let path = event.state.path;
         if (path.startsWith(this.prefix)) {
@@ -79,9 +138,6 @@ export class Router {
         const { route, params } = matcher(this.routes, path);
         this.context.params = params;
         this.current = route;
-        this.contextSubscriptions.forEach(subscription =>
-          subscription(this.context)
-        );
       }
     });
 
@@ -94,7 +150,7 @@ export class Router {
   }
 
   set component(c) {
-    this.current = new Route('',c);
+    this.current = new Route("", c);
     this.subscriptions.forEach(subscription => subscription(this));
   }
 
@@ -112,29 +168,26 @@ export class Router {
    * @param {string} path where to go
    */
   async push(path) {
-    const { route, params } = matcher(this.compiledRoutes, path);
+    const context = this.context;
+
+    const { route, params } = matcher(this.routes, path);
 
     if (this.current !== undefined) {
-      await this.current.leave(this.context, route);
+      await this.current.leave(context, route);
     }
 
-    this.context.params = params;
+    context.params = params;
 
     if (route !== undefined) {
-      await route.enter(this.context, this.current);
+      await route.enter(context, this.current);
     }
 
     this.current = route;
-
-    this.contextSubscriptions.forEach(subscription =>
-      subscription(this.context)
-    );
   }
 
-  
   /**
    * Fired when the route (or the target component changes)
-   * @param cb 
+   * @param cb
    */
   subscribe(cb) {
     this.subscriptions.add(cb);
