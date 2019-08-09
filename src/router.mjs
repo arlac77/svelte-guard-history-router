@@ -2,7 +2,16 @@ import { compile, matcher } from "multi-path-matcher";
 import { Route } from "./route.mjs";
 
 /**
+ * @typedef Key {Object}
+ * @property {string} name
+ * @property {any} value
+ */
+
+/**
  * @property {Route[]} routes
+ * @property {Map<string,key>} keys
+ * @property {Object} params Object mapping from keys
+ * @property {Object} context
  * @property {Route} current
  * @property {string} prefix
  */
@@ -12,7 +21,9 @@ export class Router {
 
     routes = compile(routes);
 
+    const contextSubscriptions = new Set();
     const keys = new Map();
+    const params = {};
 
     for (const key of routes.reduce(
       (a, r) => new Set([...r.keys, ...a]),
@@ -51,20 +62,45 @@ export class Router {
 
     const context = {
       subscribe: cb => {
-        this.contextSubscriptions.add(cb);
+        contextSubscriptions.add(cb);
         cb(this.context);
-        return () => this.contextSubscriptions.delete(cb);
-      },
-      params: {},
-      router: this
+        return () => contextSubscriptions.delete(cb);
+      }
     };
+
+    Object.defineProperties(context, {
+      router: { value: this },
+      params: {
+        set(np) {
+          const all = new Set([...Object.keys(params), ...Object.keys(np)]);
+
+          let changed = false;
+          all.forEach(key => {
+            if (params[key] !== np[key]) {
+              const k = keys.get(key);
+              k.value = np[key];
+              changed = true;
+            }
+          });
+
+          if (changed) {
+            contextSubscriptions.forEach(subscription =>
+              subscription(this.context)
+            );
+          }
+        },
+        get() {
+          return params;
+        }
+      }
+    });
 
     Object.defineProperties(this, {
       prefix: { value: prefix },
       subscriptions: { value: new Set() },
-      contextSubscriptions: { value: new Set() },
       context: { value: context },
       keys: { value: keys },
+      params: { value: params },
       routes: { value: routes },
       current: {
         get() {
@@ -73,6 +109,7 @@ export class Router {
         set(value) {
           current = value;
           this.subscriptions.forEach(subscription => subscription(this));
+          contextSubscriptions.forEach(subscription => subscription(context));
         }
       }
     });
@@ -92,7 +129,6 @@ export class Router {
     });
 
     window.addEventListener("popstate", event => {
-      console.log("POPSTATE", event);
       if (event.state) {
         let path = event.state.path;
         if (path.startsWith(this.prefix)) {
@@ -102,9 +138,6 @@ export class Router {
         const { route, params } = matcher(this.routes, path);
         this.context.params = params;
         this.current = route;
-        this.contextSubscriptions.forEach(subscription =>
-          subscription(this.context)
-        );
       }
     });
 
@@ -143,17 +176,6 @@ export class Router {
       await this.current.leave(context, route);
     }
 
-    const old = context.params;
-    const keys = new Set([...Object.keys(old), ...Object.keys(params)]);
-
-    keys.forEach(key => {
-      if (old[key] !== params[key]) {
-        const k = this.keys.get(key);
-        //console.log("param", key, k, old[key], params[key]);
-        k.value = params[key];
-      }
-    });
-
     context.params = params;
 
     if (route !== undefined) {
@@ -161,19 +183,6 @@ export class Router {
     }
 
     this.current = route;
-
-    this.contextSubscriptions.forEach(subscription => subscription(context));
-  }
-
-  param(name) {
-    this.params;
-    return {
-      subscribe(cb) {
-        this.subscriptions.add(cb);
-        cb(this);
-        return () => this.subscriptions.delete(cb);
-      }
-    };
   }
 
   /**

@@ -48,8 +48,8 @@
       route("/article/:article", guardArticles, Article),
       route(
         "/article/:article/history",
-        wg,
-        guardLogin,
+       /* wg, 
+        guardLogin, */
         guardArticles,
         ArticleHistory
       )
