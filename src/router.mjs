@@ -3,15 +3,51 @@ import { Route } from "./route.mjs";
 
 /**
  * @property {Route[]} routes
- * @property {Object} compiledRoutes
  * @property {Route} current
  * @property {string} prefix
  */
 export class Router {
-  constructor(routes = [], params = [], prefix = "") {
+  constructor(routes = [], prefix = "") {
     let current;
 
-    let compiledRoutes = compile(routes);
+    routes = compile(routes);
+
+    const keys = new Map();
+
+    for (const key of routes.reduce(
+      (a, r) => new Set([...r.keys, ...a]),
+      new Set()
+    )) {
+      const subscriptions = new Set();
+      let value;
+
+      const o = {
+        name: key,
+        subscribe: cb => {
+          subscriptions.add(cb);
+          cb(value);
+          return () => subscriptions.delete(cb);
+        },
+        set(v) {
+          o.value = v;
+        }
+      };
+
+      Object.defineProperties(o, {
+        value: {
+          get() {
+            return value;
+          },
+          set(v) {
+            value = v;
+            console.log("set", key, value);
+            subscriptions.forEach(subscription => subscription(value));
+          }
+        }
+      });
+
+      keys.set(key, o);
+    }
 
     const context = {
       subscribe: cb => {
@@ -23,39 +59,13 @@ export class Router {
       router: this
     };
 
-    const _params = {};
-
-    for(const param of params) {
-      _params[param.name] = param;
-
-      param.subscriptions = new Set();
-      param.subscribe = (cb) => {
-        param.subscriptions.add(cb);
-        cb(this.context.param[param]);
-        return () => param.subscriptions.delete(cb);
-      };
-    }
-
     Object.defineProperties(this, {
       prefix: { value: prefix },
       subscriptions: { value: new Set() },
       contextSubscriptions: { value: new Set() },
       context: { value: context },
-      params: { value: _params },
-      compiledRoutes: {
-        get() {
-          return compiledRoutes;
-        }
-      },
-      routes: {
-        get() {
-          return routes;
-        },
-        set(value) {
-          routes = value;
-          compiledRoutes = compile(routes);
-        }
-      },
+      keys: { value: keys },
+      routes: { value: routes },
       current: {
         get() {
           return current;
@@ -107,7 +117,7 @@ export class Router {
   }
 
   set component(c) {
-    this.current = new Route('',c);
+    this.current = new Route("", c);
     this.subscriptions.forEach(subscription => subscription(this));
   }
 
@@ -125,28 +135,22 @@ export class Router {
    * @param {string} path where to go
    */
   async push(path) {
-
     const context = this.context;
 
-    const { route, params } = matcher(this.compiledRoutes, path);
+    const { route, params } = matcher(this.routes, path);
 
     if (this.current !== undefined) {
       await this.current.leave(context, route);
     }
 
     const old = context.params;
-    const keys = new Set([...Object.keys(old),...Object.keys(params)]);
+    const keys = new Set([...Object.keys(old), ...Object.keys(params)]);
 
     keys.forEach(key => {
-      if(old[key] !== params[key]) {
-        const p = this.params[key];
-        console.log("param", key, p, old[key], params[key]);
-
-        if(p) {
-          p.subscriptions.forEach(subscription =>
-            subscription(params[key])
-          );
-        }
+      if (old[key] !== params[key]) {
+        const k = this.keys.get(key);
+        //console.log("param", key, k, old[key], params[key]);
+        k.value = params[key];
       }
     });
 
@@ -158,36 +162,27 @@ export class Router {
 
     this.current = route;
 
-    this.contextSubscriptions.forEach(subscription =>
-      subscription(context)
-    );
+    this.contextSubscriptions.forEach(subscription => subscription(context));
   }
 
   param(name) {
-    this.params 
+    this.params;
     return {
       subscribe(cb) {
         this.subscriptions.add(cb);
         cb(this);
         return () => this.subscriptions.delete(cb);
       }
-    }; 
+    };
   }
 
   /**
    * Fired when the route (or the target component changes)
-   * @param cb 
+   * @param cb
    */
   subscribe(cb) {
     this.subscriptions.add(cb);
     cb(this);
     return () => this.subscriptions.delete(cb);
   }
-}
-
-
-export function param(name) {
-  return {
-    name: name
-  };
 }
