@@ -1,8 +1,8 @@
 {
   "name": "svelte-guard-history-router",
   "version": "0.0.0-semantic-release",
-  "svelte": "src/index.svelte",
   "module": "src/index.svelte",
+  "svelte": "src/index.svelte",
   "description": "svelte guarded history router",
   "keywords": [
     "svelte",
