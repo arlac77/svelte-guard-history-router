@@ -11,7 +11,6 @@ before_script:
   - eval "$(ssh-agent -s)"
   - chmod 600 /tmp/id_rsa
   - ssh-add /tmp/id_rsa
-cache: npm
 jobs:
   include:
     - stage: test
