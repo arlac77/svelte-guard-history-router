@@ -8,8 +8,7 @@ const sg = (t, name = "xxx") =>
 const articles = {
   "01": {
     name: "Peanutbutter",
-    price: 1.2,
-    history: [{ price: 1.1 }, { price: 1.05 }, { price: 1.0 }]
+    price: 1.2
   },
   "02": { name: "Cheesecake" },
   "03": { name: "Hot Dog" },

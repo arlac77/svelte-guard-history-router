@@ -14,7 +14,7 @@
     "test": "nightwatch -e ci"
   },
   "dependencies": {
-    "multi-path-matcher": "^1.4.0"
+    "multi-path-matcher": "^2.0.0"
   },
   "devDependencies": {
     "chromedriver": "^76.0.0",
