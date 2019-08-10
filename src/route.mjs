@@ -1,6 +1,6 @@
 /**
  * @property {string} path
- * @property {SvelteComponent} component
+ * @property {SvelteComponent} component target to show
  * @property {Guard[]} guards
  */
 export class Route {
