@@ -9,9 +9,11 @@
   import { loadArticles, articles } from "./util.mjs";
 
   import {
+
     Outlet,
     Link,
     Router,
+    RouterContext,
     Route,
     route,
     waitingGuard
@@ -72,13 +74,6 @@
     console.log("SET article", article, c.article);
   }
 
-
-  let keys;
-
-  $: {
-    const c = $router.context;
-    keys = c.keys.values();
-    }
 </script>
 
 <div>
@@ -91,13 +86,5 @@
 
   <Outlet {router}>nothing there</Outlet>
 
-
-  <h3>Params</h3>
-  <ul>
-  {#each [...keys] as key}
-    <li>
-    {key.name} {key.value}
-    </li>
-  {/each}
-  </ul>
+  <RouterContext {router}/>
 </div>

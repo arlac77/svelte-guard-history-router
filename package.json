@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "pretest": "(cd example && rollup -c)",
+    "watch": "(cd example && rollup -c -w)",
     "start": "serve -u -s -n -l 5000 example/public",
     "test": "nightwatch -e ci"
   },

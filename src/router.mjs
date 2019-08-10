@@ -70,6 +70,7 @@ export class Router {
 
     Object.defineProperties(context, {
       router: { value: this },
+      route: { get: () => current },
       keys: { value: keys },
       params: {
         set(np) {
