@@ -62,7 +62,7 @@
   $: {
     article = $k;
 
-    const c = router.context;
+    const c = $router.context;
 
     if (c.articles) {
       c.article = c.articles[article];

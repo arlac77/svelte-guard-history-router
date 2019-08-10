@@ -19,26 +19,31 @@ const articles = {
   "14": { name: "Pizza Funghi" }
 };
 
+const al = (id) => { return { path: `/article/${id}`, title: `Article ${articles[id].name}`}; };
+
+const links = [
+  { path: "/about", title: "About" },
+ // { path: "/index.html", redirect:"/", title: "Home" },
+ { path: "/article", title: "Articles" },
+
+ { path: "/article/01", title: "Peanutbutter" },
+
+//  al('01')
+
+
+ /*
+  { path: "/article/02", title: "Article Cheesecake" },
+{ path: "/article/03", title: "Article Hot Dog" },
+{ path: "/article/12", title: "Article Pizza Hawaii" },
+{ path: "/article/14", title: "Article Pizza Funghi" }
+*/
+];
+
 describe("router", function() {
   this.slow(2000);
   this.timeout(3000);
 
-  it("renders-on-the-page", browser => {
-    browser
-      .url(base)
-      .expect.element("body")
-      .to.be.present.before(1000);
-
-    browser
-      .waitForElementVisible("h1.routetitle")
-      .assert.containsText(
-        "h1.routetitle",
-        "svelte-guard-history-router example"
-      );
-
-    browser.end();
-  });
-
+  /*
   it("navigate-url-routes", function(browser) {
     browser
       .url(`${base}/`)
@@ -59,97 +64,31 @@ describe("router", function() {
       .assert.containsText("h2.routetitle", "About")
       .assert.urlEquals(`${base}/about`);
 
-    /*
-    browser
-      .url(`${base}/article/01`)
-      .saveScreenshot(sg(this,'pre-article-01'))
-      .waitForElementVisible("h2.routetitle")
-      .saveScreenshot(sg(this,'article-01'))
-      .assert.containsText("h2.routetitle", "Article Peanutbutter");
+      browser.end();
+  });
 */
+
+
+  it("navigate-on-link", async function(browser) {
+    for (const l of links) {
+      await browser.url(`${base}${l.path}`);
+      await browser.waitForElementVisible("h2.routetitle");
+      await browser.assert.containsText("h2.routetitle", l.title);
+      await browser.assert.urlEquals(`${base}${l.redirect?l.redirect:l.path}`);
+    }
     browser.end();
   });
 
-  it("clicking-on-link", function(browser) {
-    browser
-      .url(`${base}`)
-      .waitForElementVisible('a[href="/about"]')
-      .click('a[href="/about"]', () => {
-        browser
-          .saveScreenshot(sg(this, "click-about"))
-          .assert.urlContains("/about");
-
-        browser
-          .waitForElementVisible("h2.routetitle")
-          .assert.containsText("h2.routetitle", "About")
-          .click('a[href="/article"]', () => {
-            browser
-              .saveScreenshot(sg(this, "click-home"))
-              .waitForElementVisible("h2.routetitle")
-              .assert.containsText("h2.routetitle", "Articles")
-              .click('a[href="/article/01"]', () => {
-                browser
-                  .saveScreenshot(sg(this, "click-article-01"))
-                  .waitForElementVisible("h2.routetitle")
-                  .assert.containsText("h2.routetitle", "Article Peanutbutter")
-                  .assert.urlEquals(`${base}/article/01`);
-
-                browser.end();
-              });
-          });
-      });
-  });
-
-  /*
   it("clicking-on-link", async function(browser) {
     await browser.url(`${base}`);
 
-    for (const l of [
-      { path: "/about", title: "About" },
-      { path: "/articles", title: "Articles" },
-      { path: "/article/01", title: "Article Peanutbutter" }
-    ]) {
+    for (const l of links) {
       await browser.waitForElementVisible(`a[href="${l.path}"]`);
-      browser.saveScreenshot(sg(this, l.title));
+      await browser.saveScreenshot(sg(this, l.title));
       await browser.click(`a[href="${l.path}"]`);
       await browser.assert.containsText("h2.routetitle", l.title);
     }
     browser.end();
   });
-*/
-
-  it("browse-through-articles", async function(browser) {
-    browser.url(`${base}`).click('a[href="/article"]', async () => {
-      await browser
-        .saveScreenshot(sg(this, "overview"))
-        .waitForElementVisible("h2.routetitle")
-        .assert.containsText("h2.routetitle", "Articles")
-        .assert.urlEquals(`${base}/article`);
-
-      const ids = Object.keys(articles);
-
-      const checkArticle = async i => {
-        const id = ids[i];
-        if (id === undefined) {
-          browser.end();
-          return;
-        }
-        console.log("check", id);
-        const article = articles[id];
-
-         await browser.click(`a[href="/article/${id}"]`, async () => {
-           await browser
-            .waitForElementVisible("h2.routetitle")
-            .saveScreenshot(sg(this, `click-${id}`))
-            .assert.urlEquals(`${base}/article/${id}`)
-            .assert.containsText("h2.routetitle", `Article ${article.name}`);
-           await checkArticle(i + 1);
-        });
-
-        console.log("done check", id);
-      };
-
-      await checkArticle(0);
-    });
-  });
+  
 });

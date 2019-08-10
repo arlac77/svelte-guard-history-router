@@ -1,9 +1,14 @@
 <script>
-    export let context;
+  import { Link } from "../../src/index.svelte";
 
-    let article;
+  export let context;
 
-    $: article = $context ? $context.article : {  };
+  let article;
+
+  $: article = $context ? $context.article : {};
 </script>
 
 <h2 class="routetitle">Article {article.name}</h2>
+
+
+<Link href="/category/{article.category}">Category</Link>
