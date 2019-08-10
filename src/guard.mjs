@@ -3,6 +3,10 @@
  * Like presents of values in the context
  */
 export class Guard {
+  hasGuard(other) {
+    return this === other;
+  }
+
   attach(route) {}
 
   async enter(route, context) {}
@@ -15,6 +19,10 @@ export class Guard {
  */
 export async function sequenceGuard(children) {
   return {
+    hasGuard(guard) {
+      return children.find(g => g === g.hasGuard(guard)) ? true : false;
+    },
+
     attach: route => children.forEach(c => c.attach(route)),
     enter: async (...args) => {
       for (child of children) {
@@ -29,14 +37,18 @@ export async function sequenceGuard(children) {
   };
 }
 
-
 /**
  * execute guards in a parallel
  */
 export async function parallelGuard(children) {
   return {
+    hasGuard(guard) {
+      return children.find(g => g === g.hasGuard(guard)) ? true : false;
+    },
     attach: route => children.forEach(c => c.attach(route)),
-    enter: async (...args) => Promise.all([...children].map(c => c.enter(...args))),
-    leave: async (...args) => Promise.all([...children].map(c => c.leave(...args)))
+    enter: async (...args) =>
+      Promise.all([...children].map(c => c.enter(...args))),
+    leave: async (...args) =>
+      Promise.all([...children].map(c => c.leave(...args)))
   };
 }
