@@ -13,10 +13,10 @@ import { Route } from "./route.mjs";
  * @property {Object} params Object mapping from keys
  * @property {Object} context
  * @property {Route} current
- * @property {string} prefix
+ * @property {string} base
  */
 export class Router {
-  constructor(routes = [], prefix = "") {
+  constructor(routes = [], base = "") {
     let current;
 
     routes = compile(routes);
@@ -96,7 +96,7 @@ export class Router {
     });
 
     Object.defineProperties(this, {
-      prefix: { value: prefix },
+      base: { value: base },
       subscriptions: { value: new Set() },
       context: { value: context },
       keys: { value: keys },
@@ -117,12 +117,12 @@ export class Router {
     window.addEventListener("routerLink", event => {
       let path = event.detail.path;
 
-      if (path.startsWith(this.prefix)) {
+      if (path.startsWith(this.base)) {
         history.pushState(event.detail, "", path);
-        path = path.substring(this.prefix.length);
+        path = path.substring(this.base.length);
       } else {
-        event.detail.path = this.prefix + path;
-        history.pushState(event.detail, "", this.prefix + path);
+        event.detail.path = this.base + path;
+        history.pushState(event.detail, "", this.base + path);
       }
 
       this.push(path);
@@ -131,8 +131,8 @@ export class Router {
     window.addEventListener("popstate", event => {
       if (event.state) {
         let path = event.state.path;
-        if (path.startsWith(this.prefix)) {
-          path = path.substring(this.prefix.length);
+        if (path.startsWith(this.base)) {
+          path = path.substring(this.base.length);
         }
 
         const { route, params } = matcher(this.routes, path);
