@@ -70,6 +70,7 @@ export class Router {
 
     Object.defineProperties(context, {
       router: { value: this },
+      keys: { value: keys },
       params: {
         set(np) {
           const all = new Set([...Object.keys(params), ...Object.keys(np)]);

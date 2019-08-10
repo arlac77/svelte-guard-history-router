@@ -13,8 +13,7 @@
 <ul>
   {#each articles as article}
     <li>
-      {article.id}
-      <Link href="/article/{article.id}">{article.name}</Link>
+      <Link href="/article/{article.id}">{article.name} ({article.id})</Link>
     </li>
   {/each}
 </ul>

@@ -71,6 +71,14 @@
     }
     console.log("SET article", article, c.article);
   }
+
+
+  let keys;
+
+  $: {
+    const c = $router.context;
+    keys = c.keys.values();
+    }
 </script>
 
 <div>
@@ -82,6 +90,14 @@
   <Link href="/article/02">Article 02</Link>
 
   <Outlet {router}>nothing there</Outlet>
-  Selected article:
-  <div>{article}</div>
+
+
+  <h3>Params</h3>
+  <ul>
+  {#each [...keys] as key}
+    <li>
+    {key.name} {key.value}
+    </li>
+  {/each}
+  </ul>
 </div>

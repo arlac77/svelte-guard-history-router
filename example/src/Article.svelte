@@ -10,5 +10,4 @@
 
 <h2 class="routetitle">Article {article.name}</h2>
 
-
-<Link href="/category/{article.category}">Category</Link>
+<Link href="/category/{article.category}">{article.category}</Link>

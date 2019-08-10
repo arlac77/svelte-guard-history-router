@@ -1,0 +1,1 @@
+Warning: --w3c and --legacy options no longer have any effect, and may be removed in the future. safaridriver only supports the protocol as defined by the W3C WebDriver specification.
