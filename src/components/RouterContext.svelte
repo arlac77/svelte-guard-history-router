@@ -13,15 +13,21 @@
   {/if}
 
   <h3>Props</h3>
+  <div>
+    {JSON.stringify(context.params)}
+  </div>
+
   <table>
     <thead>
       <th>Name</th>
       <th>Value</th>
+      <th>Subscriptions</th>
     </thead>
     {#each [...context.keys.values()] as key}
       <tr>
         <td>{key.name}</td>
         <td>{key.value}</td>
+        <td>{key.subscriptions.size}</td>
       </tr>
     {/each}
   </table>
