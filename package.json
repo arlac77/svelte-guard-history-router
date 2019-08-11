@@ -2,6 +2,7 @@
   "name": "svelte-guard-history-router",
   "version": "0.0.0-semantic-release",
   "module": "src/index.svelte",
+  "svelte": "src/index.svelte",
   "description": "svelte guarded history router",
   "keywords": [
     "svelte",
@@ -9,9 +10,9 @@
   ],
   "scripts": {
     "pretest": "(cd example && rollup -c)",
-    "watch": "(cd example && rollup -c -w)",
     "start": "serve -u -s -n -l 5000 example/public",
-    "test": "nightwatch -e ci"
+    "test": "nightwatch -e ci",
+    "watch": "(cd example && rollup -c -w)"
   },
   "dependencies": {
     "multi-path-matcher": "^2.0.0"
@@ -19,7 +20,7 @@
   "devDependencies": {
     "chromedriver": "^76.0.0",
     "nightwatch": "^1.1.13",
-    "rollup": "^1.19.3",
+    "rollup": "^1.19.4",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.1.0",
     "semantic-release": "^15.13.19",
@@ -41,6 +42,5 @@
     "repository": {
       "url": "https://github.com/arlac77/npm-package-template-svelte.git"
     }
-  },
-  "svelte": "src/index.svelte"
+  }
 }
