@@ -54,7 +54,8 @@ export class Router {
             console.log("set", key, value);
             subscriptions.forEach(subscription => subscription(value));
           }
-        }
+        },
+        subscriptions: { value: subscriptions }
       });
 
       keys.set(key, o);
@@ -79,8 +80,10 @@ export class Router {
           let changed = false;
           all.forEach(key => {
             if (params[key] !== np[key]) {
+              const value = np[key];
+              params[key] = value;
               const k = keys.get(key);
-              k.value = np[key];
+              k.value = value;
               changed = true;
             }
           });
