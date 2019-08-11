@@ -25,14 +25,16 @@ const links = [
   { path: "/about", title: "About" },
  // { path: "/index.html", redirect:"/", title: "Home" },
  { path: "/article", title: "Articles" },
+ al('01'),
+ al('02'),
+ al('03')
 
- { path: "/article/01", title: "Peanutbutter" },
-
-//  al('01')
 
 
  /*
-  { path: "/article/02", title: "Article Cheesecake" },
+ { path: "/article/01", title: "Peanutbutter" },
+ { path: "/article/02", title: "Article Cheesecake" },
+ { path: "/article/03", title: "Article Hot Dog" },
 { path: "/article/03", title: "Article Hot Dog" },
 { path: "/article/12", title: "Article Pizza Hawaii" },
 { path: "/article/14", title: "Article Pizza Funghi" }
@@ -44,40 +46,17 @@ describe("router", function() {
   this.timeout(3000);
 
   /*
-  it("navigate-url-routes", function(browser) {
-    browser
-      .url(`${base}/`)
-      .waitForElementVisible("h2.routetitle")
-      .assert.containsText("h2.routetitle", "Home")
-      .assert.urlEquals(`${base}/`);
-
-    browser
-      .url(`${base}/index.html`)
-      .waitForElementVisible("h2.routetitle")
-      .saveScreenshot(sg(this, "index"))
-      .assert.containsText("h2.routetitle", "Home")
-      .assert.urlEquals(`${base}/`);
-
-    browser
-      .url(`${base}/about`)
-      .waitForElementVisible("h2.routetitle")
-      .assert.containsText("h2.routetitle", "About")
-      .assert.urlEquals(`${base}/about`);
-
-      browser.end();
-  });
-*/
-
-
   it("navigate-on-link", async function(browser) {
     for (const l of links) {
       await browser.url(`${base}${l.path}`);
+      await browser.saveScreenshot(sg(this, l.title));
       await browser.waitForElementVisible("h2.routetitle");
       await browser.assert.containsText("h2.routetitle", l.title);
       await browser.assert.urlEquals(`${base}${l.redirect?l.redirect:l.path}`);
     }
     browser.end();
   });
+*/
 
   it("clicking-on-link", async function(browser) {
     await browser.url(`${base}`);
