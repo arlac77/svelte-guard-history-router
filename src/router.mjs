@@ -146,12 +146,7 @@ export class Router {
       }
     });
 
-    setTimeout(() => this.initializeCurrent(), 10);
-  }
-
-  initializeCurrent() {
-    const path = window.location.pathname + window.location.search;
-    this.push(path);
+    this.push(window.location.pathname);
   }
 
   set component(c) {
