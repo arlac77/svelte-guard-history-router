@@ -9,7 +9,6 @@
   import { loadArticles, articles } from "./util.mjs";
 
   import {
-
     Outlet,
     Link,
     Router,
@@ -77,7 +76,7 @@
 </script>
 
 <div>
-  <h1 class="routetitle">svelte-guard-history-router example</h1>
+  <h1 class="routetitle">Example</h1>
   <Link href="/about">About</Link>
   <Link href="/">Home</Link>
   <Link href="/article">List</Link>
