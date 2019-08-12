@@ -21,9 +21,9 @@ jobs:
         - SERVER_PID=$!
         - npm run test
         - kill $SERVER_PID
-        - 'mkdir -p "a${TRAVIS_BUILD_ID}/b${TRAVIS_BUILD_NUMBER}/c${TRAVIS_JOB_ID}"'
-        - 'mv test-results "a${TRAVIS_BUILD_ID}/b${TRAVIS_BUILD_NUMBER}/c${TRAVIS_JOB_ID}"'
-        - 'rsync -avz "a${TRAVIS_BUILD_ID}/b${TRAVIS_BUILD_NUMBER}/c${TRAVIS_JOB_ID}" ci-upload@$UPLOAD_SERVER:/somewhere'
+        - 'mkdir -p "${TRAVIS_REPO_SLUG}/${TRAVIS_JOB_ID}"'
+        - 'mv test-results "${TRAVIS_REPO_SLUG}/${TRAVIS_JOB_ID}"'
+        - 'rsync -avz "${TRAVIS_REPO_SLUG}/${TRAVIS_JOB_ID}" ci-upload@$UPLOAD_SERVER:/somewhere'
     - stage: release
       node_js: lts/*
       script: skip
