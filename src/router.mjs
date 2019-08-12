@@ -51,7 +51,6 @@ export class Router {
           },
           set(v) {
             value = v;
-            console.log("set", key, value);
             subscriptions.forEach(subscription => subscription(value));
           }
         },
@@ -120,26 +119,16 @@ export class Router {
     });
 
     window.addEventListener("routerLink", event => {
-      let path = event.detail.path;
+      const path = event.detail.path;
 
-      if (path.startsWith(this.base)) {
-        history.pushState(event.detail, "", path);
-        path = path.substring(this.base.length);
-      } else {
-        event.detail.path = this.base + path;
-        history.pushState(event.detail, "", this.base + path);
-      }
+      history.pushState({ path }, "", this.base + path);
 
       this.push(path);
     });
 
     window.addEventListener("popstate", event => {
       if (event.state) {
-        let path = event.state.path;
-        if (path.startsWith(this.base)) {
-          path = path.substring(this.base.length);
-        }
-
+        const path = event.state.path;
         const { route, params } = matcher(this.routes, path);
         this.context.params = params;
         this.current = route;
