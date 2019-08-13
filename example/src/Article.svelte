@@ -18,5 +18,5 @@ Id: {article.id}
 <Link href="/article/{ ("00" + (parseInt(article.id) + 1)).replace(/.*(\d\d)$/,'$1') }">Next</Link>
 <Link href="/article/{ ("00" + (parseInt(article.id) - 1)).replace(/.*(\d\d)$/,'$1') }">Prev</Link>
 {:else}
-No such article {context.propy.article}
+No such article {context.props.article}
 {/if}

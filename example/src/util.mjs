@@ -19,8 +19,7 @@ Object.keys(_articles).forEach(id => (_articles[id].id = id));
 
 export const articles = readable({}, set => {
   setTimeout(() => {
-    console.log("ARTICLES...");
-    set(_articles);
+    set(Object.values(_articles));
   }, 1000);
 
   return () => { console.log("unsubscribe articles"); };
@@ -32,13 +31,13 @@ export const categories = readable({}, set => {
 
     Object.keys(_articles).forEach(id => {
       const a = _articles[id];
-      const c = categories[a.category];
+      let c = categories[a.category];
       if (c === undefined) {
         c = { name: a.category, articles: {} };
       }
       c.articles[id] = a;
     });
-      set(categories);
+      set(Object.values(categories));
   }, 500);
 
   return () => { console.log("unsubscribe categories"); };
