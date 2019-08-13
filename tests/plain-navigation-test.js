@@ -19,31 +19,25 @@ const articles = {
   "14": { name: "Pizza Funghi" }
 };
 
-const al = (id) => { return { path: `/article/${id}`, title: `Article ${articles[id].name}`}; };
+const al = id => {
+  return { path: `/article/${id}`, title: `Article ${articles[id].name}` };
+};
 
 const links = [
   { path: "/about", title: "About" },
- // { path: "/index.html", redirect:"/", title: "Home" },
- { path: "/article", title: "Articles" },
- al('01'),
- { path: "/article", title: "Articles" },
- al('02'),
- { path: "/article", title: "Articles" },
- al('03')
-
-
- /*
- { path: "/article/01", title: "Peanutbutter" },
- { path: "/article/02", title: "Article Cheesecake" },
- { path: "/article/03", title: "Article Hot Dog" },
-{ path: "/article/03", title: "Article Hot Dog" },
-{ path: "/article/12", title: "Article Pizza Hawaii" },
-{ path: "/article/14", title: "Article Pizza Funghi" }
-*/
+  // { path: "/index.html", redirect:"/", title: "Home" },
+  { path: "/article", title: "Articles" },
+  al("01"),
+  { path: "/article", title: "Articles" },
+  al("02"),
+  { path: "/article", title: "Articles" },
+  al("03"),
+  { path: "/article", title: "Articles" },
+  al("12")
 ];
 
 describe("router", function() {
-  this.slow(2000);
+  //this.slow(2000);
   this.timeout(3000);
 
   /*
@@ -70,5 +64,4 @@ describe("router", function() {
     }
     browser.end();
   });
-  
 });

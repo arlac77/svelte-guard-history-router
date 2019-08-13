@@ -7,8 +7,6 @@
   import Articles from "./Articles.svelte";
   import Categories from "./Categories.svelte";
   import Category from "./Category.svelte";
-  import { articles } from "./util.mjs";
-  import { derived } from "svelte/store";
 
   import {
     Outlet,
@@ -30,9 +28,6 @@
     route("/category/:category", Category)
   ]);
 
-  const articleKey = router.keys.get("article");
-
-  const article = derived([articles, articleKey], ([a, b]) => a[b]);
 </script>
 
 <div>

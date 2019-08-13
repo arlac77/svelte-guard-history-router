@@ -1,11 +1,20 @@
 <script>
+  import { derived } from "svelte/store";
+
   import { Link } from "../../src/index.svelte";
+  import { articles } from "./util.mjs";
 
   export let context;
 
   let article;
 
-  $: article = $context.article;
+  const articleKey = context.keys.get("article");
+
+  $: {
+    article = $articles.find(a => a.id === $articleKey);
+    //article = derived([articles, articleKey], ([$a, $b]) => $a.find($a => $a.id === $b));
+  }
+
 </script>
 
 {#if article}
