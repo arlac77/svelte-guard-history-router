@@ -26,9 +26,10 @@ const links = [
  // { path: "/index.html", redirect:"/", title: "Home" },
  { path: "/article", title: "Articles" },
  al('01'),
+ { path: "/article", title: "Articles" },
  al('02'),
+ { path: "/article", title: "Articles" },
  al('03')
-
 
 
  /*

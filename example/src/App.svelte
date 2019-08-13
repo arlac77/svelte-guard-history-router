@@ -5,8 +5,10 @@
   import Login from "./Login.svelte";
   import Article from "./Article.svelte";
   import Articles from "./Articles.svelte";
+  import Categories from "./Categories.svelte";
   import Category from "./Category.svelte";
-  import { loadArticles, articles } from "./util.mjs";
+  import { articles } from "./util.mjs";
+  import { derived } from "svelte/store";
 
   import {
     Outlet,
@@ -18,72 +20,29 @@
     waitingGuard
   } from "../../src/index.svelte";
 
-  const guardArticles = {
-    enter: async context => {
-      console.log("enter articles");
-      context.articles = await loadArticles();
-    },
-    leave: context => {
-      console.log("leave articles");
-      delete context.articles;
-    }
-  };
-
-  const guardLogin = {
-    enter: async context => {
-      console.log("enter login");
-
-      if (!context.session) {
-        await context.router.push("/login");
-      }
-
-      context.session = true;
-    },
-    leave: context => {
-      console.log("leave login");
-      delete context.session;
-    }
-  };
-
-  const wg = waitingGuard(Waiting, 300);
-
   const router = new Router([
     route("/*", Home),
     route("/about", About),
     route("/login", Login),
-    route("/article", guardArticles, Articles),
-    route("/article/:article", guardArticles, Article),
+    route("/article", Articles),
+    route("/article/:article", Article),
+    route("/category", Categories),
     route("/category/:category", Category)
   ]);
 
-  let article;
+  const articleKey = router.keys.get("article");
 
-  const k = router.keys.get("article");
-
-  $: {
-    article = $k;
-
-    const c = $router.context;
-
-    if (c.articles) {
-      c.article = c.articles[article];
-    } else {
-      c.article = {};
-    }
-    console.log("SET article", article, c.article);
-  }
-
+  const article = derived([articles, articleKey], ([a, b]) => a[b]);
 </script>
 
 <div>
   <h1 class="routetitle">Example</h1>
   <Link href="/about">About</Link>
   <Link href="/">Home</Link>
-  <Link href="/article">List</Link>
-  <Link href="/article/01">Article 01</Link>
-  <Link href="/article/02">Article 02</Link>
+  <Link href="/article">Articles</Link>
+  <Link href="/category">Categories</Link>
 
   <Outlet {router}>nothing there</Outlet>
 
-  <RouterContext {router}/>
+  <RouterContext {router} />
 </div>

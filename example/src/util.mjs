@@ -1,4 +1,6 @@
-export const articles = {
+import { readable } from "svelte/store";
+
+const _articles = {
   "01": {
     name: "Peanutbutter",
     ceatgory: "staple",
@@ -13,38 +15,31 @@ export const articles = {
   "14": { name: "Pizza Funghi", ceatgory: "pizza" }
 };
 
-Object.keys(articles).forEach(id => (articles[id].id = id));
+Object.keys(_articles).forEach(id => (_articles[id].id = id));
 
-export async function loadCategories(duration = 10, shouldFail = false) {
-  const categories = {};
+export const articles = readable({}, set => {
+  setTimeout(() => {
+    console.log("ARTICLES...");
+    set(_articles);
+  }, 1000);
 
-  Object.keys(articles).forEach(id => {
-    const a = articles[id];
-    const c = categories[a.category];
-    if(c === undefined) {
-      c = { name: a.category, articles: {} };
-    }
-    c.articles[id] = a;
-  });
+  return () => { console.log("unsubscribe articles"); };
+});
 
-  return new Promise((resolve, reject) =>
-    setTimeout(() => {
-      shouldFail
-        ? reject(new Error("Unable to fetch categories"))
-        : resolve(categories);
-    }, duration)
-  );
-}
+export const categories = readable({}, set => {
+  setTimeout(() => {
+    const categories = {};
 
-/**
- * simulate fetching delay
- */
-export async function loadArticles(duration = 10, shouldFail = false) {
-  return new Promise((resolve, reject) =>
-    setTimeout(() => {
-      shouldFail
-        ? reject(new Error("Unable to fetch articles"))
-        : resolve(articles);
-    }, duration)
-  );
-}
+    Object.keys(_articles).forEach(id => {
+      const a = _articles[id];
+      const c = categories[a.category];
+      if (c === undefined) {
+        c = { name: a.category, articles: {} };
+      }
+      c.articles[id] = a;
+    });
+      set(categories);
+  }, 500);
+
+  return () => { console.log("unsubscribe categories"); };
+});
