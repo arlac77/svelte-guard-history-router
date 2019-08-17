@@ -6,10 +6,12 @@ import pkg from "../package.json";
 
 const port = pkg.config.port || 5000;
 
+//console.log(`Current directory: ${process.cwd()}`);
+
 if (process.env.ROLLUP_WATCH) {
   const server = http.createServer((request, response) => {
     return handler(request, response, {
-      public: "public",
+      public: "example/public",
       rewrites: [{ source: "**", destination: "/index.html" }]
     });
   });
@@ -20,11 +22,11 @@ if (process.env.ROLLUP_WATCH) {
 }
 
 export default {
-  input: "src/index.mjs",
+  input: "example/src/index.mjs",
   output: {
     sourcemap: true,
     format: "esm",
-    file: `public/bundle.mjs`
+    file: `example/public/bundle.mjs`
   },
   plugins: [resolve(), svelte()]
 };

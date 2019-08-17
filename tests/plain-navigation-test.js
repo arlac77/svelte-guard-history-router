@@ -1,9 +1,4 @@
-const assert = require("assert");
-
-const base = "http://localhost:5000";
-
-const sg = (t, name = "xxx") =>
-  `test-results/${t.test.fullTitle().replace(/\s+/, "-", "g")}-${name}.png`;
+import { Selector } from "testcafe";
 
 const articles = {
   "01": {
@@ -30,38 +25,40 @@ const links = [
   al("01"),
   { path: "/article", title: "Articles" },
   al("02"),
+  { path: "/about", title: "About" },
   { path: "/article", title: "Articles" },
   al("03"),
   { path: "/article", title: "Articles" },
   al("12")
 ];
 
-describe("router", function() {
-  //this.slow(2000);
-  this.timeout(3000);
+const base = "http://localhost:5000";
 
-  /*
-  it("navigate-on-link", async function(browser) {
-    for (const l of links) {
-      await browser.url(`${base}${l.path}`);
-      await browser.saveScreenshot(sg(this, l.title));
-      await browser.waitForElementVisible("h2.routetitle");
-      await browser.assert.containsText("h2.routetitle", l.title);
-      await browser.assert.urlEquals(`${base}${l.redirect?l.redirect:l.path}`);
+fixture`Getting Started`.page`${base}/index.html`;
+
+test("Click arund", async t => {
+  for (const l of links) {
+    const title = Selector(".routetitle").withText(l.title);
+    const a = Selector("a").withAttribute("href", l.path);
+
+    await t
+      .click(a)
+      .takeScreenshot()
+      .expect(title.innerText)
+      .eql(l.title);
+  }
+});
+
+test("Navigate around", async t => {
+  for (const l of links) {
+    if (!l.path.match(/\d+/)) {
+      const title = Selector(".routetitle").withText(l.title);
+
+      await t
+        .navigateTo(base + l.path)
+        .takeScreenshot()
+        .expect(title.innerText)
+        .eql(l.title);
     }
-    browser.end();
-  });
-*/
-
-  it("clicking-on-link", async function(browser) {
-    await browser.url(`${base}`);
-
-    for (const l of links) {
-      await browser.waitForElementVisible(`a[href="${l.path}"]`);
-      await browser.saveScreenshot(sg(this, l.title));
-      await browser.click(`a[href="${l.path}"]`);
-      await browser.assert.containsText("h2.routetitle", l.title);
-    }
-    browser.end();
-  });
+  }
 });
