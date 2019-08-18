@@ -6,8 +6,6 @@ import pkg from "../package.json";
 
 const port = pkg.config.port || 5000;
 
-//console.log(`Current directory: ${process.cwd()}`);
-
 if (process.env.ROLLUP_WATCH) {
   const server = http.createServer((request, response) => {
     return handler(request, response, {
