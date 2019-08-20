@@ -61,10 +61,6 @@
   {#if context.route !== undefined}
     <h3>Route</h3>
     <table>
-      <thead>
-        <th>Name</th>
-        <th>Value</th>
-      </thead>
       <tbody>
         <tr>
           <td>path</td>
@@ -87,7 +83,7 @@
 
   <table>
     <thead>
-      <th>Name</th>
+      <th>Key</th>
       <th>Value</th>
       <th>Subscriptions</th>
     </thead>
