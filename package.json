@@ -21,11 +21,11 @@
     "rollup-plugin-svelte": "^5.1.0",
     "semantic-release": "^15.13.23",
     "serve": "^11.1.0",
-    "svelte": "^3.9.0",
+    "svelte": "^3.9.1",
     "testcafe": "^1.4.1"
   },
   "engines": {
-    "node": ">=10.16.3"
+    "node": ">=10.16.0"
   },
   "repository": {
     "type": "git",
