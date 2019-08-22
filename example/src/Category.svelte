@@ -1,9 +1,21 @@
 <script>
-    export let context;
+  import { Link } from "../../src/index.svelte";
+  import { categories } from "./util.mjs";
 
-    let category;
+  export let context;
 
-    $: category = $context.category;
+  let category;
+
+  const categoryKey = context.keys.get("category");
+
+  $: {
+    category = $categories.find(a => a.name === $categoryKey);
+  }
 </script>
 
+
+{#if category}
 <h2 class="routetitle">Category {category.name}</h2>
+{:else}
+No such category {context.props.category}
+{/if}
