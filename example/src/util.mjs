@@ -3,16 +3,16 @@ import { readable } from "svelte/store";
 export const _articles = {
   "01": {
     name: "Peanutbutter",
-    ceatgory: "staple",
+    category: "staple",
     price: 1.2
   },
-  "02": { name: "Cheesecake", ceatgory: "dessert" },
-  "03": { name: "Hot Dog", ceatgory: "to go" },
-  "10": { name: "Pizza Quattro Stagioni", ceatgory: "pizza" },
-  "11": { name: "Pizza Salami", ceatgory: "pizza" },
-  "12": { name: "Pizza Hawaii", ceatgory: "pizza" },
-  "13": { name: "Pizza Margherita", ceatgory: "pizza" },
-  "14": { name: "Pizza Funghi", ceatgory: "pizza" }
+  "02": { name: "Cheesecake", category: "dessert" },
+  "03": { name: "Hot Dog", category: "to go" },
+  "10": { name: "Pizza Quattro Stagioni", category: "pizza" },
+  "11": { name: "Pizza Salami", category: "pizza" },
+  "12": { name: "Pizza Hawaii", category: "pizza" },
+  "13": { name: "Pizza Margherita", category: "pizza" },
+  "14": { name: "Pizza Funghi", category: "pizza" }
 };
 
 Object.keys(_articles).forEach(id => (_articles[id].id = id));
@@ -34,6 +34,7 @@ export const categories = readable({}, set => {
       let c = categories[a.category];
       if (c === undefined) {
         c = { name: a.category, articles: {} };
+        categories[a.category] = c;
       }
       c.articles[id] = a;
     });
