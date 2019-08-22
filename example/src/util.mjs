@@ -1,6 +1,6 @@
 import { readable } from "svelte/store";
 
-const _articles = {
+export const _articles = {
   "01": {
     name: "Peanutbutter",
     ceatgory: "staple",
