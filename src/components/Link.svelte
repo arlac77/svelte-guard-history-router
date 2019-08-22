@@ -1,9 +1,11 @@
 <script>
+  import { Router } from '../router.mjs';
+
   export let href;
 
   function click(e) {
     window.dispatchEvent(
-      new CustomEvent("routerLink", {
+      new CustomEvent(Router.navigationEventType, {
         detail: { path: e.currentTarget.pathname }
       })
     );

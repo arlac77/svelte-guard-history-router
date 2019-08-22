@@ -16,6 +16,12 @@ import { Route } from "./route.mjs";
  * @property {string} base
  */
 export class Router {
+
+  static get navigationEventType()
+  {
+    return "routerLink";
+  }
+
   constructor(routes = [], base = "") {
     let current;
 
@@ -118,10 +124,10 @@ export class Router {
       }
     });
 
-    window.addEventListener("routerLink", event => {
+    window.addEventListener(Router.navigationEventType, event => {
       const path = event.detail.path;
 
-      history.pushState({ path }, "", this.base + path);
+      //history.pushState({ path }, "", this.base + path);
 
       this.push(path);
     });
@@ -172,6 +178,8 @@ export class Router {
     }
 
     this.current = route;
+
+    history.pushState({ path }, "", this.base + path);
   }
 
   /**
