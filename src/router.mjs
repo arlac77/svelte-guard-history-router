@@ -141,7 +141,9 @@ export class Router {
       }
     });
 
-    this.push(window.location.pathname);
+    console.log("LOCATION", window.location.pathname, window.location.pathname.substring(this.base.length));
+
+    this.push(window.location.pathname.substring(this.base.length));
   }
 
   set component(c) {
