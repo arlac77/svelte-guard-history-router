@@ -6,7 +6,7 @@
 
   let category;
 
-  const categoryKey = context.keys.get("category");
+  const categoryKey = context.keys.category;
 
   $: {
     category = $categories.find(a => a.name === $categoryKey);

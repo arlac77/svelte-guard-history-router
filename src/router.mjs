@@ -9,8 +9,8 @@ import { Route } from "./route.mjs";
 
 /**
  * @property {Route[]} routes
- * @property {Map<string,key>} keys
- * @property {Object} params Object mapping from keys
+ * @property {Object} keys
+ * @property {Object} params value mapping from keys
  * @property {Object} context
  * @property {Route} current
  * @property {string} base
@@ -28,7 +28,7 @@ export class Router {
     routes = compile(routes);
 
     const contextSubscriptions = new Set();
-    const keys = new Map();
+    const keys = {};
     const params = {};
 
     for (const key of routes.reduce(
@@ -63,7 +63,7 @@ export class Router {
         subscriptions: { value: subscriptions }
       });
 
-      keys.set(key, o);
+      keys[key] = o;
     }
 
     const context = {
@@ -87,7 +87,7 @@ export class Router {
             if (params[key] !== np[key]) {
               const value = np[key];
               params[key] = value;
-              const k = keys.get(key);
+              const k = keys[key];
               k.value = value;
               changed = true;
             }

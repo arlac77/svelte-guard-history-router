@@ -88,7 +88,7 @@
       <th>Subscriptions</th>
     </thead>
     <tbody>
-      {#each [...context.keys.values()] as key}
+      {#each Object.values(context.keys) as key}
         <tr>
           <td id="context.key.{key.name}">{key.name}</td>
           <td id="context.key.{key.name}.value">{key.value}</td>

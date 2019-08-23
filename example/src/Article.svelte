@@ -8,7 +8,7 @@
 
   let article;
 
-  const articleKey = context.keys.get("article");
+  const articleKey = context.keys.article;
 
   $: {
     article = $articles.find(a => a.id === $articleKey);
