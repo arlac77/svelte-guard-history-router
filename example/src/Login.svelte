@@ -27,33 +27,37 @@
   }
 </script>
 
-<div>
+<div class="center">
   <form on:submit|preventDefault={submit}>
-
     {#if message}
-      <div>{message}</div>
+      <div id="message">{message}</div>
     {/if}
 
-    <fieldset>
-      <label>Username</label>
+    <label for="username">
+      Username
       <input
+        id="username"
         type="text"
         placeholder="Username"
         name="username"
+        required
         bind:value={username} />
-    </fieldset>
-
-    <fieldset>
-      <label>Password</label>
+    </label>
+    <label for="password">
+      Password
       <input
+        id="password"
         type="password"
         placeholder="Password"
         name="password"
+        required
         bind:value={password} />
-    </fieldset>
-
-    <div>
-      <button type="submit" disabled={!username || !password}>Login</button>
-    </div>
+    </label>
+    <button
+      id="submit"
+      type="submit"
+      disabled={!username || !password}>
+      Login
+    </button>
   </form>
 </div>
