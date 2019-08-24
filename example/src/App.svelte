@@ -19,15 +19,14 @@
   } from "../../src/index.svelte";
 
   const router = new Router([
-    route("/*", Home),
+    route("*", Home),
     route("/about", About),
     route("/login", Login),
     route("/article", Articles),
     route("/article/:article", Article),
     route("/category", Categories),
     route("/category/:category", Category)
-  ]);
-
+  ], "/base");
 </script>
 
 <div>

@@ -32,7 +32,7 @@ const links = [
   al("12")
 ];
 
-const base = "http://localhost:5000";
+const base = "http://localhost:5000/base";
 
 fixture`Getting Started`.page`${base}/index.html`;
 
