@@ -36,6 +36,7 @@ const base = "http://localhost:5000/base";
 
 fixture`Getting Started`.page`${base}/index.html`;
 
+
 test("Click arund", async t => {
   for (const l of links) {
     const title = Selector(".routetitle").withText(l.title);
@@ -43,22 +44,26 @@ test("Click arund", async t => {
 
     await t
       .click(a)
-      .takeScreenshot()
+     // .takeScreenshot()
       .expect(title.innerText)
       .eql(l.title);
   }
 });
 
-test("Navigate around", async t => {
-  for (const l of links) {
-    if (!l.path.match(/\d+/)) {
-      const title = Selector(".routetitle").withText(l.title);
 
-      await t
-        .navigateTo(base + l.path)
-        .takeScreenshot()
-        .expect(title.innerText)
-        .eql(l.title);
-    }
-  }
+/*
+test.page`${base}/index.html`("about", async t => {
+  const title = Selector(".routetitle").withText("About");
+  await t.expect(title.innerText).eql("About");
 });
+*/
+/*
+test("Navigate around", async t => {
+  const title = Selector(".routetitle");
+
+  await t
+    .navigateTo(`/base/about`)
+    .expect(title.innerText)
+    .eql("About");
+});
+*/
