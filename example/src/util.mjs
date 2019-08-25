@@ -4,15 +4,15 @@ export const _articles = {
   "01": {
     name: "Peanutbutter",
     category: "staple",
-    price: 1.2
+    price: 1.98
   },
-  "02": { name: "Cheesecake", category: "dessert" },
-  "03": { name: "Hot Dog", category: "to go" },
-  "10": { name: "Pizza Quattro Stagioni", category: "pizza" },
-  "11": { name: "Pizza Salami", category: "pizza" },
-  "12": { name: "Pizza Hawaii", category: "pizza" },
-  "13": { name: "Pizza Margherita", category: "pizza" },
-  "14": { name: "Pizza Funghi", category: "pizza" }
+  "02": { name: "Cheesecake", price: 2.0, category: "dessert" },
+  "03": { name: "Hot Dog", price: 2.0, category: "to go" },
+  "10": { name: "Pizza Quattro Stagioni", price: 8.0, category: "pizza" },
+  "11": { name: "Pizza Salami", price: 7.0, category: "pizza" },
+  "12": { name: "Pizza Hawaii", price: 7.0, category: "pizza" },
+  "13": { name: "Pizza Margherita", price: 5.0, category: "pizza" },
+  "14": { name: "Pizza Funghi", price: 7.0, category: "pizza" }
 };
 
 Object.keys(_articles).forEach(id => (_articles[id].id = id));
@@ -22,24 +22,28 @@ export const articles = readable({}, set => {
     set(Object.values(_articles));
   }, 1000);
 
-  return () => { console.log("unsubscribe articles"); };
+  return () => {
+    console.log("unsubscribe articles");
+  };
 });
 
-export const categories = readable({}, set => {
+export const categories = readable([], set => {
   setTimeout(() => {
-    const categories = {};
+    const categories = [];
 
     Object.keys(_articles).forEach(id => {
       const a = _articles[id];
-      let c = categories[a.category];
+      let c = categories.find(c => c.name === a.category);
       if (c === undefined) {
-        c = { name: a.category, articles: {} };
-        categories[a.category] = c;
+        c = { name: a.category, articles: [] };
+        categories.push(c);
       }
-      c.articles[id] = a;
+      c.articles.push(a);
     });
-      set(Object.values(categories));
+    set(categories);
   }, 500);
 
-  return () => { console.log("unsubscribe categories"); };
+  return () => {
+    console.log("unsubscribe categories");
+  };
 });
