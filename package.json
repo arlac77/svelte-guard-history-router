@@ -15,7 +15,7 @@
     "multi-path-matcher": "^2.0.1"
   },
   "devDependencies": {
-    "rollup": "^1.20.1",
+    "rollup": "^1.20.2",
     "rollup-plugin-livereload": "^1.0.1",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.1.0",
