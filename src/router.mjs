@@ -67,10 +67,10 @@ export class Router {
     }
 
     const context = {
-      subscribe: cb => {
-        contextSubscriptions.add(cb);
-        cb(this.context);
-        return () => contextSubscriptions.delete(cb);
+      subscribe: subscription => {
+        contextSubscriptions.add(subscription);
+        subscription(this.context);
+        return () => contextSubscriptions.delete(subscription);
       }
     };
 
@@ -186,11 +186,11 @@ export class Router {
 
   /**
    * Fired when the route (or the target component changes)
-   * @param cb
+   * @param {Function} subscription
    */
-  subscribe(cb) {
-    this.subscriptions.add(cb);
-    cb(this);
-    return () => this.subscriptions.delete(cb);
+  subscribe(subscription) {
+    this.subscriptions.add(subscription);
+    subscription(this);
+    return () => this.subscriptions.delete(subscription);
   }
 }

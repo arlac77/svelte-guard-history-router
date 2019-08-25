@@ -248,6 +248,7 @@ button:active {
 
 button:disabled {
   background-color: var(--button-disabled-background-color);
+  pointer-events:none;
 }
 
 label {
@@ -267,6 +268,12 @@ input {
   border-radius: var(--border-radius);
   transition: border-color var(--transition-time) ease-in-out,
     box-shadow var(--transition-time) ease-in-out;
+}
+
+input:disabled {
+  color: #ccc;
+  border: 0 solid #fff;
+  pointer-events:none;
 }
 
 .center {
@@ -305,4 +312,35 @@ input {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.item-list {
+  box-sizing: border-box;
+  color: rgb(51, 68, 85);
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+
+.item {
+  background-color: rgb(116, 95, 181);
+  box-sizing: border-box;
+  color: rgb(51, 68, 85);
+  cursor: default;
+  display: flex;
+  flex-basis: 40%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  height: 70px;
+  line-height: 19px;
+  list-style-type: none;
+  margin-bottom: 4px;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-top: 4px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  text-align: left;
 }
