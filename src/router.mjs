@@ -16,9 +16,7 @@ import { Route } from "./route.mjs";
  * @property {string} base
  */
 export class Router {
-
-  static get navigationEventType()
-  {
+  static get navigationEventType() {
     return "routerLink";
   }
 
@@ -141,7 +139,11 @@ export class Router {
       }
     });
 
-    console.log("LOCATION", window.location.pathname, window.location.pathname.substring(this.base.length));
+    console.log(
+      "LOCATION",
+      window.location.pathname,
+      window.location.pathname.substring(this.base.length)
+    );
 
     this.push(window.location.pathname.substring(this.base.length));
   }
@@ -165,23 +167,27 @@ export class Router {
    * @param {string} path where to go
    */
   async push(path) {
-    const context = this.context;
+    try {
+      const context = this.context;
 
-    const { route, params } = matcher(this.routes, path);
+      const { route, params } = matcher(this.routes, path);
 
-    if (this.current !== undefined) {
-      await this.current.leave(context, route);
+      if (this.current !== undefined) {
+        await this.current.leave(context, route);
+      }
+
+      context.params = params;
+
+      if (route !== undefined) {
+        await route.enter(context, this.current);
+      }
+
+      this.current = route;
+    } catch (e) {
+      console.log("PUSH", path, e);
+    } finally {
+      history.pushState({ path }, "", this.base + path);
     }
-
-    context.params = params;
-
-    if (route !== undefined) {
-      await route.enter(context, this.current);
-    }
-
-    this.current = route;
-
-    history.pushState({ path }, "", this.base + path);
   }
 
   /**
