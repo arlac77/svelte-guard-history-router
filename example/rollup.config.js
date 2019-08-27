@@ -11,7 +11,11 @@ if (process.env.ROLLUP_WATCH) {
   const server = http.createServer((request, response) => {
     return handler(request, response, {
       public: "example/public",
-      rewrites: [{source: "/base/", destination: "/"},{ source: "**", destination: "/index.html" }]
+      rewrites: [
+        { source: "/base/bundle.mjs", destination: "/bundle.mjs" },
+        { source: "/base/global.css", destination: "/global.css" },
+        { source: "/base/**", destination: "/index.html" }
+      ]
     });
   });
 
