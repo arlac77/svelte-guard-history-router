@@ -1,15 +1,15 @@
 <script>
   export let router;
 
-  let component, context;
+  let component, state;
 
   $: component = $router.component;
-  $: context = $router.context;
+  $: state = $router.state;
 </script>
 
 <div>
   {#if component}
-    <svelte:component this={component} {context} />
+    <svelte:component this={component} {state} />
   {:else}
     <slot />
   {/if}

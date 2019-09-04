@@ -9,9 +9,9 @@ export class Guard {
 
   attach(route) {}
 
-  async enter(route, context) {}
+  async enter(route, state) {}
 
-  async leave(route, context) {}
+  async leave(route, state) {}
 }
 
 /**

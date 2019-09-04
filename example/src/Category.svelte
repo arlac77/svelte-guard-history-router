@@ -2,7 +2,7 @@
   import { Link } from "../../src/index.svelte";
   import { category } from "./index.mjs";
 
-  export let context;
+  export let state;
 </script>
 
 {#if $category}
@@ -13,4 +13,4 @@
       <Link href="/article/{article.id}">{article.name} ({article.id})</Link>
     </li>
   {/each}
-{:else}No such category {context.params.category}{/if}
+{:else}No such category {state.params.category}{/if}

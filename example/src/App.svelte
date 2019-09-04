@@ -1,5 +1,5 @@
 <script>
-  import { Outlet, Link, RouterContext } from "../../src/index.svelte";
+  import { Outlet, Link, RouterState } from "../../src/index.svelte";
   import { router } from "./index.mjs";
 </script>
 
@@ -12,5 +12,5 @@
 
   <Outlet {router}>nothing there</Outlet>
 
-  <RouterContext {router} />
+  <RouterState {router} />
 </div>

@@ -1,7 +1,7 @@
 <script>
   export let router;
 
-  $: context = $router.context;
+  $: state = $router.state;
 </script>
 
 <style>
@@ -56,43 +56,43 @@
 </style>
 
 <div>
-  <h3>Context</h3>
+  <h3>State</h3>
 
-  {#if context.route !== undefined}
+  {#if state.route !== undefined}
     <h3>Route</h3>
     <table>
       <tbody>
         <tr>
           <td>path</td>
-          <td id="route.path">{context.route.path}</td>
+          <td id="route.path">{state.route.path}</td>
         </tr>
         <tr>
           <td>priority</td>
-          <td id="route.priority">{context.route.priority}</td>
+          <td id="route.priority">{state.route.priority}</td>
         </tr>
         <tr>
           <td>keys</td>
-          <td id="route.key">{context.route.keys.join(' ')}</td>
+          <td id="route.key">{state.route.keys.join(' ')}</td>
         </tr>
       </tbody>
     </table>
   {/if}
 
-  <h3>Props</h3>
-  <div>{JSON.stringify(context.params)}</div>
+  <h3>Params</h3>
+  <div>{JSON.stringify(state.params)}</div>
 
   <table>
     <thead>
       <th>Key</th>
       <th>Value</th>
-      <th>Subscriptions</th>
+      <th>Subscriptions (Number of)</th>
     </thead>
     <tbody>
-      {#each Object.values(context.keys) as key}
+      {#each Object.values(state.keys) as key}
         <tr>
-          <td id="context.key.{key.name}">{key.name}</td>
-          <td id="context.key.{key.name}.value">{key.value}</td>
-          <td id="context.key.{key.name}.subscriptions">
+          <td id="state.key.{key.name}">{key.name}</td>
+          <td id="state.key.{key.name}.value">{key.value}</td>
+          <td id="state.key.{key.name}.subscriptions">
             {key.subscriptions.size}
           </td>
         </tr>

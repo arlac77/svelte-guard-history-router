@@ -5,7 +5,7 @@
   import { waitingGuard } from './waiting-guard.mjs';
   import Outlet from "./components/Outlet.svelte";
   import Link from "./components/Link.svelte";
-  import RouterContext from "./components/RouterContext.svelte";
+  import RouterState from "./components/RouterState.svelte";
   import NotFound from "./components/NotFound.svelte";
-  export { NotFound, Outlet, Link, RouterContext, Router, Route, route, Guard, parallelGuard, sequenceGuard, waitingGuard };
+  export { NotFound, Outlet, Link, RouterState, Router, Route, route, Guard, parallelGuard, sequenceGuard, waitingGuard };
 </script>

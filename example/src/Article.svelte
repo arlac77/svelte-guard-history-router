@@ -3,7 +3,7 @@
   import { articles } from "./util.mjs";
   import { article } from "./index.mjs";
 
-  export let context;
+  export let state;
 
 </script>
 
@@ -21,4 +21,4 @@
     href="/article/{('00' + (parseInt($article.id) - 1)).replace(/.*(\d\d)$/, '$1')}">
     Prev
   </Link>
-{:else}No such article {context.params.article}{/if}
+{:else}No such article {state.params.article}{/if}

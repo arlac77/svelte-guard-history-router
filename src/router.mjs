@@ -7,11 +7,21 @@ import { Route } from "./route.mjs";
  * @property {any} value
  */
 
+ /**
+ * @typedef RouterState {Object}
+ * @property {Router} router
+ * @property {Route} route
+ * @property {Set<Key>} keys
+ * @property {Object} params
+ */
+
 /**
+ * @param {Route[]} routes
+ * @param {string} base
  * @property {Route[]} routes
  * @property {Object} keys
  * @property {Object} params value mapping from keys
- * @property {Object} context
+ * @property {RouterState} state
  * @property {Route} current
  * @property {string} base
  */
@@ -25,7 +35,7 @@ export class Router {
 
     routes = compile(routes);
 
-    const contextSubscriptions = new Set();
+    const stateSubscriptions = new Set();
     const keys = {};
     const params = {};
 
@@ -64,15 +74,15 @@ export class Router {
       keys[key] = o;
     }
 
-    const context = {
+    const state = {
       subscribe: subscription => {
-        contextSubscriptions.add(subscription);
-        subscription(this.context);
-        return () => contextSubscriptions.delete(subscription);
+        stateSubscriptions.add(subscription);
+        subscription(this.state);
+        return () => stateSubscriptions.delete(subscription);
       }
     };
 
-    Object.defineProperties(context, {
+    Object.defineProperties(state, {
       router: { value: this },
       route: { get: () => current },
       keys: { value: keys },
@@ -92,8 +102,8 @@ export class Router {
           });
 
           if (changed) {
-            contextSubscriptions.forEach(subscription =>
-              subscription(this.context)
+            stateSubscriptions.forEach(subscription =>
+              subscription(this.state)
             );
           }
         },
@@ -106,7 +116,7 @@ export class Router {
     Object.defineProperties(this, {
       base: { value: base },
       subscriptions: { value: new Set() },
-      context: { value: context },
+      state: { value: state },
       keys: { value: keys },
       params: { value: params },
       routes: { value: routes },
@@ -117,7 +127,7 @@ export class Router {
         set(value) {
           current = value;
           this.subscriptions.forEach(subscription => subscription(this));
-          contextSubscriptions.forEach(subscription => subscription(context));
+          stateSubscriptions.forEach(subscription => subscription(state));
         }
       }
     });
@@ -134,7 +144,7 @@ export class Router {
       if (event.state) {
         const path = event.state.path;
         const { route, params } = matcher(this.routes, path);
-        this.context.params = params;
+        this.state.params = params;
         this.current = route;
       }
     });
@@ -168,18 +178,18 @@ export class Router {
    */
   async push(path) {
     try {
-      const context = this.context;
+      const state = this.state;
 
       const { route, params } = matcher(this.routes, path);
 
       if (this.current !== undefined) {
-        await this.current.leave(context, route);
+        await this.current.leave(state, route);
       }
 
-      context.params = params;
+      state.params = params;
 
       if (route !== undefined) {
-        await route.enter(context, this.current);
+        await route.enter(state, this.current);
       }
 
       this.current = route;

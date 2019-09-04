@@ -1,5 +1,5 @@
 <script>
-  export let context;
+  export let state;
 
   let username = "";
   let password = "";
@@ -8,7 +8,7 @@
   async function submit() {
     try {
       await login(username, password);
-      context.router.push("/");
+      state.router.push("/");
     } catch (e) {
       message = e;
     }

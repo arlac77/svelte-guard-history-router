@@ -1,7 +1,6 @@
 <script>
   import { Link } from "../../src/index.svelte";
   import { articles } from "./util.mjs"; 
-
 </script>
 
 <h2 class="routetitle">Articles</h2>
