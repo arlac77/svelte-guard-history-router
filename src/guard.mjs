@@ -7,10 +7,24 @@ export class Guard {
     return this === other;
   }
 
+  /**
+   * Called when guard is attached to a route
+   * @param {Route} from 
+   */
   attach(route) {}
 
+  /**
+   * Called while entering a route (current outlet is not yet set)
+   * @param {RouterState} state 
+   * @param {Route} from old route
+   */
   async enter(state, from) {}
 
+  /**
+   * Called before leaving a route
+   * @param {RouterState} state 
+   * @param {Route} to new route
+   */
   async leave(state, to) {}
 }
 
