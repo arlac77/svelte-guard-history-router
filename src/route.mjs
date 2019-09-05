@@ -13,7 +13,7 @@ export class Route {
 
     for (const guard of guards) {
       if (guard.attach !== undefined) {
-        guard.attach(route);
+        guard.attach(this);
       }
     }
   }
