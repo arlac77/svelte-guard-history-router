@@ -17,13 +17,13 @@ import { Route } from "./route.mjs";
 
 /**
  * @param {Route[]} routes
- * @param {string} base
+ * @param {string} base url
  * @property {Route[]} routes
  * @property {Object} keys
  * @property {Object} params value mapping from keys
  * @property {RouterState} state
- * @property {Route} current
- * @property {string} base
+ * @property {Route} route current
+ * @property {string} base url
  */
 export class Router {
   static get navigationEventType() {
@@ -31,7 +31,7 @@ export class Router {
   }
 
   constructor(routes = [], base = "") {
-    let current;
+    let route;
 
     routes = compile(routes);
 
@@ -84,7 +84,7 @@ export class Router {
 
     Object.defineProperties(state, {
       router: { value: this },
-      route: { get: () => current },
+      route: { get: () => route },
       keys: { value: keys },
       params: {
         set(np) {
@@ -120,14 +120,16 @@ export class Router {
       keys: { value: keys },
       params: { value: params },
       routes: { value: routes },
-      current: {
+      route: {
         get() {
-          return current;
+          return route;
         },
         set(value) {
-          current = value;
-          this.subscriptions.forEach(subscription => subscription(this));
-          stateSubscriptions.forEach(subscription => subscription(state));
+          if(route !== value) {
+            route = value;
+            this.subscriptions.forEach(subscription => subscription(this));
+            stateSubscriptions.forEach(subscription => subscription(state));  
+          }
         }
       }
     });
@@ -145,7 +147,7 @@ export class Router {
         const path = event.state.path;
         const { route, params } = matcher(this.routes, path);
         this.state.params = params;
-        this.current = route;
+        this.route = route;
       }
     });
 
@@ -159,12 +161,12 @@ export class Router {
   }
 
   set component(c) {
-    this.current = new Route("", c);
+    this.route = new Route("", c);
     this.subscriptions.forEach(subscription => subscription(this));
   }
 
   get component() {
-    const r = this.current;
+    const r = this.route;
     return r !== undefined && r.component;
   }
 
@@ -177,24 +179,28 @@ export class Router {
    * @param {string} path where to go
    */
   async push(path) {
-    try {
-      const state = this.state;
+    const state = this.state;
+    const oldRoute = this.route;
+    const oldParams = this.params;
 
+    try {
       const { route, params } = matcher(this.routes, path);
 
-      if (this.current !== undefined) {
-        await this.current.leave(state, route);
+      if (oldRoute !== undefined) {
+        await oldRoute.leave(state, route);
       }
 
       state.params = params;
+      this.route = route;
 
       if (route !== undefined) {
-        await route.enter(state, this.current);
+        await route.enter(state, oldRoute);
       }
 
-      this.current = route;
     } catch (e) {
       console.log("PUSH", path, e);
+      state.params = oldParams;
+      this.route = oldRoute;
     } finally {
       history.pushState({ path }, "", this.base + path);
     }
