@@ -40,7 +40,7 @@ const base = "http://localhost:5000/base";
 fixture`Getting Started`.page`${base}/index.html`;
 
 
-test("Click arund", async t => {
+test("click arund", async t => {
   for (const l of links) {
     const title = Selector(".routetitle").withText(l.title);
     const a = Selector("a").withAttribute("href", l.path);
@@ -53,6 +53,17 @@ test("Click arund", async t => {
   }
 });
 
+test("routing failure", async t => {
+    await t.click(Selector("a").withAttribute("href", "/about"));
+
+    const title = Selector(".routetitle").withText('About');
+    const a = Selector("a").withAttribute("href", "/noway");
+
+    await t
+      .click(a)
+      .expect(title.innerText)
+      .eql("About");
+});
 
 /*
 test.page`${base}/index.html`("about", async t => {

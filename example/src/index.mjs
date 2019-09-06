@@ -2,6 +2,7 @@ import { derived } from "svelte/store";
 
 import App from "./App.svelte";
 import About from "./About.svelte";
+import NoWay from "./NoWay.svelte";
 import Home from "./Home.svelte";
 import Login from "./Login.svelte";
 import Article from "./Article.svelte";
@@ -10,7 +11,14 @@ import Categories from "./Categories.svelte";
 import Category from "./Category.svelte";
 import { articles, categories } from "./util.mjs";
 
-import { Router, route } from "../../src/index.svelte";
+import { Router, route, Guard } from "../../src/index.svelte";
+
+class ExceptionGuard extends Guard {
+
+  async enter(state, from) {
+    throw new Error("never go there");
+  }
+}
 
 export const router = new Router(
   [
@@ -20,7 +28,9 @@ export const router = new Router(
     route("/article", Articles),
     route("/article/:article", Article),
     route("/category", Categories),
-    route("/category/:category", Category)
+    route("/category/:category", Category),
+
+    route("/noway", new ExceptionGuard(), NoWay)
   ],
   "/base"
 );

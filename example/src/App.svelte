@@ -9,6 +9,7 @@
   <Link href="/">Home</Link>
   <Link href="/article">Articles</Link>
   <Link href="/category">Categories</Link>
+  <Link href="/noway">Does Not Work</Link>
 
   <Outlet {router}>nothing there</Outlet>
 
