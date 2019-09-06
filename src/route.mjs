@@ -1,4 +1,7 @@
 /**
+ * @param {string} path
+ * @param {SvelteComponent} component target to show
+ * @param {Guard[]} guards
  * @property {string} path
  * @property {SvelteComponent} component target to show
  * @property {Guard[]} guards
