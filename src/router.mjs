@@ -1,5 +1,6 @@
 import { compile, matcher } from "multi-path-matcher";
 import { Route } from "./route.mjs";
+import { Transition } from "./transition.mjs";
 
 /**
  * @typedef Key {Object}
@@ -179,31 +180,8 @@ export class Router {
    * @param {string} path where to go
    */
   async push(path) {
-    const state = this.state;
-    const oldRoute = this.route;
-    const oldParams = this.params;
-
-    try {
-      const { route, params } = matcher(this.routes, path);
-
-      if (oldRoute !== undefined) {
-        await oldRoute.leave(state, route);
-      }
-
-      state.params = params;
-      this.route = route;
-
-      if (route !== undefined) {
-        await route.enter(state, oldRoute);
-      }
-
-    } catch (e) {
-      console.log("PUSH", path, e);
-      state.params = oldParams;
-      this.route = oldRoute;
-    } finally {
-      history.pushState({ path }, "", this.base + path);
-    }
+    const transition = new Transition(this, path);
+    await transition.start();
   }
 
   /**
