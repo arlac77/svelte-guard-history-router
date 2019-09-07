@@ -103,9 +103,7 @@ export class Router {
           });
 
           if (changed) {
-            stateSubscriptions.forEach(subscription =>
-              subscription(this.state)
-            );
+            stateSubscriptions.forEach(subscription => subscription(state));  
           }
         },
         get() {
