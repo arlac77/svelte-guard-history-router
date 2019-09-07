@@ -6,6 +6,11 @@ export const articles = {
   },
   "02": { name: "Cheesecake", price: 2.0, category: "dessert" },
   "03": { name: "Hot Dog", price: 2.0, category: "to go" },
+  "04": {
+    name: "Milk",
+    category: "staple",
+    price: 1.05
+  },
   "10": { name: "Pizza Quattro Stagioni", price: 8.0, category: "pizza" },
   "11": { name: "Pizza Salami", price: 7.0, category: "pizza" },
   "12": { name: "Pizza Hawaii", price: 7.0, category: "pizza" },
