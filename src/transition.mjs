@@ -45,7 +45,8 @@ export class Transition {
    * @param path 
    */
   async redirect(path) {
-    const { route, params } = matcher(this.router.routes, path);
+    const router = this.router;
+    const { route, params } = matcher(router.routes, path);
     router.state.params = params;
     router.route = route;
   }
