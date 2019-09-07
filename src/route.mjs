@@ -29,28 +29,26 @@ export class Route {
   /**
    * Enter the route from a former one.
    * Calls guard enter on all guards present in our gurad but absent in the former one
-   * @param {RouterState} state
-   * @param {Route} form
+   * @param {Transition} transition 
    */
-  async enter(state, from) {
+  async enter(transition) {
     return Promise.all(
       this.guards
     //    .filter(g => g.enter !== undefined && (from === undefined /*|| !from.hasGuard(g) */))
-        .map(g => g.enter(state))
+        .map(g => g.enter(transition))
     );
   }
 
   /**
    * Leave the route to a new one.
    * Calls quard leave on all our guards which are not in the new route 
-   * @param {RouterState} state
-   * @param {Route} to
+   * @param {Transition} transition 
    */
-  async leave(state, to) {
+  async leave(transition) {
     return Promise.all(
       this.guards
     //    .filter(g => g.leave !== undefined &&(to === undefined /*|| !to.hasGuard(g) */))
-        .map(g => g.leave(state))
+        .map(g => g.leave(transition))
     );
   }
 }

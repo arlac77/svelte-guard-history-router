@@ -56,7 +56,7 @@
 </style>
 
 <div>
-  <h3>State</h3>
+  <h3>Router State</h3>
 
   {#if state.route !== undefined}
     <h3>Route</h3>

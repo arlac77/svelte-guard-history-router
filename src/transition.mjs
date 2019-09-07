@@ -24,20 +24,30 @@ export class Transition {
       const { route, params } = matcher(this.router.routes, this.path);
 
       if (this.saved.route !== undefined) {
-        await this.saved.route.leave(router.state, route);
+        await this.saved.route.leave(this);
       }
 
       router.state.params = params;
       router.route = route;
 
       if (route !== undefined) {
-        await route.enter(router.state, route);
+        await route.enter(this);
       }
     } catch (e) {
       await this.rollback(e);
     } finally {
       history.pushState({ path: this.path }, "", router.base + this.path);
     }
+  }
+
+  /**
+   * 
+   * @param path 
+   */
+  async redirect(path) {
+    const { route, params } = matcher(this.router.routes, path);
+    router.state.params = params;
+    router.route = route;
   }
 
   /**

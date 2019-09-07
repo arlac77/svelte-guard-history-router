@@ -15,17 +15,15 @@ export class Guard {
 
   /**
    * Called while entering a route (current outlet is not yet set)
-   * @param {RouterState} state 
-   * @param {Route} from old route
+   * @param {Transition} transition 
    */
-  async enter(state, from) {}
+  async enter(transition) {}
 
   /**
    * Called before leaving a route
-   * @param {RouterState} state 
-   * @param {Route} to new route
+   * @param {Transition} transition 
    */
-  async leave(state, to) {}
+  async leave(transition) {}
 }
 
 /**

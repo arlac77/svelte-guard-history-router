@@ -1,13 +1,13 @@
 export function waitingGuard(component, rampUpTime = 300) {
   let handler;
   return {
-    enter: state => {
+    enter: transition => {
       handler = setTimeout(() => {
         handler = undefined;
-        state.router.component = component;
+        transition.router.component = component;
       }, rampUpTime);
     },
-    leave: state => {
+    leave: transition => {
       clearTimeout(handler);
     }
   };
