@@ -2,7 +2,11 @@ import { matcher } from "multi-path-matcher";
 
 
 /**
- * 
+ * @param {Router} router
+ * @param {string} path
+ * @property {Router} router
+ * @property {string} path
+ * @property {string} state
  */
 export class Transition {
   constructor(router, path) {
@@ -36,6 +40,10 @@ export class Transition {
     }
   }
 
+  /**
+   * Bring back the router into the state before the transition has started
+   * @param {Exception} e 
+   */
   async rollback(e) {
     if(e) { console.error(e); }
     const router = this.router;

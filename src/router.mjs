@@ -152,11 +152,12 @@ export class Router {
       }
     });
 
+    /*
     console.log(
       "LOCATION",
       window.location.pathname,
       window.location.pathname.substring(this.base.length)
-    );
+    );*/
 
     this.push(window.location.pathname.substring(this.base.length));
   }
@@ -181,7 +182,7 @@ export class Router {
    */
   async push(path) {
     const transition = new Transition(this, path);
-    await transition.start();
+    return transition.start();
   }
 
   /**

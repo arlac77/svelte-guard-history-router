@@ -1,15 +1,12 @@
 import { readable } from "svelte/store";
-import { articles as _articles } from './data.mjs';
-
+import { articles as _articles } from "./data.mjs";
 
 export const articles = readable({}, set => {
   setTimeout(() => {
     set(Object.values(_articles));
   }, 1000);
 
-  return () => {
-    console.log("unsubscribe articles");
-  };
+  return () => {};
 });
 
 export const categories = readable([], set => {
@@ -28,7 +25,5 @@ export const categories = readable([], set => {
     set(categories);
   }, 500);
 
-  return () => {
-    console.log("unsubscribe categories");
-  };
+  return () => {};
 });
