@@ -14,8 +14,7 @@ import { articles, categories } from "./util.mjs";
 import { Router, route, Guard } from "../../src/index.svelte";
 
 class ExceptionGuard extends Guard {
-
-  async enter(state, from) {
+  async enter(transition) {
     throw new Error("never go there");
   }
 }

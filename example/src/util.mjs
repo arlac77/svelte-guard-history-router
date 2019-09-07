@@ -1,7 +1,7 @@
 import { readable } from "svelte/store";
 import { articles as _articles } from "./data.mjs";
 
-export const articles = readable({}, set => {
+export const articles = readable([], set => {
   setTimeout(() => {
     set(Object.values(_articles));
   }, 1000);
