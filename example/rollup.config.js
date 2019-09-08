@@ -19,7 +19,7 @@ export default {
       spa: "example/public/index.html",
       basePath: "/base"
     }),
-    resolve(),
+    resolve({ browser: true }),
     svelte()
   ]
 };
