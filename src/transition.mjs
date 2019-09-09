@@ -17,15 +17,25 @@ export class Transition {
     });
   }
 
+  /**
+   * start the transition
+   * - find matching target route
+   * - leave old route
+   * - set params
+   * - set current route
+   * - enter new route
+   */
   async start() {
     const router = this.router;
 
+    router.transition = this;
     try {
       const { route, params } = matcher(this.router.routes, this.path);
 
       if (this.saved.route !== undefined) {
         await this.saved.route.leave(this);
       }
+
 
       router.state.params = params;
       router.route = route;
@@ -36,6 +46,7 @@ export class Transition {
     } catch (e) {
       await this.rollback(e);
     } finally {
+      router.transition = undefined;
       history.pushState({ path: this.path }, "", router.base + this.path);
     }
   }

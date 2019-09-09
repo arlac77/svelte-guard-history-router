@@ -173,8 +173,8 @@ export class Router {
    * @param {string} path where to go
    */
   async push(path) {
-    this.transition = new Transition(this, path);
-    return this.transition.start();
+    const transition = new Transition(this, path);
+    return transition.start();
   }
 
   /**
