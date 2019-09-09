@@ -46,7 +46,7 @@ test("click arund", async t => {
 
     await t
       .click(a)
-     // .takeScreenshot()
+      .takeScreenshot()
       .expect(title.innerText)
       .eql(l.title);
   }
