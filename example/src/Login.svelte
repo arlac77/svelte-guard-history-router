@@ -1,4 +1,6 @@
 <script>
+  import { setSession } from './index.mjs';
+
   export let state;
 
   let username = "";
@@ -8,7 +10,11 @@
   async function submit() {
     try {
       await login(username, password);
-      state.router.push("/");
+      setSession({ username });
+      let transition = state.router.transition;
+      if(transition) {
+        transition.continue();
+      }
     } catch (e) {
       message = e;
     }
@@ -17,7 +23,7 @@
   async function login(username, password) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (username === "user1" && password === "1234") {
+        if (username === "user1" && password === "secret") {
           resolve();
         } else {
           reject(new Error("invalid credentials"));

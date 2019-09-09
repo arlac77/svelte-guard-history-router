@@ -62,6 +62,10 @@ export class Transition {
     router.route = route;
   }
 
+  async continue() {
+
+  }
+  
   /**
    * Bring back the router into the state before the transition has started
    * @param {Exception} e 

@@ -19,15 +19,32 @@ class ExceptionGuard extends Guard {
   }
 }
 
+let session;
+
+export function setSession(s)
+{
+  session = s;
+}
+
+class SessionGuard extends Guard {
+  async enter(transition) {
+    if(!session) {
+ //     transition.redirect('/login');
+    }
+  }
+}
+
+const sessionGuard = new SessionGuard();
+
 export const router = new Router(
   [
     route("*", Home),
     route("/about", About),
     route("/login", Login),
-    route("/article", Articles),
-    route("/article/:article", Article),
-    route("/category", Categories),
-    route("/category/:category", Category),
+    route("/article", sessionGuard, Articles),
+    route("/article/:article", sessionGuard, Article),
+    route("/category", sessionGuard, Categories),
+    route("/category/:category", sessionGuard, Category),
 
     route("/noway", new ExceptionGuard(), NoWay)
   ],
