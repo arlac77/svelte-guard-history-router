@@ -1,6 +1,7 @@
 <script>
   export let router;
 
+  $: transition = $router.transition;
   $: state = $router.state;
 </script>
 
@@ -57,6 +58,18 @@
 
 <div>
   <h3>Router State</h3>
+
+  {#if transition !== undefined}
+    <h3>Transition</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td>path</td>
+          <td id="route.path">{transition.path}</td>
+        </tr>
+      </tbody>
+    </table>
+  {/if}
 
   {#if state.route !== undefined}
     <h3>Route</h3>

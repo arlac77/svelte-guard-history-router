@@ -24,6 +24,7 @@ import { Transition } from "./transition.mjs";
  * @property {Object} params value mapping from keys
  * @property {RouterState} state
  * @property {Route} route current
+ * @property {Transition} transition
  * @property {string} base url
  */
 export class Router {
@@ -172,8 +173,8 @@ export class Router {
    * @param {string} path where to go
    */
   async push(path) {
-    const transition = new Transition(this, path);
-    return transition.start();
+    this.transition = new Transition(this, path);
+    return this.transition.start();
   }
 
   /**
