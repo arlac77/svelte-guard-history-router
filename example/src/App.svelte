@@ -4,9 +4,7 @@
 </script>
 
 <nav>
-  <a href="/">
-    <h1 class="routetitle">Router Example</h1>
-  </a>
+  <a class="routetitle" href="/">Router Example</a>
   <ul>
     <li>
       <Link href="/about">About</Link>
