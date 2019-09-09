@@ -86,7 +86,6 @@ export class Router {
     Object.defineProperties(state, {
       router: { value: this },
       route: { get: () => route },
-      path: { get: () => route ? route.path : undefined },
       keys: { value: keys },
       params: {
         set(np) {

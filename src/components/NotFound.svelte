@@ -5,6 +5,6 @@
 </script>
 
 <div>
-  <div class="error">${state.path}</div> No found
+  <div class="error">No found</div> 
   <Link href="/">Home</Link>
 </div>
