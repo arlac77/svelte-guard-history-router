@@ -86,6 +86,7 @@ export class Router {
     Object.defineProperties(state, {
       router: { value: this },
       route: { get: () => route },
+      path: { get: () => route ? route.path : undefined },
       keys: { value: keys },
       params: {
         set(np) {
@@ -149,13 +150,6 @@ export class Router {
         this.route = route;
       }
     });
-
-    /*
-    console.log(
-      "LOCATION",
-      window.location.pathname,
-      window.location.pathname.substring(this.base.length)
-    );*/
 
     this.push(window.location.pathname.substring(this.base.length));
   }

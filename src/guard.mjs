@@ -37,14 +37,14 @@ export async function sequenceGuard(children) {
     },
 
     attach: route => children.forEach(c => c.attach(route)),
-    enter: async (...args) => {
+    enter: async (transition) => {
       for (child of children) {
-        await c.enter(...args);
+        await c.enter(transition);
       }
     },
-    leave: async (...args) => {
+    leave: async (transition) => {
       for (child of children) {
-        await c.leave(...args);
+        await c.leave(transition);
       }
     }
   };
@@ -60,9 +60,9 @@ export async function parallelGuard(children) {
       return children.find(g => g === g.hasGuard(guard)) ? true : false;
     },
     attach: route => children.forEach(c => c.attach(route)),
-    enter: async (...args) =>
-      Promise.all([...children].map(c => c.enter(...args))),
-    leave: async (...args) =>
-      Promise.all([...children].map(c => c.leave(...args)))
+    enter: async (transition) =>
+      Promise.all([...children].map(c => c.enter(transition))),
+    leave: async (transition) =>
+      Promise.all([...children].map(c => c.leave(transition)))
   };
 }
