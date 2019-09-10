@@ -9,6 +9,7 @@ import { matcher } from "multi-path-matcher";
  */
 export class Transition {
   constructor(router, path) {
+
     Object.defineProperties(this, {
       router: { value: router },
       path: { value: path },
@@ -61,12 +62,9 @@ export class Transition {
    * @param {string} path
    */
   async redirect(path) {
-    const router = this.router;
+    this.redirected = this.save();
 
-    this.redirected = {
-      params: router.state.params,
-      route: router.route
-    };
+    const router = this.router;
 
     const { route, params } = matcher(router.routes, path);
     router.state.params = params;
@@ -75,6 +73,7 @@ export class Transition {
 
   async continue() {
     if (this.redirected) {
+      const router = this.router;
       router.state.params = this.redirected.params;
       router.route = this.redirected.route;
       this.redirected = undefined;
@@ -90,8 +89,20 @@ export class Transition {
     if (e) {
       console.error(e);
     }
+    this.restore(this.saved);
+  }
+
+  save() {
     const router = this.router;
-    router.state.params = this.saved.params;
-    router.route = this.saved.route;
+    return {
+      params: router.state.params,
+      route: router.route
+    };
+  }
+
+  restore(state) {
+    const router = this.router;
+    router.state.params = state.params;
+    router.route = state.route;
   }
 }
