@@ -4,7 +4,7 @@
 </script>
 
 <nav>
-  <a class="routetitle" href="/">Router Example</a>
+  <a href="/">Router Example</a>
   <ul>
     <li>
       <Link href="/about">About</Link>
