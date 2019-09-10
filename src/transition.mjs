@@ -36,7 +36,6 @@ export class Transition {
         await this.saved.route.leave(this);
       }
 
-
       router.state.params = params;
       router.route = route;
 
@@ -46,24 +45,40 @@ export class Transition {
     } catch (e) {
       await this.rollback(e);
     } finally {
-      router.transition = undefined;
-      history.pushState({ path: this.path }, "", router.base + this.path);
+      this.end();
     }
   }
 
+  end() {
+   if(this.redirected === undefined) {
+     router.transition = undefined;
+     history.pushState({ path: this.path }, "", router.base + this.path);
+    }
+  }
+  
   /**
    * 
-   * @param path 
+   * @param {string} path 
    */
   async redirect(path) {
     const router = this.router;
+  
+    this.redirected = {
+      params: router.state.params,
+      route: router.route };
+  
     const { route, params } = matcher(router.routes, path);
     router.state.params = params;
     router.route = route;
   }
 
   async continue() {
-
+    if(this.redirected) {
+      router.state.params = this.redirected.params;
+      router.route = this.redirected.route;
+      this.redirected = undefined;
+      this.end();
+    }
   }
   
   /**
