@@ -55,7 +55,7 @@ test("click arund", async t => {
 test("routing failure", async t => {
     await t.click(Selector("a").withAttribute("href", "/about"));
 
-    const title = Selector(".routetitle"); //.withText('About');
+    const title = Selector(".routetitle");
     const a = Selector("a").withAttribute("href", "/noway");
 
     await t
@@ -66,12 +66,12 @@ test("routing failure", async t => {
 
 
 test.page`${base}/about`("about", async t => {
-  const title = Selector(".routetitle"); //.withText("About");
+  const title = Selector(".routetitle");
   await t.expect(title.innerText).eql("About");
 });
 
 test.page`${base}/article/10`("artices/10", async t => {
-  const title = Selector(".routetitle"); //.withText("Article Pizza Quattro Stagioni");
+  const title = Selector(".routetitle");
   await t.expect(title.innerText).eql("Article Pizza Quattro Stagioni");
 });
 
