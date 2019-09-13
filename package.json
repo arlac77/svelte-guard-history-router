@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "start": "rollup -c example/rollup.config.js -w",
-    "test": "testcafe chromium:headless tests/*-test.js -s test-results --app-init-delay 500 --app \"rollup -c example/rollup.config.js -w\""
+    "test": "testcafe $BROWSER:headless tests/*-test.js -s test-results --app-init-delay 500 --app \"rollup -c example/rollup.config.js -w\""
   },
   "dependencies": {
     "multi-path-matcher": "^2.0.3"
@@ -22,7 +22,7 @@
     "rollup-plugin-svelte": "^5.1.0",
     "semantic-release": "^15.13.24",
     "svelte": "^3.12.0",
-    "testcafe": "^1.4.3"
+    "testcafe": "^1.5.0"
   },
   "engines": {
     "node": ">=12.10.0"
