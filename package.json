@@ -9,6 +9,8 @@
     "router"
   ],
   "scripts": {
+    "docs": "documentation readme src/index.svelte --section=API",
+    "lint": "documentation lint src/index.svelte",
     "start": "rollup -c example/rollup.config.js -w",
     "test": "testcafe $BROWSER:headless tests/*-test.js -s test-results --app-init-delay 500 --app \"rollup -c example/rollup.config.js -w\""
   },
@@ -16,6 +18,7 @@
     "multi-path-matcher": "^2.0.3"
   },
   "devDependencies": {
+    "documentation": "^12.1.2",
     "rollup": "^1.21.2",
     "rollup-plugin-dev": "1.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
