@@ -56,8 +56,7 @@ export class Route {
 /**
  * 
  * @param {string} path 
- * @param {Guard[]} args
- * @param {SvelteComponent} component 
+ * @param {Guard[]} args last one must be a SvelteComponent
  */
 export function route(path, ...args) {
   const component = args.pop();

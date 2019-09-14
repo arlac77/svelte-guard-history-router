@@ -9,7 +9,6 @@ import { matcher } from "multi-path-matcher";
  */
 export class Transition {
   constructor(router, path) {
-
     Object.defineProperties(this, {
       router: { value: router },
       path: { value: path },

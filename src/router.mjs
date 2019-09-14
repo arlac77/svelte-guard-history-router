@@ -3,13 +3,13 @@ import { Route } from "./route.mjs";
 import { Transition } from "./transition.mjs";
 
 /**
- * @typedef Key {Object}
+ * @typedef {Object} Key
  * @property {string} name
  * @property {any} value
  */
 
  /**
- * @typedef RouterState {Object}
+ * @typedef {Object} RouterState 
  * @property {Router} router
  * @property {Route} route
  * @property {Set<Key>} keys

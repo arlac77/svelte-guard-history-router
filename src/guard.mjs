@@ -9,7 +9,7 @@ export class Guard {
 
   /**
    * Called when guard is attached to a route
-   * @param {Route} from 
+   * @param {Route} route 
    */
   attach(route) {}
 
