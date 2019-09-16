@@ -53,6 +53,7 @@ export class Transition {
       const router = this.router;
       router.transition = undefined;
       history.pushState({ path: this.path }, "", router.base + this.path);
+      router.linkNodes.forEach(n => router.updateActive(n));
     }
   }
 

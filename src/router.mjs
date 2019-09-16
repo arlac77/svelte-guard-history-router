@@ -128,7 +128,7 @@ export class Router {
         set(value) {
           if (route !== value) {
             route = value;
-            this.linkNodes.forEach(n => this.updateActive(n));
+            //this.linkNodes.forEach(n => this.updateActive(n));
             this.subscriptions.forEach(subscription => subscription(this));
             stateSubscriptions.forEach(subscription => subscription(state));
           }
@@ -179,6 +179,11 @@ export class Router {
     return transition.start();
   }
 
+  get path()
+  {
+    return window.location.pathname.substring(this.base.length);
+  }
+
   /**
    * Fired when the route (or the target component changes)
    * @param {Function} subscription
@@ -190,17 +195,15 @@ export class Router {
   }
 
   /**
-   * 
-   * @param node 
+   *
+   * @param node
    */
   updateActive(node) {
     node.classList.remove("active");
 
     const href = node.getAttribute("href");
 
-    console.log(this.route.path, href, href.match(this.route.regex) ? true : false);
-
-    if (href.match(this.route.regex)) {
+    if(this.path === href) {
       node.classList.add("active");
     }
   }
