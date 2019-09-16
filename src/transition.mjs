@@ -94,7 +94,7 @@ export class Transition {
   save() {
     const router = this.router;
     return {
-      params: router.state.params,
+      params: { ...router.state.params},
       route: router.route
     };
   }
