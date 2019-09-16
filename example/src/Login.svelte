@@ -23,7 +23,7 @@
   async function login(username, password) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (username === "user1" && password === "secret") {
+        if (username === "user" && password === "secret") {
           resolve();
         } else {
           reject(new Error("invalid credentials"));

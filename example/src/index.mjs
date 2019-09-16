@@ -29,7 +29,7 @@ export function setSession(s)
 class SessionGuard extends Guard {
   async enter(transition) {
     if(!session) {
-    //  transition.redirect('/login');
+      transition.redirect('/login');
     }
   }
 }

@@ -40,12 +40,25 @@ const base = "http://localhost:5000/base";
 fixture`Getting Started`.page`${base}/index.html`;
 
 test("click arund", async t => {
+  const title = Selector(".routetitle");
+
+  let first = true;
+
   for (const l of links) {
-    const title = Selector(".routetitle");
     const a = Selector("a").withAttribute("href", l.path);
 
+    await t.click(a);
+
+    if (l.path.startsWith("/article") && first) {
+      await t
+        .typeText("#username", "user")
+        .typeText("#password", "secret")
+        .click("#submit");
+
+      first = false;
+    }
+
     await t
-      .click(a)
       .takeScreenshot()
       .expect(title.innerText)
       .eql(l.title);
@@ -53,17 +66,16 @@ test("click arund", async t => {
 });
 
 test("routing failure", async t => {
-    await t.click(Selector("a").withAttribute("href", "/about"));
+  await t.click(Selector("a").withAttribute("href", "/about"));
 
-    const title = Selector(".routetitle");
-    const a = Selector("a").withAttribute("href", "/noway");
+  const title = Selector(".routetitle");
+  const a = Selector("a").withAttribute("href", "/noway");
 
-    await t
-      .click(a)
-      .expect(title.innerText)
-      .eql("About");
+  await t
+    .click(a)
+    .expect(title.innerText)
+    .eql("About");
 });
-
 
 test.page`${base}/about`("about", async t => {
   const title = Selector(".routetitle");
@@ -72,6 +84,12 @@ test.page`${base}/about`("about", async t => {
 
 test.page`${base}/article/10`("artices/10", async t => {
   const title = Selector(".routetitle");
+
+  await t
+    .typeText("#username", "user")
+    .typeText("#password", "secret")
+    .click("#submit");
+
   await t.expect(title.innerText).eql("Article Pizza Quattro Stagioni");
 });
 
