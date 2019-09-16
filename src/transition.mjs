@@ -57,7 +57,7 @@ export class Transition {
   }
 
   /**
-   *
+   * Halt current transition and got to another route
    * @param {string} path
    */
   async redirect(path) {
@@ -70,6 +70,9 @@ export class Transition {
     router.route = route;
   }
 
+  /**
+   * Continue a redirected route to its original destination
+   */
   async continue() {
     if (this.redirected) {
       const router = this.router;

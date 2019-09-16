@@ -69,6 +69,7 @@ export const router = new Router(
     -   [start](#start)
     -   [redirect](#redirect)
         -   [Parameters](#parameters-4)
+    -   [continue](#continue)
     -   [rollback](#rollback)
         -   [Parameters](#parameters-5)
 -   [Route](#route)
@@ -170,9 +171,15 @@ start the transition
 
 ### redirect
 
+Halt current transition and got to another route
+
 #### Parameters
 
 -   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+### continue
+
+Continue a redirected route to its original destination
 
 ### rollback
 
