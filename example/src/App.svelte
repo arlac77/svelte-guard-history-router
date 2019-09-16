@@ -1,22 +1,28 @@
 <script>
-  import { Outlet, Link, RouterState } from "../../src/index.svelte";
+  import {
+    Outlet,
+    Link,
+    RouterState,
+    link,
+    active
+  } from "../../src/index.svelte";
   import { router } from "./index.mjs";
 </script>
 
 <nav>
-  <a href="/">Router Example</a>
+  <a href="/" use:link={router} use:active={router}>Router Example</a>
   <ul>
     <li>
-      <Link href="/about">About</Link>
+      <a href="/about" use:link={router} use:active={router}>About</a>
     </li>
     <li>
-      <Link href="/article">Articles</Link>
+      <a href="/article" use:link={router} use:active={router}>Articles</a>
     </li>
     <li>
-      <Link href="/category">Categories</Link>
+      <a href="/category" use:link={router} use:active={router}>Categories</a>
     </li>
     <li>
-      <Link href="/noway">Does Not Work</Link>
+      <a href="/noway" use:link={router} use:active={router}>Does Not Work</a>
     </li>
   </ul>
 </nav>

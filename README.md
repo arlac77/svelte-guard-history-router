@@ -63,35 +63,37 @@ export const router = new Router(
         -   [Parameters](#parameters-1)
     -   [subscribe](#subscribe)
         -   [Parameters](#parameters-2)
+    -   [updateActive](#updateactive)
+        -   [Parameters](#parameters-3)
 -   [Transition](#transition)
-    -   [Parameters](#parameters-3)
+    -   [Parameters](#parameters-4)
     -   [Properties](#properties-3)
     -   [start](#start)
     -   [redirect](#redirect)
-        -   [Parameters](#parameters-4)
+        -   [Parameters](#parameters-5)
     -   [continue](#continue)
     -   [rollback](#rollback)
-        -   [Parameters](#parameters-5)
+        -   [Parameters](#parameters-6)
 -   [Route](#route)
-    -   [Parameters](#parameters-6)
+    -   [Parameters](#parameters-7)
     -   [Properties](#properties-4)
     -   [enter](#enter)
-        -   [Parameters](#parameters-7)
-    -   [leave](#leave)
         -   [Parameters](#parameters-8)
+    -   [leave](#leave)
+        -   [Parameters](#parameters-9)
 -   [route](#route-1)
-    -   [Parameters](#parameters-9)
+    -   [Parameters](#parameters-10)
 -   [Guard](#guard)
     -   [attach](#attach)
-        -   [Parameters](#parameters-10)
-    -   [enter](#enter-1)
         -   [Parameters](#parameters-11)
-    -   [leave](#leave-1)
+    -   [enter](#enter-1)
         -   [Parameters](#parameters-12)
+    -   [leave](#leave-1)
+        -   [Parameters](#parameters-13)
 -   [sequenceGuard](#sequenceguard)
-    -   [Parameters](#parameters-13)
--   [parallelGuard](#parallelguard)
     -   [Parameters](#parameters-14)
+-   [parallelGuard](#parallelguard)
+    -   [Parameters](#parameters-15)
 
 ## Key
 
@@ -145,6 +147,12 @@ Fired when the route (or the target component changes)
 #### Parameters
 
 -   `subscription` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
+
+### updateActive
+
+#### Parameters
+
+-   `node`  
 
 ## Transition
 
@@ -202,6 +210,9 @@ Bring back the router into the state before the transition has started
 -   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 -   `component` **SvelteComponent** target to show
 -   `guards` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Guard](#guard)>** 
+-   `priority` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
+-   `keys` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** 
+-   `regex` **RegEx** 
 
 ### enter
 

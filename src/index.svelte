@@ -1,13 +1,15 @@
 <script context="module">
   import {
     Router,
-    Transition,
     Route,
     route,
+    Transition,
     Guard,
     parallelGuard,
     sequenceGuard,
-    waitingGuard
+    waitingGuard,
+    active,
+    link
   } from "./index.mjs";
   import Outlet from "./components/Outlet.svelte";
   import Link from "./components/Link.svelte";
@@ -25,6 +27,8 @@
     Guard,
     parallelGuard,
     sequenceGuard,
-    waitingGuard
+    waitingGuard,
+    active,
+    link
   };
 </script>

@@ -5,6 +5,9 @@
  * @property {string} path
  * @property {SvelteComponent} component target to show
  * @property {Guard[]} guards
+ * @property {number} priority
+ * @property {string[]} keys
+ * @property {RegEx} regex
  */
 export class Route {
   constructor(path, component, guards = []) {

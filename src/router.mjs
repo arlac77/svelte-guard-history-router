@@ -8,8 +8,8 @@ import { Transition } from "./transition.mjs";
  * @property {any} value
  */
 
- /**
- * @typedef {Object} RouterState 
+/**
+ * @typedef {Object} RouterState
  * @property {Router} router
  * @property {Route} route
  * @property {Set<Key>} keys
@@ -104,7 +104,7 @@ export class Router {
           });
 
           if (changed) {
-            stateSubscriptions.forEach(subscription => subscription(state));  
+            stateSubscriptions.forEach(subscription => subscription(state));
           }
         },
         get() {
@@ -115,6 +115,7 @@ export class Router {
 
     Object.defineProperties(this, {
       base: { value: base },
+      linkNodes: { value: new Set() },
       subscriptions: { value: new Set() },
       state: { value: state },
       keys: { value: keys },
@@ -125,10 +126,11 @@ export class Router {
           return route;
         },
         set(value) {
-          if(route !== value) {
+          if (route !== value) {
             route = value;
+            this.linkNodes.forEach(n => this.updateActive(n));
             this.subscriptions.forEach(subscription => subscription(this));
-            stateSubscriptions.forEach(subscription => subscription(state));  
+            stateSubscriptions.forEach(subscription => subscription(state));
           }
         }
       }
@@ -185,5 +187,21 @@ export class Router {
     this.subscriptions.add(subscription);
     subscription(this);
     return () => this.subscriptions.delete(subscription);
+  }
+
+  /**
+   * 
+   * @param node 
+   */
+  updateActive(node) {
+    node.classList.remove("active");
+
+    const href = node.getAttribute("href");
+
+    console.log(this.route.path, href, href.match(this.route.regex) ? true : false);
+
+    if (href.match(this.route.regex)) {
+      node.classList.add("active");
+    }
   }
 }
