@@ -48,12 +48,15 @@ export class Transition {
     }
   }
 
+  /**
+   * cleanup transition
+   */
   end() {
     if (this.redirected === undefined) {
       const router = this.router;
-      router.transition = undefined;
       history.pushState({ path: this.path }, "", router.base + this.path);
       router.linkNodes.forEach(n => router.updateActive(n));
+      router.transition = undefined;
     }
   }
 
@@ -75,7 +78,7 @@ export class Transition {
    * Continue a redirected route to its original destination
    */
   async continue() {
-    if (this.redirected) {
+    if (this.redirected !== undefined) {
       const router = this.router;
       router.state.params = this.redirected.params;
       router.route = this.redirected.route;
@@ -98,7 +101,7 @@ export class Transition {
   save() {
     const router = this.router;
     return {
-      params: { ...router.state.params},
+      params: { ...router.state.params },
       route: router.route
     };
   }

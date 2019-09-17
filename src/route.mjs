@@ -37,7 +37,6 @@ export class Route {
   async enter(transition) {
     return Promise.all(
       this.guards
-    //    .filter(g => g.enter !== undefined && (from === undefined /*|| !from.hasGuard(g) */))
         .map(g => g.enter(transition))
     );
   }
@@ -50,7 +49,6 @@ export class Route {
   async leave(transition) {
     return Promise.all(
       this.guards
-    //    .filter(g => g.leave !== undefined &&(to === undefined /*|| !to.hasGuard(g) */))
         .map(g => g.leave(transition))
     );
   }
