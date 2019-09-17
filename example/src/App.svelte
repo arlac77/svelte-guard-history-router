@@ -11,7 +11,7 @@
 
 <nav>
   <a href="/" use:link={router} use:active={router}>Router Example</a>
-  <ul>
+  <ul class="left">
     <li>
       <a href="/about" use:link={router} use:active={router}>About</a>
     </li>

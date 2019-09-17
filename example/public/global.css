@@ -4,6 +4,8 @@
   --nav-height: 46px;
 
   --active-color: rgb(84, 102, 58);
+  --active-background-color: rgba(0, 0, 0, 0.2);
+
   --error-color: #b00020;
   --ok-color: #15b000;
 
@@ -103,7 +105,7 @@ nav a {
   flex-flow: row nowrap;
   z-index: 10000;
 
-  padding: 0 7px 0 7px;
+  padding: 0 8px 0 8px;
   margin-block-start: 0.83em;
   margin-block-end: 0.83em;
   margin-inline-start: 0;
@@ -132,15 +134,16 @@ nav ul a {
 }
 
 nav ul a.active {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: var(--active-background-color);
 }
 
 nav ul a:hover {
   color: #fafafa;
+  background-color: var(--active-background-color);
 }
 
 nav ul.left {
-  float: left;
+  margin-left: 0;
 }
 
 nav li {
@@ -148,7 +151,7 @@ nav li {
   display: flex;
   flex-wrap: nowrap;
   list-style: none;
-  padding: 0 5px 0 5px;
+  padding: 0;
 }
 
 body {
