@@ -48,6 +48,7 @@ export const router = new Router(
 ```
 
 ## run tests
+
 ```sh
 export BROWSER=safari|chrome|...
 npm|yarn test
@@ -76,6 +77,7 @@ npm|yarn test
     -   [Parameters](#parameters-4)
     -   [Properties](#properties-3)
     -   [start](#start)
+    -   [end](#end)
     -   [redirect](#redirect)
         -   [Parameters](#parameters-5)
     -   [continue](#continue)
@@ -119,10 +121,17 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 -   `router` **[Router](#router)** 
 -   `route` **[Route](#route)** 
--   `keys` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)&lt;[Key](#key)>** 
--   `params` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+-   `keys` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** all possible keys of all routes
+-   `params` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** of current route
 
 ## Router
+
+key subscriptions:
+
+```js
+const aKey = router.keys.aKey;
+$aKey // fired if value of aKey changes
+```
 
 ### Parameters
 
@@ -132,11 +141,11 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 ### Properties
 
 -   `routes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Route](#route)>** 
--   `keys` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
--   `params` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** value mapping from keys
+-   `keys` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** all possible keys of all routes
+-   `params` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** value mapping from keys (from current route)
 -   `state` **[RouterState](#routerstate)** 
 -   `route` **[Route](#route)** current
--   `transition` **[Transition](#transition)** 
+-   `transition` **[Transition](#transition)** ongoing transition
 -   `base` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** url
 
 ### push
@@ -149,7 +158,8 @@ Leave current route and enter route for given path
 
 ### subscribe
 
-Fired when the route (or the target component changes)
+Router subscription
+Value changes are fired when the route (or the target component changes)
 
 #### Parameters
 
@@ -183,6 +193,10 @@ start the transition
 -   set params
 -   set current route
 -   enter new route
+
+### end
+
+cleanup transition
 
 ### redirect
 

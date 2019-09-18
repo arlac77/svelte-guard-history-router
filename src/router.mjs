@@ -12,19 +12,24 @@ import { Transition } from "./transition.mjs";
  * @typedef {Object} RouterState
  * @property {Router} router
  * @property {Route} route
- * @property {Set<Key>} keys
- * @property {Object} params
+ * @property {Object} keys all possible keys of all routes
+ * @property {Object} params of current route
  */
 
 /**
+ * key subscriptions:
+ * ```js
+ * const aKey = router.keys.aKey;
+ * $aKey // fired if value of aKey changes
+ * ```
  * @param {Route[]} routes
  * @param {string} base url
  * @property {Route[]} routes
- * @property {Object} keys
- * @property {Object} params value mapping from keys
+ * @property {Object} keys all possible keys of all routes
+ * @property {Object} params value mapping from keys (from current route)
  * @property {RouterState} state
  * @property {Route} route current
- * @property {Transition} transition
+ * @property {Transition} transition ongoing transition
  * @property {string} base url
  */
 export class Router {
@@ -128,7 +133,6 @@ export class Router {
         set(value) {
           if (route !== value) {
             route = value;
-            //this.linkNodes.forEach(n => this.updateActive(n));
             this.subscriptions.forEach(subscription => subscription(this));
             stateSubscriptions.forEach(subscription => subscription(state));
           }
@@ -185,7 +189,8 @@ export class Router {
   }
 
   /**
-   * Fired when the route (or the target component changes)
+   * Router subscription
+   * Value changes are fired when the route (or the target component changes)
    * @param {Function} subscription
    */
   subscribe(subscription) {
