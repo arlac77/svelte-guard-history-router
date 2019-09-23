@@ -90,19 +90,26 @@ npm|yarn test
         -   [Parameters](#parameters-8)
     -   [leave](#leave)
         -   [Parameters](#parameters-9)
--   [route](#route-1)
+-   [GuardedRoute](#guardedroute)
     -   [Parameters](#parameters-10)
+    -   [Properties](#properties-5)
+    -   [enter](#enter-1)
+        -   [Parameters](#parameters-11)
+    -   [leave](#leave-1)
+        -   [Parameters](#parameters-12)
+-   [route](#route-1)
+    -   [Parameters](#parameters-13)
 -   [Guard](#guard)
     -   [attach](#attach)
-        -   [Parameters](#parameters-11)
-    -   [enter](#enter-1)
-        -   [Parameters](#parameters-12)
-    -   [leave](#leave-1)
-        -   [Parameters](#parameters-13)
+        -   [Parameters](#parameters-14)
+    -   [enter](#enter-2)
+        -   [Parameters](#parameters-15)
+    -   [leave](#leave-2)
+        -   [Parameters](#parameters-16)
 -   [sequenceGuard](#sequenceguard)
-    -   [Parameters](#parameters-14)
+    -   [Parameters](#parameters-17)
 -   [parallelGuard](#parallelguard)
-    -   [Parameters](#parameters-15)
+    -   [Parameters](#parameters-18)
 
 ## Key
 
@@ -224,13 +231,48 @@ Bring back the router into the state before the transition has started
 
 -   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 -   `component` **SvelteComponent** target to show
--   `guards` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Guard](#guard)>**  (optional, default `[]`)
 
 ### Properties
 
 -   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 -   `component` **SvelteComponent** target to show
--   `guards` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Guard](#guard)>** 
+-   `priority` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
+-   `keys` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** 
+-   `regex` **RegEx** 
+
+### enter
+
+Enter the route from a former one.
+Calls guard enter on all guards present in our gurad but absent in the former one
+
+#### Parameters
+
+-   `transition` **[Transition](#transition)** 
+
+### leave
+
+Leave the route to a new one.
+Calls quard leave on all our guards which are not in the new route
+
+#### Parameters
+
+-   `transition` **[Transition](#transition)** 
+
+## GuardedRoute
+
+**Extends Route**
+
+### Parameters
+
+-   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `component` **SvelteComponent** target to show
+-   `guard` **[Guard](#guard)** 
+
+### Properties
+
+-   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `component` **SvelteComponent** target to show
+-   `guard` **[Guard](#guard)** 
 -   `priority` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 -   `keys` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** 
 -   `regex` **RegEx** 

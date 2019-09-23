@@ -2,6 +2,7 @@
   import {
     Router,
     Route,
+    GuardedRoute,
     route,
     Transition,
     Guard,
@@ -22,6 +23,7 @@
     RouterState,
     Router,
     Route,
+    GuardedRoute,
     route,
     Transition,
     Guard,

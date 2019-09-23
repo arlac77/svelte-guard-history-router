@@ -1,65 +1,93 @@
+import { sequenceGuard } from "./guard.mjs";
+
 /**
  * @param {string} path
  * @param {SvelteComponent} component target to show
- * @param {Guard[]} guards
  * @property {string} path
  * @property {SvelteComponent} component target to show
- * @property {Guard[]} guards
  * @property {number} priority
  * @property {string[]} keys
  * @property {RegEx} regex
  */
 export class Route {
-  constructor(path, component, guards = []) {
+  constructor(path, component,) {
     Object.defineProperties(this, {
       path: { value: path },
-      component: { value: component },
-      guards: { value: guards }
+      component: { value: component }
     });
-
-    for (const guard of guards) {
-      if (guard.attach !== undefined) {
-        guard.attach(this);
-      }
-    }
   }
 
-  hasGuard(guard)
-  {
-    return this.guards.find((g) => g === guard) ? true : false;
+  hasGuard(guard) {
+    return false
   }
 
   /**
    * Enter the route from a former one.
    * Calls guard enter on all guards present in our gurad but absent in the former one
-   * @param {Transition} transition 
+   * @param {Transition} transition
    */
   async enter(transition) {
-    return Promise.all(
-      this.guards
-        .map(g => g.enter(transition))
-    );
   }
 
   /**
    * Leave the route to a new one.
-   * Calls quard leave on all our guards which are not in the new route 
-   * @param {Transition} transition 
+   * Calls quard leave on all our guards which are not in the new route
+   * @param {Transition} transition
    */
   async leave(transition) {
-    return Promise.all(
-      this.guards
-        .map(g => g.leave(transition))
-    );
   }
 }
 
 /**
- * 
- * @param {string} path 
+ * @param {string} path
+ * @param {SvelteComponent} component target to show
+ * @param {Guard} guard
+ * @property {string} path
+ * @property {SvelteComponent} component target to show
+ * @property {Guard} guard
+ * @property {number} priority
+ * @property {string[]} keys
+ * @property {RegEx} regex
+ */
+export class GuardedRoute extends Route {
+  constructor(path, component, guard) {
+    super(path, component);
+    guard = guard.length > 1 ? sequenceGuard(guard) : guard[0];
+
+    Object.defineProperties(this, {
+      guard: { value: guard }
+    });
+  }
+
+  hasGuard(guard) {
+    return this.guard.hasGuard(guard);
+  }
+
+  /**
+   * Enter the route from a former one.
+   * Calls guard enter on all guards present in our gurad but absent in the former one
+   * @param {Transition} transition
+   */
+  async enter(transition) {
+    return this.guard.enter(transition);
+  }
+
+  /**
+   * Leave the route to a new one.
+   * Calls quard leave on all our guards which are not in the new route
+   * @param {Transition} transition
+   */
+  async leave(transition) {
+    return this.guard.leave(transition);
+  }
+}
+
+/**
+ *
+ * @param {string} path
  * @param {Guard[]} args last one must be a SvelteComponent
  */
 export function route(path, ...args) {
   const component = args.pop();
-  return new Route(path, component, args);
+  return args.length > 0 ? new GuardedRoute(path, component, args) : new Route(path, component, args);
 }
