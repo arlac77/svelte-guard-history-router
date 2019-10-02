@@ -1,6 +1,4 @@
 language: node_js
-node_js:
-  - 12.11.0
 addons:
   chrome: stable
   ssh_known_hosts: $UPLOAD_SERVER
@@ -21,6 +19,7 @@ jobs:
         - 'mkdir -p "${TRAVIS_REPO_SLUG}/${TRAVIS_JOB_ID}"'
         - 'mv test-results "${TRAVIS_REPO_SLUG}/${TRAVIS_JOB_ID}"'
         - 'rsync -avz "${TRAVIS_REPO_SLUG}/${TRAVIS_JOB_ID}" ci-upload@$UPLOAD_SERVER:/somewhere'
+      node_js: 12.11.1
     - stage: release
       node_js: lts/*
       script: skip
