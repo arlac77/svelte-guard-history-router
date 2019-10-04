@@ -83,7 +83,7 @@ export class GuardedRoute extends Route {
 }
 
 /**
- *
+ * Helper function to create routes with optional guards
  * @param {string} path
  * @param {Guard[]} args last one must be a SvelteComponent
  */

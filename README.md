@@ -183,12 +183,12 @@ Value changes are fired when the route (or the target component changes)
 ### Parameters
 
 -   `router` **[Router](#router)** 
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination
 
 ### Properties
 
 -   `router` **[Router](#router)** 
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination
 -   `state` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 ### start
@@ -297,6 +297,8 @@ Calls quard leave on all our guards which are not in the new route
 
 ## route
 
+Helper function to create routes with optional guards
+
 ### Parameters
 
 -   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
@@ -309,7 +311,7 @@ Like presents of values in the context
 
 ### attach
 
-Called when guard is attached to a route
+Called when guard is attached to a route (one time)
 
 #### Parameters
 

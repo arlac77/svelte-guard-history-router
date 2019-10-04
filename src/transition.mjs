@@ -2,9 +2,9 @@ import { matcher } from "multi-path-matcher";
 
 /**
  * @param {Router} router
- * @param {string} path
+ * @param {string} path destination
  * @property {Router} router
- * @property {string} path
+ * @property {string} path destination
  * @property {string} state
  */
 export class Transition {
