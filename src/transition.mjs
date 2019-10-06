@@ -16,7 +16,7 @@ export class Transition {
       path: { value: path },
       saved: { value: { route: router.route, params: router.params } },
       component: {
-        get: () => component,
+        get: () => this.redirected === undefined ? component : undefined,
         set: value => {
           component = value;
           const router = this.router;

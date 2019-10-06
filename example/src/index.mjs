@@ -45,7 +45,7 @@ export const router = new Router(
     route("*", Home),
     route("/about", About),
     route("/login", Login),
-    route("/article", sessionGuard, /*waitingGuard,*/ Articles),
+    route("/article", sessionGuard, waitingGuard, Articles),
     route("/article/:article", sessionGuard, Article),
     route("/category", sessionGuard, Categories),
     route("/category/:category", sessionGuard, Category),
