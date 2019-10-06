@@ -30,19 +30,19 @@ export class Guard {
  * execute guards in a sequence
  * @param {Iterable<Guard>} children
  */
-export async function sequenceGuard(children) {
+export function sequenceGuard(children) {
   return {
     hasGuard: guard =>
       children.find(g => g === g.hasGuard(guard)) ? true : false,
     attach: route => children.forEach(c => c.attach(route)),
     enter: async transition => {
-      for (child of children) {
-        await c.enter(transition);
+      for (const child of children) {
+        await child.enter(transition);
       }
     },
     leave: async transition => {
-      for (child of children) {
-        await c.leave(transition);
+      for (const child of children) {
+        await child.leave(transition);
       }
     }
   };
@@ -52,7 +52,7 @@ export async function sequenceGuard(children) {
  * execute guards in a parallel
  * @param {Iterable<Guard>} children
  */
-export async function parallelGuard(children) {
+export function parallelGuard(children) {
   return {
     hasGuard: guard =>
       children.find(g => g === g.hasGuard(guard)) ? true : false,

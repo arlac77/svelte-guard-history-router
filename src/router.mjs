@@ -160,12 +160,12 @@ export class Router {
     this.push(window.location.pathname.substring(this.base.length));
   }
 
-  set component(c) {
-    this.route = new Route("", c);
-    this.subscriptions.forEach(subscription => subscription(this));
-  }
-
   get component() {
+    const transition = this.transition;
+    if(transition !== undefined && transition.component !== undefined) {
+      return transition.component;
+    }
+
     const r = this.route;
     return r !== undefined && r.component;
   }

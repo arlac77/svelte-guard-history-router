@@ -9,10 +9,20 @@ import { matcher } from "multi-path-matcher";
  */
 export class Transition {
   constructor(router, path) {
+    let component;
+
     Object.defineProperties(this, {
       router: { value: router },
       path: { value: path },
-      saved: { value: { route: router.route, params: router.params } }
+      saved: { value: { route: router.route, params: router.params } },
+      component: {
+        get: () => component,
+        set: value => {
+          component = value;
+          const router = this.router;
+          router.subscriptions.forEach(subscription => subscription(router));
+        }
+      }
     });
   }
 

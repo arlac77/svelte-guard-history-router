@@ -10,7 +10,7 @@ import { sequenceGuard } from "./guard.mjs";
  * @property {RegEx} regex
  */
 export class Route {
-  constructor(path, component,) {
+  constructor(path, component) {
     Object.defineProperties(this, {
       path: { value: path },
       component: { value: component }
@@ -18,7 +18,7 @@ export class Route {
   }
 
   hasGuard(guard) {
-    return false
+    return false;
   }
 
   /**
@@ -26,16 +26,14 @@ export class Route {
    * Calls guard enter on all guards present in our gurad but absent in the former one
    * @param {Transition} transition
    */
-  async enter(transition) {
-  }
+  async enter(transition) {}
 
   /**
    * Leave the route to a new one.
    * Calls quard leave on all our guards which are not in the new route
    * @param {Transition} transition
    */
-  async leave(transition) {
-  }
+  async leave(transition) {}
 }
 
 /**
@@ -52,8 +50,6 @@ export class Route {
 export class GuardedRoute extends Route {
   constructor(path, component, guard) {
     super(path, component);
-    guard = guard.length > 1 ? sequenceGuard(guard) : guard[0];
-
     Object.defineProperties(this, {
       guard: { value: guard }
     });
@@ -89,5 +85,13 @@ export class GuardedRoute extends Route {
  */
 export function route(path, ...args) {
   const component = args.pop();
-  return args.length > 0 ? new GuardedRoute(path, component, args) : new Route(path, component, args);
+
+  switch (args.length) {
+    case 0:
+      return new Route(path, component);
+    case 1:
+      return new GuardedRoute(path, component, args[0]);
+    default:
+      return new GuardedRoute(path, component, sequenceGuard(args));
+  }
 }

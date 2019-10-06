@@ -8,7 +8,7 @@
     Guard,
     parallelGuard,
     sequenceGuard,
-    waitingGuard,
+    WaitingGuard,
     active,
     link
   } from "./index.mjs";
@@ -29,7 +29,7 @@
     Guard,
     parallelGuard,
     sequenceGuard,
-    waitingGuard,
+    WaitingGuard,
     active,
     link
   };

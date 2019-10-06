@@ -9,15 +9,18 @@ import Article from "./Article.svelte";
 import Articles from "./Articles.svelte";
 import Categories from "./Categories.svelte";
 import Category from "./Category.svelte";
+import Waiting from "./Waiting.svelte";
+
 import { articles, categories } from "./util.mjs";
 
-import { Router, route, Guard } from "../../src/index.svelte";
+import { Router, route, Guard, WaitingGuard } from "../../src/index.svelte";
 
 class ExceptionGuard extends Guard {
   async enter(transition) {
     throw new Error("never go there");
   }
 }
+
 
 let session;
 
@@ -35,13 +38,14 @@ class SessionGuard extends Guard {
 }
 
 const sessionGuard = new SessionGuard();
+const waitingGuard = new WaitingGuard(Waiting);
 
 export const router = new Router(
   [
     route("*", Home),
     route("/about", About),
     route("/login", Login),
-    route("/article", sessionGuard, Articles),
+    route("/article", sessionGuard, /*waitingGuard,*/ Articles),
     route("/article/:article", sessionGuard, Article),
     route("/category", sessionGuard, Categories),
     route("/category/:category", sessionGuard, Category),
