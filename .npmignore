@@ -11,3 +11,4 @@ doc
 .travis.yml
 .vscode
 .nyc_output
+ci
