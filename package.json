@@ -3,7 +3,7 @@
   "version": "0.0.0-semantic-release",
   "module": "src/index.mjs",
   "svelte": "src/index.svelte",
-  "description": "svelte guarded history router",
+  "description": "svelte router for spa with history only",
   "keywords": [
     "svelte",
     "router"
