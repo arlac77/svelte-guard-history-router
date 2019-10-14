@@ -71,8 +71,9 @@ export class Transition {
   }
 
   /**
-   * Halt current transition and got to another route
-   * @param {string} path
+   * Halt current transition and go to another route.
+   * To proceed with the original route by call continue()
+   * @param {string} path new route to enter temprorarly
    */
   async redirect(path) {
     this.redirected = this.save();

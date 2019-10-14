@@ -3,9 +3,20 @@ import { Route } from "./route.mjs";
 import { Transition } from "./transition.mjs";
 
 /**
+ * Keys also act as svelte stores and can be subscribed.
+ * ```js
+ * export const article = derived(
+ * [articles, router.keys.article],
+ * ([$articles, $id], set) => {
+ *   set($articles.find(a => a.id === $id));
+ *   return () => {};
+ * }
+ * );
+ * ```
  * @typedef {Object} Key
  * @property {string} name
  * @property {any} value
+ * @property {Set} subscriptions
  */
 
 /**

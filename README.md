@@ -113,12 +113,25 @@ npm|yarn test
 
 ## Key
 
+Keys also act as svelte stores and can be subscribed.
+
+```js
+export const article = derived(
+[articles, router.keys.article],
+([$articles, $id], set) => {
+  set($articles.find(a => a.id === $id));
+  return () => {};
+}
+);
+```
+
 Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
 ### Properties
 
 -   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 -   `value` **any** 
+-   `subscriptions` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)** 
 
 ## RouterState
 
@@ -207,11 +220,12 @@ cleanup transition
 
 ### redirect
 
-Halt current transition and got to another route
+Halt current transition and go to another route.
+To proceed with the original route by call continue()
 
 #### Parameters
 
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** new route to enter temprorarly
 
 ### continue
 
