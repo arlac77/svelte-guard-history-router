@@ -7,6 +7,8 @@
     active
   } from "../../src/index.svelte";
   import { router } from "./index.mjs";
+
+  let showState = false;
 </script>
 
 <nav>
@@ -29,4 +31,11 @@
 <main>
   <Outlet {router}>nothing there</Outlet>
 </main>
-<RouterState {router} />
+
+<label>
+  <input type="checkbox" bind:checked={showState} /> show router state
+</label>
+
+{#if showState}
+  <RouterState {router} />
+{/if}
