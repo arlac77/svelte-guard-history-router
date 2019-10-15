@@ -3,8 +3,8 @@
 
   export let state;
 
-  let username = "";
-  let password = "";
+  let username = "user";
+  let password = "secret";
   let message;
 
   async function submit() {
