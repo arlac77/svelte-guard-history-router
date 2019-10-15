@@ -47,6 +47,21 @@ export const router = new Router(
 );
 ```
 
+## Sample code
+
+Check out the code in the [example](/example) folder.
+
+To run the sample, clone the repository, install the dependencies, and start:
+
+```sh
+git clone https://github.com/arlac77/svelte-guard-history-router
+cd svelte-guard-history-router
+npm install
+npm start
+```
+
+then navigate to [localhost:5000](http://localhost:5000/)
+
 ## run tests
 
 ```sh
@@ -368,7 +383,13 @@ execute guards in a parallel
 With [npm](http://npmjs.org) do:
 
 ```shell
-npm svelte-guard-history-router
+npm install svelte-guard-history-router
+```
+
+With [yarn](https://yarnpkg.com) do:
+
+```shell
+yarn add svelte-guard-history-router
 ```
 
 # license

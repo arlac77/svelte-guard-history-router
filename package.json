@@ -6,7 +6,8 @@
   "description": "svelte router for spa with history only",
   "keywords": [
     "svelte",
-    "router"
+    "router",
+    "spa"
   ],
   "scripts": {
     "docs": "documentation readme src/index.mjs --section=API",
