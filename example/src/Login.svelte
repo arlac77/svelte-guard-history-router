@@ -24,6 +24,7 @@
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (username === "user" && password === "secret") {
+          sessionStorage.session = { username, password };
           resolve();
         } else {
           reject(new Error("invalid credentials"));

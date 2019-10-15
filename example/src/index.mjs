@@ -29,6 +29,10 @@ export function setSession(s)
   session = s;
 }
 
+if(sessionStorage.session) {
+  setSession(sessionStorage.session);
+}
+
 class SessionGuard extends Guard {
   async enter(transition) {
     if(!session) {

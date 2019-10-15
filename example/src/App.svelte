@@ -8,7 +8,7 @@
   } from "../../src/index.svelte";
   import { router } from "./index.mjs";
 
-  let showState = false;
+  let showState = true;
 </script>
 
 <nav>

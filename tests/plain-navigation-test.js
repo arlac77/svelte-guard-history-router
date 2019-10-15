@@ -51,8 +51,8 @@ test("click arund", async t => {
 
     if (l.path.startsWith("/article") && first) {
       await t
-        .typeText("#username", "user")
-        .typeText("#password", "secret")
+        .typeText("#username", "user", { replace: true })
+        .typeText("#password", "secret", { replace: true })
         .click("#submit");
 
       first = false;
@@ -86,8 +86,8 @@ test.page`${base}/article/10`("artices/10", async t => {
   const title = Selector(".routetitle");
 
   await t
-    .typeText("#username", "user")
-    .typeText("#password", "secret")
+    .typeText("#username", "user", { replace: true })
+    .typeText("#password", "secret", { replace: true })
     .click("#submit");
 
   await t.expect(title.innerText).eql("Article Pizza Quattro Stagioni");
