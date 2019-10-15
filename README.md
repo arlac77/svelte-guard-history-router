@@ -392,6 +392,20 @@ With [yarn](https://yarnpkg.com) do:
 yarn add svelte-guard-history-router
 ```
 
+# SPA integrating with a nginx backend
+
+All unresolvable requests are redirected to /sericeBase/index.html
+
+- /deploymantLocation is the location of the frontend in the servers file system
+- /serviceBase is the url path as seen from the browser
+
+```nginx.conf
+location /serviceBase {
+  alias /deploymantLocation;
+  try_files $uri$args $uri$args/ /sericeBase/index.html;
+}
+```
+
 # license
 
 BSD-2-Clause
