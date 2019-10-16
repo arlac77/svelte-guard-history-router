@@ -93,7 +93,7 @@ test.page`${base}/article/10`("artices/10", async t => {
   await t.expect(title.innerText).eql("Article Pizza Quattro Stagioni");
 });
 
-/*
+
 test("Navigate around", async t => {
   const title = Selector(".routetitle");
 
@@ -101,5 +101,12 @@ test("Navigate around", async t => {
     .navigateTo(`/base/about`)
     .expect(title.innerText)
     .eql("About");
+
+    /*
+  await t
+    .navigateTo(`/base/artices/10`)
+    .expect(title.innerText)
+    .eql("Article Pizza Quattro Stagioni");
+    */
 });
-*/
+
