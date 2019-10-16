@@ -98,13 +98,13 @@
     <thead>
       <th>Key</th>
       <th>Value</th>
-      <th>Subscriptions (Number of)</th>
+      <th># Subscriptions</th>
     </thead>
     <tbody>
       {#each Object.values(state.keys) as key}
         <tr>
           <td id="state.key.{key.name}">{key.name}</td>
-          <td id="state.key.{key.name}.value">{key.value}</td>
+          <td id="state.key.{key.name}.value">{key.value !== undefined ? key.value : ''}</td>
           <td id="state.key.{key.name}.subscriptions">
             {key.subscriptions.size}
           </td>

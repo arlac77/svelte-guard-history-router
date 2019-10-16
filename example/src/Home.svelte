@@ -6,4 +6,5 @@
     <li>Try pressing the browsers' back and forward buttons</li>
     <li>Manually change the URL's path</li>
     <li>Try refreshing the page</li>
+    <li>check router state</li>
 </ul>
