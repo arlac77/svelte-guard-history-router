@@ -17,10 +17,6 @@ export class Route {
     });
   }
 
-  hasGuard(guard) {
-    return false;
-  }
-
   /**
    * Enter the route from a former one.
    * Calls guard enter on all guards present in our gurad but absent in the former one
@@ -53,10 +49,6 @@ export class GuardedRoute extends Route {
     Object.defineProperties(this, {
       guard: { value: guard }
     });
-  }
-
-  hasGuard(guard) {
-    return this.guard.hasGuard(guard);
   }
 
   /**

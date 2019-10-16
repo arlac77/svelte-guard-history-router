@@ -5,7 +5,11 @@
 
   export let state;
 
+  $: {
+    console.log(router.keys.article);
+  }
 </script>
+
 
 {#if $article}
   <h2 class="routetitle">Article {$article.name}</h2>

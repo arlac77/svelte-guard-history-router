@@ -98,7 +98,7 @@
     <thead>
       <th>Key</th>
       <th>Value</th>
-      <th># Subscriptions</th>
+      <th>Subscriptions</th>
     </thead>
     <tbody>
       {#each Object.values(state.keys) as key}

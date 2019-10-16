@@ -396,8 +396,8 @@ yarn add svelte-guard-history-router
 
 All unresolvable requests are redirected to /sericeBase/index.html
 
-- /deploymantLocation is the location of the frontend in the servers file system
-- /serviceBase is the url path as seen from the browser
+-   /deploymantLocation is the location of the frontend in the servers file system
+-   /serviceBase is the url path as seen from the browser
 
 ```nginx.conf
 location /serviceBase {

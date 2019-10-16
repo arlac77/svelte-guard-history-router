@@ -3,10 +3,6 @@
  * Like presents of values in the context
  */
 export class Guard {
-  hasGuard(other) {
-    return this === other;
-  }
-
   /**
    * Called when guard is attached to a route (one time)
    * @param {Route} route
@@ -32,8 +28,6 @@ export class Guard {
  */
 export function sequenceGuard(children) {
   return {
-    hasGuard: guard =>
-      children.find(g => g === g.hasGuard(guard)) ? true : false,
     attach: route => children.forEach(c => c.attach(route)),
     enter: async transition => {
       for (const child of children) {
@@ -54,8 +48,6 @@ export function sequenceGuard(children) {
  */
 export function parallelGuard(children) {
   return {
-    hasGuard: guard =>
-      children.find(g => g === g.hasGuard(guard)) ? true : false,
     attach: route => children.forEach(c => c.attach(route)),
     enter: async transition =>
       Promise.all([...children].map(c => c.enter(transition))),
