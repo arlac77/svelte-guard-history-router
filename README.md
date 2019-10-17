@@ -84,7 +84,8 @@ export const router = new Router(
 
 ## Sample code
 
-Check out the code in the [example](/example) folder.
+Check out the code in the [example](/example) folder,
+or the [live example](https://arlac77.github.io/modules/svelte-guard-history-router/example/index.html).
 
 To run the sample, clone the repository, install the dependencies, and start:
 

@@ -56,7 +56,7 @@ export const router = new Router(
 
     route("/noway", new ExceptionGuard(), NoWay)
   ],
-  "/base"
+  "/modules/svelte-guard-history-router/example"
 );
 
 export const article = derived(

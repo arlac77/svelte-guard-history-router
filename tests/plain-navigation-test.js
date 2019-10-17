@@ -38,7 +38,7 @@ const links = [
   al("12")
 ];
 
-const base = "http://localhost:5000/base";
+const base = "http://localhost:5000/modules/svelte-guard-history-router/example";
 
 fixture`Getting Started`.page`${base}/index.html`;
 
