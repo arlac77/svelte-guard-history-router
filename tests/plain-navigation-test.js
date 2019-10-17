@@ -1,4 +1,7 @@
-import { Selector } from "testcafe";
+import { Selector, ClientFunction } from "testcafe";
+
+const getLocation = ClientFunction(() => window.location.href);
+const goBack = ClientFunction(() => window.history.back());
 
 const articles = {
   "01": {
@@ -62,6 +65,8 @@ test("click arund", async t => {
       .takeScreenshot()
       .expect(title.innerText)
       .eql(l.title);
+
+    await t.expect(getLocation()).contains(l.path);
   }
 });
 
@@ -93,20 +98,38 @@ test.page`${base}/article/10`("artices/10", async t => {
   await t.expect(title.innerText).eql("Article Pizza Quattro Stagioni");
 });
 
-
 test("Navigate around", async t => {
   const title = Selector(".routetitle");
 
   await t
-    .navigateTo(`/base/about`)
+    .navigateTo(`${base}/about`)
+    .takeScreenshot()
     .expect(title.innerText)
     .eql("About");
 
-    /*
+  await t.navigateTo(`${base}/article`);
+  await t.takeScreenshot();
+
+  await t
+    .typeText("#username", "user", { replace: true })
+    .typeText("#password", "secret", { replace: true })
+    .click("#submit");
+
+  await t.expect(title.innerText).eql("Articles");
+
+  await t.expect(getLocation()).contains("article");
+  await goBack();
+  await t.takeScreenshot();
+
+  console.log(await getLocation());
+  /*
+  await t.expect(getLocation()).contains("about");
+  await t.expect(title.innerText).eql("About");
+*/
+  /*
   await t
     .navigateTo(`/base/artices/10`)
     .expect(title.innerText)
     .eql("Article Pizza Quattro Stagioni");
     */
 });
-
