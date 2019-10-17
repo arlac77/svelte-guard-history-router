@@ -18,6 +18,12 @@
 
 svelte guarded history router
 
+# Features
+
+- Named params
+- Guards to act when entering / leaving a route
+- Standart `<a href="/home">Home</a>` elements
+
 # usage
 
 ```js
@@ -66,7 +72,9 @@ then navigate to [localhost:5000](http://localhost:5000/)
 
 ```sh
 export BROWSER=safari|chrome|...
-npm|yarn test
+yarn test
+or
+npm test
 ```
 
 # API
