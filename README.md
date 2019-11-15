@@ -21,9 +21,9 @@ svelte guarded history router
 
 # Features
 
-- Named params
-- Guards to act when entering / leaving a route
-- Standart `<a href="/home">Home</a>` elements
+-   Named params
+-   Guards to act when entering / leaving a route
+-   Standart `<a href="/home">Home</a>` elements
 
 # usage
 
@@ -54,34 +54,32 @@ export const router = new Router(
 );
 ```
 
-```
-<script>
-  import {
-    Outlet,
-    link,
-    active
-  } from "svelte-guard-history-router";
-  import { router } from "./main.mjs";
-</script>
+    <script>
+      import {
+        Outlet,
+        link,
+        active
+      } from "svelte-guard-history-router";
+      import { router } from "./main.mjs";
+    </script>
 
-<nav>
-  <a href="/" use:link={router} use:active={router}>Router Example</a>
-  <ul class="left">
-    <li>
-      <a href="/about" use:link={router} use:active={router}>About</a>
-    </li>
-    <li>
-      <a href="/article" use:link={router} use:active={router}>Articles</a>
-    </li>
-    <li>
-      <a href="/category" use:link={router} use:active={router}>Categories</a>
-    </li>
-  </ul>
-</nav>
-<main>
-  <Outlet {router}/>
-</main>
-```
+    <nav>
+      <a href="/" use:link={router} use:active={router}>Router Example</a>
+      <ul class="left">
+        <li>
+          <a href="/about" use:link={router} use:active={router}>About</a>
+        </li>
+        <li>
+          <a href="/article" use:link={router} use:active={router}>Articles</a>
+        </li>
+        <li>
+          <a href="/category" use:link={router} use:active={router}>Categories</a>
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <Outlet {router}/>
+    </main>
 
 ## Sample code
 
@@ -225,6 +223,7 @@ $aKey // fired if value of aKey changes
 ### push
 
 Leave current route and enter route for given path
+The work is done by a Transition
 
 #### Parameters
 
@@ -246,6 +245,8 @@ Value changes are fired when the route (or the target component changes)
 -   `node`  
 
 ## Transition
+
+Transition between routes
 
 ### Parameters
 
@@ -295,6 +296,8 @@ Bring back the router into the state before the transition has started
 
 ## Route
 
+Base route without guard
+
 ### Parameters
 
 -   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
@@ -305,7 +308,7 @@ Bring back the router into the state before the transition has started
 -   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 -   `component` **SvelteComponent** target to show
 -   `priority` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `keys` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** 
+-   `keys` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** as found in the path
 -   `regex` **RegEx** 
 
 ### enter
@@ -320,7 +323,7 @@ Calls guard enter on all guards present in our gurad but absent in the former on
 ### leave
 
 Leave the route to a new one.
-Calls quard leave on all our guards which are not in the new route
+Calls guard leave on all our guards which are not in the new route
 
 #### Parameters
 
@@ -330,6 +333,8 @@ Calls quard leave on all our guards which are not in the new route
 
 **Extends Route**
 
+Route with a guard
+
 ### Parameters
 
 -   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
@@ -342,7 +347,7 @@ Calls quard leave on all our guards which are not in the new route
 -   `component` **SvelteComponent** target to show
 -   `guard` **[Guard](#guard)** 
 -   `priority` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `keys` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** 
+-   `keys` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** as found in the path
 -   `regex` **RegEx** 
 
 ### enter
@@ -357,7 +362,7 @@ Calls guard enter on all guards present in our gurad but absent in the former on
 ### leave
 
 Leave the route to a new one.
-Calls quard leave on all our guards which are not in the new route
+Calls guard leave on all our guards which are not in the new route
 
 #### Parameters
 
@@ -370,7 +375,7 @@ Helper function to create routes with optional guards
 ### Parameters
 
 -   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `args` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Guard](#guard)>** last one must be a SvelteComponent
+-   `args` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>** last one must be a SvelteComponent
 
 ## Guard
 

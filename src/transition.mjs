@@ -1,6 +1,7 @@
 import { matcher } from "multi-path-matcher";
 
 /**
+ * Transition between routes
  * @param {Router} router
  * @param {string} path destination
  * @property {Router} router

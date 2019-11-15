@@ -187,6 +187,7 @@ export class Router {
 
   /**
    * Leave current route and enter route for given path
+   * The work is done by a Transition
    * @param {string} path where to go
    */
   async push(path) {

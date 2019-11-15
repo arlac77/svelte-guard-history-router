@@ -1,12 +1,13 @@
 import { sequenceGuard } from "./guard.mjs";
 
 /**
+ * Base route without guard
  * @param {string} path
  * @param {SvelteComponent} component target to show
  * @property {string} path
  * @property {SvelteComponent} component target to show
  * @property {number} priority
- * @property {string[]} keys
+ * @property {string[]} keys as found in the path
  * @property {RegEx} regex
  */
 export class Route {
@@ -26,13 +27,14 @@ export class Route {
 
   /**
    * Leave the route to a new one.
-   * Calls quard leave on all our guards which are not in the new route
+   * Calls guard leave on all our guards which are not in the new route
    * @param {Transition} transition
    */
   async leave(transition) {}
 }
 
 /**
+ * Route with a guard
  * @param {string} path
  * @param {SvelteComponent} component target to show
  * @param {Guard} guard
@@ -40,7 +42,7 @@ export class Route {
  * @property {SvelteComponent} component target to show
  * @property {Guard} guard
  * @property {number} priority
- * @property {string[]} keys
+ * @property {string[]} keys as found in the path
  * @property {RegEx} regex
  */
 export class GuardedRoute extends Route {
@@ -62,7 +64,7 @@ export class GuardedRoute extends Route {
 
   /**
    * Leave the route to a new one.
-   * Calls quard leave on all our guards which are not in the new route
+   * Calls guard leave on all our guards which are not in the new route
    * @param {Transition} transition
    */
   async leave(transition) {
@@ -73,7 +75,7 @@ export class GuardedRoute extends Route {
 /**
  * Helper function to create routes with optional guards
  * @param {string} path
- * @param {Guard[]} args last one must be a SvelteComponent
+ * @param {Object[]} args last one must be a SvelteComponent
  */
 export function route(path, ...args) {
   const component = args.pop();
