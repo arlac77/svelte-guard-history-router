@@ -1,7 +1,5 @@
 <script>
   import Link from "./Link.svelte";
-
-  export let state;
 </script>
 
 <div>
