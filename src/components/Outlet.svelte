@@ -3,8 +3,10 @@
 
   let component, state;
 
-  $: component = $router.component;
-  $: state = $router.state;
+  $: {
+    component = $router.component;
+    state = $router.state;
+  }
 </script>
 
 <div>

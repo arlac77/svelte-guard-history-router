@@ -1,8 +1,12 @@
 <script>
   export let router;
 
-  $: transition = $router.transition;
-  $: state = $router.state;
+  let transition, state;
+
+  $: {
+    transition = $router.transition;
+    state = $router.state;
+  }
 </script>
 
 <style>
@@ -49,7 +53,8 @@
     border-bottom: 2px solid #dee2e6;
   }
 
-  th, td {
+  th,
+  td {
     padding: 0.75rem;
     vertical-align: top;
     border-top: 1px solid #dee2e6;
@@ -104,7 +109,9 @@
       {#each Object.values(state.keys) as key}
         <tr>
           <td id="state.key.{key.name}">{key.name}</td>
-          <td id="state.key.{key.name}.value">{key.value !== undefined ? key.value : ''}</td>
+          <td id="state.key.{key.name}.value">
+            {key.value !== undefined ? key.value : ''}
+          </td>
           <td id="state.key.{key.name}.subscriptions">
             {key.subscriptions.size}
           </td>
