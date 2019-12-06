@@ -11,11 +11,13 @@ import { sequenceGuard } from "./guard.mjs";
  * @property {RegEx} regex
  */
 export class Route {
+
+  path;
+  component;
+
   constructor(path, component) {
-    Object.defineProperties(this, {
-      path: { value: path },
-      component: { value: component }
-    });
+    this.path = path;
+    this.component = component;
   }
 
   /**
