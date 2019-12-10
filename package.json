@@ -21,12 +21,12 @@
   },
   "devDependencies": {
     "documentation": "^12.1.4",
-    "rollup": "^1.27.3",
-    "rollup-plugin-dev": "^1.1.0",
+    "rollup": "^1.27.9",
+    "rollup-plugin-dev": "^1.1.1",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.1.1",
     "semantic-release": "^15.13.31",
-    "svelte": "^3.15.0",
+    "svelte": "^3.16.1",
     "testcafe": "^1.7.0"
   },
   "engines": {
