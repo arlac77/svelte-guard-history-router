@@ -19,7 +19,7 @@ jobs:
         - 'mkdir -p "${TRAVIS_REPO_SLUG}/${TRAVIS_JOB_ID}"'
         - 'mv test-results "${TRAVIS_REPO_SLUG}/${TRAVIS_JOB_ID}"'
         - 'rsync -avz "${TRAVIS_REPO_SLUG}/${TRAVIS_JOB_ID}" ci-upload@$UPLOAD_SERVER:/somewhere'
-      node_js: 12.13.0
+      node_js: 12.13.1
     - stage: doc
       node_js: lts/*
       skip_cleanup: 'true'
