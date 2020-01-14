@@ -1,7 +1,5 @@
 build
 tests
-test-results
-example
 doc
 *.log
 *.tmp
@@ -12,4 +10,6 @@ doc
 .vscode
 .nyc_output
 
+test-results
+example
 ci

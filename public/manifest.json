@@ -1,0 +1,10 @@
+{
+  "name": "svelte-guard-history-router",
+  "description": "svelte router for spa with history only",
+  "icons": [
+    {
+      "src": "facicon.ico",
+      "sizes": "16x16"
+    }
+  ]
+}
