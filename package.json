@@ -17,7 +17,7 @@
     "test": "testcafe $BROWSER:headless tests/*-test.js -s test-results --app-init-delay 500 --app \"rollup -c example/rollup.config.js -w\""
   },
   "dependencies": {
-    "multi-path-matcher": "^2.0.4"
+    "multi-path-matcher": "^2.0.6"
   },
   "devDependencies": {
     "documentation": "^12.1.4",
