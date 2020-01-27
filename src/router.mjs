@@ -168,7 +168,7 @@ export class Router {
       }
     });
 
-    this.push(window.location.pathname.substring(this.base.length));
+    this.push(window.location.pathname.slice(this.base.length));
   }
 
   get component() {
@@ -197,7 +197,7 @@ export class Router {
 
   get path()
   {
-    return window.location.pathname.substring(this.base.length);
+    return window.location.pathname.slice(this.base.length);
   }
 
   /**
