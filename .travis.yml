@@ -19,7 +19,10 @@ jobs:
         - 'mkdir -p "${TRAVIS_REPO_SLUG}/${TRAVIS_JOB_ID}"'
         - 'mv test-results "${TRAVIS_REPO_SLUG}/${TRAVIS_JOB_ID}"'
         - 'rsync -av "${TRAVIS_REPO_SLUG}/${TRAVIS_JOB_ID}" ci-upload@$UPLOAD_SERVER:/somewhere'
-      node_js: 12.15.0
+        - npm run cover
+        - npx codecov
+        - cat ./build/coverage/lcov.info | npx coveralls
+      node_js: 13.8.0
     - stage: doc
       node_js: lts/*
       skip_cleanup: 'true'
