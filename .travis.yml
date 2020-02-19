@@ -23,7 +23,7 @@ jobs:
         - >-
           rsync -av "${TRAVIS_REPO_SLUG}/${TRAVIS_JOB_ID}"
           ci-upload@$UPLOAD_SERVER:/somewhere
-      node_js: 12.16.1
+      node_js: '${node_version}'
     - stage: doc
       node_js: lts/*
       skip_cleanup: 'true'
