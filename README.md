@@ -50,6 +50,7 @@ export const router = new Router(
 );
 ```
 
+```html
     <script>
       import {
         Outlet,
@@ -76,6 +77,7 @@ export const router = new Router(
     <main>
       <Outlet {router}/>
     </main>
+```
 
 ## Sample code
 
