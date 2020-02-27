@@ -25,6 +25,12 @@ svelte guarded history router
 
 ```js
 import { Router, route, Guard } from 'svelte-guard-history-router';
+import Categories from "./Categories.svelte";
+import Category from "./Category.svelte";
+import Article from "./Article.svelte";
+import Articles from "./Articles.svelte";
+import About from "./About.svelte";
+import Login from "./Login.svelte";
 
 let session = undefined;
 
@@ -51,32 +57,32 @@ export const router = new Router(
 ```
 
 ```html
-    <script>
-      import {
-        Outlet,
-        link,
-        active
-      } from "svelte-guard-history-router";
-      import { router } from "./main.mjs";
-    </script>
+<script>
+  import {
+    Outlet,
+    link,
+    active
+  } from "svelte-guard-history-router";
+  import { router } from "./main.mjs";
+</script>
 
-    <nav>
-      <a href="/" use:link={router} use:active={router}>Router Example</a>
-      <ul class="left">
-        <li>
-          <a href="/about" use:link={router} use:active={router}>About</a>
-        </li>
-        <li>
-          <a href="/article" use:link={router} use:active={router}>Articles</a>
-        </li>
-        <li>
-          <a href="/category" use:link={router} use:active={router}>Categories</a>
-        </li>
-      </ul>
-    </nav>
-    <main>
-      <Outlet {router}/>
-    </main>
+<nav>
+  <a href="/" use:link={router} use:active={router}>Router Example</a>
+  <ul class="left">
+    <li>
+      <a href="/about" use:link={router} use:active={router}>About</a>
+    </li>
+    <li>
+      <a href="/article" use:link={router} use:active={router}>Articles</a>
+    </li>
+    <li>
+      <a href="/category" use:link={router} use:active={router}>Categories</a>
+    </li>
+  </ul>
+</nav>
+<main>
+  <Outlet {router}/>
+</main>
 ```
 
 ## Sample code
