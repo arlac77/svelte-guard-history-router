@@ -17,7 +17,7 @@
     "lint": "documentation lint src/index.mjs"
   },
   "dependencies": {
-    "multi-path-matcher": "^2.0.9"
+    "multi-path-matcher": "^2.0.10"
   },
   "devDependencies": {
     "documentation": "^12.1.4",
