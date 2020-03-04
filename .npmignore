@@ -11,3 +11,4 @@ doc
 .vscode
 ci
 rollup.config.js
+.github
