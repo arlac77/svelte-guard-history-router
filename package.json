@@ -11,11 +11,11 @@
   ],
   "license": "BSD-2-Clause",
   "scripts": {
-    "gh-page": "rollup -c example/rollup.config.js",
     "start": "rollup -c example/rollup.config.mjs -w",
     "test": "testcafe $BROWSER:headless tests/*-test.js -s test-results --app-init-delay 500 --app \"rollup -c example/rollup.config.mjs -w\"",
     "docs": "documentation readme src/index.mjs --section=API",
-    "lint": "documentation lint src/index.mjs"
+    "lint": "documentation lint src/index.mjs",
+    "gh-page": "rollup -c example/rollup.config.js"
   },
   "dependencies": {
     "multi-path-matcher": "^2.0.11"
