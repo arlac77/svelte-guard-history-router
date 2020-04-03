@@ -2,17 +2,8 @@ language: node_js
 addons:
   chrome: stable
   ssh_known_hosts: $UPLOAD_SERVER
-before_script:
-  - >-
-    echo "$UPLOAD_SERVER ecdsa-sha2-nistp256
-    AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBH2TydShl6oPEvF+2gWsCYLbfgps6rpZjbPz889LsWUvZiLnvoQUlmH8C4i1cUAl+eq5CiP7egcbrJ60p7fvM/k="
-    >> $HOME/.ssh/known_hosts
-  - >-
-    openssl aes-256-cbc -K $encrypted_d0f036b99c7e_key -iv
-    $encrypted_d0f036b99c7e_iv -in ci/id_rsa.enc -out /tmp/id_rsa -d
-  - eval "$(ssh-agent -s)"
-  - chmod 600 /tmp/id_rsa
-  - ssh-add /tmp/id_rsa
+env:
+  - BROWSER=chrome
 jobs:
   include:
     - stage: test
@@ -38,11 +29,20 @@ jobs:
         script:
           - npx semantic-release
         cleanup: 'false'
+before_script:
+  - >-
+    echo "$UPLOAD_SERVER ecdsa-sha2-nistp256
+    AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBH2TydShl6oPEvF+2gWsCYLbfgps6rpZjbPz889LsWUvZiLnvoQUlmH8C4i1cUAl+eq5CiP7egcbrJ60p7fvM/k="
+    >> $HOME/.ssh/known_hosts
+  - >-
+    openssl aes-256-cbc -K $encrypted_d0f036b99c7e_key -iv
+    $encrypted_d0f036b99c7e_iv -in ci/id_rsa.enc -out /tmp/id_rsa -d
+  - eval "$(ssh-agent -s)"
+  - chmod 600 /tmp/id_rsa
+  - ssh-add /tmp/id_rsa
 branches:
   only:
     - master
     - /^greenkeeper/.*$/
     - /^mkpr/.*$/
     - /^npm-template-sync/.*$/
-env:
-  - BROWSER=chrome
