@@ -10,5 +10,5 @@ doc
 .travis.yml
 .vscode
 ci
-rollup.config.js
 .github
+rollup.config.mjs
