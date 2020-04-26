@@ -1,6 +1,9 @@
 {
   "name": "svelte-guard-history-router",
   "version": "0.0.0-semantic-release",
+  "publishConfig": {
+    "access": "public"
+  },
   "module": "src/index.mjs",
   "svelte": "src/index.svelte",
   "description": "svelte router for spa with history only",
@@ -8,6 +11,12 @@
     "svelte",
     "router",
     "spa"
+  ],
+  "contributors": [
+    {
+      "name": "Markus Felten",
+      "email": "markus.felten@gmx.de"
+    }
   ],
   "license": "BSD-2-Clause",
   "scripts": {
@@ -43,8 +52,8 @@
   "homepage": "https://github.com/arlac77/svelte-guard-history-router#readme",
   "template": {
     "inheritFrom": [
-      "arlac77/template-svelte-component",
-      "arlac77/template-github"
+      "arlac77/template-arlac77-github",
+      "arlac77/template-svelte-component"
     ]
   }
 }
