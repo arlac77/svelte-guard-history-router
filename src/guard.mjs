@@ -1,6 +1,6 @@
 /**
  * Enforces conditions of routes
- * Like presents of values in the context
+ * Like the presents of values in the context
  */
 export class Guard {
   /**
@@ -23,7 +23,7 @@ export class Guard {
 }
 
 /**
- * execute guards in a sequence
+ * Execute guards in a sequence
  * @param {Iterable<Guard>} children
  */
 export function sequenceGuard(children) {
@@ -43,7 +43,7 @@ export function sequenceGuard(children) {
 }
 
 /**
- * execute guards in a parallel
+ * Execute guards in a parallel
  * @param {Iterable<Guard>} children
  */
 export function parallelGuard(children) {

@@ -75,7 +75,7 @@ export class GuardedRoute extends Route {
 /**
  * Helper function to create routes with optional guards
  * @param {string} path
- * @param {Object[]} args last one must be a SvelteComponent
+ * @param {Guard|SvelteComponent[]} args last one must be a SvelteComponent
  */
 export function route(path, ...args) {
   const component = args.pop();

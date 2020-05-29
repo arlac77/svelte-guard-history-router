@@ -212,8 +212,8 @@ export class Router {
   }
 
   /**
-   *
-   * @param node
+   * Update the active state of a node
+   * @param {Object} node
    */
   updateActive(node) {
     node.classList.remove("active");
