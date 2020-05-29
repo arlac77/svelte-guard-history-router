@@ -28,7 +28,7 @@ export class Transition {
   }
 
   /**
-   * start the transition
+   * Start the transition
    * - find matching target route
    * - leave old route
    * - set params
@@ -60,7 +60,8 @@ export class Transition {
   }
 
   /**
-   * cleanup transition
+   * Cleanup transition
+   * Update Nodes active state
    */
   end() {
     if (this.redirected === undefined) {
@@ -74,7 +75,7 @@ export class Transition {
   /**
    * Halt current transition and go to another route.
    * To proceed with the original route by call continue()
-   * @param {string} path new route to enter temprorarly
+   * @param {string} path new route to enter temporarly
    */
   async redirect(path) {
     this.redirected = this.save();

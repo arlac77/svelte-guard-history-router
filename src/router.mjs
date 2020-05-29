@@ -35,6 +35,7 @@ import { Transition } from "./transition.mjs";
  * ```
  * @param {Route[]} routes
  * @param {string} base url
+ * @property {Set<Node>} linkNodes nodes having their active state updated
  * @property {Route[]} routes
  * @property {Object} keys all possible keys of all routes
  * @property {Object} params value mapping from keys (from current route)
