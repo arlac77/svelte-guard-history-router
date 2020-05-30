@@ -4,8 +4,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "src/index.mjs",
-  "svelte": "src/index.svelte",
+  "main": "./src/index.mjs",
+  "svelte": "./src/index.svelte",
   "description": "svelte router for spa with history only",
   "keywords": [
     "svelte",
@@ -29,7 +29,7 @@
     "gh-page": "rollup -c example/rollup.config.js"
   },
   "dependencies": {
-    "multi-path-matcher": "^2.0.13"
+    "multi-path-matcher": "^2.0.14"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^8.0.0",
