@@ -29,7 +29,7 @@
     "gh-page": "rollup -c example/rollup.config.js"
   },
   "dependencies": {
-    "multi-path-matcher": "^2.0.11"
+    "multi-path-matcher": "^2.0.13"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^8.0.0",
