@@ -107,7 +107,7 @@ export class Router {
       keys: { value: keys },
       params: {
         set(np) {
-          const all = new Set([...Object.keys(params), ...Object.keys(np)]);
+          const all = new Set(Object.keys(params).concat(Object.keys(np)));
 
           let changed = false;
           all.forEach(key => {
@@ -174,7 +174,7 @@ export class Router {
 
   get component() {
     const transition = this.transition;
-    if(transition !== undefined && transition.component !== undefined) {
+    if (transition !== undefined && transition.component !== undefined) {
       return transition.component;
     }
 
@@ -196,8 +196,7 @@ export class Router {
     return transition.start();
   }
 
-  get path()
-  {
+  get path() {
     return window.location.pathname.slice(this.base.length);
   }
 
@@ -221,7 +220,7 @@ export class Router {
 
     const href = node.getAttribute("href");
 
-    if(this.path === href) {
+    if (this.path === href) {
       node.classList.add("active");
     }
   }
