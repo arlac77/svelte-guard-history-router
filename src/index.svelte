@@ -14,11 +14,9 @@
   } from "./index.mjs";
   import Outlet from "./components/Outlet.svelte";
   import Link from "./components/Link.svelte";
-  import RouterState from "./components/RouterState.svelte";
   export {
     Outlet,
     Link,
-    RouterState,
     Router,
     Route,
     GuardedRoute,
