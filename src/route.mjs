@@ -20,14 +20,12 @@ export class Route {
 
   /**
    * Enter the route from a former one.
-   * Calls guard enter on all guards present in our gurad but absent in the former one
    * @param {Transition} transition
    */
   async enter(transition) {}
 
   /**
    * Leave the route to a new one.
-   * Calls guard leave on all our guards which are not in the new route
    * @param {Transition} transition
    */
   async leave(transition) {}
