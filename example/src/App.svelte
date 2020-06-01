@@ -5,6 +5,7 @@
     link,
     active
   } from "../../src/index.svelte";
+  import RouterState from "./RouterState.svelte";
   import { router } from "./index.mjs";
   import RouterState from "./RouterState.svelte";
 
