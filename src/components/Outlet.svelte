@@ -1,17 +1,16 @@
 <script>
   export let router;
 
-  let component, state;
+  let component;
 
   $: {
     component = $router.component;
-    state = $router.state;
   }
 </script>
 
 <div>
   {#if component}
-    <svelte:component this={component} {state} />
+    <svelte:component this={component}/>
   {:else}
     <slot />
   {/if}

@@ -79,12 +79,7 @@ export class Transition {
    */
   async redirect(path) {
     this.redirected = this.save();
-
-    const router = this.router;
-
-    const { route, params } = matcher(router.routes, path);
-    router.state.params = params;
-    router.route = route;
+    this.router.replace(path);
   }
 
   /**

@@ -162,10 +162,7 @@ export class Router {
 
     window.addEventListener("popstate", event => {
       if (event.state) {
-        const path = event.state.path;
-        const { route, params } = matcher(this.routes, path);
-        this.state.params = params;
-        this.route = route;
+        this.replace(event.state.path);
       }
     });
 
@@ -182,8 +179,10 @@ export class Router {
     return r !== undefined && r.component;
   }
 
-  async replace(path) {
-    await this.push(path);
+  replace(path) {
+    const { route, params } = matcher(this.routes, path);
+    this.state.params = params;
+    this.route = route;
   }
 
   /**
@@ -213,7 +212,7 @@ export class Router {
 
   /**
    * Update the active state of a node
-   * @param {Object} node
+   * @param {Node} node
    */
   updateActive(node) {
     node.classList.remove("active");

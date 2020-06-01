@@ -1,7 +1,6 @@
 <script>
-  import { setSession } from './index.mjs';
+  import { setSession, router } from './index.mjs';
 
-  export let state;
 
   let username = "user";
   let password = "secret";
@@ -11,7 +10,7 @@
     try {
       await login(username, password);
       setSession({ username });
-      let transition = state.router.transition;
+      let transition = router.transition;
       if(transition) {
         transition.continue();
       }
