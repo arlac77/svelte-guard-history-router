@@ -2,11 +2,11 @@
   import {
     Outlet,
     Link,
-    RouterState,
     link,
     active
   } from "../../src/index.svelte";
   import { router } from "./index.mjs";
+  import RouterState from "./RouterState.svelte";
 
   let showState = true;
 </script>
