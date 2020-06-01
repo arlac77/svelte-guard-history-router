@@ -44,6 +44,7 @@ before_script:
 branches:
   only:
     - master
+    - development
     - /^greenkeeper/.*$/
     - /^mkpr/.*$/
     - /^npm-template-sync/.*$/
