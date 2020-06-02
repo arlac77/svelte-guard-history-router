@@ -54,9 +54,7 @@ export class Router {
 
     routes = compile(routes);
 
-    const stateSubscriptions = new Set();
     const keys = {};
-    const params = {};
 
     for (const key of routes.reduce(
       (a, r) => new Set([...r.keys, ...a]),
@@ -93,6 +91,8 @@ export class Router {
       keys[key] = o;
     }
 
+    const params = {};
+    const stateSubscriptions = new Set();
     const state = {
       subscribe: subscription => {
         stateSubscriptions.add(subscription);
