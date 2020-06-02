@@ -60,35 +60,7 @@ export class Router {
       (a, r) => new Set([...r.keys, ...a]),
       new Set()
     )) {
-      const subscriptions = new Set();
-      let value;
-
-      const o = {
-        name: key,
-        subscribe: cb => {
-          subscriptions.add(cb);
-          cb(value);
-          return () => subscriptions.delete(cb);
-        },
-        set(v) {
-          o.value = v;
-        }
-      };
-
-      Object.defineProperties(o, {
-        value: {
-          get() {
-            return value;
-          },
-          set(v) {
-            value = v;
-            subscriptions.forEach(subscription => subscription(value));
-          }
-        },
-        subscriptions: { value: subscriptions }
-      });
-
-      keys[key] = o;
+      keys[key] = subscriberKey(key);
     }
 
     const params = {};
@@ -223,4 +195,37 @@ export class Router {
       node.classList.add("active");
     }
   }
+}
+
+
+function subscriberKey(name) {
+  const subscriptions = new Set();
+  let value;
+
+  const o = {
+    name,
+    subscribe: cb => {
+      subscriptions.add(cb);
+      cb(value);
+      return () => subscriptions.delete(cb);
+    },
+    set(v) {
+      o.value = v;
+    }
+  };
+
+  Object.defineProperties(o, {
+    value: {
+      get() {
+        return value;
+      },
+      set(v) {
+        value = v;
+        subscriptions.forEach(subscription => subscription(value));
+      }
+    },
+    subscriptions: { value: subscriptions }
+  });
+
+  return o;
 }
