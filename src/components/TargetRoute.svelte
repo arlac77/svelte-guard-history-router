@@ -3,13 +3,13 @@
   import { active } from "../active.mjs";
   import { route } from "../route.mjs";
 
-  export let href;
+  export let def;
   export let router;
-  export let target;
 
-  router.addRoute(route(href, target));
+  const r = route(...def);
+  router.addRoute(r);
 </script>
 
-<a {href} use:link={router} use:active={router}>
+<a href={r.path} use:link={router} use:active={router}>
   <slot />
 </a>
