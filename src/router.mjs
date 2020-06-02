@@ -195,6 +195,18 @@ export class Router {
       node.classList.add("active");
     }
   }
+
+  addRoute(route) {
+    Object.assign(route, pathToRegexp(route.path));
+
+    route.keys.forEach(key => {
+      if(this.keys[key]) { return; }
+      this.keys[key] = subscriberKey(key);
+    });
+
+    this.routes.unshift(route);
+    console.log(router.routes.map(route => route.path));
+  }
 }
 
 
