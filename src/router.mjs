@@ -83,8 +83,8 @@ export class Router {
 
           let changed = false;
           all.forEach(key => {
-            if (params[key] !== np[key]) {
-              const value = np[key];
+            const value = np[key];
+            if (params[key] !== value) {
               params[key] = value;
               const k = keys[key];
               k.value = value;
