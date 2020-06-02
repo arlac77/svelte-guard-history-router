@@ -8,6 +8,7 @@ jobs:
   include:
     - stage: test
       script:
+        - npm run gh-page
         - npm run test
         - 'mkdir -p "${TRAVIS_REPO_SLUG}/${TRAVIS_JOB_ID}"'
         - 'mv test-results "${TRAVIS_REPO_SLUG}/${TRAVIS_JOB_ID}"'
