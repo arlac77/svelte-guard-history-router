@@ -1,6 +1,7 @@
 import { compile, matcher, pathToRegexp } from "multi-path-matcher";
 import { Route } from "./route.mjs";
 import { Transition } from "./transition.mjs";
+import { nameValueStore } from "./util.mjs";
 
 /**
  * Keys also act as svelte stores and can be subscribed.
@@ -60,7 +61,7 @@ export class Router {
       (a, r) => new Set([...r.keys, ...a]),
       new Set()
     )) {
-      keys[key] = subscriberKey(key);
+      keys[key] = nameValueStore(key);
     }
 
     const params = {};
@@ -201,42 +202,9 @@ export class Router {
 
     route.keys.forEach(key => {
       if(this.keys[key]) { return; }
-      this.keys[key] = subscriberKey(key);
+      this.keys[key] = nameValueStore(key);
     });
 
     this.routes.unshift(route);
   }
-}
-
-
-function subscriberKey(name) {
-  const subscriptions = new Set();
-  let value;
-
-  const o = {
-    name,
-    subscribe: cb => {
-      subscriptions.add(cb);
-      cb(value);
-      return () => subscriptions.delete(cb);
-    },
-    set(v) {
-      o.value = v;
-    }
-  };
-
-  Object.defineProperties(o, {
-    value: {
-      get() {
-        return value;
-      },
-      set(v) {
-        value = v;
-        subscriptions.forEach(subscription => subscription(value));
-      }
-    },
-    subscriptions: { value: subscriptions }
-  });
-
-  return o;
 }
