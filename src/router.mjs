@@ -205,7 +205,6 @@ export class Router {
     });
 
     this.routes.unshift(route);
-    console.log(this.routes.map(route => route.path));
   }
 }
 
