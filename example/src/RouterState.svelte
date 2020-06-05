@@ -1,11 +1,10 @@
 <script>
   export let router;
 
-  let transition, state;
+  let transition;
 
   $: {
     transition = $router.transition;
-    state = $router.state;
   }
 </script>
 
@@ -76,28 +75,28 @@
     </table>
   {/if}
 
-  {#if state.route !== undefined}
+  {#if $router.route !== undefined}
     <h3>Route</h3>
     <table>
       <tbody>
         <tr>
           <td>path</td>
-          <td id="route.path">{state.route.path}</td>
+          <td id="route.path">{$router.route.path}</td>
         </tr>
         <tr>
           <td>priority</td>
-          <td id="route.priority">{state.route.priority}</td>
+          <td id="route.priority">{$router.route.priority}</td>
         </tr>
         <tr>
           <td>keys</td>
-          <td id="route.key">{state.route.keys.join(' ')}</td>
+          <td id="route.key">{$router.route.keys.join(' ')}</td>
         </tr>
       </tbody>
     </table>
   {/if}
 
   <h3>Params</h3>
-  <div>{JSON.stringify(state.params)}</div>
+  <div>{JSON.stringify($router.params)}</div>
 
   <table>
     <thead>
@@ -106,7 +105,7 @@
       <th>Subscriptions</th>
     </thead>
     <tbody>
-      {#each Object.values(state.keys) as key}
+      {#each Object.values($router.keys) as key}
         <tr>
           <td id="state.key.{key.name}">{key.name}</td>
           <td id="state.key.{key.name}.value">

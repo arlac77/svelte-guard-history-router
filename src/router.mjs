@@ -21,14 +21,6 @@ import { nameValueStore } from "./util.mjs";
  */
 
 /**
- * @typedef {Object} RouterState
- * @property {Router} router
- * @property {Route} route
- * @property {Object} keys all possible keys of all routes
- * @property {Object} params of current route
- */
-
-/**
  * key subscriptions:
  * ```js
  * const aKey = router.keys.aKey;
@@ -40,7 +32,6 @@ import { nameValueStore } from "./util.mjs";
  * @property {Route[]} routes
  * @property {Object} keys all possible keys of all routes
  * @property {Object} params value mapping from keys (from current route)
- * @property {RouterState} state
  * @property {Route} route current
  * @property {Transition} transition ongoing transition
  * @property {string} base url
@@ -65,51 +56,29 @@ export class Router {
     }
 
     const params = {};
-    const stateSubscriptions = new Set();
-    const state = {
-      subscribe: subscription => {
-        stateSubscriptions.add(subscription);
-        subscription(this.state);
-        return () => stateSubscriptions.delete(subscription);
-      }
-    };
 
-    Object.defineProperties(state, {
-      router: { value: this },
-      route: { get: () => route },
+    Object.defineProperties(this, {
+      base: { value: base },
+      linkNodes: { value: new Set() },
+      subscriptions: { value: new Set() },
       keys: { value: keys },
       params: {
         set(np) {
           const all = new Set(Object.keys(params).concat(Object.keys(np)));
 
-          let changed = false;
           all.forEach(key => {
             const value = np[key];
             if (params[key] !== value) {
               params[key] = value;
               const k = keys[key];
               k.value = value;
-              changed = true;
             }
           });
-
-          if (changed) {
-            stateSubscriptions.forEach(subscription => subscription(state));
-          }
         },
         get() {
           return params;
         }
-      }
-    });
-
-    Object.defineProperties(this, {
-      base: { value: base },
-      linkNodes: { value: new Set() },
-      subscriptions: { value: new Set() },
-      state: { value: state },
-      keys: { value: keys },
-      params: { value: params },
+      },
       routes: { value: routes },
       route: {
         get() {
@@ -119,7 +88,6 @@ export class Router {
           if (route !== value) {
             route = value;
             this.subscriptions.forEach(subscription => subscription(this));
-            stateSubscriptions.forEach(subscription => subscription(state));
           }
         }
       }
@@ -154,7 +122,7 @@ export class Router {
 
   replace(path) {
     const { route, params } = matcher(this.routes, path);
-    this.state.params = params;
+    this.params = params;
     this.route = route;
   }
 

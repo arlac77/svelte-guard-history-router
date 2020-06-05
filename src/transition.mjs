@@ -46,7 +46,7 @@ export class Transition {
         await this.saved.route.leave(this);
       }
 
-      router.state.params = params;
+      router.params = params;
       router.route = route;
 
       if (route !== undefined) {
@@ -88,7 +88,7 @@ export class Transition {
   async continue() {
     if (this.redirected !== undefined) {
       const router = this.router;
-      router.state.params = this.redirected.params;
+      router.params = this.redirected.params;
       router.route = this.redirected.route;
       this.redirected = undefined;
       this.end();
@@ -109,14 +109,14 @@ export class Transition {
   save() {
     const router = this.router;
     return {
-      params: { ...router.state.params },
+      params: { ...router.params },
       route: router.route
     };
   }
 
   restore(state) {
     const router = this.router;
-    router.state.params = state.params;
+    router.params = state.params;
     router.route = state.route;
   }
 }
