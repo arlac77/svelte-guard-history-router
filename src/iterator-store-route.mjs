@@ -1,6 +1,6 @@
 import { StoreRoute } from "./store-route.mjs";
 
-export class IteratorRoute extends StoreRoute {
+export class IteratorStoreRoute extends StoreRoute {
   constructor(path, component, options = {}) {
     super(path, component);
 
