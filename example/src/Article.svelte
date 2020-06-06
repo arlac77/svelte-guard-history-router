@@ -23,4 +23,4 @@
     href="/article/{('00' + (parseInt($article.id) - 1)).replace(/.*(\d\d)$/, '$1')}">
     Prev
   </Link>
-{:else}No such article {router.state.params.article}{/if}
+{:else}No such article {router.params.article}{/if}

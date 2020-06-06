@@ -21,7 +21,7 @@ export class ObjectStoreRoute extends StoreRoute {
   }
 
   async enter(transition) {
-    const properties = transition.router.state.params;
+    const properties = transition.router.params;
     const object = await this.objectForProperties(properties);
     console.log("OBJECT", object, properties);
 

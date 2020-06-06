@@ -12,4 +12,4 @@
       <Link href="/article/{article.id}">{article.name} ({article.id})</Link>
     </li>
   {/each}
-{:else}No such category {router.state.params.category}{/if}
+{:else}No such category {router.params.category}{/if}
