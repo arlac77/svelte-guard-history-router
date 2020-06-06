@@ -13,6 +13,8 @@ export function findClosestAttribute(element, attributeName) {
 /**
  * Create a named object wich can act as a store
  * @param {string} name
+ * @param {any} initialValue
+ * @property {any} value
  * @return {Store}
  */
 export function nameValueStore(name, initialValue) {
