@@ -142,7 +142,7 @@ export class Router {
 
   /**
    * Router subscription
-   * Value changes are fired when the route (or the target component changes)
+   * Changes in the current route will trigger a update
    * @param {Function} subscription
    */
   subscribe(subscription) {
