@@ -32,17 +32,14 @@
     "multi-path-matcher": "^2.0.14"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^8.0.0",
-    "documentation": "^13.0.0",
-    "rollup": "^2.12.0",
+    "@rollup/plugin-node-resolve": "^8.0.1",
+    "documentation": "^13.0.1",
+    "rollup": "^2.15.0",
     "rollup-plugin-dev": "^1.1.2",
     "rollup-plugin-svelte": "^5.2.2",
     "semantic-release": "^17.0.8",
-    "svelte": "^3.23.0",
+    "svelte": "^3.23.1",
     "testcafe": "^1.8.6"
-  },
-  "engines": {
-    "node": ">=14.3.0"
   },
   "repository": {
     "type": "git",
