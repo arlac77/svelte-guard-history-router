@@ -57,7 +57,9 @@ export class GuardedRoute extends Route {
    * @param {Transition} transition
    */
   async enter(transition) {
-    return this.guard.enter(transition);
+    if (this.guard) {
+      return this.guard.enter(transition);
+    }
   }
 
   /**
@@ -66,7 +68,9 @@ export class GuardedRoute extends Route {
    * @param {Transition} transition
    */
   async leave(transition) {
-    return this.guard.leave(transition);
+    if (this.guard) {
+      return this.guard.leave(transition);
+    }
   }
 }
 
