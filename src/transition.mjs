@@ -1,4 +1,3 @@
-import { matcher } from "multi-path-matcher";
 
 /**
  * Transition between routes
@@ -20,8 +19,7 @@ export class Transition {
         get: () => this.redirected === undefined ? component : undefined,
         set: value => {
           component = value;
-          const router = this.router;
-          router.subscriptions.forEach(subscription => subscription(router));
+          this.router.notifySubscriptions();
         }
       }
     });
@@ -40,17 +38,14 @@ export class Transition {
 
     router.transition = this;
     try {
-      const { route, params } = matcher(this.router.routes, this.path);
-
       if (this.saved.route !== undefined) {
         await this.saved.route.leave(this);
       }
 
-      router.params = params;
-      router.route = route;
+      router.replace(this.path);
 
-      if (route !== undefined) {
-        await route.enter(this);
+      if (router.route !== undefined) {
+        await router.route.enter(this);
       }
     } catch (e) {
       await this.rollback(e);
@@ -78,8 +73,7 @@ export class Transition {
    * @param {string} path new route to enter temporarly
    */
   async redirect(path) {
-    this.redirected = this.save();
-    this.router.replace(path);
+     this.redirected = this.router.replace(path);
   }
 
   /**
@@ -87,9 +81,7 @@ export class Transition {
    */
   async continue() {
     if (this.redirected !== undefined) {
-      const router = this.router;
-      router.params = this.redirected.params;
-      router.route = this.redirected.route;
+      this.router.restore(this.redirected);
       this.redirected = undefined;
       this.end();
     }
@@ -103,20 +95,6 @@ export class Transition {
     if (e) {
       console.error(e);
     }
-    this.restore(this.saved);
-  }
-
-  save() {
-    const router = this.router;
-    return {
-      params: { ...router.params },
-      route: router.route
-    };
-  }
-
-  restore(state) {
-    const router = this.router;
-    router.params = state.params;
-    router.route = state.route;
+    this.router.restore(this.saved);
   }
 }

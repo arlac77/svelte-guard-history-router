@@ -87,7 +87,7 @@ export class Router {
         set(value) {
           if (route !== value) {
             route = value;
-            this.subscriptions.forEach(subscription => subscription(this));
+            this.notifySubscriptions();
           }
         }
       }
@@ -116,17 +116,39 @@ export class Router {
    * @return {SvelteComponent}
    */
   get component() {
-    for(const o of [this.transition, this.route]) {
-      if(o !== undefined && o.component !== undefined) {
+    for (const o of [this.transition, this.route]) {
+      if (o !== undefined && o.component !== undefined) {
         return o.component;
       }
     }
   }
 
+  get path() {
+    return window.location.pathname.slice(this.base.length);
+  }
+
+  /**
+   * Replace current route
+   * @param {string} path
+   * @return {Object} former state
+   */
   replace(path) {
+    const currentState = {
+      params: { ...this.params },
+      route: this.route
+    };
+
     const { route, params } = matcher(this.routes, path);
+
     this.params = params;
     this.route = route;
+
+    return currentState;
+  }
+
+  restore(state) {
+    this.params = state.params;
+    this.route = state.route;
   }
 
   /**
@@ -140,10 +162,6 @@ export class Router {
     return transition.start();
   }
 
-  get path() {
-    return window.location.pathname.slice(this.base.length);
-  }
-
   /**
    * Router subscription
    * Changes in the current route will trigger a update
@@ -153,6 +171,11 @@ export class Router {
     this.subscriptions.add(subscription);
     subscription(this);
     return () => this.subscriptions.delete(subscription);
+  }
+
+  notifySubscriptions()
+  {
+    this.subscriptions.forEach(subscription => subscription(this));
   }
 
   /**
@@ -173,7 +196,9 @@ export class Router {
     Object.assign(route, pathToRegexp(route.path));
 
     route.keys.forEach(key => {
-      if(this.keys[key]) { return; }
+      if (this.keys[key]) {
+        return;
+      }
       this.keys[key] = nameValueStore(key);
     });
 
