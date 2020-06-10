@@ -158,8 +158,8 @@ export class Router {
    * @return {Transition}
    */
   async push(path) {
-    const transition = new Transition(this, path);
-    return transition.start();
+    this.transition = new Transition(this, path);
+    return this.transition.start();
   }
 
   /**

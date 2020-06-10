@@ -1,4 +1,3 @@
-
 /**
  * Transition between routes
  * @param {Router} router
@@ -16,7 +15,7 @@ export class Transition {
       path: { value: path },
       saved: { value: { route: router.route, params: router.params } },
       component: {
-        get: () => this.redirected === undefined ? component : undefined,
+        get: () => (this.redirected === undefined ? component : undefined),
         set: value => {
           component = value;
           this.router.notifySubscriptions();
@@ -36,7 +35,6 @@ export class Transition {
   async start() {
     const router = this.router;
 
-    router.transition = this;
     try {
       if (this.saved.route !== undefined) {
         await this.saved.route.leave(this);
@@ -73,7 +71,7 @@ export class Transition {
    * @param {string} path new route to enter temporarly
    */
   async redirect(path) {
-     this.redirected = this.router.replace(path);
+    this.redirected = this.router.replace(path);
   }
 
   /**
