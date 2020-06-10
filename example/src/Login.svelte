@@ -1,7 +1,6 @@
 <script>
   import { setSession, router } from './index.mjs';
 
-
   let username = "user";
   let password = "secret";
   let message;
@@ -10,7 +9,7 @@
     try {
       await login(username, password);
       setSession({ username });
-      let transition = router.transition;
+      const transition = router.transition;
       if(transition) {
         transition.continue();
       }

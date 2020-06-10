@@ -2,10 +2,6 @@
   import { Link, active, link } from "../../src/index.svelte";
   import { articles } from "./util.mjs";
   import { article, router } from "./index.mjs";
-
-  $: {
-    console.log(router.keys.article);
-  }
 </script>
 
 
