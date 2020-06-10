@@ -113,7 +113,7 @@ export class Router {
   /**
    * Current component.
    * Either during a transition or from the current route
-   * return {Component}
+   * @return {SvelteComponent}
    */
   get component() {
     for(const o of [this.transition, this.route]) {
@@ -133,6 +133,7 @@ export class Router {
    * Leave current route and enter route for given path
    * The work is done by a Transition
    * @param {string} path where to go
+   * @return {Transition}
    */
   async push(path) {
     const transition = new Transition(this, path);

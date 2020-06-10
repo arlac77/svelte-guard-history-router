@@ -32,7 +32,7 @@ export class IteratorStoreRoute extends StoreRoute {
       entries.push(e);
     }
 
-    this.value =entries;
+    this.value = entries;
 
     console.log("ITERATOR", entries, properties);
     this.subscriptions.forEach(subscription => subscription(entries));
