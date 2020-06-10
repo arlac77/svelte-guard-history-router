@@ -1,13 +1,9 @@
 <script>
   export let router;
-
-  let component;
-
-  $: component = $router.component;
 </script>
 
-{#if component}
-  <svelte:component this={component} />
+{#if $router.component}
+  <svelte:component this={$router.component} />
 {:else}
   <slot />
 {/if}
