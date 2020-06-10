@@ -37,7 +37,7 @@ import { Transition } from "./transition.mjs";
  * @param {string} base url
  * @property {Set<Node>} linkNodes nodes having their active state updated
  * @property {Route[]} routes
- * @property {Object} keys all possible keys of all routes
+ * @property {Object} keys collected keys of all routes
  * @property {Object} params value mapping from keys (from current route)
  * @property {RouterState} state
  * @property {Route} route current
@@ -169,14 +169,17 @@ export class Router {
     this.push(window.location.pathname.slice(this.base.length));
   }
 
+  /**
+   * Current component.
+   * Either during a transition or from the current route
+   * return {Component}
+   */
   get component() {
-    const transition = this.transition;
-    if (transition !== undefined && transition.component !== undefined) {
-      return transition.component;
+    for(const o of [this.transition, this.route]) {
+      if(o !== undefined && o.component !== undefined) {
+        return o.component;
+      }
     }
-
-    const r = this.route;
-    return r !== undefined && r.component;
   }
 
   replace(path) {
