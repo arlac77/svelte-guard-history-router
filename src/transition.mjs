@@ -58,10 +58,7 @@ export class Transition {
    */
   end() {
     if (this.redirected === undefined) {
-      const router = this.router;
-      history.pushState({ path: this.path }, "", router.base + this.path);
-      router.linkNodes.forEach(n => router.updateActive(n));
-      router.transition = undefined;
+      this.router.finalizePush(this.path);
     }
   }
 

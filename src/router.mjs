@@ -162,6 +162,12 @@ export class Router {
     return this.transition.start();
   }
 
+  finalizePush(path) {
+    history.pushState({ path }, "", this.base + path);
+    this.linkNodes.forEach(n => this.updateActive(n));
+    this.transition = undefined;
+  }
+
   /**
    * Router subscription
    * Changes in the current route will trigger a update
@@ -173,8 +179,7 @@ export class Router {
     return () => this.subscriptions.delete(subscription);
   }
 
-  notifySubscriptions()
-  {
+  notifySubscriptions() {
     this.subscriptions.forEach(subscription => subscription(this));
   }
 
