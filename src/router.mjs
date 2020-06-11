@@ -133,20 +133,24 @@ export class Router {
    * @return {Object} former state
    */
   replace(path) {
-    const currentState = {
-      params: { ...this.params },
-      route: this.route
-    };
+    const formerState = this.state;
 
     const { route, params } = matcher(this.routes, path);
 
     this.params = params;
     this.route = route;
 
-    return currentState;
+    return formerState;
   }
 
-  restore(state) {
+  get state() {
+    return {
+      params: { ...this.params },
+      route: this.route
+    };
+  }
+
+  set state(state) {
     this.params = state.params;
     this.route = state.route;
   }

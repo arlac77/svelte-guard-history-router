@@ -13,7 +13,7 @@ export class Transition {
     Object.defineProperties(this, {
       router: { value: router },
       path: { value: path },
-      saved: { value: { route: router.route, params: router.params } },
+      saved: { value: router.state },
       component: {
         get: () => (this.redirected === undefined ? component : undefined),
         set: value => {
@@ -26,7 +26,7 @@ export class Transition {
 
   /**
    * Start the transition
-   * - find matching target route
+   * - find matching target route @see Router.replace()
    * - leave old route
    * - set params
    * - set current route
@@ -76,7 +76,7 @@ export class Transition {
    */
   async continue() {
     if (this.redirected !== undefined) {
-      this.router.restore(this.redirected);
+      this.router.state = this.redirected;
       this.redirected = undefined;
       this.end();
     }
@@ -90,6 +90,6 @@ export class Transition {
     if (e) {
       console.error(e);
     }
-    this.router.restore(this.saved);
+    this.router.state = this.saved;
   }
 }
