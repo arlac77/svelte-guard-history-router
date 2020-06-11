@@ -1,5 +1,5 @@
 <script>
-  import { setSession, router } from './index.mjs';
+  import { setSession, router } from "./index.mjs";
 
 
   let username = "user";
@@ -10,10 +10,7 @@
     try {
       await login(username, password);
       setSession({ username });
-      let transition = router.transition;
-      if(transition) {
-        transition.continue();
-      }
+      router.continue();
     } catch (e) {
       message = e;
     }
@@ -59,10 +56,7 @@
         required
         bind:value={password} />
     </label>
-    <button
-      id="submit"
-      type="submit"
-      disabled={!username || !password}>
+    <button id="submit" type="submit" disabled={!username || !password}>
       Login
     </button>
   </form>

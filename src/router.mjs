@@ -203,6 +203,17 @@ export class Router {
   }
 
   /**
+   * Continue transition to its original destination.
+   * Does nothing if there is no transition.
+   */
+  continue()
+  {
+    if(this.transition) {
+      this.transition.continue();
+    }
+  }
+
+  /**
    * Router subscription
    * Value changes are fired when the route (or the target component changes)
    * @param {Function} subscription
