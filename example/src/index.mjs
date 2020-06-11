@@ -1,7 +1,6 @@
 import { derived } from "svelte/store";
 
 import App from "./App.svelte";
-import About from "./About.svelte";
 import NoWay from "./NoWay.svelte";
 import Home from "./Home.svelte";
 import Login from "./Login.svelte";
@@ -20,7 +19,6 @@ class ExceptionGuard extends Guard {
     throw new Error("never go there");
   }
 }
-
 
 let session;
 
@@ -47,13 +45,11 @@ const waitingGuard = new WaitingGuard(Waiting);
 export const router = new Router(
   [
     route("*", Home),
-    route("/about", About),
     route("/login", Login),
     route("/article", sessionGuard, waitingGuard, Articles),
     route("/article/:article", sessionGuard, Article),
     route("/category", sessionGuard, Categories),
     route("/category/:category", sessionGuard, Category),
-
     route("/noway", new ExceptionGuard(), NoWay)
   ],
   "/modules/svelte-guard-history-router/example"

@@ -1,11 +1,15 @@
 <script>
   import {
+    TargetRoute,
     Outlet,
     Link,
     link,
     active
   } from "../../src/index.svelte";
   import RouterState from "./RouterState.svelte";
+  import About from "./About.svelte";
+  import Home from "./Home.svelte";
+
   import { router } from "./index.mjs";
 
   let showState = true;
@@ -15,7 +19,7 @@
   <a href="/" use:link={router} use:active={router}>Router Example</a>
   <ul class="left">
     <li>
-      <a href="/about" use:link={router} use:active={router}>About</a>
+      <TargetRoute href='/about' component={About} {router}>About</TargetRoute>
     </li>
     <li>
       <a href="/article" use:link={router} use:active={router}>Articles</a>

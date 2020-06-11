@@ -3,10 +3,11 @@
   import { active } from "../active.mjs";
   import { route } from "../route.mjs";
 
-  export let def;
+  export let href;
+  export let component;
   export let router;
 
-  const r = route(...def);
+  const r = route(href,component);
   router.addRoute(r);
 </script>
 
