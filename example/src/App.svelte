@@ -1,5 +1,6 @@
 <script>
   import {
+    TheRouter,
     TargetRoute,
     Outlet,
     Link,
@@ -15,11 +16,12 @@
   let showState = true;
 </script>
 
+<TheRouter>
 <nav>
   <a href="/" use:link={router} use:active={router}>Router Example</a>
   <ul class="left">
     <li>
-      <TargetRoute href='/about' component={About} {router}>About</TargetRoute>
+      <TargetRoute path='/about' component={About} {router}>About</TargetRoute>
     </li>
     <li>
       <a href="/article" use:link={router} use:active={router}>Articles</a>
@@ -35,6 +37,7 @@
 <main>
   <Outlet {router}>nothing there</Outlet>
 </main>
+</TheRouter>
 
 <label for="state">
   show router state

@@ -18,10 +18,12 @@
   import Outlet from "./components/Outlet.svelte";
   import Link from "./components/Link.svelte";
   import TargetRoute from "./components/TargetRoute.svelte";
+  import TheRouter from "./components/TheRouter.svelte";
   export {
+    TargetRoute,
+    TheRouter,
     Outlet,
     Link,
-    TargetRoute,
     Router,
     Route,
     GuardedRoute,
