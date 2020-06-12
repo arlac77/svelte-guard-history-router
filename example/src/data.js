@@ -19,6 +19,10 @@ export const articles = Object.fromEntries(
     { id: "13", name: "Pizza Margherita", price: 5.0, category: "pizza" },
     { id: "14", name: "Pizza Funghi", price: 7.0, category: "pizza" },
     { id: "15", name: "Pizza Calzone", price: 7.0, category: "pizza" },
+    { id: "16", name: "Pizza Tonno", price: 7.0, category: "pizza" },
+    { id: "17", name: "Pizza Frutti di Mare", price: 7.0, category: "pizza" },
+    { id: "18", name: "Pizza Prosciutto", price: 7.0, category: "pizza" },
+    { id: "19", name: "Pizza Peperoni", price: 7.0, category: "pizza" },
     { id: "23", name: "Hot Dog", price: 2.0, category: "to go" },
     { id: "32", name: "Cheesecake", price: 2.0, category: "dessert" }
   ].map(a => [a.id, a])
