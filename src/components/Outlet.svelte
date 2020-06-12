@@ -1,5 +1,7 @@
 <script>
-  export let router;
+  import { getContext } from "svelte";
+  import { ROUTER } from "../util.mjs";
+  const router = getContext(ROUTER);
 </script>
 
 {#if $router.component}

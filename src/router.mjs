@@ -44,17 +44,9 @@ export class Router {
   constructor(routes = [], base = "") {
     let route;
 
-    routes = compile(routes);
+    this.routes = routes;
 
     const keys = {};
-
-    for (const key of routes.reduce(
-      (a, r) => new Set([...r.keys, ...a]),
-      new Set()
-    )) {
-      keys[key] = nameValueStore(key);
-    }
-
     const params = {};
 
     Object.defineProperties(this, {
@@ -79,7 +71,6 @@ export class Router {
           return params;
         }
       },
-      routes: { value: routes },
       route: {
         get() {
           return route;
@@ -93,10 +84,27 @@ export class Router {
       }
     });
 
+    this.compile();
+
+    setTimeout(() => this._start(), 10);
+  }
+
+  compile() {
+    this.routes = compile(this.routes);
+
+    for (const route of this.routes) {
+      route.keys.forEach(key => {
+        if (this.keys[key]) {
+          return;
+        }
+        this.keys[key] = nameValueStore(key);
+      });
+    }
+  }
+
+  _start() {
     window.addEventListener(Router.navigationEventType, event => {
       const path = event.detail.path;
-
-      //history.pushState({ path }, "", this.base + path);
 
       this.push(path);
     });
@@ -177,9 +185,8 @@ export class Router {
    * Continue transition to its original destination.
    * Does nothing if there is no transition.
    */
-  continue()
-  {
-    if(this.transition) {
+  continue() {
+    if (this.transition) {
       this.transition.continue();
     }
   }
@@ -214,15 +221,7 @@ export class Router {
   }
 
   addRoute(route) {
-    Object.assign(route, pathToRegexp(route.path));
-
-    route.keys.forEach(key => {
-      if (this.keys[key]) {
-        return;
-      }
-      this.keys[key] = nameValueStore(key);
-    });
-
-    this.routes.unshift(route);
+    this.routes.push(route);
+    this.compile();
   }
 }
