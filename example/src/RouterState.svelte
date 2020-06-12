@@ -58,42 +58,34 @@
     vertical-align: top;
     border-top: 1px solid #dee2e6;
   }
+
+  .current {
+    background-color: bisque;
+  }
 </style>
 
 <div>
-  <h3>Router State</h3>
-
   {#if transition !== undefined}
-    <h3>Transition</h3>
     <table>
       <tbody>
         <tr>
-          <td>path</td>
           <td id="route.path">{transition.path}</td>
         </tr>
       </tbody>
     </table>
   {/if}
 
-  {#if $router.route !== undefined}
-    <h3>Route</h3>
-    <table>
-      <tbody>
-        <tr>
-          <td>path</td>
-          <td id="route.path">{$router.route.path}</td>
+  <table>
+    <tbody>
+      {#each router.routes as r, i (i)}
+        <tr class={r === $router.route ? 'current': ''}>
+          <td id="route.priority">{r.priority} </td>
+          <td id="route.path">{r.path}</td>
+          <td id="route.key">{r.keys.join(' ')}</td>
         </tr>
-        <tr>
-          <td>priority</td>
-          <td id="route.priority">{$router.route.priority}</td>
-        </tr>
-        <tr>
-          <td>keys</td>
-          <td id="route.key">{$router.route.keys.join(' ')}</td>
-        </tr>
-      </tbody>
-    </table>
-  {/if}
+      {/each}
+    </tbody>
+  </table>
 
   <h3>Params</h3>
   <div>{JSON.stringify($router.params)}</div>
