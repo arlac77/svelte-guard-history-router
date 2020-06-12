@@ -112,7 +112,7 @@ export class Router {
 
   /**
    * Current component.
-   * Either during a transition or from the current route
+   * Either from a redirected transition or from the current route
    * @return {SvelteComponent}
    */
   get component() {
@@ -170,6 +170,7 @@ export class Router {
     history.pushState({ path }, "", this.base + path);
     this.linkNodes.forEach(n => this.updateActive(n));
     this.transition = undefined;
+    //this.notifySubscriptions();
   }
 
   /**
