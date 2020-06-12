@@ -23,3 +23,9 @@ export const articles = Object.fromEntries(
     { id: "32", name: "Cheesecake", price: 2.0, category: "dessert" }
   ].map(a => [a.id, a])
 );
+
+export const categories = Object.values(articles).reduce((a, c) => {
+  if (!a[c.category]) a[c.category] = { name: c.category, articles: [] };
+  a[c.category].articles.push(c);
+  return a;
+}, {});

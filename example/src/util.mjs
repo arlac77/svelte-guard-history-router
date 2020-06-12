@@ -1,5 +1,5 @@
 import { readable } from "svelte/store";
-import { articles as _articles } from "./data.mjs";
+import { articles as _articles, categories as _categories } from "./data.js";
 
 export const articles = readable([], set => {
   setTimeout(() => {
@@ -11,19 +11,8 @@ export const articles = readable([], set => {
 
 export const categories = readable([], set => {
   setTimeout(() => {
-    const categories = [];
-
-    Object.keys(_articles).forEach(id => {
-      const a = _articles[id];
-      let c = categories.find(c => c.name === a.category);
-      if (c === undefined) {
-        c = { name: a.category, articles: [] };
-        categories.push(c);
-      }
-      c.articles.push(a);
-    });
-    set(categories);
-  }, 500);
+    set(Object.values(_categories));
+  }, 1000);
 
   return () => {};
 });
