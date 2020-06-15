@@ -7,7 +7,7 @@ import Article from "./Article.svelte";
 
 import { articles, categories } from "./util.mjs";
 
-import { Router, route, Guard, WaitingGuard } from "../../src/index.svelte";
+import { ObjectStoreRoute, Router, route, Guard, WaitingGuard } from "../../src/index.svelte";
 
 export class AlwaysThrowGuard extends Guard {
   async enter(transition) {
@@ -39,11 +39,39 @@ export const waitingGuard = new WaitingGuard(Waiting);
 
 export const router = new Router(
   [
+    new CategoryRoute("/category/:category", Category),
+    new ArticleRoute("/article/:article", Article)
+    /*
     route("/category/:category",sessionGuard,Category),
     route("/article/:article",sessionGuard,Article)
+    */
   ],
   "/modules/svelte-guard-history-router/example"
 );
+
+class CategoryRoute extends ObjectStoreRoute {
+  async objectForProperties(properties)
+  {
+    const name = properties.category;
+    return categories.find(c => c.name === name);
+  }
+ 
+  propertiesForObject(category) {
+    return { category: category.name };
+  }
+}
+
+class ArticleRoute extends ObjectStoreRoute {
+  async objectForProperties(properties)
+  {
+    const id = properties.article;
+    return articles.find(c => c.id === id);
+  }
+ 
+  propertiesForObject(article) {
+    return { article: category.id };
+  }
+}
 
 export const article = derived(
   [articles, router.keys.article],
