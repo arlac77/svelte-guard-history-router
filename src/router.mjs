@@ -224,4 +224,18 @@ export class Router {
     this.routes.push(route);
     this.compile();
   }
+
+  /**
+   * find route for a given object
+   * @param {Object} object
+   */
+  pathFor(...objects)
+  {
+    for(const r of this.routes) {
+      const p = r.pathFor(...objects);
+      if(p !== undefined) {
+        return p;
+      }
+    }
+  }
 }

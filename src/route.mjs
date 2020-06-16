@@ -29,6 +29,8 @@ export class Route {
    * @param {Transition} transition
    */
   async leave(transition) {}
+
+  pathFor() { return undefined; }
 }
 
 /**
