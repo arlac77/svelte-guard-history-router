@@ -50,6 +50,23 @@ class ArticlesRoute extends IteratorStoreRoute {
   }
 }
 
+class ArticleRoute extends ObjectStoreRoute {
+  async objectForProperties(properties) {
+    return articles[properties.article];
+  }
+
+  propertiesForObject(article) {
+    return { article: article.id };
+  }
+}
+
+export const articlesRoute = new ArticlesRoute("/article", Articles);
+export const articleRoute = new ArticleRoute(
+  articlesRoute.path + "/:article",
+  Article
+);
+
+
 class CategoriesRoute extends IteratorStoreRoute {
   async *iteratorForProperties() {
     for (const c of Object.values(categories)) {
@@ -68,26 +85,12 @@ class CategoryRoute extends ObjectStoreRoute {
   }
 }
 
-class ArticleRoute extends ObjectStoreRoute {
-  async objectForProperties(properties) {
-    return articles[properties.article];
-  }
-
-  propertiesForObject(article) {
-    return { article: article.id };
-  }
-}
-
 export const categoriesRoute = new CategoriesRoute("/category", Categories);
 export const categoryRoute = new CategoryRoute(
   categoriesRoute.path + "/:category",
   Category
 );
-export const articlesRoute = new ArticlesRoute("/article", Articles);
-export const articleRoute = new ArticleRoute(
-  articlesRoute.path + "/:article",
-  Article
-);
+
 
 export const router = new Router(
   [categoriesRoute, categoryRoute, articlesRoute, articleRoute],

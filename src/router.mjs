@@ -226,8 +226,9 @@ export class Router {
   }
 
   /**
-   * find route for a given object
+   * Find path for a given object
    * @param {Object} object
+   * @return {string} path able to handle object  
    */
   pathFor(...objects)
   {
