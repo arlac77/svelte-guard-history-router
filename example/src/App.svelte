@@ -15,7 +15,12 @@
   import Home from "./Home.svelte";
   import NoWay from "./NoWay.svelte";
 
-  import { router, sessionGuard, waitingGuard, AlwaysThrowGuard } from "./index.mjs";
+  import {
+    router,
+    sessionGuard,
+    waitingGuard,
+    AlwaysThrowGuard
+  } from "./index.mjs";
 
   let showState = true;
 </script>
@@ -28,20 +33,10 @@
         <TargetRoute path="/about" component={About}>About</TargetRoute>
       </li>
       <li>
-        <TargetRoute
-          path="/article"
-          guards={[sessionGuard, waitingGuard]}
-          component={Articles}>
-          Articles
-        </TargetRoute>
+        <Link href="/article">Articles</Link>
       </li>
       <li>
-        <TargetRoute
-          path="/category"
-          guards={[sessionGuard]}
-          component={Categories}>
-          Categories
-        </TargetRoute>
+        <Link href="/category">Categories</Link>
       </li>
       <li>
         <a href="/noway" use:link={router} use:active={router}>Does Not Work</a>
@@ -49,10 +44,12 @@
     </ul>
   </nav>
   <TargetRoute path="/login" component={Login} />
-  <TargetRoute path="/noway" guards={[new AlwaysThrowGuard()]} component={NoWay} />
+  <TargetRoute
+    path="/noway"
+    guards={[new AlwaysThrowGuard()]}
+    component={NoWay} />
   <!--
   <TargetRoute path="*" component={Home} />-->
-
 
   <main>
     <Outlet>nothing there</Outlet>

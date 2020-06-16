@@ -71,7 +71,7 @@ test.page`${base}/about`("about", async t => {
   await t.expect(title.innerText).eql("About");
 });
 
-test.page`${base}/article/10`("artices/10", async t => {
+test.page`${base}/article/10`("article/10", async t => {
   const title = Selector(".routetitle");
 
   await t
@@ -79,7 +79,7 @@ test.page`${base}/article/10`("artices/10", async t => {
     .typeText("#password", "secret", { replace: true })
     .click("#submit");
 
-  await t.expect(title.innerText).eql("Article Pizza Quattro Stagioni");
+  await t.expect(title.innerText).eql("Pizza Quattro Stagioni");
 });
 
 test("Navigate around", async t => {

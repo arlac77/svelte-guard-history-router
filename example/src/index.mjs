@@ -48,6 +48,13 @@ class ArticlesRoute extends IteratorStoreRoute {
       yield a;
     }
   }
+  async enter(transition) {
+    if (!session) {
+      transition.redirect("/login");
+    }
+
+    return super.enter(transition);
+  }
 }
 
 class ArticleRoute extends ObjectStoreRoute {
@@ -58,6 +65,13 @@ class ArticleRoute extends ObjectStoreRoute {
   propertiesForObject(article) {
     return { article: article.id };
   }
+  async enter(transition) {
+    if (!session) {
+      transition.redirect("/login");
+    }
+
+    return super.enter(transition);
+  }
 }
 
 export const articlesRoute = new ArticlesRoute("/article", Articles);
@@ -66,22 +80,37 @@ export const articleRoute = new ArticleRoute(
   Article
 );
 
-
 class CategoriesRoute extends IteratorStoreRoute {
   async *iteratorForProperties() {
     for (const c of Object.values(categories)) {
       yield c;
     }
   }
+
+  async enter(transition) {
+    if (!session) {
+      transition.redirect("/login");
+    }
+
+    return super.enter(transition);
+  }
 }
 
 class CategoryRoute extends ObjectStoreRoute {
   async objectForProperties(properties) {
-    return categories[properties.category]
+    return categories[properties.category];
   }
 
   propertiesForObject(category) {
     return { category: category.name };
+  }
+
+  async enter(transition) {
+    if (!session) {
+      transition.redirect("/login");
+    }
+
+    return super.enter(transition);
   }
 }
 
@@ -90,7 +119,6 @@ export const categoryRoute = new CategoryRoute(
   categoriesRoute.path + "/:category",
   Category
 );
-
 
 export const router = new Router(
   [categoriesRoute, categoryRoute, articlesRoute, articleRoute],
