@@ -143,10 +143,7 @@ export class Router {
   replace(path) {
     const formerState = this.state;
 
-    const { route, params } = matcher(this.routes, path);
-
-    this.params = params;
-    this.route = route;
+    this.state = matcher(this.routes, path);
 
     return formerState;
   }
@@ -185,9 +182,9 @@ export class Router {
    * Continue transition to its original destination.
    * Does nothing if there is no transition.
    */
-  continue() {
+  async continue() {
     if (this.transition) {
-      this.transition.continue();
+      return this.transition.continue();
     }
   }
 
