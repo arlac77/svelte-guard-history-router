@@ -9,8 +9,9 @@
     try {
       await login(username, password);
       setSession({ username });
-      router.continue();
+      await router.continue();
     } catch (e) {
+      console.log(e);
       message = e;
     }
   }

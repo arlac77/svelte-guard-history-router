@@ -22,7 +22,8 @@ const links = [
   al("12")
 ];
 
-const base = "http://localhost:5000/modules/svelte-guard-history-router/example";
+const base =
+  "http://localhost:5000/modules/svelte-guard-history-router/example";
 
 fixture`Getting Started`.page`${base}/index.html`;
 
@@ -46,7 +47,7 @@ test("click arund", async t => {
     }
 
     await t
-   //   .takeScreenshot()
+      //   .takeScreenshot()
       .expect(title.innerText)
       .eql(l.title);
 
@@ -60,10 +61,7 @@ test("routing failure", async t => {
   const title = Selector(".routetitle");
   const a = Selector("a").withAttribute("href", "/noway");
 
-  await t
-    .click(a)
-    .expect(title.innerText)
-    .eql("About");
+  await t.click(a).expect(title.innerText).eql("About");
 });
 
 test.page`${base}/about`("about", async t => {
@@ -79,7 +77,9 @@ test.page`${base}/article/10`("article/10", async t => {
     .typeText("#password", "secret", { replace: true })
     .click("#submit");
 
-  await t.expect(title.innerText).eql("Pizza Quattro Stagioni");
+  //console.log(await t.getBrowserConsoleMessages());
+
+  await t.expect(title.innerText).eql("Article Pizza Quattro Stagioni");
 });
 
 test("Navigate around", async t => {
@@ -87,7 +87,7 @@ test("Navigate around", async t => {
 
   await t
     .navigateTo(`${base}/about`)
-   // .takeScreenshot()
+    // .takeScreenshot()
     .expect(title.innerText)
     .eql("About");
 
