@@ -56,16 +56,19 @@ export class Router {
       keys: { value: keys },
       params: {
         set(np) {
-          const all = new Set(Object.keys(params).concat(Object.keys(np)));
-
-          all.forEach(key => {
+          for (const key of Object.keys(keys)) {
             const value = np[key];
             if (params[key] !== value) {
-              params[key] = value;
+              if(value === undefined) {
+                delete params[key];
+              }
+              else {
+                params[key] = value;
+              }
               const k = keys[key];
               k.value = value;
             }
-          });
+          }
         },
         get() {
           return params;
@@ -164,7 +167,7 @@ export class Router {
    * Leave current route and enter route for given path
    * The work is done by a Transition
    * @param {string} path where to go
-   * @return {Transition}
+   * @return {Transition} running transition
    */
   async push(path) {
     this.transition = new Transition(this, path);
@@ -173,7 +176,7 @@ export class Router {
 
   /**
    * Called from a transition to manifest the new destination
-   * @param {stirng} path
+   * @param {string} path
    */
   finalizePush(path) {
     history.pushState({ path }, "", this.base + path);
@@ -234,13 +237,12 @@ export class Router {
   /**
    * Find path for a given object
    * @param {Object} object
-   * @return {string} path able to handle object  
+   * @return {string} path able to handle object
    */
-  pathFor(...objects)
-  {
-    for(const r of this.routes) {
+  pathFor(...objects) {
+    for (const r of this.routes) {
       const p = r.pathFor(...objects);
-      if(p !== undefined) {
+      if (p !== undefined) {
         return p;
       }
     }
