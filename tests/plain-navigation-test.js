@@ -87,12 +87,14 @@ test("Navigate around", async t => {
 
   await t
     .navigateTo(`${base}/about`)
-    // .takeScreenshot()
     .expect(title.innerText)
     .eql("About");
 
+  console.log(await getLocation());
+
   await t.navigateTo(`${base}/article`);
-  //await t.takeScreenshot();
+
+  console.log(await getLocation());
 
   await t
     .typeText("#username", "user", { replace: true })
@@ -101,9 +103,10 @@ test("Navigate around", async t => {
 
   await t.expect(title.innerText).eql("Articles");
 
+  console.log(await getLocation());
+
   await t.expect(getLocation()).contains("article");
   await goBack();
-  //await t.takeScreenshot();
 
   console.log(await getLocation());
   /*
