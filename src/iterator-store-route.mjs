@@ -34,7 +34,6 @@ export class IteratorStoreRoute extends StoreRoute {
 
     this.value = entries;
 
-    console.log("ITERATOR", entries, properties);
     this.subscriptions.forEach(subscription => subscription(entries));
   }
 
