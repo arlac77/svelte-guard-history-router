@@ -34,8 +34,7 @@ if (sessionStorage.session) {
 class SessionGuard extends Guard {
   async enter(transition) {
     if (!session) {
-      transition.redirect("/login");
-      return false;
+      return transition.redirect("/login");
     }
   }
 }
@@ -51,8 +50,7 @@ class ArticlesRoute extends IteratorStoreRoute {
   }
   async enter(transition) {
     if (!session) {
-      transition.redirect("/login");
-      return;
+      return transition.redirect("/login");
     }
 
     return super.enter(transition);
@@ -71,8 +69,7 @@ class ArticleRoute extends ObjectStoreRoute {
 
   async enter(transition) {
     if (!session) {
-      transition.redirect("/login");
-      return;
+      return transition.redirect("/login");
     }
 
     return super.enter(transition);
@@ -94,8 +91,7 @@ class CategoriesRoute extends IteratorStoreRoute {
 
   async enter(transition) {
     if (!session) {
-      transition.redirect("/login");
-      return;
+      return transition.redirect("/login");
     }
 
     return super.enter(transition);
@@ -113,8 +109,7 @@ class CategoryRoute extends ObjectStoreRoute {
 
   async enter(transition) {
     if (!session) {
-      transition.redirect("/login");
-      return;
+      return transition.redirect("/login");
     }
 
     return super.enter(transition);
