@@ -75,16 +75,21 @@ export class Transition {
    * Continue a redirected route to its original destination
    */
   async continue() {
-    if (this.redirected !== undefined) {      
-      this.router.state = this.redirected;
+    if (this.redirected !== undefined) {
+      try {
+        this.router.state = this.redirected;
 
-      // try entering 2nd. time
-      if (this.router.route !== undefined) {
-        await this.router.route.enter(this);
+        // try entering 2nd. time
+        if (this.router.route !== undefined) {
+          await this.router.route.enter(this);
+        }
+
+      } catch (e) {
+        await this.rollback(e);
+      } finally {
+        this.redirected = undefined;
+        this.end();
       }
-
-      this.redirected = undefined;
-      this.end();
     }
   }
 
