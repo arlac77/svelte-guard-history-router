@@ -15,9 +15,10 @@ svelte guarded history router
 
 # Features
 
--   Named params
--   Guards to act when entering / leaving a route
--   Standart `<a href="/home">Home</a>` elements
+- Named params
+- Guards to act when entering / leaving a route
+- Automatic route ranking
+- Standart `<a href="/home">Home</a>` elements
 
 # usage
 
@@ -35,7 +36,7 @@ let session = undefined;
 class SessionGuard extends Guard {
   async enter(transition) {
     if(!session) {
-      transition.redirect('/login');
+      return transition.redirect('/login');
     }
   }
 }
@@ -64,6 +65,7 @@ export const router = new Router(
   import { router } from "./main.mjs";
 </script>
 
+<Router>
 <nav>
   <a href="/" use:link={router} use:active={router}>Router Example</a>
   <ul class="left">
@@ -79,8 +81,9 @@ export const router = new Router(
   </ul>
 </nav>
 <main>
-  <Outlet {router}/>
+  <Outlet/>
 </main>
+</Router>
 ```
 
 ## Sample code
