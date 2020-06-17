@@ -43,7 +43,7 @@ export const sessionGuard = new SessionGuard();
 export const waitingGuard = new WaitingGuard(Waiting);
 
 class ArticlesRoute extends IteratorStoreRoute {
-  async *iteratorForProperties() {
+  async *iteratorFor() {
     for (const a of Object.values(articles)) {
       yield a;
     }
@@ -58,12 +58,11 @@ class ArticlesRoute extends IteratorStoreRoute {
 }
 
 class ArticleRoute extends ObjectStoreRoute {
-  async objectForProperties(properties) {
-    console.log("objectForProperties", JSON.stringify(properties));
+  async objectFor(properties) {
     return articles[properties.article];
   }
 
-  propertiesForObject(article) {
+  propertiesFor(article) {
     return { article: article.id };
   }
 
@@ -83,7 +82,7 @@ export const articleRoute = new ArticleRoute(
 );
 
 class CategoriesRoute extends IteratorStoreRoute {
-  async *iteratorForProperties() {
+  async *iteratorFor() {
     for (const c of Object.values(categories)) {
       yield c;
     }
@@ -99,11 +98,11 @@ class CategoriesRoute extends IteratorStoreRoute {
 }
 
 class CategoryRoute extends ObjectStoreRoute {
-  async objectForProperties(properties) {
+  async objectFor(properties) {
     return categories[properties.category];
   }
 
-  propertiesForObject(category) {
+  propertiesFor(category) {
     return { category: category.name };
   }
 

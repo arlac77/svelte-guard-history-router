@@ -10,13 +10,13 @@ export class IteratorStoreRoute extends StoreRoute {
       value: { get: () => value, set: v => (value = v) }
     };
 
-    if (options.iteratorForProperties) {
-      properties.iteratorForProperties = {
-        value: options.iteratorForProperties
+    if (options.iteratorFor) {
+      properties.iteratorFor = {
+        value: options.iteratorFor
       };
     }
-    if (options.propertiesForObject) {
-      properties.propertiesForObject = { value: options.propertiesForObject };
+    if (options.propertiesFor) {
+      properties.propertiesFor = { value: options.propertiesFor };
     }
 
     Object.defineProperties(this, properties);
@@ -28,7 +28,7 @@ export class IteratorStoreRoute extends StoreRoute {
     const properties = transition.router.params;
     const entries = [];
 
-    for await (const e of await this.iteratorForProperties(properties)) {
+    for await (const e of await this.iteratorFor(properties)) {
       entries.push(e);
     }
 
@@ -37,13 +37,8 @@ export class IteratorStoreRoute extends StoreRoute {
     this.subscriptions.forEach(subscription => subscription(entries));
   }
 
-  propertiesForObject(object) {
+  propertiesFor(object) {
     return Object.fromEntries(this.keys.map(key => [key, object[key]]));
-  }
-
-  pathFor(...objects) {
-    const properties = this.propertiesForObject(...objects);
-    return this.path.replace(/:(\w+)/g, (m, name) => properties[name]);
   }
 }
 

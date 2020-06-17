@@ -10,11 +10,11 @@ export class ObjectStoreRoute extends StoreRoute {
       value: { get: () => value, set: v => (value = v) }
     };
 
-    if (options.objectForProperties) {
-      properties.objectForProperties = { value: options.objectForProperties };
+    if (options.objectFor) {
+      properties.objectFor = { value: options.objectFor };
     }
-    if (options.propertiesForObject) {
-      properties.propertiesForObject = { value: options.propertiesForObject };
+    if (options.propertiesFor) {
+      properties.propertiesFor = { value: options.propertiesFor };
     }
 
     Object.defineProperties(this, properties);
@@ -22,19 +22,14 @@ export class ObjectStoreRoute extends StoreRoute {
 
   async enter(transition) {
     const properties = transition.router.params;
-    const object = await this.objectForProperties(properties);
+    const object = await this.objectFor(properties);
     
     this.value = object;
     this.subscriptions.forEach(subscription => subscription(object));
   }
 
-  propertiesForObject(object) {
+  propertiesFor(object) {
     return Object.fromEntries(this.keys.map(key => [key, object[key]]));
-  }
-
-  pathFor(...objects) {
-    const properties = this.propertiesForObject(...objects);
-    return this.path.replace(/:(\w+)/g, (m, name) => properties[name]);
   }
 }
 

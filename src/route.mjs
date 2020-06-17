@@ -30,7 +30,34 @@ export class Route {
    */
   async leave(transition) {}
 
-  pathFor() { return undefined; }
+  /**
+   * Extract properties from objects.
+   * @return {object} properties extracted from given objects
+   */
+  propertiesFor(...objects) {
+    return undefined;
+  }
+
+  /**
+   * Deliver path with properties expanded to point to objects.
+   * @param {objects} objects to be pointed to
+   * @return {string} path with properties replaces for objects. undefined if object does not fit
+   */
+  pathFor(...objects) {
+    const properties = this.propertiesFor(...objects);
+    return properties ?
+      this.path.replace(/:(\w+)/g, (m, name) => properties[name])
+      : undefined;
+  }
+  
+  /**
+   * Deliver object for a given set of properties
+   * @param {object}
+   * @return {object} matching properties
+   */
+  objectFor(properties) {
+    return undefined;
+  }
 }
 
 /**

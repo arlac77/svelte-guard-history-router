@@ -171,6 +171,10 @@ export class Router {
     return this.transition.start();
   }
 
+  /**
+   * Called from a transition to manifest the new destination
+   * @param {stirng} path
+   */
   finalizePush(path) {
     history.pushState({ path }, "", this.base + path);
     this.linkNodes.forEach(n => this.updateActive(n));
@@ -180,6 +184,7 @@ export class Router {
 
   /**
    * Continue transition to its original destination.
+   * Shortcut for this.transition.continue()
    * Does nothing if there is no transition.
    */
   async continue() {
@@ -217,6 +222,10 @@ export class Router {
     }
   }
 
+  /**
+   * Add a new route.
+   * @param {Route} route
+   */
   addRoute(route) {
     this.routes.push(route);
     this.compile();
