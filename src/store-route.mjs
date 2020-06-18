@@ -20,6 +20,10 @@ export class StoreRoute extends GuardedRoute {
     subscription(this.value);
     return () => this.subscriptions.delete(subscription);
   }
+
+  propertiesFor(object) {
+    return Object.fromEntries(this.keys.map(key => [key, object[key]]));
+  }
 }
 
 export default StoreRoute;

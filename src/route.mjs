@@ -31,7 +31,7 @@ export class Route {
   async leave(transition) {}
 
   /**
-   * Extract properties from objects.
+   * Extract properties from object(s).
    * @return {object} properties extracted from given objects
    */
   propertiesFor(...objects) {
@@ -39,7 +39,7 @@ export class Route {
   }
 
   /**
-   * Deliver path with properties expanded to point to objects.
+   * Deliver path with properties expanded to point to object(s).
    * @param {objects} objects to be pointed to
    * @return {string} path with properties replaces for objects. undefined if object does not fit
    */
@@ -52,8 +52,8 @@ export class Route {
   
   /**
    * Deliver object for a given set of properties
-   * @param {object}
-   * @return {object} matching properties
+   * @param {object} properties
+   * @return {object} for matching properties
    */
   objectFor(properties) {
     return undefined;

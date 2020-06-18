@@ -27,10 +27,6 @@ export class ObjectStoreRoute extends StoreRoute {
     this.value = object;
     this.subscriptions.forEach(subscription => subscription(object));
   }
-
-  propertiesFor(object) {
-    return Object.fromEntries(this.keys.map(key => [key, object[key]]));
-  }
 }
 
 export default ObjectStoreRoute;

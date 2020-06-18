@@ -36,10 +36,6 @@ export class IteratorStoreRoute extends StoreRoute {
 
     this.subscriptions.forEach(subscription => subscription(entries));
   }
-
-  propertiesFor(object) {
-    return Object.fromEntries(this.keys.map(key => [key, object[key]]));
-  }
 }
 
 export default IteratorStoreRoute;
