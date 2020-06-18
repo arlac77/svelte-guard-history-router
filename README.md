@@ -18,6 +18,8 @@ svelte guarded history router
 - Named params
 - Guards to act when entering / leaving a route
 - Automatic route ranking
+- Route stores
+- Object / parameter mapping 
 - Standart `<a href="/home">Home</a>` elements
 
 # usage
