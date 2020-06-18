@@ -16,7 +16,7 @@
   router.addRoute(r);
 </script>
 
-{#if r.keys.length == 0}
+{#if r.keys.length === 0}
   <a href={r.path} use:link={router} use:active={router}>
     <slot />
   </a>
