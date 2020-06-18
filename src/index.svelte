@@ -2,7 +2,6 @@
   import {
     Router,
     Route,
-    GuardedRoute,
     StoreRoute,
     ObjectStoreRoute,
     IteratorStoreRoute,
@@ -28,7 +27,6 @@
     ObjectLink,
     Router,
     Route,
-    GuardedRoute,
     StoreRoute,
     ObjectStoreRoute,
     IteratorStoreRoute,

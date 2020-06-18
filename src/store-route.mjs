@@ -1,6 +1,6 @@
-import { GuardedRoute } from "./route.mjs";
+import { Route } from "./route.mjs";
 
-export class StoreRoute extends GuardedRoute {
+export class StoreRoute extends Route {
   constructor(path, component, guard) {
     super(path, component, guard);
 
