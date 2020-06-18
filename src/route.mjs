@@ -45,11 +45,11 @@ export class Route {
    */
   pathFor(...objects) {
     const properties = this.propertiesFor(...objects);
-    return properties ?
-      this.path.replace(/:(\w+)/g, (m, name) => properties[name])
+    return properties
+      ? this.path.replace(/:(\w+)/g, (m, name) => properties[name])
       : undefined;
   }
-  
+
   /**
    * Deliver object for a given set of properties
    * @param {object} properties

@@ -55,6 +55,7 @@ export class Transition {
   /**
    * Cleanup transition
    * Update Nodes active state
+   * @see Router.finalizePush
    */
   end() {
     if (this.redirected === undefined) {
@@ -65,7 +66,7 @@ export class Transition {
   /**
    * Halt current transition and go to another route.
    * To proceed with the original route by callin continue()
-   * @param {string} path new route to enter temporarly
+   * @param {string} path new route to enter temporary
    */
   async redirect(path) {
     this.redirected = this.router.replace(path);
