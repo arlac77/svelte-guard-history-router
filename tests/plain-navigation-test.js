@@ -58,8 +58,10 @@ test("click arund", async t => {
 test("routing failure", async t => {
   await t.click(Selector("a").withAttribute("href", "/about"));
 
+  console.log(await getLocation());
+
   const title = Selector(".routetitle");
-  const a = Selector("a").withAttribute("href", "/noway");
+  const a = Selector("a").withAttribute("href", "/about");
 
   await t.click(a).expect(title.innerText).eql("About");
 });
