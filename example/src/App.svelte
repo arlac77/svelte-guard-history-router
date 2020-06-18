@@ -25,7 +25,7 @@
   let showState = true;
 </script>
 
-<TheRouter base="" {router}>
+<TheRouter {router}>
   <nav>
     <TargetRoute path="/" component={Home}>Router Example</TargetRoute>
     <ul class="left">
