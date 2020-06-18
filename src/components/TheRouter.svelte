@@ -1,5 +1,5 @@
 <script>
-  import { getContext, setContext, onMount } from "svelte";
+  import { setContext } from "svelte";
 
   import { ROUTER } from "../util.mjs";
 

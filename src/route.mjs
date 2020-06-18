@@ -18,6 +18,14 @@ export class Route {
     });
   }
 
+  get path() {
+    return "";
+  }
+  
+  get component() {
+    return undefined;
+  }
+
   /**
    * Enter the route from a former one.
    * @param {Transition} transition
