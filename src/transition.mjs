@@ -13,6 +13,7 @@ export class Transition {
     Object.defineProperties(this, {
       router: { value: router },
       path: { value: path },
+      savedPathname : { value: window.location.pathname },
       saved: { value: router.state },
       component: {
         get: () => (this.redirected === undefined ? component : undefined),
@@ -102,6 +103,11 @@ export class Transition {
     if (e) {
       console.error(e);
     }
+
     this.router.state = this.saved;
+
+    window.location.pathname = this.savedPathname;
+
+    router.finalizePush();
   }
 }

@@ -176,12 +176,17 @@ export class Router {
 
   /**
    * Called from a transition to manifest the new destination
+   * if path is undefined the transition has been aborderd
    * @param {string} path
    */
   finalizePush(path) {
-    history.pushState({ path }, "", this.base + path);
-    this.linkNodes.forEach(n => this.updateActive(n));
     this.transition = undefined;
+
+    if(path !== undefined) {
+      history.pushState({ path }, "", this.base + path);
+    }
+
+    this.linkNodes.forEach(n => this.updateActive(n));
     //this.notifySubscriptions();
   }
 
