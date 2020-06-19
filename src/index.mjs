@@ -1,4 +1,4 @@
-  export * from './router.mjs';
+  export * from './base-router.mjs';
   export * from './transition.mjs';
   export * from './skeleton-route.mjs';
   export * from './store-route.mjs';

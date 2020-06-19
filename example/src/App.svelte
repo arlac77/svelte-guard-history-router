@@ -1,6 +1,6 @@
 <script>
   import {
-    TheRouter,
+    Router,
     Route,
     Outlet,
     Link,
@@ -25,7 +25,7 @@
   let showState = true;
 </script>
 
-<TheRouter {router}>
+<Router {router}>
   <nav>
     <Route path="/" component={Home}>Router Example</Route>
     <ul class="left">
@@ -64,4 +64,4 @@
   {#if showState}
     <RouterState/>
   {/if}
-</TheRouter>
+</Router>

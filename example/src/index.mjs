@@ -10,7 +10,7 @@ import Articles from "./Articles.svelte";
 import {
   IteratorStoreRoute,
   ObjectStoreRoute,
-  Router,
+  BaseRouter,
   Guard,
   WaitingGuard
 } from "../../src/index.svelte";
@@ -121,7 +121,7 @@ export const categoryRoute = new CategoryRoute(
   Category
 );
 
-export const router = new Router(
+export const router = new BaseRouter(
   [categoriesRoute, categoryRoute, articlesRoute, articleRoute],
   "/modules/svelte-guard-history-router/example"
 );

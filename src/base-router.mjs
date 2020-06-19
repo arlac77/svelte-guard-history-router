@@ -35,7 +35,7 @@ import { nameValueStore } from "./util.mjs";
  * @property {Transition} transition ongoing transition
  * @property {string} base url
  */
-export class Router {
+export class BaseRouter {
   static get navigationEventType() {
     return "routerLink";
   }
@@ -104,7 +104,7 @@ export class Router {
   }
 
   _start() {
-    window.addEventListener(Router.navigationEventType, event =>
+    window.addEventListener(BaseRouter.navigationEventType, event =>
       this.push(event.detail.path)
     );
 
@@ -158,9 +158,6 @@ export class Router {
   set state(state) {
     this.params = state.params;
     this.route = state.route;
-    /* if(state.pathname) {
-      window.location.pathname = state.pathname;
-    }*/
   }
 
   /**

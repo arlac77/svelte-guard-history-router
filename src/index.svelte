@@ -1,6 +1,6 @@
 <script context="module">
   import {
-    Router,
+    BaseRouter,
     SkeletonRoute,
     StoreRoute,
     ObjectStoreRoute,
@@ -18,14 +18,15 @@
   import Link from "./components/Link.svelte";
   import ObjectLink from "./components/Link.svelte";
   import Route from "./components/Route.svelte";
-  import TheRouter from "./components/TheRouter.svelte";
+  import Router from "./components/Router.svelte";
   export {
     Route,
-    TheRouter,
+    Router,
     Outlet,
     Link,
     ObjectLink,
-    Router,
+    
+    BaseRouter,
     SkeletonRoute,
     StoreRoute,
     ObjectStoreRoute,
