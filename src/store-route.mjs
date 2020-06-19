@@ -1,8 +1,8 @@
 import { SkeletonRoute } from "./skeleton-route.mjs";
 
 export class StoreRoute extends SkeletonRoute {
-  constructor(path, component, guard) {
-    super(path, component, guard);
+  constructor() {
+    super();
 
     const properties = {
       subscriptions: { value: new Set() }

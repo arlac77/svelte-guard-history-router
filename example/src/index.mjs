@@ -12,7 +12,8 @@ import {
   ObjectStoreRoute,
   BaseRouter,
   Guard,
-  WaitingGuard
+  WaitingGuard,
+  route
 } from "../../src/index.svelte";
 
 export class AlwaysThrowGuard extends Guard {
@@ -48,13 +49,6 @@ class ArticlesRoute extends IteratorStoreRoute {
       yield a;
     }
   }
-  async enter(transition) {
-    if (!session) {
-      return transition.redirect("/login");
-    }
-
-    return super.enter(transition);
-  }
 }
 
 class ArticleRoute extends ObjectStoreRoute {
@@ -65,35 +59,13 @@ class ArticleRoute extends ObjectStoreRoute {
   propertiesFor(article) {
     return { article: article.id };
   }
-
-  async enter(transition) {
-    if (!session) {
-      return transition.redirect("/login");
-    }
-
-    return super.enter(transition);
-  }
 }
-
-export const articlesRoute = new ArticlesRoute("/article", Articles);
-export const articleRoute = new ArticleRoute(
-  articlesRoute.path + "/:article",
-  Article
-);
 
 class CategoriesRoute extends IteratorStoreRoute {
   async *iteratorFor() {
     for (const c of Object.values(categories)) {
       yield c;
     }
-  }
-
-  async enter(transition) {
-    if (!session) {
-      return transition.redirect("/login");
-    }
-
-    return super.enter(transition);
   }
 }
 
@@ -115,10 +87,29 @@ class CategoryRoute extends ObjectStoreRoute {
   }
 }
 
-export const categoriesRoute = new CategoriesRoute("/category", Categories);
-export const categoryRoute = new CategoryRoute(
+export const categoriesRoute = route(
+  "/category",
+  CategoriesRoute,
+  sessionGuard,
+  Categories
+);
+export const categoryRoute = route(
   categoriesRoute.path + "/:category",
+  CategoryRoute,
+  sessionGuard,
   Category
+);
+export const articlesRoute = route(
+  "/article",
+  ArticlesRoute,
+  sessionGuard,
+  Articles
+);
+export const articleRoute = route(
+  articlesRoute.path + "/:article",
+  ArticleRoute,
+  sessionGuard,
+  Article
 );
 
 export const router = new BaseRouter(

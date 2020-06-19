@@ -11,21 +11,6 @@ import { sequenceGuard } from "./guard.mjs";
  * @property {RegEx} regex
  */
 export class SkeletonRoute {
-  constructor(path, component) {
-    Object.defineProperties(this, {
-      path: { value: path },
-      component: { value: component }
-    });
-  }
-
-  get path() {
-    return "";
-  }
-  
-  get component() {
-    return undefined;
-  }
-
   /**
    * Enter the route from a former one.
    * @param {Transition} transition
@@ -43,7 +28,7 @@ export class SkeletonRoute {
   async leave(transition) {
     if (this.guard) {
       return this.guard.leave(transition);
-    }  
+    }
   }
 
   /**
@@ -78,17 +63,21 @@ export class SkeletonRoute {
 
 /**
  * Helper function to create routes with optional guards
+ * @param {Route} path
  * @param {string} path
  * @param {Guard|SvelteComponent[]} args last one must be a SvelteComponent
  */
-export function route(path, ...args) {
-  const component = args.pop();
-
-  const route = new SkeletonRoute(path, component);
+export function route(path, factory, ...args) {
+  const route = new factory();
+  route.component = args.pop();
+  route.path = path;
 
   switch (args.length) {
+    case 0:
+      break;
     case 1:
       route.guard = args[0];
+      break;
     default:
       route.guard = sequenceGuard(args);
   }

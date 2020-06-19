@@ -1,8 +1,8 @@
 import { StoreRoute } from "./store-route.mjs";
 
 export class ObjectStoreRoute extends StoreRoute {
-  constructor(path, component, options = {}) {
-    super(path, component);
+  constructor(options = {}) {
+    super();
 
     let value;
 
@@ -21,6 +21,8 @@ export class ObjectStoreRoute extends StoreRoute {
   }
 
   async enter(transition) {
+    await super.enter(transition);
+
     const properties = transition.router.params;
     const object = await this.objectFor(properties);
 

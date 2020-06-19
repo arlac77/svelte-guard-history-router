@@ -1,8 +1,8 @@
 import { StoreRoute } from "./store-route.mjs";
 
 export class IteratorStoreRoute extends StoreRoute {
-  constructor(path, component, options = {}) {
-    super(path, component);
+  constructor(options = {}) {
+    super();
 
     let value = [];
 
@@ -23,6 +23,7 @@ export class IteratorStoreRoute extends StoreRoute {
   }
 
   async enter(transition) {
+    await super.enter(transition);
     this.subscriptions.forEach(subscription => subscription([]));
 
     const properties = transition.router.params;

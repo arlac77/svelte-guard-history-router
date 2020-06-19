@@ -3,7 +3,6 @@
  * Like the presents of values in the context
  */
 export class Guard {
-
   /**
    * Called while entering a route (current outlet is not yet set)
    * @param {Transition} transition
@@ -15,6 +14,10 @@ export class Guard {
    * @param {Transition} transition
    */
   async leave(transition) {}
+
+  toString() {
+    return this.constructor.name;
+  }
 }
 
 /**
@@ -23,6 +26,7 @@ export class Guard {
  */
 export function sequenceGuard(children) {
   return {
+    toString: () => { return "["+ children +"]"},
     enter: async transition => {
       for (const child of children) {
         await child.enter(transition);

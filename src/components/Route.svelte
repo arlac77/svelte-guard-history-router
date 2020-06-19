@@ -7,17 +7,24 @@
   import { sequenceGuard } from "../guard.mjs";
 
   export let path;
-  export let guards = [];
+  export let guards;
   export let component;
+  export let factory = SkeletonRoute;
 
   const router = getContext(ROUTER);
-  const route = new SkeletonRoute(path, component);
+  const route = new factory();
 
-  switch (guards.length) {
-    case 1:
-      route.guard = guards[0];
-    default:
-      route.guard = sequenceGuard(guards);
+  route.path = path;
+  route.component = component;
+
+  if (guards) {
+    switch (guards.length) {
+      case 1:
+        route.guard = guards[0];
+        break;
+      default:
+        route.guard = sequenceGuard(guards);
+    }
   }
 
   router.addRoute(route);
