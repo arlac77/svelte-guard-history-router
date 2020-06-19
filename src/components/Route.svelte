@@ -1,7 +1,6 @@
 <script>
   import { getContext } from "svelte";
   import { ROUTER } from "../util.mjs";
-
   import { link } from "../link.mjs";
   import { active } from "../active.mjs";
   import { route } from "../skeleton-route.mjs";

@@ -55,13 +55,13 @@
   <main>
     <Outlet>nothing there</Outlet>
   </main>
+
+  <label for="state">
+    show router state
+    <input type="checkbox" bind:checked={showState} id="state" />
+  </label>
+
+  {#if showState}
+    <RouterState/>
+  {/if}
 </TheRouter>
-
-<label for="state">
-  show router state
-  <input type="checkbox" bind:checked={showState} id="state" />
-</label>
-
-{#if showState}
-  <RouterState {router} />
-{/if}
