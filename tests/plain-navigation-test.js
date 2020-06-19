@@ -87,10 +87,7 @@ test.page`${base}/article/10`("article/10", async t => {
 test("Navigate around", async t => {
   const title = Selector(".routetitle");
 
-  await t
-    .navigateTo(`${base}/about`)
-    .expect(title.innerText)
-    .eql("About");
+  await t.navigateTo(`${base}/about`).expect(title.innerText).eql("About");
 
   console.log(await getLocation());
 
