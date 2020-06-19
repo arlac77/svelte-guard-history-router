@@ -26,11 +26,6 @@ export class SkeletonRoute {
     return undefined;
   }
 
-  /*get guard()
-  {
-    return undefined;
-  }*/
-
   /**
    * Enter the route from a former one.
    * @param {Transition} transition

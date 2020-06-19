@@ -3,20 +3,28 @@
   import { ROUTER } from "../util.mjs";
   import { link } from "../link.mjs";
   import { active } from "../active.mjs";
-  import { route } from "../skeleton-route.mjs";
+  import { SkeletonRoute } from "../skeleton-route.mjs";
+  import { sequenceGuard } from "../guard.mjs";
 
   export let path;
   export let guards = [];
   export let component;
 
-  let router = getContext(ROUTER);
+  const router = getContext(ROUTER);
+  const route = new SkeletonRoute(path, component);
 
-  const r = route(path, ...guards, component);
-  router.addRoute(r);
+  switch (guards.length) {
+    case 1:
+      route.guard = guards[0];
+    default:
+      route.guard = sequenceGuard(guards);
+  }
+
+  router.addRoute(route);
 </script>
 
-{#if r.keys.length === 0}
-  <a href={r.path} use:link={router} use:active={router}>
+{#if route.keys.length === 0}
+  <a href={route.path} use:link={router} use:active={router}>
     <slot />
   </a>
 {/if}
