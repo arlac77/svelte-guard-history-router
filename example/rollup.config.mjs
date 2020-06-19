@@ -11,14 +11,11 @@ export default {
     format: "esm",
     file: "example/public/bundle.mjs"
   },
-  plugins: [
-    dev({
-      port,
-      dirs: ["example/public"],
-      spa: "example/public/index.html",
-      basePath: "/modules/svelte-guard-history-router/example"
-    }),
-    (resolve.nodeResolve ? resolve.nodeResolve : resolve)({ browser: true }),
-    svelte()
-  ]
+  plugins: [dev({
+    port,
+    dirs: ["example/public"],
+    spa: "example/public/index.html",
+    basePath: "/modules/svelte-guard-history-router/example"
+  }), (resolve.nodeResolve ? resolve.nodeResolve : resolve)({ browser: true }), svelte(), resolve({ browser: true,
+            dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/') })]
 };
