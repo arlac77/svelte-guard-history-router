@@ -1,5 +1,5 @@
 import { compile, matcher } from "multi-path-matcher";
-import { Route } from "./route.mjs";
+//import { Route } from "./route.mjs";
 import { Transition } from "./transition.mjs";
 import { nameValueStore } from "./util.mjs";
 

@@ -4,7 +4,7 @@
 
   import { link } from "../link.mjs";
   import { active } from "../active.mjs";
-  import { route } from "../route.mjs";
+  import { route } from "../skeleton-route.mjs";
 
   export let path;
   export let guards = [];

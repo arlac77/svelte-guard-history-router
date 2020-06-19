@@ -1,6 +1,6 @@
-import { Route } from "./route.mjs";
+import { SkeletonRoute } from "./skeleton-route.mjs";
 
-export class StoreRoute extends Route {
+export class StoreRoute extends SkeletonRoute {
   constructor(path, component, guard) {
     super(path, component, guard);
 

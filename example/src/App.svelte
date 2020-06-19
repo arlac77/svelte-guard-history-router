@@ -1,7 +1,7 @@
 <script>
   import {
     TheRouter,
-    TargetRoute,
+    Route,
     Outlet,
     Link,
     link,
@@ -27,10 +27,10 @@
 
 <TheRouter {router}>
   <nav>
-    <TargetRoute path="/" component={Home}>Router Example</TargetRoute>
+    <Route path="/" component={Home}>Router Example</Route>
     <ul class="left">
       <li>
-        <TargetRoute path="/about" component={About}>About</TargetRoute>
+        <Route path="/about" component={About}>About</Route>
       </li>
       <li>
         <Link href="/article">Articles</Link>
@@ -43,13 +43,13 @@
       </li>
     </ul>
   </nav>
-  <TargetRoute path="/login" component={Login} />
-  <TargetRoute
+  <Route path="/login" component={Login} />
+  <Route
     path="/noway"
     guards={[new AlwaysThrowGuard()]}
     component={NoWay} />
   <!--
-  <TargetRoute path="*" component={Home} />-->
+  <Route path="*" component={Home} />-->
 
   <main>
     <Outlet>nothing there</Outlet>

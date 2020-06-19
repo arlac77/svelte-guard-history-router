@@ -1,7 +1,7 @@
 <script context="module">
   import {
     Router,
-    Route,
+    SkeletonRoute,
     StoreRoute,
     ObjectStoreRoute,
     IteratorStoreRoute,
@@ -17,16 +17,16 @@
   import Outlet from "./components/Outlet.svelte";
   import Link from "./components/Link.svelte";
   import ObjectLink from "./components/Link.svelte";
-  import TargetRoute from "./components/TargetRoute.svelte";
+  import Route from "./components/Route.svelte";
   import TheRouter from "./components/TheRouter.svelte";
   export {
-    TargetRoute,
+    Route,
     TheRouter,
     Outlet,
     Link,
     ObjectLink,
     Router,
-    Route,
+    SkeletonRoute,
     StoreRoute,
     ObjectStoreRoute,
     IteratorStoreRoute,

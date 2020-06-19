@@ -10,7 +10,7 @@ import { sequenceGuard } from "./guard.mjs";
  * @property {string[]} keys as found in the path
  * @property {RegEx} regex
  */
-export class Route {
+export class SkeletonRoute {
   constructor(path, component) {
     Object.defineProperties(this, {
       path: { value: path },
@@ -89,7 +89,7 @@ export class Route {
 export function route(path, ...args) {
   const component = args.pop();
 
-  const route = new Route(path, component);
+  const route = new SkeletonRoute(path, component);
 
   switch (args.length) {
     case 1:
