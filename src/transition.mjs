@@ -13,7 +13,6 @@ export class Transition {
     Object.defineProperties(this, {
       router: { value: router },
       path: { value: path },
-      savedPathname : { value: window.location.pathname },
       saved: { value: router.state },
       component: {
         get: () => (this.redirected === undefined ? component : undefined),
@@ -66,7 +65,7 @@ export class Transition {
 
   /**
    * Halt current transition and go to another route.
-   * To proceed with the original route by callin continue()
+   * To proceed with the original route by calling continue()
    * @param {string} path new route to enter temporary
    */
   async redirect(path) {
@@ -104,9 +103,9 @@ export class Transition {
       console.error(e);
     }
 
+    // TODO belongs into set state
+    window.location.pathname = this.saved.pathname
     this.router.state = this.saved;
-
-    window.location.pathname = this.savedPathname;
 
     router.finalizePush();
   }

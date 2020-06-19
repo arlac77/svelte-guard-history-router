@@ -154,13 +154,17 @@ export class Router {
   get state() {
     return {
       params: { ...this.params },
-      route: this.route
+      route: this.route,
+      pathname: window.location.pathname
     };
   }
 
   set state(state) {
     this.params = state.params;
     this.route = state.route;
+   /* if(state.pathname) {
+      window.location.pathname = state.pathname;
+    }*/
   }
 
   /**
