@@ -39,15 +39,16 @@
         <Link href="/category">Categories</Link>
       </li>
       <li>
-        <a href="/noway" use:link={router} use:active={router}>Does Not Work</a>
+        <Route
+          path="/noway"
+          guards={[new AlwaysThrowGuard()]}
+          component={NoWay}>
+          Does Not Work
+        </Route>
       </li>
     </ul>
   </nav>
   <Route path="/login" component={Login} />
-  <Route
-    path="/noway"
-    guards={[new AlwaysThrowGuard()]}
-    component={NoWay} />
   <!--
   <Route path="*" component={Home} />-->
 
