@@ -106,7 +106,6 @@ export class Transition {
     // TODO belongs into set state
     window.location.pathname = this.saved.pathname
     this.router.state = this.saved;
-
-    router.finalizePush();
+    this.router.finalizePush();
   }
 }
