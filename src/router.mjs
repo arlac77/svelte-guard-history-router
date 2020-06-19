@@ -1,5 +1,4 @@
 import { compile, matcher } from "multi-path-matcher";
-//import { Route } from "./route.mjs";
 import { Transition } from "./transition.mjs";
 import { nameValueStore } from "./util.mjs";
 
@@ -59,10 +58,9 @@ export class Router {
           for (const key of Object.keys(keys)) {
             const value = np[key];
             if (params[key] !== value) {
-              if(value === undefined) {
+              if (value === undefined) {
                 delete params[key];
-              }
-              else {
+              } else {
                 params[key] = value;
               }
               const k = keys[key];
@@ -106,11 +104,9 @@ export class Router {
   }
 
   _start() {
-    window.addEventListener(Router.navigationEventType, event => {
-      const path = event.detail.path;
-
-      this.push(path);
-    });
+    window.addEventListener(Router.navigationEventType, event =>
+      this.push(event.detail.path)
+    );
 
     window.addEventListener("popstate", event => {
       if (event.state) {
@@ -162,7 +158,7 @@ export class Router {
   set state(state) {
     this.params = state.params;
     this.route = state.route;
-   /* if(state.pathname) {
+    /* if(state.pathname) {
       window.location.pathname = state.pathname;
     }*/
   }
@@ -186,7 +182,7 @@ export class Router {
   finalizePush(path) {
     this.transition = undefined;
 
-    if(path !== undefined) {
+    if (path !== undefined) {
       history.pushState({ path }, "", this.base + path);
     }
 
