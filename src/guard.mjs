@@ -26,7 +26,9 @@ export class Guard {
  */
 export function sequenceGuard(children) {
   return {
-    toString: () => { return "["+ children +"]"},
+    toString: () => {
+      return "[" + children + "]";
+    },
     enter: async transition => {
       for (const child of children) {
         await child.enter(transition);
