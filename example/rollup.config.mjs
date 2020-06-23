@@ -18,7 +18,7 @@ export default {
       spa: "example/public/index.html",
       basePath: "/modules/svelte-guard-history-router/example"
     }),
-    resolve.nodeResolve({ browser: true }),
+    resolve({ browser: true }),
     svelte()
   ]
 };

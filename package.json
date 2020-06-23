@@ -32,12 +32,12 @@
     "multi-path-matcher": "^2.0.15"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^8.0.1",
+    "@rollup/plugin-node-resolve": "^8.1.0",
     "documentation": "^13.0.1",
-    "rollup": "^2.17.1",
+    "rollup": "^2.18.0",
     "rollup-plugin-dev": "^1.1.2",
-    "rollup-plugin-svelte": "^5.2.2",
-    "semantic-release": "^17.0.8",
+    "rollup-plugin-svelte": "^5.2.3",
+    "semantic-release": "^17.1.0",
     "svelte": "^3.23.2",
     "testcafe": "^1.8.6"
   },
