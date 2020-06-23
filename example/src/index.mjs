@@ -43,8 +43,15 @@ class SessionGuard extends Guard {
 export const sessionGuard = new SessionGuard();
 export const waitingGuard = new WaitingGuard(Waiting);
 
+async function delay(msecs=1000)
+{
+  return new Promise(r => setTimeout(r, msecs));
+}
+
 class ArticlesRoute extends IteratorStoreRoute {
   async *iteratorFor() {
+    await delay(2000);
+
     for (const a of Object.values(articles)) {
       yield a;
     }
@@ -63,7 +70,8 @@ class ArticleRoute extends ObjectStoreRoute {
 
 class CategoriesRoute extends IteratorStoreRoute {
   async *iteratorFor() {
-    await new Promise(r => setTimeout(r, 2000));
+    await delay(2000);
+
     for (const c of Object.values(categories)) {
       yield c;
     }
@@ -99,18 +107,21 @@ export const categoryRoute = route(
   categoriesRoute.path + "/:category",
   CategoryRoute,
   sessionGuard,
+  waitingGuard,
   Category
 );
 export const articlesRoute = route(
   "/article",
   ArticlesRoute,
   sessionGuard,
+  waitingGuard,
   Articles
 );
 export const articleRoute = route(
   articlesRoute.path + "/:article",
   ArticleRoute,
   sessionGuard,
+  waitingGuard,
   Article
 );
 

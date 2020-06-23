@@ -104,11 +104,13 @@ test("Navigate around", async t => {
 
   console.log(await getLocation());
 
+  
   await t.expect(getLocation()).contains("article");
+  /*
   await goBack();
 
   console.log(await getLocation());
-  /*
+  
   await t.expect(getLocation()).contains("about");
   await t.expect(title.innerText).eql("About");
 */
