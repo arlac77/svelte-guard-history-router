@@ -63,6 +63,7 @@ class ArticleRoute extends ObjectStoreRoute {
 
 class CategoriesRoute extends IteratorStoreRoute {
   async *iteratorFor() {
+    await new Promise(r => setTimeout(r, 2000));
     for (const c of Object.values(categories)) {
       yield c;
     }
@@ -91,6 +92,7 @@ export const categoriesRoute = route(
   "/category",
   CategoriesRoute,
   sessionGuard,
+  waitingGuard,
   Categories
 );
 export const categoryRoute = route(

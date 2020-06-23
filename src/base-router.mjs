@@ -177,7 +177,13 @@ export class BaseRouter {
    * @param {string} path
    */
   finalizePush(path) {
+    const c = this.component;
     this.transition = undefined;
+
+    // transition had its own tmp component (waiting... or so)
+    if(c !== this.component) {
+      this.notifySubscriptions();
+    }
 
     if (path !== undefined) {
       history.pushState({ path }, "", this.base + path);
