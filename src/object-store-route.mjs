@@ -10,12 +10,12 @@ export class ObjectStoreRoute extends StoreRoute {
       value: { get: () => value, set: v => (value = v) }
     };
 
-    if (options.objectFor) {
+    /*if (options.objectFor) {
       properties.objectFor = { value: options.objectFor };
     }
     if (options.propertiesFor) {
       properties.propertiesFor = { value: options.propertiesFor };
-    }
+    }*/
 
     Object.defineProperties(this, properties);
   }

@@ -10,14 +10,14 @@ export class IteratorStoreRoute extends StoreRoute {
       value: { get: () => value, set: v => (value = v) }
     };
 
-    if (options.iteratorFor) {
+    /*if (options.iteratorFor) {
       properties.iteratorFor = {
         value: options.iteratorFor
       };
     }
     if (options.propertiesFor) {
       properties.propertiesFor = { value: options.propertiesFor };
-    }
+    }*/
 
     Object.defineProperties(this, properties);
   }

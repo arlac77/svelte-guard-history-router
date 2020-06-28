@@ -22,7 +22,7 @@ export class StoreRoute extends SkeletonRoute {
   }
 
   propertiesFor(object) {
-    return Object.fromEntries(this.keys.map(key => [key, object[key]]));
+    return this.keys.length === 0 ? undefined : Object.fromEntries(this.keys.map(key => [key, object[key]]));
   }
 }
 
