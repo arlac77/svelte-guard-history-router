@@ -6,11 +6,11 @@
 
   export let object;
 
-  const path = router.pathFor(object);
+  const href = router.pathFor(object);
 </script>
 
-{#if path}
-  <Link href={path}>
+{#if href}
+  <Link {href}>
     <slot />
   </Link>
 {:else}

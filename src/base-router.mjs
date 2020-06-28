@@ -243,7 +243,7 @@ export class BaseRouter {
   }
 
   /**
-   * Find path for a given object
+   * Find path for a given object(s)
    * @param {Object} object
    * @return {string} path able to handle object
    */
