@@ -1,5 +1,5 @@
 <script>
-  import { Link } from "../../src/index.svelte";
+  import { ObjectLink } from "../../src/index.svelte";
   import { articlesRoute } from "./index.mjs"; 
 </script>
 
@@ -8,7 +8,7 @@
 <ul>
   {#each $articlesRoute as article}
     <li>
-      <Link href="/article/{article.id}">{article.name} ({article.id})</Link>
+      <ObjectLink object={article}>{article.name} ({article.id})</ObjectLink>
     </li>
   {/each}
 </ul>
