@@ -41,7 +41,7 @@
       <li>
         <Route
           path="/noway"
-          guards={[new AlwaysThrowGuard()]}
+          guards={new AlwaysThrowGuard()}
           component={NoWay}>
           Does Not Work
         </Route>

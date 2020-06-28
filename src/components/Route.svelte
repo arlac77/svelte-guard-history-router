@@ -18,12 +18,17 @@
   route.component = component;
 
   if (guards) {
-    switch (guards.length) {
-      case 1:
-        route.guard = guards[0];
-        break;
-      default:
-        route.guard = sequenceGuard(guards);
+    if(Array.isArray(guards)) { 
+      switch (guards.length) {
+        case 1:
+          route.guard = guards[0];
+          break;
+        default:
+          route.guard = sequenceGuard(guards);
+      }
+    }
+    else {
+      route.guard = guards;
     }
   }
 
