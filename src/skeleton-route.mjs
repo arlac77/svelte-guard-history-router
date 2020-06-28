@@ -11,6 +11,8 @@ import { sequenceGuard } from "./guard.mjs";
  * @property {RegEx} regex
  */
 export class SkeletonRoute {
+  static get isRoute() { return true; }
+
   /**
    * Enter the route from a former one.
    * @param {Transition} transition
@@ -67,8 +69,16 @@ export class SkeletonRoute {
  * @param {string} path
  * @param {Guard|SvelteComponent[]} args last one must be a SvelteComponent
  */
-export function route(path, factory, ...args) {
-  const route = new factory();
+export function route(path, ...args) {
+  let route;
+
+  if (args[0].isRoute) {
+    const factory = args.shift();
+    route = new factory();
+  } else {
+    route = new SkeletonRoute();
+  }
+
   route.component = args.pop();
   route.path = path;
 
