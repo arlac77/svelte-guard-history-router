@@ -25,12 +25,11 @@ svelte guarded history router
 # usage
 
 ```js
-import { Router, route, Guard } from 'svelte-guard-history-router';
+import { BaseRouter, route, Guard } from 'svelte-guard-history-router';
 import Categories from "./Categories.svelte";
 import Category from "./Category.svelte";
 import Article from "./Article.svelte";
 import Articles from "./Articles.svelte";
-import About from "./About.svelte";
 import Login from "./Login.svelte";
 
 let session = undefined;
@@ -43,14 +42,11 @@ class SessionGuard extends Guard {
   }
 }
 
-export const router = new Router(
+export const router = new BaseRouter(
   [
     route("*", Home),
-    route("/about", About),
     route("/login", Login),
-    route("/article", sessionGuard, Articles),
     route("/article/:article", sessionGuard, Article),
-    route("/category", sessionGuard, Categories),
     route("/category/:category", sessionGuard, Category)
   ],
   "/base"
@@ -60,25 +56,30 @@ export const router = new Router(
 ```html
 <script>
   import {
+    Router,
     Outlet,
     link,
     active
   } from "svelte-guard-history-router";
+  import About from "./About.svelte";
+  import Home from "./Home.svelte";
+  import Articles from "./Articles.svelte";
+
   import { router } from "./main.mjs";
 </script>
 
 <Router>
 <nav>
-  <a href="/" use:link={router} use:active={router}>Router Example</a>
+  <Route path="/" component={Home}>Router Example</Route>
   <ul class="left">
     <li>
-      <a href="/about" use:link={router} use:active={router}>About</a>
+      <Route path="/about" component={About}>About</Route>
     </li>
     <li>
-      <a href="/article" use:link={router} use:active={router}>Articles</a>
+      <Route path="/article" component={Articles}>Articles</Route>
     </li>
     <li>
-      <a href="/category" use:link={router} use:active={router}>Categories</a>
+      <Route path="/category" component={Categories}>Categories</Route>
     </li>
   </ul>
 </nav>
