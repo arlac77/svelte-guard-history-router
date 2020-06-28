@@ -1,7 +1,7 @@
 import { StoreRoute } from "./store-route.mjs";
 
 export class ObjectStoreRoute extends StoreRoute {
-  constructor(options = {}) {
+  constructor() {
     super();
 
     let value;
@@ -9,13 +9,6 @@ export class ObjectStoreRoute extends StoreRoute {
     const properties = {
       value: { get: () => value, set: v => (value = v) }
     };
-
-    /*if (options.objectFor) {
-      properties.objectFor = { value: options.objectFor };
-    }
-    if (options.propertiesFor) {
-      properties.propertiesFor = { value: options.propertiesFor };
-    }*/
 
     Object.defineProperties(this, properties);
   }
