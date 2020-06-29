@@ -25,7 +25,6 @@
     Outlet,
     Link,
     ObjectLink,
-    
     BaseRouter,
     SkeletonRoute,
     StoreRoute,
