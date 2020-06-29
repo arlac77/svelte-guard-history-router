@@ -2,10 +2,10 @@
   import Link from "./Link.svelte";
   import { getContext } from "svelte";
   import { ROUTER } from "../util.mjs";
-  const router = getContext(ROUTER);
 
   export let object;
 
+  const router = getContext(ROUTER);
   const href = router.pathFor(object);
 </script>
 

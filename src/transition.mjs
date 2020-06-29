@@ -84,7 +84,6 @@ export class Transition {
         if (this.router.route !== undefined) {
           await this.router.route.enter(this);
         }
-
       } catch (e) {
         await this.rollback(e);
       } finally {
@@ -104,8 +103,14 @@ export class Transition {
     }
 
     // TODO belongs into set state
-    window.location.pathname = this.saved.pathname
+    //window.location.pathname = this.saved.pathname;
+
+    console.log("rollback", this.saved.pathname);
+    history.replaceState(undefined, "", this.saved.pathname);
+
     this.router.state = this.saved;
     this.router.finalizePush();
+
+    console.log("rollback after", window.location.pathname);
   }
 }
