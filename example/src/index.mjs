@@ -84,7 +84,7 @@ class CategoryRoute extends ObjectStoreRoute {
   }
 
   propertiesFor(category) {
-    return category.name ? { category: category.name } : undefined;
+    return category.name && category.articles ? { category: category.name } : undefined;
   }
 
   async enter(transition) {

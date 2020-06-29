@@ -1,17 +1,11 @@
 import { StoreRoute } from "./store-route.mjs";
 
 export class IteratorStoreRoute extends StoreRoute {
-  constructor() {
-    super();
 
-    let value = [];
-
-    const properties = {
-      value: { get: () => value, set: v => (value = v) }
-    };
-
-    Object.defineProperties(this, properties);
-  }
+  get defaultValue()
+  {
+    return [];
+  }  
 
   async enter(transition) {
     await super.enter(transition);
