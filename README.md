@@ -25,12 +25,9 @@ svelte guarded history router
 # usage
 
 ```js
-import { Router, route, Guard } from 'svelte-guard-history-router';
-import Categories from "./Categories.svelte";
-import Category from "./Category.svelte";
+import { BaseRouter, route, Guard } from 'svelte-guard-history-router';
 import Article from "./Article.svelte";
-import Articles from "./Articles.svelte";
-import About from "./About.svelte";
+import Category from "./Category.svelte";
 import Login from "./Login.svelte";
 
 let session = undefined;
@@ -43,14 +40,9 @@ class SessionGuard extends Guard {
   }
 }
 
-export const router = new Router(
+export const router = new BaseRouter(
   [
-    route("*", Home),
-    route("/about", About),
-    route("/login", Login),
-    route("/article", sessionGuard, Articles),
     route("/article/:article", sessionGuard, Article),
-    route("/category", sessionGuard, Categories),
     route("/category/:category", sessionGuard, Category)
   ],
   "/base"
@@ -59,26 +51,26 @@ export const router = new Router(
 
 ```html
 <script>
-  import {
-    Outlet,
-    link,
-    active
-  } from "svelte-guard-history-router";
-  import { router } from "./main.mjs";
+  import { Router, Route, Outlet } from "svelte-guard-history-router";
+  import About from "./About.svelte";
+  import Categories from "./Categories.svelte";
+  import Articles from "./Articles.svelte";
+
+  import { router, sessionGuard } from "./main.mjs";
 </script>
 
-<Router>
+<Router {router}>
 <nav>
-  <a href="/" use:link={router} use:active={router}>Router Example</a>
+  <Route path="/" component={Home}>Router Example</Route>
   <ul class="left">
     <li>
-      <a href="/about" use:link={router} use:active={router}>About</a>
+      <Route path="/about" component={Home}>About</Route>
     </li>
     <li>
-      <a href="/article" use:link={router} use:active={router}>Articles</a>
+      <Route path="/article" guards={sessionGuard} component={Home}>Articles</Route>
     </li>
     <li>
-      <a href="/category" use:link={router} use:active={router}>Categories</a>
+      <Route path="/category" guards={sessionGuard} component={Home}>Categories</Route>
     </li>
   </ul>
 </nav>

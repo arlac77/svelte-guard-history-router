@@ -86,14 +86,6 @@ class CategoryRoute extends ObjectStoreRoute {
   propertiesFor(category) {
     return category.name && category.articles ? { category: category.name } : undefined;
   }
-
-  async enter(transition) {
-    if (!session) {
-      return transition.redirect("/login");
-    }
-
-    return super.enter(transition);
-  }
 }
 
 export const categoriesRoute = route(
