@@ -19,7 +19,7 @@ svelte guarded history router
 - Guards to act when entering / leaving a route
 - Automatic route ranking
 - Route stores
-- Object / parameter mapping 
+- Object / parameter mapping
 - Standart `<a href="/home">Home</a>` elements
 
 # usage
@@ -70,7 +70,7 @@ export const router = new BaseRouter(
       <Route path="/article" guards={sessionGuard} component={Home}>Articles</Route>
     </li>
     <li>
-      <Route path="/category" guards={sessionGuard} component={Home}>Categories</Route>
+      <Route path="/category" guards={sessionGuard} component={Categories}>Categories</Route>
     </li>
   </ul>
 </nav>
