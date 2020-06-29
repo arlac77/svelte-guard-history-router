@@ -172,8 +172,8 @@ export class BaseRouter {
   }
 
   /**
-   * Called from a transition to manifest the new destination
-   * if path is undefined the transition has been aborderd
+   * Called from a transition to manifest the new destination.
+   * If path is undefined the transition has been aborderd
    * @param {string} path
    */
   finalizePush(path) {
@@ -190,7 +190,6 @@ export class BaseRouter {
     }
 
     this.linkNodes.forEach(n => this.updateActive(n));
-    //this.notifySubscriptions();
   }
 
   /**
