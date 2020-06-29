@@ -64,7 +64,7 @@ class ArticleRoute extends ObjectStoreRoute {
   }
 
   propertiesFor(article) {
-    return { article: article.id };
+    return article.id ? { article: article.id } : undefined;
   }
 }
 
@@ -84,7 +84,7 @@ class CategoryRoute extends ObjectStoreRoute {
   }
 
   propertiesFor(category) {
-    return { category: category.name };
+    return category.name ? { category: category.name } : undefined;
   }
 
   async enter(transition) {
