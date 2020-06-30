@@ -18,7 +18,11 @@
 
 {#if href}
   <Link {href}>
-    <slot />
+    {#if rote.linkComponent}
+      <svelte:component this={rote.linkComponent} />
+    {:else}
+      <slot />
+    {/if}
   </Link>
 {:else}
   <slot name="noFound" />

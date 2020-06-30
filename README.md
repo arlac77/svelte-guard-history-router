@@ -20,6 +20,7 @@ svelte guarded history router
 - Automatic route ranking
 - Route stores
 - Object / parameter mapping
+- Create links from objects
 - Standart `<a href="/home">Home</a>` elements
 
 # usage
