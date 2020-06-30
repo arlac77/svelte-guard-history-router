@@ -12,7 +12,7 @@ export class IteratorStoreRoute extends StoreRoute {
     this.subscriptions.forEach(subscription => subscription([]));
 
     const properties = transition.router.params;
-    const entries = [];
+    const entries = this.defaultValue;
 
     for await (const e of await this.iteratorFor(properties)) {
       entries.push(e);
