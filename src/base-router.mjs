@@ -242,15 +242,14 @@ export class BaseRouter {
   }
 
   /**
-   * Find path for a given object(s)
+   * Find Route for a given object(s)
    * @param {Object} object
-   * @return {string} path able to handle object
+   * @return {Route} able to support given object
    */
-  pathFor(...objects) {
+  routeFor(...objects) {
     for (const r of this.routes) {
-      const p = r.pathFor(...objects);
-      if (p !== undefined) {
-        return p;
+      if(r.propertiesFor(...objects)) {
+        return r;
       }
     }
   }

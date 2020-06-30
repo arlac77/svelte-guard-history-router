@@ -6,7 +6,14 @@
   export let object;
 
   const router = getContext(ROUTER);
-  const href = router.pathFor(object);
+  const route = router.routeFor(object);
+
+  let href;
+
+  if (route !== undefined) {
+    const properties = route.propertiesFor(object);
+    href = route.path.replace(/:(\w+)/g, (m, name) => properties[name]);
+  }
 </script>
 
 {#if href}
