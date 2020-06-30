@@ -3,6 +3,7 @@ import { articles, categories } from "./data.js";
 import App from "./App.svelte";
 import Waiting from "./Waiting.svelte";
 import Category from "./Category.svelte";
+import CategoryLink from "./CategoryLink.svelte";
 import Article from "./Article.svelte";
 import Categories from "./Categories.svelte";
 import Articles from "./Articles.svelte";
@@ -102,6 +103,9 @@ export const categoryRoute = route(
   waitingGuard,
   Category
 );
+
+categoryRoute.linkComponent = CategoryLink;
+
 export const articlesRoute = route(
   "/article",
   ArticlesRoute,

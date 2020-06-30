@@ -18,8 +18,8 @@
 
 {#if href}
   <Link {href}>
-    {#if rote.linkComponent}
-      <svelte:component this={rote.linkComponent} />
+    {#if route.linkComponent}
+      <svelte:component this={route.linkComponent} {object}/>
     {:else}
       <slot />
     {/if}
