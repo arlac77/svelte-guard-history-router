@@ -12,7 +12,8 @@
     sequenceGuard,
     WaitingGuard,
     active,
-    link
+    link,
+    ROUTER
   } from "./index.mjs";
   import Outlet from "./components/Outlet.svelte";
   import Link from "./components/Link.svelte";
@@ -37,6 +38,7 @@
     sequenceGuard,
     WaitingGuard,
     active,
-    link
+    link,
+    ROUTER
   };
 </script>
