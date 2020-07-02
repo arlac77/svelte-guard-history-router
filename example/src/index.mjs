@@ -4,8 +4,9 @@ import App from "./App.svelte";
 import Waiting from "./Waiting.svelte";
 import Category from "./Category.svelte";
 import CategoryLink from "./CategoryLink.svelte";
-import Article from "./Article.svelte";
 import Categories from "./Categories.svelte";
+import Article from "./Article.svelte";
+import ArticleLink from "./ArticleLink.svelte";
 import Articles from "./Articles.svelte";
 
 import {
@@ -113,6 +114,7 @@ export const articlesRoute = route(
   waitingGuard,
   Articles
 );
+
 export const articleRoute = route(
   articlesRoute.path + "/:article",
   ArticleRoute,
@@ -120,6 +122,7 @@ export const articleRoute = route(
   waitingGuard,
   Article
 );
+articleRoute.linkComponent = ArticleLink;
 
 export const router = new BaseRouter(
   [categoriesRoute, categoryRoute, articlesRoute, articleRoute],

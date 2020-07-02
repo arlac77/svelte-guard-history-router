@@ -8,7 +8,7 @@
 <ul>
   {#each $articlesRoute as article}
     <li>
-      <ObjectLink object={article}>{article.name} ({article.id})</ObjectLink>
+      <ObjectLink object={article}/>
     </li>
   {/each}
 </ul>
