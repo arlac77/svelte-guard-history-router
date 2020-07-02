@@ -1,14 +1,13 @@
 <script>
-  import { Link, active, link } from "../../src/index.svelte";
-  import { articleRoute, router } from "./index.mjs";
+  import { ObjectLink, Link } from "../../src/index.svelte";
+  import { articleRoute } from "./index.mjs";
 </script>
-
 
 {#if $articleRoute}
   <h2 class="routetitle">Article {$articleRoute.name}</h2>
   <div>Id: {$articleRoute.id}</div>
   <div>Price: {$articleRoute.price}</div>
-  <a href="/category/{$articleRoute.category}" use:link={router} use:active={router}>{$articleRoute.category}</a>
+  <ObjectLink object={$articleRoute.category}/>
 
   <Link
     href="/article/{('00' + (parseInt($articleRoute.id) + 1)).replace(/.*(\d\d)$/, '$1')}">

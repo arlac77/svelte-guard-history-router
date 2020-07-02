@@ -3,9 +3,7 @@
     Router,
     Route,
     Outlet,
-    Link,
-    link,
-    active
+    Link
   } from "../../src/index.svelte";
   import RouterState from "./RouterState.svelte";
   import About from "./About.svelte";
@@ -14,9 +12,8 @@
   import Login from "./Login.svelte";
   import Home from "./Home.svelte";
   import NoWay from "./NoWay.svelte";
-
   import {
-    router,
+    categoriesRoute, categoryRoute, articlesRoute, articleRoute,
     sessionGuard,
     waitingGuard,
     AlwaysThrowGuard
@@ -25,7 +22,7 @@
   let showState = true;
 </script>
 
-<Router {router}>
+<Router routes={[categoriesRoute, categoryRoute, articlesRoute, articleRoute]} base="/modules/svelte-guard-history-router/example">
   <nav>
     <Route href="/" path="*" component={Home}>Router Example</Route>
     <ul class="left">

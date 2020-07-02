@@ -12,7 +12,6 @@ import Articles from "./Articles.svelte";
 import {
   IteratorStoreRoute,
   ObjectStoreRoute,
-  BaseRouter,
   Guard,
   WaitingGuard,
   route
@@ -123,11 +122,6 @@ export const articleRoute = route(
   Article
 );
 articleRoute.linkComponent = ArticleLink;
-
-export const router = new BaseRouter(
-  [categoriesRoute, categoryRoute, articlesRoute, articleRoute],
-  "/modules/svelte-guard-history-router/example"
-);
 
 export default new App({
   target: document.body
