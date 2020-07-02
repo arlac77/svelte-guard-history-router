@@ -27,7 +27,7 @@
 
 <Router {router}>
   <nav>
-    <Route path="/" component={Home}>Router Example</Route>
+    <Route href="/" path="*" component={Home}>Router Example</Route>
     <ul class="left">
       <li>
         <Route path="/about" component={About}>About</Route>

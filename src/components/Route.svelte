@@ -7,6 +7,7 @@
   import { sequenceGuard } from "../guard.mjs";
 
   export let path;
+  export let href = path;
   export let guards;
   export let component;
   export let factory = SkeletonRoute;
@@ -36,7 +37,7 @@
 </script>
 
 {#if route.keys.length === 0}
-  <a href={route.path} use:link={router} use:active={router}>
+  <a {href} use:link={router} use:active={router}>
     <slot />
   </a>
 {/if}
