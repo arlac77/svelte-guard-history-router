@@ -18,7 +18,7 @@ svelte guarded history router
 - Named params
 - Guards to act when entering / leaving a route
 - Automatic route ranking
-- Route stores
+- Routes and keys acting as stores
 - Object / parameter mapping
 - Create links from objects
 - Standart `<a href="/home">Home</a>` elements
@@ -26,10 +26,7 @@ svelte guarded history router
 # usage
 
 ```js
-import { BaseRouter, route, Guard } from 'svelte-guard-history-router';
-import Article from "./Article.svelte";
-import Category from "./Category.svelte";
-import Login from "./Login.svelte";
+import { Guard } from 'svelte-guard-history-router';
 
 let session = undefined;
 
@@ -40,14 +37,6 @@ class SessionGuard extends Guard {
     }
   }
 }
-
-export const router = new BaseRouter(
-  [
-    route("/article/:article", sessionGuard, Article),
-    route("/category/:category", sessionGuard, Category)
-  ],
-  "/base"
-);
 ```
 
 ```html
@@ -55,12 +44,14 @@ export const router = new BaseRouter(
   import { Router, Route, Outlet } from "svelte-guard-history-router";
   import About from "./About.svelte";
   import Categories from "./Categories.svelte";
+  import Category from "./Category.svelte";
   import Articles from "./Articles.svelte";
+  import Article from "./Article.svelte";
 
-  import { router, sessionGuard } from "./main.mjs";
+  import { sessionGuard } from "./main.mjs";
 </script>
 
-<Router {router}>
+<Router base="/base">
 <nav>
   <Route path="/" component={Home}>Router Example</Route>
   <ul class="left">
@@ -68,10 +59,12 @@ export const router = new BaseRouter(
       <Route path="/about" component={Home}>About</Route>
     </li>
     <li>
-      <Route path="/article" guards={sessionGuard} component={Home}>Articles</Route>
+      <Route path="/article" guards={sessionGuard} component={Articles}>Articles</Route>
+      <Route path="/article/:artice" guards={sessionGuard} component={Article}/>
     </li>
     <li>
       <Route path="/category" guards={sessionGuard} component={Categories}>Categories</Route>
+      <Route path="/category/:category" guards={sessionGuard} component={Category}/>
     </li>
   </ul>
 </nav>
