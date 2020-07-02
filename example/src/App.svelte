@@ -1,10 +1,5 @@
 <script>
-  import {
-    Router,
-    Route,
-    Outlet,
-    Link
-  } from "../../src/index.svelte";
+  import { Router, Route, Outlet, Link } from "../../src/index.svelte";
   import RouterState from "./RouterState.svelte";
   import About from "./About.svelte";
   import Articles from "./Articles.svelte";
@@ -13,7 +8,10 @@
   import Home from "./Home.svelte";
   import NoWay from "./NoWay.svelte";
   import {
-    categoriesRoute, categoryRoute, articlesRoute, articleRoute,
+    categoriesRoute,
+    categoryRoute,
+    articlesRoute,
+    articleRoute,
     sessionGuard,
     waitingGuard,
     AlwaysThrowGuard
@@ -22,7 +20,9 @@
   let showState = true;
 </script>
 
-<Router routes={[categoriesRoute, categoryRoute, articlesRoute, articleRoute]} base="/modules/svelte-guard-history-router/example">
+<Router
+  routes={[categoriesRoute, categoryRoute, articlesRoute, articleRoute]}
+  base="/modules/svelte-guard-history-router/example">
   <nav>
     <Route href="/" path="*" component={Home}>Router Example</Route>
     <ul class="left">
@@ -36,18 +36,13 @@
         <Link href="/category">Categories</Link>
       </li>
       <li>
-        <Route
-          path="/noway"
-          guards={new AlwaysThrowGuard()}
-          component={NoWay}>
+        <Route path="/noway" guards={new AlwaysThrowGuard()} component={NoWay}>
           Does Not Work
         </Route>
       </li>
     </ul>
   </nav>
   <Route path="/login" component={Login} />
-  <!--
-  <Route path="*" component={Home} />-->
 
   <main>
     <Outlet>nothing there</Outlet>
@@ -59,6 +54,6 @@
   </label>
 
   {#if showState}
-    <RouterState/>
+    <RouterState />
   {/if}
 </Router>
