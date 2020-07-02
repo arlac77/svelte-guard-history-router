@@ -78,7 +78,7 @@
 
   <table>
     <thead>
-      <th colspan="3">Routes</th>
+      <th colspan="4">Routes</th>
     </thead>
     <tbody>
       {#each router.routes as r, i (i)}
@@ -87,6 +87,7 @@
           <td id="route.path">{r.path}</td>
           <td id="route.guard">{r.guard ? r.guard : ""}</td>
           <td id="route.key">{r.keys.join(' ')}</td>
+          <td id="route.component">{r.component.name}</td>
         </tr>
       {/each}
     </tbody>
