@@ -35,6 +35,15 @@
       <li>
         <Link href="/category">Categories</Link>
       </li>
+      <!--
+      <li>
+        <Route path="/a" component={About}>
+          A
+          <Route path="/b1" component={About}>B1</Route>
+          <Route path="/b2" component={About}>B2</Route>
+        </Route>
+      </li>
+-->
       <li>
         <Route path="/noway" guards={new AlwaysThrowGuard()} component={NoWay}>
           Does Not Work
