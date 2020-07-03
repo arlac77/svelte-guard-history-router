@@ -9,14 +9,16 @@ import { sequenceGuard } from "./guard.mjs";
  * @property {RegEx} regex
  */
 export class SkeletonRoute {
-  static get isRoute() { return true; }
+  static get isRoute() {
+    return true;
+  }
 
   /**
    * Enter the route from a former one.
    * @param {Transition} transition
    */
   async enter(transition) {
-    if(this.parent && this.parent.guard) {
+    if (this.parent && this.parent.guard) {
       await this.parent.guard.enter(transition);
     }
 
@@ -34,7 +36,7 @@ export class SkeletonRoute {
       await this.guard.leave(transition);
     }
 
-    if(this.parent && this.parent.guard) {
+    if (this.parent && this.parent.guard) {
       await this.parent.guard.leave(transition);
     }
   }
@@ -60,8 +62,7 @@ export class SkeletonRoute {
    * Full path of the Route including all parents
    * @return {string} path
    */
-  get path()
-  {
+  get path() {
     return this.parent ? this.parent.path + this.localPath : this.localPath;
   }
 }
@@ -74,9 +75,9 @@ export class SkeletonRoute {
  * @param {Guard|SvelteComponent[]} args last one must be a SvelteComponent
  */
 export function route(...args) {
-  let route,path,parent;
+  let route, path, parent;
 
-  if (typeof args[0] !== 'string') {
+  if (typeof args[0] !== "string") {
     parent = args.shift();
   }
 
@@ -91,7 +92,9 @@ export function route(...args) {
 
   route.component = args.pop();
   route.localPath = path;
-  if(parent) { route.parent = parent; }
+  if (parent) {
+    route.parent = parent;
+  }
 
   switch (args.length) {
     case 0:

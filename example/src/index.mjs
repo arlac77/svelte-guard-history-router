@@ -98,11 +98,11 @@ export const categoriesRoute = route(
 );
 
 export const categoryRoute = route(
+  categoriesRoute,
   "/:category",
   CategoryRoute,
   Category
 );
-categoryRoute.parent = categoriesRoute;
 categoryRoute.linkComponent = CategoryLink;
 
 export const articlesRoute = route(
@@ -114,11 +114,11 @@ export const articlesRoute = route(
 );
 
 export const articleRoute = route(
+  articlesRoute,
   "/:article",
   ArticleRoute,
   Article
 );
-articleRoute.parent = articlesRoute;
 articleRoute.linkComponent = ArticleLink;
 
 export default new App({
