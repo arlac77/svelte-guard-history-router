@@ -46,6 +46,11 @@ export class SkeletonRoute {
    * @return {object} properties extracted from given objects
    */
   propertiesFor(...objects) {
+    if(this.parent) {
+      object = objects.shift();
+      return this.parent.propertiesFor(...objects);
+    }
+
     return undefined;
   }
 
@@ -55,6 +60,10 @@ export class SkeletonRoute {
    * @return {object} for matching properties
    */
   objectFor(properties) {
+    if(this.parent) {
+      return this.parent.objectFor(properties);
+    }
+
     return undefined;
   }
 
