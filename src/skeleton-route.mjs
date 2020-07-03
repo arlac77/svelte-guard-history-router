@@ -68,12 +68,19 @@ export class SkeletonRoute {
 
 /**
  * Helper function to create routes with optional guards
- * @param {Route} path
+ * @param {Route?} parent
  * @param {string} path
+ * @param {Route?} factory
  * @param {Guard|SvelteComponent[]} args last one must be a SvelteComponent
  */
-export function route(path, ...args) {
-  let route;
+export function route(...args) {
+  let route,path,parent;
+
+  if (typeof args[0] !== 'string') {
+    parent = args.shift();
+  }
+
+  path = args.shift();
 
   if (args[0].isRoute) {
     const factory = args.shift();
@@ -84,6 +91,7 @@ export function route(path, ...args) {
 
   route.component = args.pop();
   route.localPath = path;
+  if(parent) { route.parent = parent; }
 
   switch (args.length) {
     case 0:
