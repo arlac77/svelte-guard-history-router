@@ -28,8 +28,9 @@ export const articles = Object.fromEntries(
   ].map(a => [a.id, a])
 );
 
-export const categories = Object.values(articles).reduce((a, c) => {
-  if (!a[c.category]) a[c.category] = { name: c.category, articles: [] };
-  a[c.category].articles.push(c);
-  return a;
+export const categories = Object.values(articles).reduce((all, c) => {
+  if (!all[c.category]) all[c.category] = { name: c.category, articles: [] };
+  all[c.category].articles.push(c);
+  c.category = all[c.category];
+  return all;
 }, {});
