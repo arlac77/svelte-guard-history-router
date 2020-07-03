@@ -15,7 +15,7 @@
   const router = getContext(ROUTER);
   const route = new factory();
 
-  route.path = path;
+  route.localPath = path;
   route.component = component;
 
   if (guards) {

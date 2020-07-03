@@ -96,14 +96,15 @@ export const categoriesRoute = route(
   waitingGuard,
   Categories
 );
+
 export const categoryRoute = route(
-  categoriesRoute.path + "/:category",
+  "/:category",
   CategoryRoute,
   sessionGuard,
   waitingGuard,
   Category
 );
-
+categoryRoute.parent = categoriesRoute;
 categoryRoute.linkComponent = CategoryLink;
 
 export const articlesRoute = route(
@@ -115,12 +116,13 @@ export const articlesRoute = route(
 );
 
 export const articleRoute = route(
-  articlesRoute.path + "/:article",
+  "/:article",
   ArticleRoute,
   sessionGuard,
   waitingGuard,
   Article
 );
+articleRoute.parent = articlesRoute;
 articleRoute.linkComponent = ArticleLink;
 
 export default new App({

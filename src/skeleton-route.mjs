@@ -49,6 +49,15 @@ export class SkeletonRoute {
   objectFor(properties) {
     return undefined;
   }
+
+  /**
+   * Full path of the Route including all parents
+   * @return {string} path
+   */
+  get path()
+  {
+    return this.parent ? this.parent.path + this.localPath : this.localPath;
+  }
 }
 
 /**
@@ -68,7 +77,7 @@ export function route(path, ...args) {
   }
 
   route.component = args.pop();
-  route.path = path;
+  route.localPath = path;
 
   switch (args.length) {
     case 0:
