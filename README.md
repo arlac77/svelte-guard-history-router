@@ -60,12 +60,14 @@ class SessionGuard extends Guard {
       <Route path="/about" component={Home}>About</Route>
     </li>
     <li>
-      <Route path="/article" guards={sessionGuard} component={Articles}>Articles</Route>
-      <Route path="/article/:artice" guards={sessionGuard} component={Article}/>
+      <Route path="/article" guards={sessionGuard} component={Articles}>Articles
+        <Route path="/:artice" component={Article}/>
+      </Route>
     </li>
     <li>
-      <Route path="/category" guards={sessionGuard} component={Categories}>Categories</Route>
-      <Route path="/category/:category" guards={sessionGuard} component={Category}/>
+      <Route path="/category" guards={sessionGuard} component={Categories}>Categories
+        <Route path="/:category" component={Category}/>
+      </Route>
     </li>
   </ul>
 </nav>
