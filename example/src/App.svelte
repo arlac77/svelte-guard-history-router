@@ -41,17 +41,18 @@
         </Route>
       </li>
     </ul>
+    <ul>
+      <li>
+        Router
+        <input type="checkbox" bind:checked={showState} id="state" />
+      </li>
+    </ul>
   </nav>
   <Route path="/login" component={Login} />
 
   <main>
     <Outlet>nothing there</Outlet>
   </main>
-
-  <label for="state">
-    show router state
-    <input type="checkbox" bind:checked={showState} id="state" />
-  </label>
 
   {#if showState}
     <RouterState />
