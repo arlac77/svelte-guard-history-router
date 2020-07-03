@@ -23,6 +23,8 @@ export const articles = Object.fromEntries(
     { id: "17", name: "Pizza Frutti di Mare", price: 7.0, category: "pizza" },
     { id: "18", name: "Pizza Prosciutto", price: 7.0, category: "pizza" },
     { id: "19", name: "Pizza Peperoni", price: 7.0, category: "pizza" },
+    { id: "20", name: "Pizza Chef", price: 7.5, category: "pizza" },
+    { id: "21", name: "Pizza Speciale", price: 8.5, category: "pizza" },
     { id: "23", name: "Hot Dog", price: 2.0, category: "to go" },
     { id: "32", name: "Cheesecake", price: 2.0, category: "dessert" }
   ].map(a => [a.id, a])
