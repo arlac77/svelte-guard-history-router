@@ -100,8 +100,6 @@ export const categoriesRoute = route(
 export const categoryRoute = route(
   "/:category",
   CategoryRoute,
-  sessionGuard,
-  waitingGuard,
   Category
 );
 categoryRoute.parent = categoriesRoute;
@@ -118,8 +116,6 @@ export const articlesRoute = route(
 export const articleRoute = route(
   "/:article",
   ArticleRoute,
-  sessionGuard,
-  waitingGuard,
   Article
 );
 articleRoute.parent = articlesRoute;

@@ -2,9 +2,7 @@ import { sequenceGuard } from "./guard.mjs";
 
 /**
  * Base route without guard
- * @param {string} path
- * @param {SvelteComponent} component target to show
- * @property {string} path
+ * @property {string} localPath
  * @property {SvelteComponent} component target to show
  * @property {number} priority
  * @property {string[]} keys as found in the path
@@ -18,6 +16,10 @@ export class SkeletonRoute {
    * @param {Transition} transition
    */
   async enter(transition) {
+    if(this.parent && this.parent.guard) {
+      await this.parent.guard.enter(transition);
+    }
+
     if (this.guard) {
       return this.guard.enter(transition);
     }
@@ -29,7 +31,11 @@ export class SkeletonRoute {
    */
   async leave(transition) {
     if (this.guard) {
-      return this.guard.leave(transition);
+      await this.guard.leave(transition);
+    }
+
+    if(this.parent && this.parent.guard) {
+      await this.parent.guard.leave(transition);
     }
   }
 
