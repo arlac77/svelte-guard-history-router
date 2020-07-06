@@ -106,7 +106,7 @@ export class Transition {
     //window.location.pathname = this.saved.pathname;
 
     console.log("rollback", this.saved.pathname);
-    history.replaceState(undefined, "", this.saved.pathname);
+    history.replaceState(undefined, undefined, this.saved.pathname);
 
     this.router.state = this.saved;
     this.router.finalizePush();

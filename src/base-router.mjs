@@ -186,7 +186,7 @@ export class BaseRouter {
     }
 
     if (path !== undefined) {
-      history.pushState(undefined, "", this.base + path);
+      history.pushState(undefined, undefined, this.base + path);
     }
 
     this.linkNodes.forEach(n => this.updateActive(n));
