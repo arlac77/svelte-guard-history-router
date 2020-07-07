@@ -8,7 +8,7 @@
 <ul>
   {#each $categoriesRoute as category}
     <li>
-      <ObjectLink object={category}>{category.name}</ObjectLink>
+      <ObjectLink object={category}/>
     </li>
   {/each}
 </ul>
