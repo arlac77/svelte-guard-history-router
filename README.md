@@ -14,72 +14,68 @@ svelte guarded history router
 
 # Features
 
--   Named params
--   Guards to act when entering / leaving a route
--   Standart `<a href="/home">Home</a>` elements
+- Named params
+- Guards to act when entering / leaving a route
+- Automatic route ranking
+- Routes and keys acting as stores
+- nesting of Routes
+- Object / parameter mapping
+- Create links from objects
+- Standart `<a href="/home">Home</a>` elements
 
 # usage
 
 ```js
-import { Router, route, Guard } from 'svelte-guard-history-router';
-import Categories from "./Categories.svelte";
-import Category from "./Category.svelte";
-import Article from "./Article.svelte";
-import Articles from "./Articles.svelte";
-import About from "./About.svelte";
-import Login from "./Login.svelte";
+import { Guard } from 'svelte-guard-history-router';
 
 let session = undefined;
 
 class SessionGuard extends Guard {
   async enter(transition) {
     if(!session) {
-      transition.redirect('/login');
+      return transition.redirect('/login');
     }
   }
 }
-
-export const router = new Router(
-  [
-    route("*", Home),
-    route("/about", About),
-    route("/login", Login),
-    route("/article", sessionGuard, Articles),
-    route("/article/:article", sessionGuard, Article),
-    route("/category", sessionGuard, Categories),
-    route("/category/:category", sessionGuard, Category)
-  ],
-  "/base"
-);
 ```
 
 ```html
 <script>
-  import {
-    Outlet,
-    link,
-    active
-  } from "svelte-guard-history-router";
-  import { router } from "./main.mjs";
+  import { Router, Route, Outlet } from "svelte-guard-history-router";
+  import About from "./About.svelte";
+  import Categories from "./Categories.svelte";
+  import Category from "./Category.svelte";
+  import Articles from "./Articles.svelte";
+  import Article from "./Article.svelte";
+
+  import { sessionGuard } from "./main.mjs";
 </script>
 
+<Router base="/base">
 <nav>
-  <a href="/" use:link={router} use:active={router}>Router Example</a>
+  <Route path="/" component={Home}>Router Example</Route>
   <ul class="left">
     <li>
-      <a href="/about" use:link={router} use:active={router}>About</a>
+      <Route path="/about" component={Home}>About</Route>
     </li>
     <li>
-      <a href="/article" use:link={router} use:active={router}>Articles</a>
+      <Route path="/article" guards={sessionGuard} component={Articles}>
+        Articles
+        <Route path="/:artice" component={Article}/>
+      </Route>
     </li>
     <li>
-      <a href="/category" use:link={router} use:active={router}>Categories</a>
+      <Route path="/category" guards={sessionGuard} component={Categories}>
+        Categories
+        <Route path="/:category" component={Category}/>
+      </Route>
     </li>
   </ul>
 </nav>
 <main>
-  <Outlet {router}/>
+  <Outlet/>
 </main>
+</Router>
 ```
 
 ## Sample code
