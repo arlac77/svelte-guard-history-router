@@ -87,7 +87,7 @@ export class BaseRouter {
 
     this.compile();
 
-    setTimeout(() => this._start(), 10);
+    setTimeout(() => this._start(), 0);
   }
 
   compile() {
@@ -181,12 +181,12 @@ export class BaseRouter {
     this.transition = undefined;
 
     // transition had its own tmp component (waiting... or so)
-    if(c !== this.component) {
+    if (c !== this.component) {
       this.notifySubscriptions();
     }
 
     if (path !== undefined) {
-      history.pushState(undefined, undefined, this.base + path);
+      history.pushState({path}, undefined, this.base + path);
     }
 
     this.linkNodes.forEach(n => this.updateActive(n));
@@ -248,7 +248,7 @@ export class BaseRouter {
    */
   routeFor(...objects) {
     for (const r of this.routes) {
-      if(r.propertiesFor(...objects)) {
+      if (r.propertiesFor(...objects)) {
         return r;
       }
     }

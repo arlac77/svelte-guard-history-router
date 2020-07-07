@@ -102,15 +102,8 @@ export class Transition {
       console.error(e);
     }
 
-    // TODO belongs into set state
-    //window.location.pathname = this.saved.pathname;
-
-    console.log("rollback", this.saved.pathname);
-    history.replaceState(undefined, undefined, this.saved.pathname);
-
     this.router.state = this.saved;
-    this.router.finalizePush();
-
-    console.log("rollback after", window.location.pathname);
+    window.history.back();
+    setTimeout(() => this.router.finalizePush(), 0);
   }
 }
