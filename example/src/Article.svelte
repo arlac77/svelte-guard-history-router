@@ -3,10 +3,15 @@
   import { articleRoute } from "./index.mjs";
 </script>
 
+<style>
+.price {
+  font-weight: bold
+}
+</style>
 {#if $articleRoute}
   <h2 class="routetitle">Article {$articleRoute.name}</h2>
   <div>Id: {$articleRoute.id}</div>
-  <div>Price: {$articleRoute.price}</div>
+  <div class="price">{$articleRoute.price} $</div>
   <ObjectLink object={$articleRoute.category} />
 
   <div>
