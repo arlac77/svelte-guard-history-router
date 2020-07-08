@@ -130,6 +130,14 @@ export class BaseRouter {
     }
   }
 
+  /**
+   * Value if the current route
+   * @return {any}
+   */
+  get value() {
+    return this.route ? this.route.value: undefined;
+  }
+
   get path() {
     return window.location.pathname.slice(this.base.length);
   }
@@ -241,13 +249,13 @@ export class BaseRouter {
   }
 
   /**
-   * Find Route for a given object(s)
-   * @param {Object} objects
+   * Find Route for a given object
+   * @param {Object} object
    * @return {Route} able to support given object
    */
-  routeFor(...objects) {
+  routeFor(object) {
     for (const r of this.routes) {
-      if (r.propertiesFor(...objects)) {
+      if (r.propertiesFor(object)) {
         return r;
       }
     }

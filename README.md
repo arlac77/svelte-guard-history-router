@@ -19,8 +19,9 @@ svelte guarded history router
 - Guards to act when entering / leaving a route
 - Automatic route ranking
 - Routes and keys acting as stores
-- nesting of Routes
-- Object / parameter mapping
+- Nested Routes
+- Route values
+- Object <> parameter mapping
 - Create links from objects
 - Standart `<a href="/home">Home</a>` elements
 
