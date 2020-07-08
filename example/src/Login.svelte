@@ -1,8 +1,7 @@
 <script>
   import { setSession } from "./index.mjs";
-  import { getContext } from "svelte";
-  import { ROUTER } from "../../src/util.mjs";
-  const router = getContext(ROUTER);
+
+  export let router;
 
   let username = "user";
   let password = "secret";

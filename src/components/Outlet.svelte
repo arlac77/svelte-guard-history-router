@@ -4,8 +4,4 @@
   const router = getContext(ROUTER);
 </script>
 
-{#if $router.component}
-  <svelte:component this={$router.component} />
-{:else}
-  <slot />
-{/if}
+<svelte:component this={$router.component} {router}/>
