@@ -1,81 +1,125 @@
-import { derived } from "svelte/store";
+import { articles, categories } from "./data.js";
 
 import App from "./App.svelte";
-import About from "./About.svelte";
-import NoWay from "./NoWay.svelte";
-import Home from "./Home.svelte";
-import Login from "./Login.svelte";
-import Article from "./Article.svelte";
-import Articles from "./Articles.svelte";
-import Categories from "./Categories.svelte";
-import Category from "./Category.svelte";
 import Waiting from "./Waiting.svelte";
+import Category from "./Category.svelte";
+import CategoryLink from "./CategoryLink.svelte";
+import Categories from "./Categories.svelte";
+import Article from "./Article.svelte";
+import ArticleLink from "./ArticleLink.svelte";
+import Articles from "./Articles.svelte";
 
-import { articles, categories } from "./util.mjs";
+import {
+  IteratorStoreRoute,
+  ObjectStoreRoute,
+  Guard,
+  WaitingGuard,
+  route
+} from "../../src/index.svelte";
 
-import { Router, route, Guard, WaitingGuard } from "../../src/index.svelte";
-
-class ExceptionGuard extends Guard {
+export class AlwaysThrowGuard extends Guard {
   async enter(transition) {
     throw new Error("never go there");
   }
 }
 
-
 let session;
 
-export function setSession(s)
-{
+export function setSession(s) {
   session = s;
 }
 
-if(sessionStorage.session) {
+if (sessionStorage.session) {
   setSession(sessionStorage.session);
 }
 
 class SessionGuard extends Guard {
   async enter(transition) {
-    if(!session) {
-      transition.redirect('/login');
+    if (!session) {
+      return transition.redirect("/login");
     }
   }
 }
 
-const sessionGuard = new SessionGuard();
-const waitingGuard = new WaitingGuard(Waiting);
+export const sessionGuard = new SessionGuard();
+export const waitingGuard = new WaitingGuard(Waiting);
 
-export const router = new Router(
-  [
-    route("*", Home),
-    route("/about", About),
-    route("/login", Login),
-    route("/article", sessionGuard, waitingGuard, Articles),
-    route("/article/:article", sessionGuard, Article),
-    route("/category", sessionGuard, Categories),
-    route("/category/:category", sessionGuard, Category),
+async function delay(msecs=1000)
+{
+  return new Promise(r => setTimeout(r, msecs));
+}
 
-    route("/noway", new ExceptionGuard(), NoWay)
-  ],
-  "/modules/svelte-guard-history-router/example"
-);
+class ArticlesRoute extends IteratorStoreRoute {
+  async *iteratorFor() {
+    await delay(2000);
 
-export const article = derived(
-  [articles, router.keys.article],
-  ([$articles, $id], set) => {
-    set($articles.find(a => a.id === $id));
-    return () => {};
+    for (const a of Object.values(articles)) {
+      yield a;
+    }
   }
-);
+}
 
-const emptyCategory = { articles: [] };
-
-export const category = derived(
-  [categories, router.keys.category],
-  ([$categories, $name], set) => {
-    set($categories ? $categories.find(a => a.name === $name): emptyCategory);
-    return () => emptyCategory;
+class ArticleRoute extends ObjectStoreRoute {
+  async objectFor(properties) {
+    return articles[properties.article];
   }
+
+  propertiesFor(article) {
+    return article.id ? { article: article.id } : undefined;
+  }
+}
+
+class CategoriesRoute extends IteratorStoreRoute {
+  async *iteratorFor() {
+    await delay(2000);
+
+    for (const c of Object.values(categories)) {
+      yield c;
+    }
+  }
+}
+
+class CategoryRoute extends ObjectStoreRoute {
+  async objectFor(properties) {
+    return categories[properties.category];
+  }
+
+  propertiesFor(category) {
+    return category.name && category.articles ? { category: category.name } : undefined;
+  }
+}
+
+export const categoriesRoute = route(
+  "/category",
+  CategoriesRoute,
+  sessionGuard,
+  waitingGuard,
+  Categories
 );
+
+export const categoryRoute = route(
+  categoriesRoute,
+  "/:category",
+  CategoryRoute,
+  Category
+);
+categoryRoute.linkComponent = CategoryLink;
+
+export const articlesRoute = route(
+  "/article",
+  ArticlesRoute,
+  sessionGuard,
+  waitingGuard,
+  Articles
+);
+
+export const articleRoute = route(
+  articlesRoute,
+  "/:article",
+  ArticleRoute,
+  Article
+);
+articleRoute.linkComponent = ArticleLink;
 
 export default new App({
   target: document.body

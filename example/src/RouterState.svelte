@@ -1,12 +1,8 @@
 <script>
-  export let router;
+  import { getContext } from "svelte";
+  import { ROUTER } from "../../src/util.mjs";
 
-  let transition, state;
-
-  $: {
-    transition = $router.transition;
-    state = $router.state;
-  }
+  let router = getContext(ROUTER);
 </script>
 
 <style>
@@ -17,7 +13,6 @@
   }
 
   thead {
-    display: table-header-group;
     vertical-align: middle;
     border-top-color: inherit;
     border-right-color: inherit;
@@ -26,7 +21,6 @@
   }
 
   tbody {
-    display: table-row-group;
     vertical-align: middle;
     border-top-color: inherit;
     border-right-color: inherit;
@@ -35,7 +29,6 @@
   }
 
   tr {
-    display: table-row;
     vertical-align: inherit;
     border-top-color: inherit;
     border-right-color: inherit;
@@ -50,54 +43,69 @@
 
   table thead th {
     vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
   }
 
   th,
   td {
-    padding: 0.75rem;
+    padding: 0.2rem;
     vertical-align: top;
     border-top: 1px solid #dee2e6;
   }
+
+  .current {
+    background-color: bisque;
+  }
+
+  .background {
+    background-color: rgba(165, 181, 190, 0.05);
+  }
 </style>
 
-<div>
-  <h3>Router State</h3>
+<div class="background">
+  <table>
+    <thead>
+      <th colspan="2">Transition</th>
+    </thead>
+    <tbody>
+      {#if $router.transition !== undefined}
+        <tr>
+          <td id="route.path">{$router.transition.path}</td>
+        </tr>
+      {/if}
+    </tbody>
+  </table>
 
-  {#if transition !== undefined}
-    <h3>Transition</h3>
-    <table>
-      <tbody>
-        <tr>
-          <td>path</td>
-          <td id="route.path">{transition.path}</td>
+  <table>
+    <thead>
+      <th colspan="4">Routes</th>
+    </thead>
+    <tbody>
+      {#each router.routes as r, i (i)}
+        <tr class={r === $router.route ? 'current' : ''}>
+          <!--         <td id="route.priority">{r.priority} </td> -->
+          <td id="route.path">{r.path}</td>
+          <td id="route.guard">{r.guard ? r.guard : ""}</td>
+          <td id="route.key">{r.keys.join(' ')}</td>
+          <td id="route.component">{r.component.name}</td>
         </tr>
-      </tbody>
-    </table>
-  {/if}
+      {/each}
+    </tbody>
+  </table>
 
-  {#if state.route !== undefined}
-    <h3>Route</h3>
-    <table>
-      <tbody>
+  <table>
+    <thead>
+      <th colspan="2">Properties</th>
+    </thead>
+    <tbody>
+      {#each Object.entries($router.params) as e (e[0])}
         <tr>
-          <td>path</td>
-          <td id="route.path">{state.route.path}</td>
+          <td>{e[0]}</td>
+          <td>{e[1]}</td>
         </tr>
-        <tr>
-          <td>priority</td>
-          <td id="route.priority">{state.route.priority}</td>
-        </tr>
-        <tr>
-          <td>keys</td>
-          <td id="route.key">{state.route.keys.join(' ')}</td>
-        </tr>
-      </tbody>
-    </table>
-  {/if}
-
-  <h3>Params</h3>
-  <div>{JSON.stringify(state.params)}</div>
+      {/each}
+    </tbody>
+  </table>
 
   <table>
     <thead>
@@ -106,7 +114,7 @@
       <th>Subscriptions</th>
     </thead>
     <tbody>
-      {#each Object.values(state.keys) as key}
+      {#each Object.values($router.keys) as key}
         <tr>
           <td id="state.key.{key.name}">{key.name}</td>
           <td id="state.key.{key.name}.value">

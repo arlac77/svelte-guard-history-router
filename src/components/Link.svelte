@@ -1,11 +1,11 @@
 <script>
-  import { Router } from '../router.mjs';
+  import { BaseRouter } from '../base-router.mjs';
 
   export let href;
 
   function click(e) {
     window.dispatchEvent(
-      new CustomEvent(Router.navigationEventType, {
+      new CustomEvent(BaseRouter.navigationEventType, {
         detail: { path: e.currentTarget.pathname }
       })
     );

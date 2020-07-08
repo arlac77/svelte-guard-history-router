@@ -1,5 +1,10 @@
 import { Guard } from "./guard.mjs";
 
+/**
+ * Shows a component during transition
+ * @param {SvelteComponent} component to show up during th transition
+ * @param {number} rampUpTime initial delay for the componnt to show up
+ */
 export class WaitingGuard extends Guard {
   constructor(component, rampUpTime = 300) {
     super();
@@ -15,6 +20,7 @@ export class WaitingGuard extends Guard {
       transition.component = this.component;
     }, this.rampUpTime);
   }
+
   async leave(transition) {
     if (transition.timeoutID) {
       clearTimeout(transition.timeoutID);

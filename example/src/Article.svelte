@@ -1,26 +1,27 @@
 <script>
-  import { Link, active, link } from "../../src/index.svelte";
-  import { articles } from "./util.mjs";
-  import { article, router } from "./index.mjs";
-
-  $: {
-    console.log(router.keys.article);
-  }
+  import { ObjectLink, Link } from "../../src/index.svelte";
+  import { articleRoute } from "./index.mjs";
 </script>
 
+<style>
+.price {
+  font-weight: bold
+}
+</style>
+{#if $articleRoute}
+  <h2 class="routetitle">Article {$articleRoute.name}</h2>
+  <div>Id: {$articleRoute.id}</div>
+  <div class="price">{$articleRoute.price} $</div>
+  <ObjectLink object={$articleRoute.category} />
 
-{#if $article}
-  <h2 class="routetitle">Article {$article.name}</h2>
-  <div>Id: {$article.id}</div>
-  <div>Price: {$article.price}</div>
-  <a href="/category/{$article.category}" use:link={router} use:active={router}>{$article.category}</a>
-
-  <Link
-    href="/article/{('00' + (parseInt($article.id) + 1)).replace(/.*(\d\d)$/, '$1')}">
-    Next
-  </Link>
-  <Link
-    href="/article/{('00' + (parseInt($article.id) - 1)).replace(/.*(\d\d)$/, '$1')}">
-    Prev
-  </Link>
-{:else}No such article {router.state.params.article}{/if}
+  <div>
+    <Link
+      href="/article/{('00' + (parseInt($articleRoute.id) + 1)).replace(/.*(\d\d)$/, '$1')}">
+      Next
+    </Link>
+    <Link
+      href="/article/{('00' + (parseInt($articleRoute.id) - 1)).replace(/.*(\d\d)$/, '$1')}">
+      Prev
+    </Link>
+  </div>
+{:else}No such article{/if}

@@ -1,6 +1,8 @@
 <script>
-  import { setSession, router } from "./index.mjs";
-
+  import { setSession } from "./index.mjs";
+  import { getContext } from "svelte";
+  import { ROUTER } from "../../src/util.mjs";
+  const router = getContext(ROUTER);
 
   let username = "user";
   let password = "secret";
@@ -10,8 +12,9 @@
     try {
       await login(username, password);
       setSession({ username });
-      router.continue();
+      await router.continue();
     } catch (e) {
+      console.log(e);
       message = e;
     }
   }
@@ -43,6 +46,7 @@
         type="text"
         placeholder="Username"
         name="username"
+        size="20"
         required
         bind:value={username} />
     </label>
@@ -53,6 +57,7 @@
         type="password"
         placeholder="Password"
         name="password"
+        size="20"
         required
         bind:value={password} />
     </label>

@@ -1,5 +1,3 @@
-import { matcher } from "multi-path-matcher";
-
 /**
  * Transition between routes
  * @param {Router} router
@@ -15,13 +13,12 @@ export class Transition {
     Object.defineProperties(this, {
       router: { value: router },
       path: { value: path },
-      saved: { value: { route: router.route, params: router.params } },
+      saved: { value: router.state },
       component: {
-        get: () => this.redirected === undefined ? component : undefined,
+        get: () => (this.redirected === undefined ? component : undefined),
         set: value => {
           component = value;
-          const router = this.router;
-          router.subscriptions.forEach(subscription => subscription(router));
+          this.router.notifySubscriptions();
         }
       }
     });
@@ -29,7 +26,7 @@ export class Transition {
 
   /**
    * Start the transition
-   * - find matching target route
+   * - find matching target route @see Router.replace()
    * - leave old route
    * - set params
    * - set current route
@@ -38,19 +35,15 @@ export class Transition {
   async start() {
     const router = this.router;
 
-    router.transition = this;
     try {
-      const { route, params } = matcher(this.router.routes, this.path);
-
       if (this.saved.route !== undefined) {
         await this.saved.route.leave(this);
       }
 
-      router.state.params = params;
-      router.route = route;
+      router.replace(this.path);
 
-      if (route !== undefined) {
-        await route.enter(this);
+      if (router.route !== undefined) {
+        await router.route.enter(this);
       }
     } catch (e) {
       await this.rollback(e);
@@ -62,24 +55,21 @@ export class Transition {
   /**
    * Cleanup transition
    * Update Nodes active state
+   * @see Router.finalizePush
    */
   end() {
     if (this.redirected === undefined) {
-      const router = this.router;
-      history.pushState({ path: this.path }, "", router.base + this.path);
-      router.linkNodes.forEach(n => router.updateActive(n));
-      router.transition = undefined;
+      this.router.finalizePush(this.path);
     }
   }
 
   /**
    * Halt current transition and go to another route.
-   * To proceed with the original route by callin continue()
-   * @param {string} path new route to enter temporarly
+   * To proceed with the original route by calling continue()
+   * @param {string} path new route to enter temporary
    */
   async redirect(path) {
-    this.redirected = this.save();
-    this.router.replace(path);
+    this.redirected = this.router.replace(path);
   }
 
   /**
@@ -87,11 +77,19 @@ export class Transition {
    */
   async continue() {
     if (this.redirected !== undefined) {
-      const router = this.router;
-      router.state.params = this.redirected.params;
-      router.route = this.redirected.route;
-      this.redirected = undefined;
-      this.end();
+      try {
+        this.router.state = this.redirected;
+
+        // try entering 2nd. time
+        if (this.router.route !== undefined) {
+          await this.router.route.enter(this);
+        }
+      } catch (e) {
+        await this.rollback(e);
+      } finally {
+        this.redirected = undefined;
+        this.end();
+      }
     }
   }
 
@@ -103,20 +101,9 @@ export class Transition {
     if (e) {
       console.error(e);
     }
-    this.restore(this.saved);
-  }
 
-  save() {
-    const router = this.router;
-    return {
-      params: { ...router.state.params },
-      route: router.route
-    };
-  }
-
-  restore(state) {
-    const router = this.router;
-    router.state.params = state.params;
-    router.route = state.route;
+    this.router.state = this.saved;
+    window.history.back();
+    setTimeout(() => this.router.finalizePush(), 0);
   }
 }

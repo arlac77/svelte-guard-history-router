@@ -1,8 +1,10 @@
 <script context="module">
   import {
-    Router,
-    Route,
-    GuardedRoute,
+    BaseRouter,
+    SkeletonRoute,
+    StoreRoute,
+    ObjectStoreRoute,
+    IteratorStoreRoute,
     route,
     Transition,
     Guard,
@@ -10,16 +12,25 @@
     sequenceGuard,
     WaitingGuard,
     active,
-    link
+    link,
+    ROUTER
   } from "./index.mjs";
   import Outlet from "./components/Outlet.svelte";
   import Link from "./components/Link.svelte";
+  import ObjectLink from "./components/ObjectLink.svelte";
+  import Route from "./components/Route.svelte";
+  import Router from "./components/Router.svelte";
   export {
+    Route,
+    Router,
     Outlet,
     Link,
-    Router,
-    Route,
-    GuardedRoute,
+    ObjectLink,
+    BaseRouter,
+    SkeletonRoute,
+    StoreRoute,
+    ObjectStoreRoute,
+    IteratorStoreRoute,
     route,
     Transition,
     Guard,
@@ -27,6 +38,7 @@
     sequenceGuard,
     WaitingGuard,
     active,
-    link
+    link,
+    ROUTER
   };
 </script>
