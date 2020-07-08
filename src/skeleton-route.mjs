@@ -50,12 +50,15 @@ export class SkeletonRoute {
    */
   propertiesFor(object) {
     const pp = this.parent ? this.parent.propertiesFor(object) : undefined;
- 
-    if(this.keys.length === 0) {
+
+    if (this.keys.length === 0) {
       return pp;
     }
 
-    return Object.assign(Object.fromEntries(this.keys.map(key => [key, object[key]])), pp);
+    return Object.assign(
+      Object.fromEntries(this.keys.map(key => [key, object[key]])),
+      pp
+    );
   }
 
   /**
@@ -71,8 +74,7 @@ export class SkeletonRoute {
    * Default value used for store.
    * @return {any}
    */
-  get defaultValue()
-  {
+  get defaultValue() {
     return undefined;
   }
 
@@ -80,11 +82,10 @@ export class SkeletonRoute {
    * Value used for store.
    * @return {any}
    */
-  get value()
-  {
+  get value() {
     return this.defaultValue;
   }
-  
+
   /**
    * Full path of the Route including all parents
    * @return {string} path
