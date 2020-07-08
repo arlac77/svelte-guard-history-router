@@ -82,7 +82,7 @@ class SessionGuard extends Guard {
 ## Sample code
 
 Check out the code in the [example](/example) folder,
-or the [live example](https://arlac77.github.io/modules/svelte-guard-history-router/example/index.html).
+or the [live example](https://arlac77.github.io/components/svelte-guard-history-router/example/index.html).
 
 To run the sample, clone the repository, install the dependencies, and start:
 
