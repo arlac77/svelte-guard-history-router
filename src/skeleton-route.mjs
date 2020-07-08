@@ -49,11 +49,7 @@ export class SkeletonRoute {
    * @return {Object} properties extracted from given objects
    */
   propertiesFor(object) {
-    let pp = undefined;
- 
-    if(this.parent) {
-      pp = this.parent.propertiesFor(object);
-    }
+    const pp = this.parent ? this.parent.propertiesFor(object) : undefined;
  
     if(this.keys.length === 0) {
       return pp;
