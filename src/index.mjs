@@ -8,4 +8,3 @@
   export * from './waiting-guard.mjs';
   export * from './active.mjs';
   export * from './link.mjs';
-  export * from './util.mjs';
