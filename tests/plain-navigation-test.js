@@ -106,18 +106,20 @@ test("Navigate around", async t => {
   
   await t.expect(getLocation()).contains("article");
   
-  /*await*/ goBack();
+
+  const a = Selector("a").withAttribute("href", "/article/18");
+  await t.click(a);
+  await t.expect(getLocation()).contains("article/18");
+  await t.expect(title.innerText).contains("Pizza Prosciutto");
 
   console.log(await getLocation());
 
-  /*
+  await goBack();
+
+  console.log(await getLocation());
+ /* await t.expect(getLocation()).contains("article");
+  await t.expect(title.innerText).eql("Articles");
   await t.expect(getLocation()).contains("about");
   await t.expect(title.innerText).eql("About");
 */
-  /*
-  await t
-    .navigateTo(`/base/artices/10`)
-    .expect(title.innerText)
-    .eql("Article Pizza Quattro Stagioni");
-    */
 });
