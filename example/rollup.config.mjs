@@ -16,7 +16,7 @@ export default {
       port,
       dirs: ["example/public"],
       spa: "example/public/index.html",
-      basePath: "/modules/svelte-guard-history-router/example"
+      basePath: "/components/svelte-guard-history-router/example"
     }),
     resolve({ browser: true }),
     svelte()

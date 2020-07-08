@@ -22,7 +22,7 @@
 
 <Router
   routes={[categoriesRoute, categoryRoute, articlesRoute, articleRoute]}
-  base="/modules/svelte-guard-history-router/example">
+  base="/components/svelte-guard-history-router/example">
   <nav>
     <Route href="/" path="*" component={Home}>Router Example</Route>
     <ul class="left">
