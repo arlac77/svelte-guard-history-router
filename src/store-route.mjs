@@ -13,19 +13,10 @@ export class StoreRoute extends SkeletonRoute {
     Object.defineProperties(this, properties);
   }
 
-  get defaultValue()
-  {
-    return undefined;
-  }
-
   subscribe(subscription) {
     this.subscriptions.add(subscription);
     subscription(this.value);
     return () => this.subscriptions.delete(subscription);
-  }
-
-  propertiesFor(object) {
-    return this.keys.length === 0 ? undefined : Object.fromEntries(this.keys.map(key => [key, object[key]]));
   }
 }
 

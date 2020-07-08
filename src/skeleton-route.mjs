@@ -7,6 +7,8 @@ import { sequenceGuard } from "./guard.mjs";
  * @property {number} priority
  * @property {string[]} keys as found in the path
  * @property {RegEx} regex
+ * @property {any} value
+ * @property {any} defaultValue
  */
 export class SkeletonRoute {
   static get isRoute() {
@@ -42,16 +44,22 @@ export class SkeletonRoute {
   }
 
   /**
-   * Extract properties from object(s).
+   * Extract properties from object.
+   * @param {Object} object
    * @return {Object} properties extracted from given objects
    */
-  propertiesFor(...objects) {
+  propertiesFor(object) {
+    let pp = undefined;
+ 
     if(this.parent) {
-      object = objects.shift();
-      return this.parent.propertiesFor(...objects);
+      pp = this.parent.propertiesFor(object);
+    }
+ 
+    if(this.keys.length === 0) {
+      return pp;
     }
 
-    return undefined;
+    return Object.assign(Object.fromEntries(this.keys.map(key => [key, object[key]])), pp);
   }
 
   /**
@@ -60,13 +68,27 @@ export class SkeletonRoute {
    * @return {Object} for matching properties
    */
   objectFor(properties) {
-    if(this.parent) {
-      return this.parent.objectFor(properties);
-    }
+    return this.parent ? this.parent.objectFor(properties) : undefined;
+  }
 
+  /**
+   * Default value used for store.
+   * @return {any}
+   */
+  get defaultValue()
+  {
     return undefined;
   }
 
+  /**
+   * Value used for store.
+   * @return {any}
+   */
+  get value()
+  {
+    return this.defaultValue;
+  }
+  
   /**
    * Full path of the Route including all parents
    * @return {string} path
