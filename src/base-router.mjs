@@ -150,8 +150,7 @@ export class BaseRouter {
   get state() {
     return {
       params: { ...this.params },
-      route: this.route,
-      pathname: window.location.pathname
+      route: this.route
     };
   }
 

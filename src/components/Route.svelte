@@ -18,8 +18,6 @@
   const router = getContext(ROUTER);
   const route = new factory();
 
-  //console.log(parent, path);
-
   setContext(ROUTE, route);
 
   route.localPath = path;
