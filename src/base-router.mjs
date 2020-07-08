@@ -242,7 +242,7 @@ export class BaseRouter {
 
   /**
    * Find Route for a given object(s)
-   * @param {Object} object
+   * @param {Object} objects
    * @return {Route} able to support given object
    */
   routeFor(...objects) {

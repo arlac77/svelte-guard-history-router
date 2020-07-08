@@ -43,7 +43,7 @@ export class SkeletonRoute {
 
   /**
    * Extract properties from object(s).
-   * @return {object} properties extracted from given objects
+   * @return {Object} properties extracted from given objects
    */
   propertiesFor(...objects) {
     if(this.parent) {
@@ -56,8 +56,8 @@ export class SkeletonRoute {
 
   /**
    * Deliver object for a given set of properties
-   * @param {object} properties
-   * @return {object} for matching properties
+   * @param {Object} properties
+   * @return {Object} for matching properties
    */
   objectFor(properties) {
     if(this.parent) {
@@ -79,7 +79,7 @@ export class SkeletonRoute {
 /**
  * Helper function to create routes with optional guards
  * @param {Route?} parent
- * @param {string} path
+ * @param {string?} path
  * @param {Route?} factory
  * @param {Guard|SvelteComponent[]} args last one must be a SvelteComponent
  */
