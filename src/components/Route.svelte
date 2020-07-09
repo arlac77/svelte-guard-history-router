@@ -1,6 +1,6 @@
 <script>
   import { setContext, getContext } from "svelte";
-  import { ROUTER } from "../util.mjs";
+  import { ROUTER, ROUTE } from "../util.mjs";
   import { link } from "../link.mjs";
   import { active } from "../active.mjs";
   import { SkeletonRoute } from "../skeleton-route.mjs";
@@ -13,7 +13,6 @@
   export let linkComponent;
   export let factory = SkeletonRoute;
 
-  const ROUTE = "@@private@@-ROUTE";
   const parent = getContext(ROUTE);
   const router = getContext(ROUTER);
   const route = new factory();

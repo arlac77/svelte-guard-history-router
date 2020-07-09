@@ -49,5 +49,5 @@ export function nameValueStore(name, initialValue) {
   return o;
 }
 
-
-export const ROUTER = "@@private@@-ROUTER";
+export const ROUTE = "@private-ROUTE";
+export const ROUTER = "@private-ROUTER";
