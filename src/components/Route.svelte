@@ -52,4 +52,6 @@
   <a {href} use:link={router} use:active={router}>
     <slot />
   </a>
+{:else}
+  <slot />
 {/if}
