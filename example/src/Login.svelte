@@ -32,7 +32,7 @@
   }
 </script>
 
-<div class="center">
+<div class="center modal">
   <form on:submit|preventDefault={submit}>
     {#if message}
       <div id="message">{message}</div>
