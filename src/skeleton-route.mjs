@@ -46,19 +46,22 @@ export class SkeletonRoute {
   /**
    * Extract properties from object.
    * @param {Object} object
-   * @return {Object} properties extracted from given objects
+   * @return {Object|undefined} properties extracted from given objects
    */
   propertiesFor(object) {
     const pp = this.parent ? this.parent.propertiesFor(object) : undefined;
 
-    if (this.keys.length === 0) {
+    if (this.keys.size === 0) {
       return pp;
     }
 
-    return Object.assign(
-      Object.fromEntries(this.keys.map(key => [key, object[key]])),
-      pp
-    );
+    const entries = this.keys
+      .map(key => [key, object[key]])
+      .filter(([k, v]) => v !== undefined);
+
+    return pp !== undefined || entries.length > 0
+      ? Object.assign(Object.fromEntries(entries), pp)
+      : undefined;
   }
 
   /**
