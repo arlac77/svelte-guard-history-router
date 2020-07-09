@@ -35,7 +35,7 @@
         <Route
           path="/article"
           factory={ArticlesRoute}
-          gurads={[sessionGuard, waitingGuard]}
+          guards={[sessionGuard, waitingGuard]}
           component={Articles}>
           Articles
           <Route
@@ -49,7 +49,7 @@
         <Route
           path="/category"
           factory={CategoriesRoute}
-          gurads={[sessionGuard, waitingGuard]}
+          guards={[sessionGuard, waitingGuard]}
           component={Categories}>
           Categories
           <Route
@@ -75,7 +75,7 @@
   <Route path="/login" component={Login} />
 
   <main>
-    <Outlet>nothing there</Outlet>
+    <Outlet/>
   </main>
 
   {#if showState}
