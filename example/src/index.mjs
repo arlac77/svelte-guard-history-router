@@ -5,7 +5,7 @@ import Waiting from "./Waiting.svelte";
 
 import {
   IteratorStoreRoute,
-  ObjectStoreRoute,
+  ChildStoreRoute,
   Guard,
   WaitingGuard
 } from "../../src/index.svelte";
@@ -51,9 +51,9 @@ export class ArticlesRoute extends IteratorStoreRoute {
   }
 }
 
-export class ArticleRoute extends ObjectStoreRoute {
-  async objectFor(properties) {
-    return articles[properties.article];
+export class ArticleRoute extends ChildStoreRoute {
+  matches(object, properties) {
+    return object.id === properties.article;
   }
 
   propertiesFor(article) {
@@ -71,9 +71,9 @@ export class CategoriesRoute extends IteratorStoreRoute {
   }
 }
 
-export class CategoryRoute extends ObjectStoreRoute {
-  async objectFor(properties) {
-    return categories[properties.category];
+export class CategoryRoute extends ChildStoreRoute {
+  matches(object, properties) {
+    return object.name === properties.category;
   }
 
   propertiesFor(category) {
