@@ -21,7 +21,7 @@ svelte guarded history router
 - Routes and keys acting as stores
 - Nested Routes
 - Route values
-- Object <> parameter mapping
+- Object &lt;=> parameter mapping
 - Create links from objects
 - Standart `<a href="/home">Home</a>` elements
 
@@ -55,10 +55,11 @@ class SessionGuard extends Guard {
 
 <Router base="/base">
 <nav>
+  <!-- catch all but link to '/' -->
   <Route href="/" path="*" component={Home}>Router Example</Route>
   <ul class="left">
     <li>
-      <Route path="/about" component={Home}>About</Route>
+      <Route path="/about" component={About}>About</Route>
     </li>
     <li>
       <Route path="/article" guards={sessionGuard} component={Articles}>
@@ -113,54 +114,65 @@ npm test
 
 -   [Key](#key)
     -   [Properties](#properties)
--   [RouterState](#routerstate)
-    -   [Properties](#properties-1)
--   [Router](#router)
+-   [BaseRouter](#baserouter)
     -   [Parameters](#parameters)
-    -   [Properties](#properties-2)
-    -   [push](#push)
+    -   [Properties](#properties-1)
+    -   [component](#component)
+    -   [value](#value)
+    -   [replace](#replace)
         -   [Parameters](#parameters-1)
-    -   [subscribe](#subscribe)
+    -   [push](#push)
         -   [Parameters](#parameters-2)
-    -   [updateActive](#updateactive)
+    -   [finalizePush](#finalizepush)
         -   [Parameters](#parameters-3)
+    -   [continue](#continue)
+    -   [subscribe](#subscribe)
+        -   [Parameters](#parameters-4)
+    -   [updateActive](#updateactive)
+        -   [Parameters](#parameters-5)
+    -   [addRoute](#addroute)
+        -   [Parameters](#parameters-6)
+    -   [routeFor](#routefor)
+        -   [Parameters](#parameters-7)
+-   [nameValueStore](#namevaluestore)
+    -   [Parameters](#parameters-8)
+    -   [Properties](#properties-2)
 -   [Transition](#transition)
-    -   [Parameters](#parameters-4)
+    -   [Parameters](#parameters-9)
     -   [Properties](#properties-3)
     -   [start](#start)
     -   [end](#end)
     -   [redirect](#redirect)
-        -   [Parameters](#parameters-5)
-    -   [continue](#continue)
+        -   [Parameters](#parameters-10)
+    -   [continue](#continue-1)
     -   [rollback](#rollback)
-        -   [Parameters](#parameters-6)
--   [Route](#route)
-    -   [Parameters](#parameters-7)
+        -   [Parameters](#parameters-11)
+-   [SkeletonRoute](#skeletonroute)
     -   [Properties](#properties-4)
     -   [enter](#enter)
-        -   [Parameters](#parameters-8)
-    -   [leave](#leave)
-        -   [Parameters](#parameters-9)
--   [GuardedRoute](#guardedroute)
-    -   [Parameters](#parameters-10)
-    -   [Properties](#properties-5)
-    -   [enter](#enter-1)
-        -   [Parameters](#parameters-11)
-    -   [leave](#leave-1)
         -   [Parameters](#parameters-12)
--   [route](#route-1)
-    -   [Parameters](#parameters-13)
--   [Guard](#guard)
-    -   [attach](#attach)
+    -   [leave](#leave)
+        -   [Parameters](#parameters-13)
+    -   [propertiesFor](#propertiesfor)
         -   [Parameters](#parameters-14)
-    -   [enter](#enter-2)
+    -   [objectFor](#objectfor)
         -   [Parameters](#parameters-15)
-    -   [leave](#leave-2)
-        -   [Parameters](#parameters-16)
+    -   [defaultValue](#defaultvalue)
+    -   [value](#value-1)
+    -   [path](#path)
+-   [route](#route)
+    -   [Parameters](#parameters-16)
+-   [Guard](#guard)
+    -   [enter](#enter-1)
+        -   [Parameters](#parameters-17)
+    -   [leave](#leave-1)
+        -   [Parameters](#parameters-18)
 -   [sequenceGuard](#sequenceguard)
-    -   [Parameters](#parameters-17)
+    -   [Parameters](#parameters-19)
 -   [parallelGuard](#parallelguard)
-    -   [Parameters](#parameters-18)
+    -   [Parameters](#parameters-20)
+-   [WaitingGuard](#waitingguard)
+    -   [Parameters](#parameters-21)
 
 ## Key
 
@@ -184,18 +196,7 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 -   `value` **any** 
 -   `subscriptions` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)** 
 
-## RouterState
-
-Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
-
-### Properties
-
--   `router` **[Router](#router)** 
--   `route` **[Route](#route)** 
--   `keys` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** all possible keys of all routes
--   `params` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** of current route
-
-## Router
+## BaseRouter
 
 key subscriptions:
 
@@ -206,18 +207,41 @@ $aKey // fired if value of aKey changes
 
 ### Parameters
 
--   `routes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Route](#route)>**  (optional, default `[]`)
+-   `routes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;Route>**  (optional, default `[]`)
 -   `base` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** url (optional, default `""`)
 
 ### Properties
 
--   `routes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Route](#route)>** 
--   `keys` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** all possible keys of all routes
+-   `linkNodes` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)&lt;[Node](https://developer.mozilla.org/docs/Web/API/Node/nextSibling)>** nodes having their active state updated
+-   `routes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;Route>** 
+-   `keys` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** collected keys of all routes
 -   `params` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** value mapping from keys (from current route)
--   `state` **[RouterState](#routerstate)** 
--   `route` **[Route](#route)** current
+-   `route` **Route** current
 -   `transition` **[Transition](#transition)** ongoing transition
 -   `base` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** url
+
+### component
+
+Current component.
+Either from a redirected transition or from the current route
+
+Returns **SvelteComponent** 
+
+### value
+
+Value if the current route
+
+Returns **any** 
+
+### replace
+
+Replace current route
+
+#### Parameters
+
+-   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** former state
 
 ### push
 
@@ -228,10 +252,27 @@ The work is done by a Transition
 
 -   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** where to go
 
+Returns **[Transition](#transition)** running transition
+
+### finalizePush
+
+Called from a transition to manifest the new destination.
+If path is undefined the transition has been aborderd
+
+#### Parameters
+
+-   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+### continue
+
+Continue transition to its original destination.
+Shortcut for this.transition.continue()
+Does nothing if there is no transition.
+
 ### subscribe
 
 Router subscription
-Value changes are fired when the route (or the target component changes)
+Changes in the current route will trigger a update
 
 #### Parameters
 
@@ -239,9 +280,44 @@ Value changes are fired when the route (or the target component changes)
 
 ### updateActive
 
+Update the active state of a node
+
 #### Parameters
 
--   `node`  
+-   `node` **[Node](https://developer.mozilla.org/docs/Web/API/Node/nextSibling)** 
+
+### addRoute
+
+Add a new route.
+
+#### Parameters
+
+-   `route` **Route** 
+
+### routeFor
+
+Find Route for a given object
+
+#### Parameters
+
+-   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
+Returns **Route** able to support given object
+
+## nameValueStore
+
+Create a named object wich can act as a store
+
+### Parameters
+
+-   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `initialValue` **any** 
+
+### Properties
+
+-   `value` **any** 
+
+Returns **Store** 
 
 ## Transition
 
@@ -249,20 +325,20 @@ Transition between routes
 
 ### Parameters
 
--   `router` **[Router](#router)** 
+-   `router` **Router** 
 -   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination
 
 ### Properties
 
--   `router` **[Router](#router)** 
+-   `router` **Router** 
 -   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** destination
 -   `state` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 ### start
 
-start the transition
+Start the transition
 
--   find matching target route
+-   find matching target route @see Router.replace()
 -   leave old route
 -   set params
 -   set current route
@@ -270,16 +346,20 @@ start the transition
 
 ### end
 
-cleanup transition
+-   **See: Router.finalizePush
+    **
+
+Cleanup transition
+Update Nodes active state
 
 ### redirect
 
 Halt current transition and go to another route.
-To proceed with the original route by call continue()
+To proceed with the original route by calling continue()
 
 #### Parameters
 
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** new route to enter temprorarly
+-   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** new route to enter temporary
 
 ### continue
 
@@ -293,27 +373,23 @@ Bring back the router into the state before the transition has started
 
 -   `e` **Exception** 
 
-## Route
+## SkeletonRoute
 
 Base route without guard
 
-### Parameters
-
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `component` **SvelteComponent** target to show
-
 ### Properties
 
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `localPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 -   `component` **SvelteComponent** target to show
 -   `priority` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 -   `keys` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** as found in the path
 -   `regex` **RegEx** 
+-   `value` **any** 
+-   `defaultValue` **any** 
 
 ### enter
 
 Enter the route from a former one.
-Calls guard enter on all guards present in our gurad but absent in the former one
 
 #### Parameters
 
@@ -322,50 +398,48 @@ Calls guard enter on all guards present in our gurad but absent in the former on
 ### leave
 
 Leave the route to a new one.
-Calls guard leave on all our guards which are not in the new route
 
 #### Parameters
 
 -   `transition` **[Transition](#transition)** 
 
-## GuardedRoute
+### propertiesFor
 
-**Extends Route**
-
-Route with a guard
-
-### Parameters
-
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `component` **SvelteComponent** target to show
--   `guard` **[Guard](#guard)** 
-
-### Properties
-
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `component` **SvelteComponent** target to show
--   `guard` **[Guard](#guard)** 
--   `priority` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `keys` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** as found in the path
--   `regex` **RegEx** 
-
-### enter
-
-Enter the route from a former one.
-Calls guard enter on all guards present in our gurad but absent in the former one
+Extract properties from object.
 
 #### Parameters
 
--   `transition` **[Transition](#transition)** 
+-   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
-### leave
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** properties extracted from given objects
 
-Leave the route to a new one.
-Calls guard leave on all our guards which are not in the new route
+### objectFor
+
+Deliver object for a given set of properties
 
 #### Parameters
 
--   `transition` **[Transition](#transition)** 
+-   `properties` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** for matching properties
+
+### defaultValue
+
+Default value used for store.
+
+Returns **any** 
+
+### value
+
+Value used for store.
+
+Returns **any** 
+
+### path
+
+Full path of the Route including all parents
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** path
 
 ## route
 
@@ -373,21 +447,15 @@ Helper function to create routes with optional guards
 
 ### Parameters
 
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `args` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>** last one must be a SvelteComponent
+-   `args` **([Guard](#guard) \| [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;SvelteComponent>)** last one must be a SvelteComponent
+-   `parent` **Route?** 
+-   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** 
+-   `factory` **Route?** 
 
 ## Guard
 
 Enforces conditions of routes
-Like presents of values in the context
-
-### attach
-
-Called when guard is attached to a route (one time)
-
-#### Parameters
-
--   `route` **[Route](#route)** 
+Like the presents of values in the context
 
 ### enter
 
@@ -407,7 +475,7 @@ Called before leaving a route
 
 ## sequenceGuard
 
-execute guards in a sequence
+Execute guards in a sequence
 
 ### Parameters
 
@@ -415,11 +483,22 @@ execute guards in a sequence
 
 ## parallelGuard
 
-execute guards in a parallel
+Execute guards in a parallel
 
 ### Parameters
 
 -   `children` **Iterable&lt;[Guard](#guard)>** 
+
+## WaitingGuard
+
+**Extends Guard**
+
+Shows a component during transition
+
+### Parameters
+
+-   `component` **SvelteComponent** to show up during th transition
+-   `rampUpTime` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** initial delay for the componnt to show up (optional, default `300`)
 
 # install
 
