@@ -10,21 +10,26 @@
   export let href = path;
   export let guards;
   export let component;
+  export let linkComponent;
   export let factory = SkeletonRoute;
 
   const ROUTE = "@@private@@-ROUTE";
   const parent = getContext(ROUTE);
-
   const router = getContext(ROUTER);
   const route = new factory();
 
   setContext(ROUTE, route);
 
   route.localPath = path;
+
   route.component = component;
 
   if (parent) {
     route.parent = parent;
+  }
+
+  if (linkComponent) {
+    route.linkComponent = linkComponent;
   }
 
   if (guards) {
