@@ -1,12 +1,15 @@
 <script>
   import { ObjectLink } from "../../src/index.svelte";
-  import { categoryRoute } from "./index.mjs";
+
+  export let router;
+
+  const route = router.route;
 </script>
 
-{#if $categoryRoute}
-  <h2 class="routetitle">Category {$categoryRoute.name}</h2>
+{#if $route}
+  <h2 class="routetitle">Category {$route.name}</h2>
 
-  {#each $categoryRoute.articles as article}
+  {#each $route.articles as article}
     <li>
       <ObjectLink object={article}/>
     </li>

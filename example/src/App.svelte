@@ -3,15 +3,19 @@
   import RouterState from "./RouterState.svelte";
   import About from "./About.svelte";
   import Articles from "./Articles.svelte";
+  import Article from "./Article.svelte";
+  import ArticleLink from "./ArticleLink.svelte";
   import Categories from "./Categories.svelte";
+  import Category from "./Category.svelte";
+  import CategoryLink from "./CategoryLink.svelte";
   import Login from "./Login.svelte";
   import Home from "./Home.svelte";
   import NoWay from "./NoWay.svelte";
   import {
-    categoriesRoute,
-    categoryRoute,
-    articlesRoute,
-    articleRoute,
+    ArticlesRoute,
+    ArticleRoute,
+    CategoriesRoute,
+    CategoryRoute,
     sessionGuard,
     waitingGuard,
     AlwaysThrowGuard
@@ -20,9 +24,7 @@
   let showState = true;
 </script>
 
-<Router
-  routes={[categoriesRoute, categoryRoute, articlesRoute, articleRoute]}
-  base="/components/svelte-guard-history-router/example">
+<Router base="/components/svelte-guard-history-router/example">
   <nav>
     <Route href="/" path="*" component={Home}>Router Example</Route>
     <ul class="left">
@@ -30,20 +32,33 @@
         <Route path="/about" component={About}>About</Route>
       </li>
       <li>
-        <Link href="/article">Articles</Link>
-      </li>
-      <li>
-        <Link href="/category">Categories</Link>
-      </li>
-      <!--
-      <li>
-        <Route path="/a" component={About}>
-          A
-          <Route path="/b1" component={About}>B1</Route>
-          <Route path="/b2" component={About}>B2</Route>
+        <Route
+          path="/article"
+          factory={ArticlesRoute}
+          gurads={[sessionGuard, waitingGuard]}
+          component={Articles}>
+          Articles
+          <Route
+            path="/:article"
+            factory={ArticleRoute}
+            linkComponent={ArticleLink}
+            component={Article} />
         </Route>
       </li>
--->
+      <li>
+        <Route
+          path="/category"
+          factory={CategoriesRoute}
+          gurads={[sessionGuard, waitingGuard]}
+          component={Categories}>
+          Categories
+          <Route
+            path="/:category"
+            factory={CategoryRoute}
+            linkComponent={CategoryLink}
+            component={Category} />
+        </Route>
+      </li>
       <li>
         <Route path="/noway" guards={new AlwaysThrowGuard()} component={NoWay}>
           Does Not Work

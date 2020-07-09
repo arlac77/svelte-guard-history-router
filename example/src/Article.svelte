@@ -1,26 +1,30 @@
 <script>
   import { ObjectLink, Link } from "../../src/index.svelte";
-  import { articleRoute } from "./index.mjs";
+
+  export let router;
+
+  const route = router.route;
 </script>
 
 <style>
-.price {
-  font-weight: bold
-}
+  .price {
+    font-weight: bold;
+  }
 </style>
-{#if $articleRoute}
-  <h2 class="routetitle">Article {$articleRoute.name}</h2>
-  <div>Id: {$articleRoute.id}</div>
-  <div class="price">{$articleRoute.price} $</div>
-  <ObjectLink object={$articleRoute.category} />
+
+{#if $route}
+  <h2 class="routetitle">Article {$route.name}</h2>
+  <div>Id: {$route.id}</div>
+  <div class="price">{$route.price} $</div>
+  <ObjectLink object={$route.category} />
 
   <div>
     <Link
-      href="/article/{('00' + (parseInt($articleRoute.id) + 1)).replace(/.*(\d\d)$/, '$1')}">
+      href="/article/{('00' + (parseInt($route.id) + 1)).replace(/.*(\d\d)$/, '$1')}">
       Next
     </Link>
     <Link
-      href="/article/{('00' + (parseInt($articleRoute.id) - 1)).replace(/.*(\d\d)$/, '$1')}">
+      href="/article/{('00' + (parseInt($route.id) - 1)).replace(/.*(\d\d)$/, '$1')}">
       Prev
     </Link>
   </div>

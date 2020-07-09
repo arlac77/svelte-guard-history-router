@@ -2,19 +2,12 @@ import { articles, categories } from "./data.js";
 
 import App from "./App.svelte";
 import Waiting from "./Waiting.svelte";
-import Category from "./Category.svelte";
-import CategoryLink from "./CategoryLink.svelte";
-import Categories from "./Categories.svelte";
-import Article from "./Article.svelte";
-import ArticleLink from "./ArticleLink.svelte";
-import Articles from "./Articles.svelte";
 
 import {
   IteratorStoreRoute,
   ObjectStoreRoute,
   Guard,
-  WaitingGuard,
-  route
+  WaitingGuard
 } from "../../src/index.svelte";
 
 export class AlwaysThrowGuard extends Guard {
@@ -44,12 +37,11 @@ class SessionGuard extends Guard {
 export const sessionGuard = new SessionGuard();
 export const waitingGuard = new WaitingGuard(Waiting);
 
-async function delay(msecs=1000)
-{
+async function delay(msecs = 1000) {
   return new Promise(r => setTimeout(r, msecs));
 }
 
-class ArticlesRoute extends IteratorStoreRoute {
+export class ArticlesRoute extends IteratorStoreRoute {
   async *iteratorFor() {
     await delay(2000);
 
@@ -59,7 +51,7 @@ class ArticlesRoute extends IteratorStoreRoute {
   }
 }
 
-class ArticleRoute extends ObjectStoreRoute {
+export class ArticleRoute extends ObjectStoreRoute {
   async objectFor(properties) {
     return articles[properties.article];
   }
@@ -69,7 +61,7 @@ class ArticleRoute extends ObjectStoreRoute {
   }
 }
 
-class CategoriesRoute extends IteratorStoreRoute {
+export class CategoriesRoute extends IteratorStoreRoute {
   async *iteratorFor() {
     await delay(2000);
 
@@ -79,47 +71,17 @@ class CategoriesRoute extends IteratorStoreRoute {
   }
 }
 
-class CategoryRoute extends ObjectStoreRoute {
+export class CategoryRoute extends ObjectStoreRoute {
   async objectFor(properties) {
     return categories[properties.category];
   }
 
   propertiesFor(category) {
-    return category.name && category.articles ? { category: category.name } : undefined;
+    return category.name && category.articles
+      ? { category: category.name }
+      : undefined;
   }
 }
-
-export const categoriesRoute = route(
-  "/category",
-  CategoriesRoute,
-  sessionGuard,
-  waitingGuard,
-  Categories
-);
-
-export const categoryRoute = route(
-  categoriesRoute,
-  "/:category",
-  CategoryRoute,
-  Category
-);
-categoryRoute.linkComponent = CategoryLink;
-
-export const articlesRoute = route(
-  "/article",
-  ArticlesRoute,
-  sessionGuard,
-  waitingGuard,
-  Articles
-);
-
-export const articleRoute = route(
-  articlesRoute,
-  "/:article",
-  ArticleRoute,
-  Article
-);
-articleRoute.linkComponent = ArticleLink;
 
 export default new App({
   target: document.body
