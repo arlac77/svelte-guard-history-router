@@ -260,4 +260,8 @@ export class BaseRouter {
       }
     }
   }
+
+  error(err) {
+    console.error(err);
+  }
 }

@@ -99,7 +99,7 @@ export class Transition {
    */
   async rollback(e) {
     if (e) {
-      console.error(e);
+      this.router.error(e);
     }
 
     this.router.state = this.saved;
