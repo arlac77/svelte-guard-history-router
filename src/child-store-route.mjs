@@ -9,5 +9,7 @@ export class ChildStoreRoute extends ObjectStoreRoute {
     }
   }
 
-  matches(object, properties) {}
+  matches(object, properties) {
+    return false;
+  }
 }
