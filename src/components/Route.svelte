@@ -3,7 +3,7 @@
   import { ROUTER, ROUTE } from "../util.mjs";
   import { link } from "../link.mjs";
   import { active } from "../active.mjs";
-  import { SkeletonRoute } from "../skeleton-route.mjs";
+  import { SkeletonRoute } from "../routes.mjs";
   import { sequenceGuard } from "../guard.mjs";
 
   export let path;

@@ -1,3 +1,4 @@
+const dummySet = { forEach: () => {} };
 
 /**
  * Base route without guard
@@ -121,11 +122,82 @@ export class SkeletonRoute {
     return this.defaultValue;
   }
 
+  get subscriptions() {
+    return this._subscriptions || dummySet;
+  }
+
+  subscribe(subscription) {
+    if (this.subscriptions === dummySet) {
+      Object.defineProperty(this, "_subscriptions", { value: new Set() });
+    }
+    this.subscriptions.add(subscription);
+    subscription(this.value);
+    return () => this.subscriptions.delete(subscription);
+  }
+
   /**
    * Full path of the Route including all parents
    * @return {string} path
    */
   get path() {
     return this.parent ? this.parent.path + this.localPath : this.localPath;
+  }
+}
+
+export class StoreRoute extends SkeletonRoute {
+  constructor() {
+    super();
+    let value = this.defaultValue;
+
+    const properties = {
+      value: { get: () => value, set: v => (value = v) }
+    };
+
+    Object.defineProperties(this, properties);
+  }
+}
+
+export class IteratorStoreRoute extends StoreRoute {
+  get defaultValue() {
+    return [];
+  }
+
+  async enter(transition) {
+    await super.enter(transition);
+
+    this.subscriptions.forEach(subscription => subscription([]));
+
+    const properties = transition.router.params;
+    const entries = this.defaultValue;
+
+    for await (const e of await this.iteratorFor(properties)) {
+      entries.push(e);
+    }
+
+    this.value = entries;
+
+    this.subscriptions.forEach(subscription => subscription(entries));
+  }
+}
+
+export class ObjectStoreRoute extends StoreRoute {
+  async enter(transition) {
+    await super.enter(transition);
+
+    const properties = transition.router.params;
+    const object = await this.objectFor(properties);
+
+    this.value = object;
+    this.subscriptions.forEach(subscription => subscription(object));
+  }
+}
+
+export class ChildStoreRoute extends ObjectStoreRoute {
+  async objectFor(properties) {
+    for await (const object of this.parent.iteratorFor()) {
+      if (this.matches(object, properties)) {
+        return object;
+      }
+    }
   }
 }

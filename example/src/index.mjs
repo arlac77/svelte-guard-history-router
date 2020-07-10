@@ -37,7 +37,7 @@ async function delay(msecs = 1000) {
 
 export class ArticlesRoute extends IteratorStoreRoute {
   async *iteratorFor() {
-    await delay(2000);
+    await delay(1500);
 
     for (const a of Object.values(articles)) {
       yield a;
@@ -53,7 +53,7 @@ export class ArticleRoute extends ChildStoreRoute {
 
 export class CategoriesRoute extends IteratorStoreRoute {
   async *iteratorFor() {
-    await delay(2000);
+    await delay(1500);
 
     for (const c of Object.values(categories)) {
       yield c;
