@@ -14,22 +14,31 @@ test("route path", t => {
   t.is(route.path, "/a/b");
 });
 
-test("route propertiesFor", t => {
+test("route guard", t => {
+  let parentGuardEntered = false;
   const parentRoute = new SkeletonRoute();
-  parentRoute._path = "/a";
+  parentRoute._guard = { enter: () => parentGuardEntered = true}
+
   const route = new SkeletonRoute();
   route._parent = parentRoute;
-  route._path = "/b";
+
+  route.enter();
+
+  t.true(parentGuardEntered);
+});
+
+test("route propertiesFor", t => {
+  const parentRoute = new SkeletonRoute();
+  const route = new SkeletonRoute();
+  route._parent = parentRoute;
 
   t.deepEqual(route.propertiesFor({ name: "repo1" }), undefined);
 });
 
 test("route objectFor", t => {
   const parentRoute = new SkeletonRoute();
-  parentRoute._path = "/a";
   const route = new SkeletonRoute();
   route._parent = parentRoute;
-  route._path = "/b";
 
   t.deepEqual(route.objectFor({ repository: "repo1" }), undefined);
 });

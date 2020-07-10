@@ -1,8 +1,10 @@
 const dummySet = { forEach: () => {} };
 
+const dummyGuard = { toString: () => "", enter: () => {}, leave: () => {} };
+
 const dummyParent = {
   path: "",
-  guard: { enter: () => {}, leave: () => {} },
+  guard: dummyGuard,
   propertiesFor: () => undefined,
   objectFor: () => undefined
 };
@@ -27,13 +29,8 @@ export class SkeletonRoute {
    * @param {Transition} transition
    */
   async enter(transition) {
-    if (this.parent.guard) {
-      await this.parent.guard.enter(transition);
-    }
-
-    if (this.guard) {
-      return this.guard.enter(transition);
-    }
+    await this.parent.guard.enter(transition);
+    return this.guard.enter(transition);
   }
 
   /**
@@ -41,13 +38,8 @@ export class SkeletonRoute {
    * @param {Transition} transition
    */
   async leave(transition) {
-    if (this.guard) {
-      await this.guard.leave(transition);
-    }
-
-    if (this.parent.guard) {
-      await this.parent.guard.leave(transition);
-    }
+    await this.guard.leave(transition);
+    return this.parent.guard.leave(transition);
   }
 
   /**
@@ -131,6 +123,10 @@ export class SkeletonRoute {
 
   get parent() {
     return this._parent || dummyParent;
+  }
+
+  get guard() {
+    return this._guard || dummyGuard;
   }
 
   subscribe(subscription) {

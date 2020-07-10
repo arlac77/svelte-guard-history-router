@@ -35,13 +35,13 @@
     if (Array.isArray(guards)) {
       switch (guards.length) {
         case 1:
-          route.guard = guards[0];
+          route._guard = guards[0];
           break;
         default:
-          route.guard = sequenceGuard(guards);
+          route._guard = sequenceGuard(guards);
       }
     } else {
-      route.guard = guards;
+      route._guard = guards;
     }
   }
 
