@@ -44,24 +44,55 @@ export class SkeletonRoute {
   }
 
   /**
+   * Map properties to objects
+   * Keys are the property names and values are the keys in the resulting object
+   * @return {Object}
+   */
+  get () {
+    return {};
+  }
+
+  get factory() {
+    return undefined;
+  }
+
+  matches(object, properties) {
+    if (this.factory !== undefined && ! object instanceof this.factory) {
+      return false;
+    }
+
+    for (const [p, n] of Object.entries(this.propertyMapping)) {
+      if (object[n] !== properties[p]) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  /**
    * Extract properties from object.
    * @param {Object} object
    * @return {Object|undefined} properties extracted from given objects
    */
   propertiesFor(object) {
-    const pp = this.parent ? this.parent.propertiesFor(object) : undefined;
+    let properties = this.parent
+      ? this.parent.propertiesFor(object)
+      : undefined;
 
-    if (this.keys.size === 0) {
-      return pp;
+    if (this.factory === undefined || object instanceof this.factory) {
+      for (const [p, n] of Object.entries(this.propertyMapping)) {
+        const v = object[n];
+        if (v !== undefined) {
+          if (properties === undefined) {
+            properties = {};
+          }
+          properties[p] = v;
+        }
+      }
     }
 
-    const entries = this.keys
-      .map(key => [key, object[key]])
-      .filter(([k, v]) => v !== undefined);
-
-    return pp !== undefined || entries.length > 0
-      ? Object.assign(Object.fromEntries(entries), pp)
-      : undefined;
+    return properties;
   }
 
   /**
