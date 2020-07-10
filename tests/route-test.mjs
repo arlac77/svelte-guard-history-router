@@ -17,14 +17,15 @@ test("route path", t => {
 test("route guard", t => {
   let parentGuardEntered = false;
   const parentRoute = new SkeletonRoute();
-  parentRoute._guard = { enter: () => parentGuardEntered = true}
+  parentRoute._guard = { enter: x => (parentGuardEntered = x) };
 
   const route = new SkeletonRoute();
   route._parent = parentRoute;
 
-  route.enter();
+  const transition = {};
+  route.enter(transition);
 
-  t.true(parentGuardEntered);
+  t.deepEqual(parentGuardEntered, transition);
 });
 
 test("route propertiesFor", t => {
