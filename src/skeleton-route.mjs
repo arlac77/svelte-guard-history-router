@@ -1,4 +1,3 @@
-import { sequenceGuard } from "./guard.mjs";
 
 /**
  * Base route without guard
