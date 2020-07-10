@@ -48,7 +48,7 @@ export class SkeletonRoute {
    * Keys are the property names and values are the keys in the resulting object
    * @return {Object}
    */
-  get () {
+  get propertyMapping() {
     return {};
   }
 
