@@ -17,7 +17,6 @@ const dummyParent = {
  * @property {string[]} keys as found in the path
  * @property {RegEx} regex
  * @property {any} value
- * @property {any} defaultValue
  */
 export class SkeletonRoute {
   static get isRoute() {
@@ -101,22 +100,6 @@ export class SkeletonRoute {
     return this.parent.objectFor(properties);
   }
 
-  /**
-   * Default value used for store.
-   * @return {any}
-   */
-  get defaultValue() {
-    return undefined;
-  }
-
-  /**
-   * Value used for store.
-   * @return {any}
-   */
-  get value() {
-    return this.defaultValue;
-  }
-
   get subscriptions() {
     return this._subscriptions || dummySet;
   }
@@ -147,31 +130,20 @@ export class SkeletonRoute {
   }
 }
 
-export class StoreRoute extends SkeletonRoute {
+export class IteratorStoreRoute extends SkeletonRoute {
   constructor() {
     super();
-    let value = this.defaultValue;
-
-    const properties = {
-      value: { get: () => value, set: v => (value = v) }
-    };
-
-    Object.defineProperties(this, properties);
-  }
-}
-
-export class IteratorStoreRoute extends StoreRoute {
-  get defaultValue() {
-    return [];
+    this.value = [];
   }
 
   async enter(transition) {
     await super.enter(transition);
 
-    this.subscriptions.forEach(subscription => subscription([]));
+    const entries = [];
+
+    this.subscriptions.forEach(subscription => subscription(entries));
 
     const properties = transition.router.params;
-    const entries = this.defaultValue;
 
     for await (const e of await this.iteratorFor(properties)) {
       entries.push(e);
@@ -183,7 +155,7 @@ export class IteratorStoreRoute extends StoreRoute {
   }
 }
 
-export class ObjectStoreRoute extends StoreRoute {
+export class ObjectStoreRoute extends SkeletonRoute {
   async enter(transition) {
     await super.enter(transition);
 

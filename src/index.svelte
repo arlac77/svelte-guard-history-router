@@ -2,7 +2,6 @@
   import {
     BaseRouter,
     SkeletonRoute,
-    StoreRoute,
     ObjectStoreRoute,
     IteratorStoreRoute,
     ChildStoreRoute,
@@ -28,7 +27,6 @@
     ObjectLink,
     BaseRouter,
     SkeletonRoute,
-    StoreRoute,
     ObjectStoreRoute,
     IteratorStoreRoute,
     ChildStoreRoute,
