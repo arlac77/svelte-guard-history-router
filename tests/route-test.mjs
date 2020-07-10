@@ -14,8 +14,6 @@ test("route path", t => {
   t.is(route.path, "/a/b");
 });
 
-
-
 test("route propertiesFor", t => {
   const parentRoute = new SkeletonRoute();
   parentRoute.localPath = "/a";
@@ -23,9 +21,7 @@ test("route propertiesFor", t => {
   route.parent = parentRoute;
   route.localPath = "/b";
 
- // route.propertyMapping = { repository: "name" };
+  // route.propertyMapping = { repository: "name" };
 
-
-  t.deepEqual(route.propertiesFor({ name: "repo1" }),undefined);
-
+  t.deepEqual(route.propertiesFor({ name: "repo1" }), undefined);
 });
