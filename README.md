@@ -15,15 +15,15 @@ svelte guarded history router
 
 # Features
 
-- Named params
-- Guards to act when entering / leaving a route
-- Automatic route ranking
-- Routes and keys acting as stores
-- Nested Routes
-- Route values
-- Object &lt;=> parameter mapping
-- Create links from objects
-- Standart `<a href="/home">Home</a>` elements
+-   Named params
+-   Guards to act when entering / leaving a route
+-   Automatic route ranking
+-   Routes and keys acting as stores
+-   Nested Routes
+-   Route values
+-   Object &lt;=> parameter mapping
+-   Create links from objects
+-   Standart `<a href="/home">Home</a>` elements
 
 # usage
 
@@ -153,6 +153,7 @@ npm test
         -   [Parameters](#parameters-12)
     -   [leave](#leave)
         -   [Parameters](#parameters-13)
+    -   [propertyMapping](#propertymapping)
     -   [propertiesFor](#propertiesfor)
         -   [Parameters](#parameters-14)
     -   [objectFor](#objectfor)
@@ -160,13 +161,13 @@ npm test
     -   [defaultValue](#defaultvalue)
     -   [value](#value-1)
     -   [path](#path)
--   [route](#route)
-    -   [Parameters](#parameters-16)
 -   [Guard](#guard)
     -   [enter](#enter-1)
-        -   [Parameters](#parameters-17)
+        -   [Parameters](#parameters-16)
     -   [leave](#leave-1)
-        -   [Parameters](#parameters-18)
+        -   [Parameters](#parameters-17)
+-   [redirectGuard](#redirectguard)
+    -   [Parameters](#parameters-18)
 -   [sequenceGuard](#sequenceguard)
     -   [Parameters](#parameters-19)
 -   [parallelGuard](#parallelguard)
@@ -403,6 +404,13 @@ Leave the route to a new one.
 
 -   `transition` **[Transition](#transition)** 
 
+### propertyMapping
+
+Map properties to objects attributes.
+Keys are the property names and values are the keys in the resulting object.
+
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
 ### propertiesFor
 
 Extract properties from object.
@@ -411,7 +419,7 @@ Extract properties from object.
 
 -   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** properties extracted from given objects
+Returns **([Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** properties extracted from given objects
 
 ### objectFor
 
@@ -441,17 +449,6 @@ Full path of the Route including all parents
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** path
 
-## route
-
-Helper function to create routes with optional guards
-
-### Parameters
-
--   `args` **([Guard](#guard) \| [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;SvelteComponent>)** last one must be a SvelteComponent
--   `parent` **Route?** 
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** 
--   `factory` **Route?** 
-
 ## Guard
 
 Enforces conditions of routes
@@ -472,6 +469,15 @@ Called before leaving a route
 #### Parameters
 
 -   `transition` **[Transition](#transition)** 
+
+## redirectGuard
+
+Redirects to a given url if condition is met
+
+### Parameters
+
+-   `url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `condition` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** redirects when returning true
 
 ## sequenceGuard
 
