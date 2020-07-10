@@ -52,12 +52,8 @@ export class ArticlesRoute extends IteratorStoreRoute {
 }
 
 export class ArticleRoute extends ChildStoreRoute {
-  matches(object, properties) {
-    return object.id === properties.article;
-  }
-
-  propertiesFor(article) {
-    return article.id ? { article: article.id } : undefined;
+  get propertyMapping() {
+    return { article: "id" };
   }
 }
 
@@ -72,13 +68,14 @@ export class CategoriesRoute extends IteratorStoreRoute {
 }
 
 export class CategoryRoute extends ChildStoreRoute {
-  matches(object, properties) {
-    return object.name === properties.category;
-  }
 
-  propertiesFor(category) {
-    return category.name && category.articles
-      ? { category: category.name }
+  get propertyMapping() {
+    return { category: "name" };
+  }
+  
+  propertiesFor(object) {
+    return object.name && object.articles
+      ? { category: object.name }
       : undefined;
   }
 }
