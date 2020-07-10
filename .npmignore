@@ -1,5 +1,6 @@
 build
 tests
+testcafe
 test-results
 rollup.config.*
 example
