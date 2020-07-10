@@ -37,7 +37,7 @@ async function delay(msecs = 1000) {
 
 export class ArticlesRoute extends IteratorStoreRoute {
   async *iteratorFor() {
-    await delay(1500);
+    await delay(1000);
 
     for (const a of Object.values(articles)) {
       yield a;
@@ -45,32 +45,13 @@ export class ArticlesRoute extends IteratorStoreRoute {
   }
 }
 
-export class ArticleRoute extends ChildStoreRoute {
-  get propertyMapping() {
-    return { article: "id" };
-  }
-}
-
 export class CategoriesRoute extends IteratorStoreRoute {
   async *iteratorFor() {
-    await delay(1500);
+    await delay(800);
 
     for (const c of Object.values(categories)) {
       yield c;
     }
-  }
-}
-
-export class CategoryRoute extends ChildStoreRoute {
-
-  get propertyMapping() {
-    return { category: "name" };
-  }
-  
-  propertiesFor(object) {
-    return object.name && object.articles
-      ? { category: object.name }
-      : undefined;
   }
 }
 

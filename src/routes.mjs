@@ -41,18 +41,6 @@ export class SkeletonRoute {
     return this.parent.guard.leave(transition);
   }
 
-  /**
-   * Map properties to objects attributes.
-   * Keys are the property names and values are the keys in the resulting object.
-   * @return {Object}
-   */
-  get propertyMapping() {
-    return {};
-  }
-
-  get factory() {
-    return undefined;
-  }
 
   matches(object, properties) {
     if (this.factory !== undefined && !object instanceof this.factory) {
@@ -112,9 +100,22 @@ export class SkeletonRoute {
     return this._guard || dummyGuard;
   }
 
+  /**
+   * Map properties to objects attributes.
+   * Keys are the property names and values are the keys in the resulting object.
+   * @return {Object}
+   */
+  get propertyMapping() {
+    return this._propertyMapping || {};
+  }
+
+  get factory() {
+    return undefined;
+  }
+
   subscribe(subscription) {
     if (this.subscriptions === dummySet) {
-      Object.defineProperty(this, "_subscriptions", { value: new Set() });
+      this._subscriptions = new Set();
     }
     this.subscriptions.add(subscription);
     subscription(this.value);

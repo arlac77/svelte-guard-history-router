@@ -1,5 +1,11 @@
 <script>
-  import { Router, Route, Outlet, Link } from "../../src/index.svelte";
+  import {
+    Router,
+    Route,
+    ChildStoreRoute,
+    Outlet,
+    Link
+  } from "../../src/index.svelte";
   import RouterState from "./RouterState.svelte";
   import About from "./About.svelte";
   import Articles from "./Articles.svelte";
@@ -13,9 +19,7 @@
   import NoWay from "./NoWay.svelte";
   import {
     ArticlesRoute,
-    ArticleRoute,
     CategoriesRoute,
-    CategoryRoute,
     enshureSession,
     waitingGuard,
     AlwaysThrowGuard
@@ -40,7 +44,8 @@
           Articles
           <Route
             path="/:article"
-            factory={ArticleRoute}
+            factory={ChildStoreRoute}
+            propertyMapping={{ article: 'id' }}
             linkComponent={ArticleLink}
             component={Article} />
         </Route>
@@ -54,7 +59,8 @@
           Categories
           <Route
             path="/:category"
-            factory={CategoryRoute}
+            factory={ChildStoreRoute}
+            propertyMapping={{ category: 'name', xarticles: 'X' }}
             linkComponent={CategoryLink}
             component={Category} />
         </Route>
@@ -75,7 +81,7 @@
   <Route path="/login" component={Login} />
 
   <main>
-    <Outlet/>
+    <Outlet />
   </main>
 
   {#if showState}

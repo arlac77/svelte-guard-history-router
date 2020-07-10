@@ -9,6 +9,7 @@
   export let path;
   export let href = path;
   export let guards;
+  export let propertyMapping;
   export let component;
   export let linkComponent;
   export let factory = SkeletonRoute;
@@ -25,6 +26,10 @@
 
   if (parent) {
     route._parent = parent;
+  }
+
+  if (propertyMapping) {
+    route._propertyMapping = propertyMapping;
   }
 
   if (linkComponent) {

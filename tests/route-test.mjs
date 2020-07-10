@@ -34,10 +34,15 @@ test("route propertiesFor", t => {
   route._parent = parentRoute;
 
   t.deepEqual(route.propertiesFor({ name: "repo1" }), undefined);
+
+  route._propertyMapping = { repository: "name" };
+  t.deepEqual(route._propertyMapping, { repository: "name" });
+  t.deepEqual(route.propertiesFor({ name: "repo1" }), { repository: "repo1" });
 });
 
 test("route objectFor", t => {
   const parentRoute = new SkeletonRoute();
+
   const route = new SkeletonRoute();
   route._parent = parentRoute;
 
