@@ -3,27 +3,35 @@ import { SkeletonRoute } from "../src/routes.mjs";
 
 test("route path", t => {
   const parentRoute = new SkeletonRoute();
-  parentRoute.localPath = "/a";
+  parentRoute._path = "/a";
 
   t.is(parentRoute.path, "/a");
 
   const route = new SkeletonRoute();
-  route.parent = parentRoute;
-  route.localPath = "/b";
+  route._parent = parentRoute;
+  route._path = "/b";
 
   t.is(route.path, "/a/b");
 });
 
 test("route propertiesFor", t => {
   const parentRoute = new SkeletonRoute();
-  parentRoute.localPath = "/a";
+  parentRoute._path = "/a";
   const route = new SkeletonRoute();
-  route.parent = parentRoute;
-  route.localPath = "/b";
-
-  // route.propertyMapping = { repository: "name" };
+  route._parent = parentRoute;
+  route._path = "/b";
 
   t.deepEqual(route.propertiesFor({ name: "repo1" }), undefined);
+});
+
+test("route objectFor", t => {
+  const parentRoute = new SkeletonRoute();
+  parentRoute._path = "/a";
+  const route = new SkeletonRoute();
+  route._parent = parentRoute;
+  route._path = "/b";
+
+  t.deepEqual(route.objectFor({ repository: "repo1" }), undefined);
 });
 
 test("route subscription", t => {

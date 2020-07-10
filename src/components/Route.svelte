@@ -19,12 +19,12 @@
 
   setContext(ROUTE, route);
 
-  route.localPath = path;
+  route._path = path;
 
   route.component = component;
 
   if (parent) {
-    route.parent = parent;
+    route._parent = parent;
   }
 
   if (linkComponent) {

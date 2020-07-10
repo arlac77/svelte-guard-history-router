@@ -1,5 +1,12 @@
 const dummySet = { forEach: () => {} };
 
+const dummyParent = {
+  path: "",
+  guard: { enter: () => {}, leave: () => {} },
+  propertiesFor: () => undefined,
+  objectFor: () => undefined
+};
+
 /**
  * Base route without guard
  * @property {string} localPath
@@ -20,7 +27,7 @@ export class SkeletonRoute {
    * @param {Transition} transition
    */
   async enter(transition) {
-    if (this.parent && this.parent.guard) {
+    if (this.parent.guard) {
       await this.parent.guard.enter(transition);
     }
 
@@ -38,7 +45,7 @@ export class SkeletonRoute {
       await this.guard.leave(transition);
     }
 
-    if (this.parent && this.parent.guard) {
+    if (this.parent.guard) {
       await this.parent.guard.leave(transition);
     }
   }
@@ -76,11 +83,7 @@ export class SkeletonRoute {
    * @return {Object|undefined} properties extracted from given objects
    */
   propertiesFor(object) {
-    let properties;
-
-    if (this.parent) {
-      properties = this.parent.propertiesFor(object);
-    }
+    let properties = this.parent.propertiesFor(object);
 
     if (this.factory === undefined || object instanceof this.factory) {
       for (const [p, n] of Object.entries(this.propertyMapping)) {
@@ -103,7 +106,7 @@ export class SkeletonRoute {
    * @return {Object} for matching properties
    */
   objectFor(properties) {
-    return this.parent ? this.parent.objectFor(properties) : undefined;
+    return this.parent.objectFor(properties);
   }
 
   /**
@@ -126,6 +129,10 @@ export class SkeletonRoute {
     return this._subscriptions || dummySet;
   }
 
+  get parent() {
+    return this._parent || dummyParent;
+  }
+
   subscribe(subscription) {
     if (this.subscriptions === dummySet) {
       Object.defineProperty(this, "_subscriptions", { value: new Set() });
@@ -140,7 +147,7 @@ export class SkeletonRoute {
    * @return {string} path
    */
   get path() {
-    return this.parent ? this.parent.path + this.localPath : this.localPath;
+    return this.parent.path + this._path;
   }
 }
 
