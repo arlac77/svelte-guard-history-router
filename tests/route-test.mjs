@@ -1,5 +1,5 @@
 import test from "ava";
-import { SkeletonRoute } from "svelte-guard-history-router";
+import { SkeletonRoute } from "../src/routes.mjs";
 
 test("route path", t => {
   const parentRoute = new SkeletonRoute();

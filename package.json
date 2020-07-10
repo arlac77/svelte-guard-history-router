@@ -6,9 +6,6 @@
   },
   "main": "./src/index.mjs",
   "svelte": "./src/index.svelte",
-  "exports": {
-    ".": "./src/index.mjs"
-  },
   "description": "svelte router for SPA (history mode only)",
   "keywords": [
     "svelte",
