@@ -16,7 +16,7 @@
     ArticleRoute,
     CategoriesRoute,
     CategoryRoute,
-    sessionGuard,
+    enshureSession,
     waitingGuard,
     AlwaysThrowGuard
   } from "./index.mjs";
@@ -35,7 +35,7 @@
         <Route
           path="/article"
           factory={ArticlesRoute}
-          guards={[sessionGuard, waitingGuard]}
+          guards={[enshureSession, waitingGuard]}
           component={Articles}>
           Articles
           <Route
@@ -49,7 +49,7 @@
         <Route
           path="/category"
           factory={CategoriesRoute}
-          guards={[sessionGuard, waitingGuard]}
+          guards={[enshureSession, waitingGuard]}
           component={Categories}>
           Categories
           <Route

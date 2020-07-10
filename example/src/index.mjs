@@ -6,8 +6,9 @@ import Waiting from "./Waiting.svelte";
 import {
   IteratorStoreRoute,
   ChildStoreRoute,
+  WaitingGuard,
   Guard,
-  WaitingGuard
+  redirectGuard
 } from "../../src/index.svelte";
 
 export class AlwaysThrowGuard extends Guard {
@@ -26,15 +27,8 @@ if (sessionStorage.session) {
   setSession(sessionStorage.session);
 }
 
-class SessionGuard extends Guard {
-  async enter(transition) {
-    if (!session) {
-      return transition.redirect("/login");
-    }
-  }
-}
+export const enshureSession = redirectGuard("/login",() => !session);
 
-export const sessionGuard = new SessionGuard();
 export const waitingGuard = new WaitingGuard(Waiting);
 
 async function delay(msecs = 1000) {

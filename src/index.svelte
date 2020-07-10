@@ -10,6 +10,7 @@
     Guard,
     parallelGuard,
     sequenceGuard,
+    redirectGuard,
     WaitingGuard,
     active,
     link
@@ -35,6 +36,7 @@
     Guard,
     parallelGuard,
     sequenceGuard,
+    redirectGuard,
     WaitingGuard,
     active,
     link

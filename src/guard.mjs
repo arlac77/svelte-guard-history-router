@@ -21,13 +21,33 @@ export class Guard {
 }
 
 /**
+ * Redirects to a given url if condition is met
+ *
+ * @param {string} url
+ * @param {Function} condition redirects when returning true
+ */
+export function redirectGuard(url, condition) {
+  return {
+    toString: () => {
+      return `redirect(${url})`;
+    },
+    enter: async transition => {
+      if (condition === undefined || condition(transition)) {
+        return transition.redirect(url);
+      }
+    },
+    leave: () => {}
+  };
+}
+
+/**
  * Execute guards in a sequence
  * @param {Iterable<Guard>} children
  */
 export function sequenceGuard(children) {
   return {
     toString: () => {
-      return "[" + children + "]";
+      return children.toString();
     },
     enter: async transition => {
       for (const child of children) {
