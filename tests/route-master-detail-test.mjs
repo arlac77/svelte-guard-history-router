@@ -5,18 +5,25 @@ class Master {
   constructor(details) {
     this.details = details;
   }
+ 
+  async *[Symbol.asyncIterator]() {
+    for (const d of this.details) {
+      yield d;
+    }
+  }
 }
 
 class Detail {
   constructor(id) { this.id = id; }
 }
 
-test("route master detail subscription", async t => {
-  const m = new Master([new Detail(1),new Detail(2)]);
+function setupRoute()
+{
+  const model = new Master([new Detail(1),new Detail(2)]);
   const master = new SkeletonRoute();
   master._path = "/master";
   master._objectInstance = Master;
-  master.iteratorFor = m.details;
+  master.iteratorFor = model;
 
   const detail = new SkeletonRoute();
   detail._path = "/:detail";
@@ -24,6 +31,12 @@ test("route master detail subscription", async t => {
   detail._objectInstance = Detail;
   detail._propertyMapping = { detail: "id" };
   
+  return { master, detail, model};
+}
+
+test("route master detail subscription", async t => {
+  const { master, detail, model } = setupRoute();
+ 
   let detailValue;
   
   detail.subscribe(x => detailValue = x);
@@ -32,5 +45,5 @@ test("route master detail subscription", async t => {
   
   await detail.enter(transition);
 
-  t.deepEqual(detailValue,m.details[1]);
+  t.deepEqual(detailValue, model.details[1]);
 });

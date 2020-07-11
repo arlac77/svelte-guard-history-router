@@ -67,11 +67,6 @@ test("route objectInstance", t => {
 test("route subscription", t => {
   const route = new SkeletonRoute();
 
-  let value;
-/*  Object.defineProperties(route, {
-    value: { get: () => value, set: v => (value = v) }
-  });*/
-
   route.value = 4711;
 
   let changed;
