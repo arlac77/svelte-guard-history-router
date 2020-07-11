@@ -50,7 +50,6 @@ test("route objectFor", t => {
 });
 
 test("route objectInstance", t => {
-
   const route = new SkeletonRoute();
 
   t.is(route.objectInstance, Object);
@@ -69,9 +68,9 @@ test("route subscription", t => {
   const route = new SkeletonRoute();
 
   let value;
-  Object.defineProperties(route, {
+/*  Object.defineProperties(route, {
     value: { get: () => value, set: v => (value = v) }
-  });
+  });*/
 
   route.value = 4711;
 
@@ -81,3 +80,5 @@ test("route subscription", t => {
 
   t.is(changed, 4711);
 });
+
+
