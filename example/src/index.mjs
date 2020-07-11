@@ -1,6 +1,6 @@
 import { articles, categories } from "./data.js";
 import App from "./App.svelte";
-import { IteratorStoreRoute, Guard } from "../../src/index.svelte";
+import { Guard } from "../../src/index.svelte";
 
 export class AlwaysThrowGuard extends Guard {
   async enter(transition) {
@@ -22,23 +22,19 @@ async function delay(msecs = 1000) {
   return new Promise(r => setTimeout(r, msecs));
 }
 
-export class ArticlesRoute extends IteratorStoreRoute {
-  async *iteratorFor() {
-    await delay(1000);
+export async function* articleIterator() {
+  await delay(1000);
 
-    for (const a of Object.values(articles)) {
-      yield a;
-    }
+  for (const a of Object.values(articles)) {
+    yield a;
   }
 }
 
-export class CategoriesRoute extends IteratorStoreRoute {
-  async *iteratorFor() {
-    await delay(800);
+export async function* categoryIterator() {
+  await delay(800);
 
-    for (const c of Object.values(categories)) {
-      yield c;
-    }
+  for (const c of Object.values(categories)) {
+    yield c;
   }
 }
 

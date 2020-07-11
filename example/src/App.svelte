@@ -2,6 +2,7 @@
   import {
     Router,
     Route,
+    IteratorStoreRoute,
     ChildStoreRoute,
     Outlet,
     Link,
@@ -22,10 +23,10 @@
   import Waiting from "./Waiting.svelte";
 
   import {
-    ArticlesRoute,
-    CategoriesRoute,
     AlwaysThrowGuard,
-    session
+    session,
+    articleIterator,
+    categoryIterator
   } from "./index.mjs";
 
   let showState = true;
@@ -44,7 +45,8 @@
       <li>
         <Route
           path="/article"
-          factory={ArticlesRoute}
+          factory={IteratorStoreRoute}
+          iteratorFor={articleIterator}
           guards={[enshureSession, waitingGuard]}
           component={Articles}>
           Articles
@@ -59,7 +61,8 @@
       <li>
         <Route
           path="/category"
-          factory={CategoriesRoute}
+          factory={IteratorStoreRoute}
+          iteratorFor={categoryIterator}
           guards={[enshureSession, waitingGuard]}
           component={Categories}>
           Categories

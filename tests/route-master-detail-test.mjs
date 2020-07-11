@@ -50,7 +50,6 @@ function setupRoute() {
 
   detail.iteratorFor = function (properties) {
     return this.parent.iteratorFor()
-    return [];
   };
 
   const leaf = new ChildStoreRoute();

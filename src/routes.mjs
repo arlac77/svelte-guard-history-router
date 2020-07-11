@@ -24,6 +24,14 @@ export class SkeletonRoute {
   }
 
   /**
+   * Full path of the Route including all parents
+   * @return {string} path
+   */
+  get path() {
+    return this.parent.path + this._path;
+  }
+
+  /**
    * Enter the route from a former one.
    * @param {Transition} transition
    */
@@ -74,15 +82,6 @@ export class SkeletonRoute {
     return properties;
   }
 
-  /**
-   * Deliver object for a given set of properties
-   * @param {Object} properties
-   * @return {Object} for matching properties
-   */
-  objectFor(properties) {
-    return this.parent.objectFor(properties);
-  }
-
   get subscriptions() {
     return this._subscriptions || dummySet;
   }
@@ -118,11 +117,12 @@ export class SkeletonRoute {
   }
 
   /**
-   * Full path of the Route including all parents
-   * @return {string} path
+   * Deliver object for a given set of properties
+   * @param {Object} properties
+   * @return {Object} for matching properties
    */
-  get path() {
-    return this.parent.path + this._path;
+  objectFor(properties) {
+    return this.parent.objectFor(properties);
   }
 }
 

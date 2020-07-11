@@ -11,6 +11,7 @@
   export let guards;
   export let propertyMapping;
   export let objectInstance;
+  export let iteratorFor;
   export let component;
   export let linkComponent;
   export let factory = SkeletonRoute;
@@ -33,6 +34,9 @@
   }
   if (objectInstance) {
     route._objectInstance = objectInstance;
+  }
+  if (iteratorFor) {
+    route.iteratorFor = iteratorFor;
   }
 
   if (linkComponent) {
