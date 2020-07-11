@@ -41,19 +41,14 @@ export class SkeletonRoute {
     return this.parent.guard.leave(transition);
   }
 
-
   matches(object, properties) {
-    if (!(object instanceof this.objectInstance)) {
-      return false;
-    }
-
     for (const [p, n] of Object.entries(this.propertyMapping)) {
       if (object[n] !== properties[p]) {
         return false;
       }
     }
 
-    return true;
+    return object instanceof this.objectInstance;
   }
 
   /**
@@ -106,7 +101,7 @@ export class SkeletonRoute {
    * @return {Object}
    */
   get propertyMapping() {
-    return this._propertyMapping || {};
+    return this._propertyMapping || {};
   }
 
   get objectInstance() {
