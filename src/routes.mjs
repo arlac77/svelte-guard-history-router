@@ -43,7 +43,7 @@ export class SkeletonRoute {
 
 
   matches(object, properties) {
-    if (this.factory !== undefined && !object instanceof this.factory) {
+    if (!(object instanceof this.objectInstance)) {
       return false;
     }
 
@@ -64,7 +64,7 @@ export class SkeletonRoute {
   propertiesFor(object) {
     let properties = this.parent.propertiesFor(object);
 
-    if (this.factory === undefined || object instanceof this.factory) {
+    if (object instanceof this.objectInstance) {
       for (const [p, n] of Object.entries(this.propertyMapping)) {
         const v = object[n];
         if (v !== undefined) {
@@ -109,8 +109,8 @@ export class SkeletonRoute {
     return this._propertyMapping || {};
   }
 
-  get factory() {
-    return undefined;
+  get objectInstance() {
+    return this._objectInstance || Object;
   }
 
   subscribe(subscription) {
@@ -169,6 +169,12 @@ export class ObjectStoreRoute extends SkeletonRoute {
 }
 
 export class ChildStoreRoute extends ObjectStoreRoute {
+
+  get objectInstance()
+  {
+    return this.parent.objectInstance;
+  }
+
   async objectFor(properties) {
     for await (const object of this.parent.iteratorFor()) {
       if (this.matches(object, properties)) {

@@ -1,5 +1,5 @@
 import test from "ava";
-import { SkeletonRoute } from "../src/routes.mjs";
+import { SkeletonRoute, ChildStoreRoute } from "../src/routes.mjs";
 
 test("route path", t => {
   const parentRoute = new SkeletonRoute();
@@ -47,6 +47,22 @@ test("route objectFor", t => {
   route._parent = parentRoute;
 
   t.deepEqual(route.objectFor({ repository: "repo1" }), undefined);
+});
+
+test("route objectInstance", t => {
+
+  const route = new SkeletonRoute();
+
+  t.is(route.objectInstance, Object);
+
+  route._objectInstance = Number;
+  t.is(route.objectInstance, Number);
+
+
+  const child = new ChildStoreRoute();
+
+  child._parent = route;
+  t.is(child.objectInstance, Number);
 });
 
 test("route subscription", t => {
