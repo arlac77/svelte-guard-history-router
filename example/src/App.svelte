@@ -4,7 +4,9 @@
     Route,
     ChildStoreRoute,
     Outlet,
-    Link
+    Link,
+    WaitingGuard,
+    redirectGuard
   } from "../../src/index.svelte";
   import RouterState from "./RouterState.svelte";
   import About from "./About.svelte";
@@ -17,15 +19,19 @@
   import Login from "./Login.svelte";
   import Home from "./Home.svelte";
   import NoWay from "./NoWay.svelte";
+  import Waiting from "./Waiting.svelte";
+
   import {
     ArticlesRoute,
     CategoriesRoute,
-    enshureSession,
-    waitingGuard,
-    AlwaysThrowGuard
+    AlwaysThrowGuard,
+    session
   } from "./index.mjs";
 
   let showState = true;
+
+  const waitingGuard = new WaitingGuard(Waiting);
+  const enshureSession = redirectGuard("/login", () => !session);
 </script>
 
 <Router base="/components/svelte-guard-history-router/example">

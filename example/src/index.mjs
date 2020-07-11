@@ -1,15 +1,6 @@
 import { articles, categories } from "./data.js";
-
 import App from "./App.svelte";
-import Waiting from "./Waiting.svelte";
-
-import {
-  IteratorStoreRoute,
-  ChildStoreRoute,
-  WaitingGuard,
-  Guard,
-  redirectGuard
-} from "../../src/index.svelte";
+import { IteratorStoreRoute, Guard } from "../../src/index.svelte";
 
 export class AlwaysThrowGuard extends Guard {
   async enter(transition) {
@@ -17,7 +8,7 @@ export class AlwaysThrowGuard extends Guard {
   }
 }
 
-let session;
+export let session;
 
 export function setSession(s) {
   session = s;
@@ -26,10 +17,6 @@ export function setSession(s) {
 if (sessionStorage.session) {
   setSession(sessionStorage.session);
 }
-
-export const enshureSession = redirectGuard("/login",() => !session);
-
-export const waitingGuard = new WaitingGuard(Waiting);
 
 async function delay(msecs = 1000) {
   return new Promise(r => setTimeout(r, msecs));
