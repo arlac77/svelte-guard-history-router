@@ -14,13 +14,29 @@ class Master {
 }
 
 class Detail {
+  constructor(id, leafs = []) {
+    this.id = id;
+    this.leafs = leafs;
+  }
+
+  async *[Symbol.asyncIterator]() {
+    for (const l of this.leafs) {
+      yield l;
+    }
+  }
+}
+
+class Leaf {
   constructor(id) {
     this.id = id;
   }
 }
 
 function setupRoute() {
-  const model = new Master([new Detail("1"), new Detail("2")]);
+  const model = new Master([
+    new Detail("1", [new Leaf("a"), new Leaf("b")]),
+    new Detail("2", [new Leaf("c"), new Leaf("d")])
+  ]);
   const master = new IteratorStoreRoute();
   master._path = "/master";
   master._objectInstance = Master;
@@ -32,11 +48,22 @@ function setupRoute() {
   detail._objectInstance = Detail;
   detail._propertyMapping = { detail: "id" };
 
-  return { master, detail, model };
+  detail.iteratorFor = function (properties) {
+    return this.parent.iteratorFor()
+    return [];
+  };
+
+  const leaf = new ChildStoreRoute();
+  leaf._path = "/:leaf";
+  leaf._parent = detail;
+  leaf._objectInstance = Leaf;
+  leaf._propertyMapping = { leaf: "id" };
+
+  return { master, detail, leaf, model };
 }
 
 test("route master detail subscription", async t => {
-  const { master, detail, model } = setupRoute();
+  const { detail, model } = setupRoute();
 
   let detailValue;
 
@@ -47,4 +74,18 @@ test("route master detail subscription", async t => {
   await detail.enter(transition);
 
   t.deepEqual(detailValue, model.details[1]);
+});
+
+test.skip("route master detail leaf subscription", async t => {
+  const { leaf, model } = setupRoute();
+
+  let leafValue;
+
+  leaf.subscribe(x => (leafValue = x));
+
+  const transition = { path: "/master/2/d", router: { params: { detail: "2", leaf: "d" } } };
+
+  await leaf.enter(transition);
+
+  t.deepEqual(leafValue, model.details[1].leafs[1]);
 });
