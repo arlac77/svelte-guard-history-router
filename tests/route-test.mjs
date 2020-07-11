@@ -51,17 +51,16 @@ test("route objectFor", t => {
 
 test("route objectInstance", t => {
   const route = new SkeletonRoute();
-
   t.is(route.objectInstance, Object);
 
   route._objectInstance = Number;
   t.is(route.objectInstance, Number);
 
-
   const child = new ChildStoreRoute();
+  child._objectInstance = Date;
 
   child._parent = route;
-  t.is(child.objectInstance, Number);
+  t.is(child.objectInstance, Date);
 });
 
 test("route subscription", t => {
@@ -75,5 +74,3 @@ test("route subscription", t => {
 
   t.is(changed, 4711);
 });
-
-

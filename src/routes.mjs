@@ -164,14 +164,8 @@ export class ObjectStoreRoute extends SkeletonRoute {
 }
 
 export class ChildStoreRoute extends ObjectStoreRoute {
-
-  get objectInstance()
-  {
-    return this.parent.objectInstance;
-  }
-
   async objectFor(properties) {
-    for await (const object of this.parent.iteratorFor()) {
+    for await (const object of this.parent.iteratorFor(properties)) {
       if (this.matches(object, properties)) {
         return object;
       }
