@@ -125,6 +125,10 @@ export class SkeletonRoute {
   objectFor(properties) {
     return this.parent.objectFor(properties);
   }
+
+  iteratorFor(properties) {
+    return this.parent.iteratorFor(properties);
+  }
 }
 
 export class IteratorStoreRoute extends SkeletonRoute {

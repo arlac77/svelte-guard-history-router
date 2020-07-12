@@ -62,9 +62,6 @@ export function setupRoute() {
   const filler = new SkeletonRoute();
   filler._path = "/filler";
   filler._parent = detail;
-  filler.iteratorFor = function(params) {
-    //console.log("FILLER",params,this);
-    return this.parent.iteratorFor(params); }
 
   const leaf = new ChildStoreRoute();
   leaf._path = "/:leaf";
