@@ -31,7 +31,7 @@ export const articles = Object.fromEntries(
 );
 
 export const categories = Object.values(articles).reduce((all, c) => {
-  if (!all[c.category]) all[c.category] = { name: c.category, articles: [] };
+  if (!all[c.category]) all[c.category] = { cid: c.category, name: c.category, articles: [] };
   all[c.category].articles.push(c);
   c.category = all[c.category];
   return all;

@@ -69,7 +69,7 @@
           <Route
             path="/:category"
             factory={ChildStoreRoute}
-            propertyMapping={{ category: 'name', xarticles: 'X' }}
+            propertyMapping={{ category: 'cid' }}
             linkComponent={CategoryLink}
             component={Category} />
         </Route>
