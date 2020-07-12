@@ -12,6 +12,7 @@
   export let propertyMapping;
   export let objectInstance;
   export let iteratorFor;
+  export let objectFor;
   export let component;
   export let linkComponent;
   export let factory = SkeletonRoute;
@@ -23,7 +24,6 @@
   setContext(ROUTE, route);
 
   route._path = path;
-
   route.component = component;
 
   if (parent) {
@@ -37,6 +37,9 @@
   }
   if (iteratorFor) {
     route.iteratorFor = iteratorFor;
+  }
+  if (objectFor) {
+    route.objectFor = objectFor;
   }
 
   if (linkComponent) {
