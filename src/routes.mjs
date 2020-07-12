@@ -9,6 +9,13 @@ const dummyParent = {
   objectFor: () => undefined
 };
 
+function ref(obj, str) {
+  for(const part of str.split(".")) {
+    obj = obj[part];
+  }
+  return obj;
+}
+
 /**
  * Base route without guard
  * @property {string} localPath
@@ -47,7 +54,7 @@ export class SkeletonRoute {
 
   matches(object, properties) {
     for (const [p, n] of Object.entries(this.propertyMapping)) {
-      if (object[n] !== properties[p]) {
+      if (ref(object,n) !== properties[p]) {
         return false;
       }
     }
@@ -65,7 +72,7 @@ export class SkeletonRoute {
 
     if (object instanceof this.objectInstance) {
       for (const [p, n] of Object.entries(this.propertyMapping)) {
-        const v = object[n];
+        const v = ref(object,n);
         if (v === undefined) {
           return undefined;
         }

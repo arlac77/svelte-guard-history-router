@@ -37,7 +37,13 @@ test("route propertiesFor", t => {
 
   route._propertyMapping = { repository: "name" };
   t.deepEqual(route._propertyMapping, { repository: "name" });
-  t.deepEqual(route.propertiesFor({ name: "repo1" }), { repository: "repo1" });
+  t.deepEqual(route.propertiesFor({ name: "r1" }), { repository: "r1" });
+});
+
+test("route propertiesFor deep refs", t => {
+  const route = new SkeletonRoute();
+  route._propertyMapping = { repository: "name", "group" : "owner.name" };
+  t.deepEqual(route.propertiesFor({ name: "r1", owner: { name: "g1"} }), { group: "g1", repository: "r1" });
 });
 
 test("route objectFor", t => {
