@@ -7,9 +7,22 @@ globalThis.window = {
   addEventListener: () => {}
 };
 
-test("router", async t => {
-  const { master } = setupRoute();
+function rft(t, object, expected) {
+  const { master, detail, leaf } = setupRoute();
   const router = new BaseRouter();
+  router.addRoute(master);
+  router.addRoute(detail);
+  router.addRoute(leaf);
+  t.is(router.routeFor(object), router.routes.find(r => r.path === expected));
+}
 
-  t.is(router.routeFor(undefined), undefined);
-});
+rft.title = (providedTitle = "", object, expected) =>
+  `router routeFor ${providedTitle} ${JSON.stringify(object)} ${JSON.stringify(
+    expected
+  )}`.trim();
+
+  test(rft, undefined, undefined);
+  test(rft, {}, undefined);
+  test(rft, new Date(), undefined);
+  test(rft, new Detail(1), '/master/:detail');
+  test(rft, new Leaf('b'), '/master/:detail/:leaf');
