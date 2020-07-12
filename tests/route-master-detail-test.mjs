@@ -23,7 +23,7 @@ test("route master detail leaf subscription", async t => {
   leaf.subscribe(x => (leafValue = x));
 
   const transition = {
-    path: "/master/2/d",
+    path: "/master/2/filler/d",
     router: { params: { detail: "2", leaf: "d" } }
   };
 

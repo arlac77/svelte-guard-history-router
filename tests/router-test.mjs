@@ -32,4 +32,4 @@ test(rft, undefined, undefined);
 test(rft, {}, undefined);
 test(rft, new Date(), undefined);
 test(rft, new Detail(1), "/master/:detail");
-test(rft, new Leaf("b"), "/master/:detail/:leaf");
+test(rft, new Leaf("b"), "/master/:detail/filler/:leaf");

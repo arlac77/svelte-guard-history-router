@@ -57,13 +57,18 @@ export function setupRoute() {
         yield* d.leafs;
       }
     }
-
-    //return this.parent.iteratorFor();
   };
+
+  const filler = new SkeletonRoute();
+  filler._path = "/filler";
+  filler._parent = detail;
+  filler.iteratorFor = function(params) {
+    //console.log("FILLER",params,this);
+    return this.parent.iteratorFor(params); }
 
   const leaf = new ChildStoreRoute();
   leaf._path = "/:leaf";
-  leaf._parent = detail;
+  leaf._parent = filler;
   leaf._objectInstance = Leaf;
   leaf._propertyMapping = { leaf: "id" };
 
@@ -74,5 +79,5 @@ export function setupRoute() {
   ext2._path = "/ext2";
   ext2._parent = leaf;
 
-  return { master, detail, leaf, ext1, ext2, model };
+  return { master, detail, filler, leaf, ext1, ext2, model };
 }
