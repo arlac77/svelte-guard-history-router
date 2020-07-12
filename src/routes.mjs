@@ -70,12 +70,13 @@ export class SkeletonRoute {
     if (object instanceof this.objectInstance) {
       for (const [p, n] of Object.entries(this.propertyMapping)) {
         const v = object[n];
-        if (v !== undefined) {
-          if (properties === undefined) {
-            properties = {};
-          }
-          properties[p] = v;
+        if (v === undefined) {
+          return undefined;
         }
+        if (properties === undefined) {
+          properties = {};
+        }
+        properties[p] = v;
       }
     }
 
