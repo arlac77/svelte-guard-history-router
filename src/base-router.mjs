@@ -254,7 +254,8 @@ export class BaseRouter {
    * @return {Route} able to support given object
    */
   routeFor(object) {
-    for (const r of this.routes.reverse()) {
+    for (let i = this.routes.length - 1; i >= 0; i--) {
+      const r = this.routes[i];
       if (r.propertiesFor(object)) {
         return r;
       }
