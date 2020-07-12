@@ -135,7 +135,7 @@ export class BaseRouter {
    * @return {any}
    */
   get value() {
-    return this.route ? this.route.value: undefined;
+    return this.route ? this.route.value : undefined;
   }
 
   get path() {
@@ -193,7 +193,7 @@ export class BaseRouter {
     }
 
     if (path !== undefined) {
-      history.pushState({path}, undefined, this.base + path);
+      history.pushState({ path }, undefined, this.base + path);
     }
 
     this.linkNodes.forEach(n => this.updateActive(n));
@@ -254,7 +254,7 @@ export class BaseRouter {
    * @return {Route} able to support given object
    */
   routeFor(object) {
-    for (const r of this.routes) {
+    for (const r of this.routes.reverse()) {
       if (r.propertiesFor(object)) {
         return r;
       }

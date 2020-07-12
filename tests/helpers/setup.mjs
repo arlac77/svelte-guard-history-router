@@ -1,4 +1,8 @@
-import { ChildStoreRoute, IteratorStoreRoute } from "../../src/routes.mjs";
+import {
+  ChildStoreRoute,
+  IteratorStoreRoute,
+  SkeletonRoute
+} from "../../src/routes.mjs";
 
 export class Master {
   constructor(details) {
@@ -47,8 +51,14 @@ export function setupRoute() {
   detail._objectInstance = Detail;
   detail._propertyMapping = { detail: "id" };
 
-  detail.iteratorFor = function (properties) {
-    return this.parent.iteratorFor();
+  detail.iteratorFor = async function* (properties) {
+    for await (const d of this.parent.iteratorFor()) {
+      if (d.id === properties.detail) {
+        yield* d.leafs;
+      }
+    }
+
+    //return this.parent.iteratorFor();
   };
 
   const leaf = new ChildStoreRoute();
@@ -57,5 +67,12 @@ export function setupRoute() {
   leaf._objectInstance = Leaf;
   leaf._propertyMapping = { leaf: "id" };
 
-  return { master, detail, leaf, model };
+  const ext1 = new SkeletonRoute();
+  ext1._path = "/ext1";
+  ext1._parent = leaf;
+  const ext2 = new SkeletonRoute();
+  ext2._path = "/ext2";
+  ext2._parent = leaf;
+
+  return { master, detail, leaf, ext1, ext2, model };
 }

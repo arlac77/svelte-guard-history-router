@@ -15,7 +15,7 @@ test("route master detail subscription", async t => {
   t.deepEqual(detailValue, model.details[1]);
 });
 
-test.skip("route master detail leaf subscription", async t => {
+test("route master detail leaf subscription", async t => {
   const { leaf, model } = setupRoute();
 
   let leafValue;
