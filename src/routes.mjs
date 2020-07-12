@@ -19,10 +19,6 @@ const dummyParent = {
  * @property {any} value
  */
 export class SkeletonRoute {
-  static get isRoute() {
-    return true;
-  }
-
   /**
    * Full path of the Route including all parents
    * @return {string} path
