@@ -4,6 +4,7 @@
   import { ROUTER } from "../util.mjs";
 
   export let object;
+  export let suffix = "";
 
   const router = getContext(ROUTER);
   const route = router.routeFor(object);
@@ -12,7 +13,7 @@
 
   if (route !== undefined) {
     const properties = route.propertiesFor(object);
-    href = route.path.replace(/:(\w+)/g, (m, name) => properties[name]);
+    href = route.path.replace(/:(\w+)/g, (m, name) => properties[name]) + suffix;
   }
 </script>
 
