@@ -149,18 +149,16 @@ npm test
         -   [Parameters](#parameters-11)
 -   [SkeletonRoute](#skeletonroute)
     -   [Properties](#properties-4)
+    -   [path](#path)
     -   [enter](#enter)
         -   [Parameters](#parameters-12)
     -   [leave](#leave)
         -   [Parameters](#parameters-13)
-    -   [propertyMapping](#propertymapping)
     -   [propertiesFor](#propertiesfor)
         -   [Parameters](#parameters-14)
+    -   [propertyMapping](#propertymapping)
     -   [objectFor](#objectfor)
         -   [Parameters](#parameters-15)
-    -   [defaultValue](#defaultvalue)
-    -   [value](#value-1)
-    -   [path](#path)
 -   [Guard](#guard)
     -   [enter](#enter-1)
         -   [Parameters](#parameters-16)
@@ -339,8 +337,8 @@ Transition between routes
 
 Start the transition
 
--   find matching target route @see Router.replace()
 -   leave old route
+-   find matching target route @see Router.replace()
 -   set params
 -   set current route
 -   enter new route
@@ -376,17 +374,23 @@ Bring back the router into the state before the transition has started
 
 ## SkeletonRoute
 
-Base route without guard
+Route
 
 ### Properties
 
--   `localPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `_path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 -   `component` **SvelteComponent** target to show
+-   `linkComponent` **SvelteComponent** content for [ObjectLink](ObjectLink)
 -   `priority` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 -   `keys` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** as found in the path
 -   `regex` **RegEx** 
 -   `value` **any** 
--   `defaultValue` **any** 
+
+### path
+
+Full path of the Route including all parents
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** path
 
 ### enter
 
@@ -404,13 +408,6 @@ Leave the route to a new one.
 
 -   `transition` **[Transition](#transition)** 
 
-### propertyMapping
-
-Map properties to objects attributes.
-Keys are the property names and values are the keys in the resulting object.
-
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
-
 ### propertiesFor
 
 Extract properties from object.
@@ -421,33 +418,23 @@ Extract properties from object.
 
 Returns **([Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** properties extracted from given objects
 
+### propertyMapping
+
+Map properties to objects attributes.
+Keys are the property names and values are the keys in the resulting object.
+
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
 ### objectFor
 
 Deliver object for a given set of properties
 
 #### Parameters
 
+-   `transition`  
 -   `properties` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** for matching properties
-
-### defaultValue
-
-Default value used for store.
-
-Returns **any** 
-
-### value
-
-Value used for store.
-
-Returns **any** 
-
-### path
-
-Full path of the Route including all parents
-
-Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** path
 
 ## Guard
 
