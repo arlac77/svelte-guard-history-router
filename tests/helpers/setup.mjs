@@ -69,8 +69,8 @@ export function setupRoutes() {
   detail._objectInstance = Detail;
   detail._propertyMapping = { detail: "id" };
 
-  detail.iteratorFor = async function* (properties) {
-    for await (const d of this.parent.iteratorFor()) {
+  detail.iteratorFor = async function* (transition, properties) {
+    for await (const d of this.parent.iteratorFor(transition, properties)) {
       if (d.id === properties.detail) {
         yield* d.leafs;
       }

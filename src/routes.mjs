@@ -10,7 +10,7 @@ const dummyParent = {
 };
 
 function ref(obj, str) {
-  for(const part of str.split(".")) {
+  for (const part of str.split(".")) {
     obj = obj[part];
   }
   return obj;
@@ -55,7 +55,7 @@ export class SkeletonRoute {
 
   matches(object, properties) {
     for (const [p, n] of Object.entries(this.propertyMapping)) {
-      if (ref(object,n) !== properties[p]) {
+      if (ref(object, n) !== properties[p]) {
         return false;
       }
     }
@@ -73,7 +73,7 @@ export class SkeletonRoute {
 
     if (object instanceof this.objectInstance) {
       for (const [p, n] of Object.entries(this.propertyMapping)) {
-        const v = ref(object,n);
+        const v = ref(object, n);
         if (v === undefined) {
           return undefined;
         }
@@ -126,12 +126,12 @@ export class SkeletonRoute {
    * @param {Object} properties
    * @return {Object} for matching properties
    */
-  objectFor(properties) {
-    return this.parent.objectFor(properties);
+  objectFor(transition, properties) {
+    return this.parent.objectFor(transition, properties);
   }
 
-  iteratorFor(properties) {
-    return this.parent.iteratorFor(properties);
+  iteratorFor(transition, properties) {
+    return this.parent.iteratorFor(transition, properties);
   }
 }
 
@@ -150,7 +150,7 @@ export class IteratorStoreRoute extends SkeletonRoute {
 
     const properties = transition.router.params;
 
-    for await (const e of await this.iteratorFor(properties)) {
+    for await (const e of await this.iteratorFor(transition, properties)) {
       entries.push(e);
     }
 
@@ -163,9 +163,7 @@ export class IteratorStoreRoute extends SkeletonRoute {
 export class ObjectStoreRoute extends SkeletonRoute {
   async enter(transition) {
     await super.enter(transition);
-
-    const properties = transition.router.params;
-    const object = await this.objectFor(properties);
+    const object = await this.objectFor(transition, transition.router.params);
 
     this.value = object;
     this.subscriptions.forEach(subscription => subscription(object));
@@ -173,8 +171,11 @@ export class ObjectStoreRoute extends SkeletonRoute {
 }
 
 export class ChildStoreRoute extends ObjectStoreRoute {
-  async objectFor(properties) {
-    for await (const object of this.parent.iteratorFor(properties)) {
+  async objectFor(transition, properties) {
+    for await (const object of this.parent.iteratorFor(
+      transition,
+      properties
+    )) {
       if (this.matches(object, properties)) {
         return object;
       }

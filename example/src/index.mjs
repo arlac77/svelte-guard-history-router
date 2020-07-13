@@ -22,7 +22,7 @@ async function delay(msecs = 1000) {
   return new Promise(r => setTimeout(r, msecs));
 }
 
-export async function* articleIterator() {
+export async function* articleIterator(transition, properties) {
   await delay(1000);
 
   for (const a of Object.values(articles)) {
@@ -30,7 +30,7 @@ export async function* articleIterator() {
   }
 }
 
-export async function* categoryIterator() {
+export async function* categoryIterator(transition, properties) {
   await delay(800);
 
   for (const c of Object.values(categories)) {
