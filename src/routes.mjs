@@ -17,9 +17,10 @@ function ref(obj, str) {
 }
 
 /**
- * Base route without guard
- * @property {string} localPath
+ * Route
+ * @property {string} _path
  * @property {SvelteComponent} component target to show
+ * @property {SvelteComponent} linkComponent content for {@link ObjectLink}
  * @property {number} priority
  * @property {string[]} keys as found in the path
  * @property {RegEx} regex
