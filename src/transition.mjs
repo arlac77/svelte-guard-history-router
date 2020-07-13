@@ -26,8 +26,8 @@ export class Transition {
 
   /**
    * Start the transition
-   * - find matching target route @see Router.replace()
    * - leave old route
+   * - find matching target route @see Router.replace()
    * - set params
    * - set current route
    * - enter new route
