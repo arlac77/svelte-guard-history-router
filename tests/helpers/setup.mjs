@@ -5,6 +5,17 @@ import {
 } from "../../src/routes.mjs";
 import { BaseRouter } from "../../src/base-router.mjs";
 
+globalThis.window = {
+  location: { pathname: "" },
+  addEventListener: () => {}
+};
+
+globalThis.history = {
+  pushState: (...args) => {
+    /*console.log("push",...args);*/
+  }
+};
+
 export class Master {
   constructor(details) {
     this.details = details;
@@ -36,11 +47,17 @@ export class Leaf {
   }
 }
 
-export function setupRoutes() {
+export function setupModel() {
   const model = new Master([
     new Detail("1", [new Leaf("a"), new Leaf("b")]),
     new Detail("2", [new Leaf("c"), new Leaf("d")])
   ]);
+
+  return model;
+}
+
+export function setupRoutes() {
+  const model = setupModel();
   const master = new IteratorStoreRoute();
   master._path = "/master";
   master._objectInstance = Master;

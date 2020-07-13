@@ -1,33 +1,30 @@
 import test from "ava";
-import { Master, Detail, Leaf, setupRoutes } from "./helpers/setup.mjs";
+import { Transition } from "../src/transition.mjs";
+
+import { Master, Detail, Leaf, setupRouter } from "./helpers/setup.mjs";
 
 test("route master detail subscription", async t => {
-  const { detail, model } = setupRoutes();
+  const { router, detail, model } = setupRouter();
 
   let detailValue;
 
   detail.subscribe(x => (detailValue = x));
 
-  const transition = { path: "/master/2", router: { params: { detail: "2" } } };
-
-  await detail.enter(transition);
+  const transition = new Transition(router, "/master/2");
+  await transition.start();
 
   t.deepEqual(detailValue, model.details[1]);
 });
 
 test("route master detail leaf subscription", async t => {
-  const { leaf, model } = setupRoutes();
+  const { router, leaf, model } = setupRouter();
 
   let leafValue;
 
   leaf.subscribe(x => (leafValue = x));
 
-  const transition = {
-    path: "/master/2/filler/d",
-    router: { params: { detail: "2", leaf: "d" } }
-  };
-
-  await leaf.enter(transition);
+  const transition = new Transition(router, "/master/2/filler/d");
+  await transition.start();
 
   t.deepEqual(leafValue, model.details[1].leafs[1]);
 });

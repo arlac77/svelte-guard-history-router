@@ -1,10 +1,6 @@
 import test from "ava";
 import { Master, Detail, Leaf, setupRouter } from "./helpers/setup.mjs";
 
-globalThis.window = {
-  location: { pathname: "" },
-  addEventListener: () => {}
-};
 
 function rft(t, object, expected) {
   const { router } = setupRouter();
