@@ -1,8 +1,8 @@
 import test from "ava";
-import { Master, Detail, Leaf, setupRoute } from "./helpers/setup.mjs";
+import { Master, Detail, Leaf, setupRoutes } from "./helpers/setup.mjs";
 
 test("route master detail subscription", async t => {
-  const { detail, model } = setupRoute();
+  const { detail, model } = setupRoutes();
 
   let detailValue;
 
@@ -16,7 +16,7 @@ test("route master detail subscription", async t => {
 });
 
 test("route master detail leaf subscription", async t => {
-  const { leaf, model } = setupRoute();
+  const { leaf, model } = setupRoutes();
 
   let leafValue;
 

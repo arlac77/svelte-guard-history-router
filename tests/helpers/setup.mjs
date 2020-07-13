@@ -3,6 +3,7 @@ import {
   IteratorStoreRoute,
   SkeletonRoute
 } from "../../src/routes.mjs";
+import { BaseRouter } from "../../src/base-router.mjs";
 
 export class Master {
   constructor(details) {
@@ -35,7 +36,7 @@ export class Leaf {
   }
 }
 
-export function setupRoute() {
+export function setupRoutes() {
   const model = new Master([
     new Detail("1", [new Leaf("a"), new Leaf("b")]),
     new Detail("2", [new Leaf("c"), new Leaf("d")])
@@ -77,4 +78,18 @@ export function setupRoute() {
   ext2._parent = leaf;
 
   return { master, detail, filler, leaf, ext1, ext2, model };
+}
+
+export function setupRouter() {
+  const all = setupRoutes();
+  const router = new BaseRouter();
+  router.addRoute(all.master);
+  router.addRoute(all.detail);
+  router.addRoute(all.filler);
+  router.addRoute(all.leaf);
+  router.addRoute(all.ext1);
+  router.addRoute(all.ext2);
+
+  all.router = router;
+  return all;
 }

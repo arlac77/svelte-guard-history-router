@@ -1,6 +1,5 @@
 import test from "ava";
-import { BaseRouter } from "../src/base-router.mjs";
-import { Master, Detail, Leaf, setupRoute } from "./helpers/setup.mjs";
+import { Master, Detail, Leaf, setupRouter } from "./helpers/setup.mjs";
 
 globalThis.window = {
   location: { pathname: "" },
@@ -8,12 +7,7 @@ globalThis.window = {
 };
 
 function rft(t, object, expected) {
-  const { master, detail, leaf, ext1 } = setupRoute();
-  const router = new BaseRouter();
-  router.addRoute(master);
-  router.addRoute(detail);
-  router.addRoute(leaf);
-  router.addRoute(ext1);
+  const { router } = setupRouter();
 
  // console.log(router.routes.map(r => `${r.path} ${r.priority}`));
 
