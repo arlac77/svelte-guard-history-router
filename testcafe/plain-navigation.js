@@ -5,7 +5,7 @@ const getLocation = ClientFunction(() => window.location.href);
 const goBack = ClientFunction(() => window.history.back());
 
 const al = id => {
-  return { path: `/article/${id}`, title: `Article ${articles[id].name}` };
+  return { path: `/article/${id}#price`, title: `Article ${articles[id].name}` };
 };
 
 const links = [
@@ -71,7 +71,7 @@ test.page`${base}/about`("about", async t => {
   await t.expect(title.innerText).eql("About");
 });
 
-test.page`${base}/article/10`("article/10", async t => {
+test.page`${base}/article/10`("article/10#price", async t => {
   const title = Selector(".routetitle");
 
   await t
@@ -107,7 +107,7 @@ test("Navigate around", async t => {
   await t.expect(getLocation()).contains("article");
   
 
-  const a = Selector("a").withAttribute("href", "/article/18");
+  const a = Selector("a").withAttribute("href", "/article/18#price");
   await t.click(a);
   await t.expect(getLocation()).contains("article/18");
   await t.expect(title.innerText).contains("Pizza Prosciutto");

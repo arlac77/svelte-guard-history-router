@@ -4,9 +4,11 @@
   export let href;
 
   function click(e) {
+    const ct = e.currentTarget;
+
     window.dispatchEvent(
       new CustomEvent(BaseRouter.navigationEventType, {
-        detail: { path: e.currentTarget.pathname }
+        detail: { path: ct.pathname + ct.hash }
       })
     );
   }

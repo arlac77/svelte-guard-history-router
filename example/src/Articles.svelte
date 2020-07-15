@@ -11,7 +11,7 @@
 <ul>
   {#each $route as article}
     <li>
-      <ObjectLink object={article}/>
+      <ObjectLink object={article} suffix="#price"/>
     </li>
   {/each}
 </ul>

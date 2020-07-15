@@ -15,7 +15,7 @@
 {#if $route}
   <h2 class="routetitle">Article {$route.name}</h2>
   <div>Id: {$route.id}</div>
-  <div class="price">{$route.price} $</div>
+  <div id="price" class="price">{$route.price} $</div>
   <ObjectLink object={$route.category} />
 
   <div>
