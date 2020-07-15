@@ -13,17 +13,17 @@
 
   if (route !== undefined) {
     const properties = route.propertiesFor(object);
-    href = route.path.replace(/:(\w+)/g, (m, name) => properties[name]) + suffix;
+    href =
+      route.path.replace(/:(\w+)/g, (m, name) => properties[name]) + suffix;
   }
 </script>
 
 {#if href}
   <Link {href}>
     {#if route.linkComponent}
-      <svelte:component this={route.linkComponent} {object}/>
-    {:else}
-      <slot />
+      <svelte:component this={route.linkComponent} {object} />
     {/if}
+    <slot />
   </Link>
 {:else}
   <slot name="noFound" />
