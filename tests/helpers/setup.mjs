@@ -94,7 +94,10 @@ export function setupRoutes() {
   ext2._path = "/ext2";
   ext2._parent = leaf;
 
-  return { master, detail, filler, leaf, ext1, ext2, model };
+  const login = new SkeletonRoute();
+  login._path = "/login";
+
+  return { master, detail, filler, leaf, ext1, ext2, login, model };
 }
 
 export function setupRouter() {
