@@ -87,10 +87,6 @@ export class Transition {
             console.log("CONTINUE");
 
             this.router.state = redirected.state;
-            // try entering 2nd. time
-            /*if (this.router.route !== undefined) {
-            await this.router.route.enter(this);
-          }*/
           } catch (e) {
             await this.rollback(e);
             reject(e);

@@ -28,9 +28,7 @@ export class Guard {
  */
 export function redirectGuard(url, condition) {
   return {
-    toString: () => {
-      return `redirect(${url})`;
-    },
+    toString: () => `redirect(${url})`,
     enter: async transition => {
       if (condition === undefined || condition(transition)) {
         return transition.redirect(url);
@@ -46,9 +44,7 @@ export function redirectGuard(url, condition) {
  */
 export function sequenceGuard(children) {
   return {
-    toString: () => {
-      return children.toString();
-    },
+    toString: () => children.toString(),
     enter: async transition => {
       for (const child of children) {
         await child.enter(transition);
