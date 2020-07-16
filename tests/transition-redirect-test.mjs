@@ -5,7 +5,7 @@ import { setupRouter } from "./helpers/setup.mjs";
 test("transition redirect", async t => {
   const { router } = setupRouter();
 
-  const transition = new Transition(router, "/master/2");
+  const transition = new Transition(router, "/protected");
   await transition.start();
   transition.redirect("/login");
 

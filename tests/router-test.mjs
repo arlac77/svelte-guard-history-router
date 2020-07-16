@@ -1,5 +1,5 @@
 import test from "ava";
-import { Master, Detail, Leaf, setupRouter } from "./helpers/setup.mjs";
+import { Detail, Leaf, setupRouter } from "./helpers/setup.mjs";
 
 
 function rft(t, object, expected) {

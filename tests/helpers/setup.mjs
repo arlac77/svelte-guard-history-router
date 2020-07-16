@@ -3,7 +3,9 @@ import {
   IteratorStoreRoute,
   SkeletonRoute
 } from "../../src/routes.mjs";
+
 import { BaseRouter } from "../../src/base-router.mjs";
+import { redirectGuard } from "../../src/guard.mjs";
 
 globalThis.window = {
   location: { pathname: "" },
@@ -97,7 +99,11 @@ export function setupRoutes() {
   const login = new SkeletonRoute();
   login._path = "/login";
 
-  return { master, detail, filler, leaf, ext1, ext2, login, model };
+  const redirect = new SkeletonRoute();
+  redirect._path = "/protected";
+  redirect._guard = redirectGuard("/login", () => true);
+
+  return { master, detail, filler, leaf, ext1, ext2, redirect, login, model };
 }
 
 export function setupRouter() {
