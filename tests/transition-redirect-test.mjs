@@ -18,5 +18,6 @@ test("transition redirect", async t => {
   await start;
 
   t.falsy(transition.redirected);
-});
 
+  t.is(router.route.path, "/protected");
+});

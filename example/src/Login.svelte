@@ -13,7 +13,6 @@
       setSession({ username });
       await router.continue();
     } catch (e) {
-      console.log(e);
       message = e;
     }
   }

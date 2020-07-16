@@ -13,9 +13,7 @@ globalThis.window = {
 };
 
 globalThis.history = {
-  pushState: (...args) => {
-    /*console.log("push",...args);*/
-  }
+  pushState: (...args) => {}
 };
 
 export class Master {
@@ -106,12 +104,22 @@ export function setupRoutes() {
 
   redirect._guard = redirectGuard("/login", () => needsLogin);
 
-  function noLoginRequired()
-  {
+  function noLoginRequired() {
     needsLogin = false;
   }
 
-  return { master, detail, filler, leaf, ext1, ext2, redirect, login, model, noLoginRequired };
+  return {
+    master,
+    detail,
+    filler,
+    leaf,
+    ext1,
+    ext2,
+    redirect,
+    login,
+    model,
+    noLoginRequired
+  };
 }
 
 export function setupRouter() {

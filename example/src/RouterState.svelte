@@ -71,7 +71,7 @@
       {#if $router.transition !== undefined}
         <tr>
           <td id="route.path">{$router.transition.path}</td>
-          <td id="route.redirected">{$router.transition.redirected ? $router.transition.redirected.path : ''}</td>
+          <td id="route.redirected">{$router.transition.redirected ? $router.route.path : ''}</td>
         </tr>
       {/if}
     </tbody>

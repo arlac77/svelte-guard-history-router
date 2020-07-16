@@ -38,8 +38,6 @@ export class Transition {
   async start() {
     const router = this.router;
 
-    console.log("START", this.path);
-
     try {
       if (this.saved.route !== undefined) {
         await this.saved.route.leave(this);
@@ -53,7 +51,6 @@ export class Transition {
     } catch (e) {
       await this.rollback(e);
     } finally {
-      console.log("END", this.path);
       this.end();
     }
   }
@@ -76,23 +73,19 @@ export class Transition {
    * @param {string} path new route to enter temporary
    */
   async redirect(path) {
-    console.log("REDIRECT", path);
-    const redirected = { path, state: this.router.replace(path) };
+    this.redirected = { state: this.router.replace(path) };
 
-    this.redirected = redirected;
     return new Promise(
       (resolve, reject) =>
-        (redirected.continue = async () => {
+        (this.redirected.continue = async () => {
           try {
-            console.log("CONTINUE");
-
-            this.router.state = redirected.state;
+            this.router.state = this.redirected.state;
+            resolve();
           } catch (e) {
             await this.rollback(e);
             reject(e);
           } finally {
             this.redirected = undefined;
-            resolve();
           }
         })
     );
