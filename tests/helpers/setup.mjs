@@ -13,7 +13,8 @@ globalThis.window = {
 };
 
 globalThis.history = {
-  pushState: (...args) => {}
+  pushState: (...args) => {},
+  back: () => {}
 };
 
 export class Master {

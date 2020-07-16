@@ -21,3 +21,27 @@ test("transition redirect", async t => {
 
   t.is(router.route.path, "/protected");
 });
+
+
+test("transition redirect + abort", async t => {
+  const { router } = setupRouter();
+
+  const transition = new Transition(router, "/protected");
+  const start = transition.start();
+  transition.redirect("/login");
+
+  await router.abort();
+
+  t.not(router.route.path,"/protected");
+
+  t.pass("aborted");
+  /*
+  try {
+    await start;
+  }
+  catch(e) {
+  }
+*/
+ // t.is(transition.redirected,undefined);
+  //t.is(router.route.path, "/protected");
+});

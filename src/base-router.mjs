@@ -200,13 +200,24 @@ export class BaseRouter {
   }
 
   /**
-   * Continue transition to its original destination.
+   * Continue a transition to its original destination.
    * Shortcut for this.transition.continue()
    * Does nothing if there is no transition.
    */
   async continue() {
     if (this.transition) {
       return this.transition.continue();
+    }
+  }
+
+  /**
+   * Abort a transition.
+   * Shortcut for this.transition.abort()
+   * Does nothing if there is no transition.
+   */
+  async abort() {
+    if (this.transition) {
+      return this.transition.abort();
     }
   }
 

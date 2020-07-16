@@ -29,7 +29,17 @@
       }, 500);
     });
   }
+
+  const handleKeyup = event => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      router.abort();
+      close();
+    }
+  };
 </script>
+
+<svelte:window on:keyup={handleKeyup} />
 
 <div class="center modal">
   <form on:submit|preventDefault={submit}>

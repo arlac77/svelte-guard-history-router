@@ -49,7 +49,7 @@ export class Transition {
         await router.route.enter(this);
       }
     } catch (e) {
-      await this.rollback(e);
+      await this.abort(e);
     } finally {
       this.end();
     }
@@ -76,18 +76,24 @@ export class Transition {
     this.redirected = { state: this.router.replace(path) };
 
     return new Promise(
-      (resolve, reject) =>
-        (this.redirected.continue = async () => {
+      (resolve, reject) => {
+        this.redirected.continue = async () => {
           try {
             this.router.state = this.redirected.state;
             resolve();
           } catch (e) {
-            await this.rollback(e);
+            await this.abort(e);
             reject(e);
           } finally {
             this.redirected = undefined;
           }
-        })
+        };
+      
+        this.redirected.abort = () => {
+          this.redirected = undefined;
+          reject();
+        };
+      }
     );
   }
 
@@ -97,7 +103,7 @@ export class Transition {
    */
   async continue() {
     if (this.redirected !== undefined) {
-      this.redirected.continue();
+      return this.redirected.continue();
     }
   }
 
@@ -105,13 +111,17 @@ export class Transition {
    * Bring back the router into the state before the transition has started
    * @param {Exception} e
    */
-  async rollback(e) {
+  async abort(e) {
     if (e) {
       this.router.error(e);
     }
 
+    if (this.redirected !== undefined) {
+      await this.redirected.abort();
+    }
+
     this.router.state = this.saved;
-    window.history.back();
+    history.back();
     setTimeout(() => this.router.finalizePush(), 0);
   }
 }
