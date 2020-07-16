@@ -101,9 +101,17 @@ export function setupRoutes() {
 
   const redirect = new SkeletonRoute();
   redirect._path = "/protected";
-  redirect._guard = redirectGuard("/login", () => true);
 
-  return { master, detail, filler, leaf, ext1, ext2, redirect, login, model };
+  let needsLogin = true;
+
+  redirect._guard = redirectGuard("/login", () => needsLogin);
+
+  function noLoginRequired()
+  {
+    needsLogin = false;
+  }
+
+  return { master, detail, filler, leaf, ext1, ext2, redirect, login, model, noLoginRequired };
 }
 
 export function setupRouter() {
@@ -115,6 +123,8 @@ export function setupRouter() {
   router.addRoute(all.leaf);
   router.addRoute(all.ext1);
   router.addRoute(all.ext2);
+  router.addRoute(all.redirect);
+  router.addRoute(all.login);
 
   all.router = router;
   return all;
