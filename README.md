@@ -28,17 +28,11 @@ svelte guarded history router
 # usage
 
 ```js
-import { Guard } from 'svelte-guard-history-router';
+import { redirectGuard } from 'svelte-guard-history-router';
 
 let session = undefined;
 
-class SessionGuard extends Guard {
-  async enter(transition) {
-    if(!session) {
-      return transition.redirect('/login');
-    }
-  }
-}
+export const enshureSession = redirectGuard("/login", () => !session);
 ```
 
 ```html
@@ -50,7 +44,7 @@ class SessionGuard extends Guard {
   import Articles from "./Articles.svelte";
   import Article from "./Article.svelte";
 
-  import { sessionGuard } from "./main.mjs";
+  import { enshureSession } from "./main.mjs";
 </script>
 
 <Router base="/base">
@@ -62,13 +56,13 @@ class SessionGuard extends Guard {
       <Route path="/about" component={About}>About</Route>
     </li>
     <li>
-      <Route path="/article" guards={sessionGuard} component={Articles}>
+      <Route path="/article" guards={enshureSession} component={Articles}>
         Articles
         <Route path="/:artice" component={Article}/>
       </Route>
     </li>
     <li>
-      <Route path="/category" guards={sessionGuard} component={Categories}>
+      <Route path="/category" guards={enshureSession} component={Categories}>
         Categories
         <Route path="/:category" component={Category}/>
       </Route>
