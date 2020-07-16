@@ -40,7 +40,7 @@ export class BaseRouter {
     return "routerLink";
   }
 
-  constructor(routes = [], base = "") {
+  constructor(routes=[], base="") {
     let route;
 
     this.routes = routes;

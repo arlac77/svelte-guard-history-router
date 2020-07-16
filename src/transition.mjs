@@ -38,6 +38,8 @@ export class Transition {
   async start() {
     const router = this.router;
 
+    console.log("START", this.path);
+
     try {
       if (this.saved.route !== undefined) {
         await this.saved.route.leave(this);
@@ -51,6 +53,7 @@ export class Transition {
     } catch (e) {
       await this.rollback(e);
     } finally {
+      console.log("END", this.path);
       this.end();
     }
   }
@@ -68,31 +71,44 @@ export class Transition {
 
   /**
    * Halt current transition and go to another route.
-   * To proceed with the original route by calling continue()
+   * To proceed with the original route by calling {@link continue()}
+   * The original transition will cept in place and be continued afterwards
    * @param {string} path new route to enter temporary
    */
   async redirect(path) {
-    this.redirected = this.router.replace(path);
+    console.log("REDIRECT", path);
+    const redirected = { path, state: this.router.replace(path) };
+
+    this.redirected = redirected;
+    return new Promise(
+      (resolve, reject) =>
+        (redirected.continue = async () => {
+          try {
+            console.log("CONTINUE");
+
+            this.router.state = redirected.state;
+            // try entering 2nd. time
+            /*if (this.router.route !== undefined) {
+            await this.router.route.enter(this);
+          }*/
+          } catch (e) {
+            await this.rollback(e);
+            reject(e);
+          } finally {
+            this.redirected = undefined;
+            resolve();
+          }
+        })
+    );
   }
 
   /**
-   * Continue a redirected route to its original destination
+   * Continue a redirected route to its original destination.
+   * Does nothing if the transition has not been redirected
    */
   async continue() {
     if (this.redirected !== undefined) {
-      try {
-        this.router.state = this.redirected;
-
-        // try entering 2nd. time
-        if (this.router.route !== undefined) {
-          await this.router.route.enter(this);
-        }
-      } catch (e) {
-        await this.rollback(e);
-      } finally {
-        this.redirected = undefined;
-        this.end();
-      }
+      this.redirected.continue();
     }
   }
 
