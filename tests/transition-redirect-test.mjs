@@ -1,10 +1,9 @@
 import test from "ava";
 import { Transition } from "../src/transition.mjs";
+import { setupRouter } from "./helpers/setup.mjs";
 
-import { Master, Detail, Leaf, setupRouter } from "./helpers/setup.mjs";
-
-test("route master detail subscription", async t => {
-  const { router, detail, model } = setupRouter();
+test("transition redirect", async t => {
+  const { router } = setupRouter();
 
   const transition = new Transition(router, "/master/2");
   await transition.start();
