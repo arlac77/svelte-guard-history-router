@@ -354,7 +354,8 @@ Update Nodes active state
 ### redirect
 
 Halt current transition and go to another route.
-To proceed with the original route by calling continue()
+To proceed with the original route by calling [continue()](continue())
+The original transition will cept in place and be continued afterwards
 
 #### Parameters
 
@@ -362,7 +363,8 @@ To proceed with the original route by calling continue()
 
 ### continue
 
-Continue a redirected route to its original destination
+Continue a redirected route to its original destination.
+Does nothing if the transition has not been redirected
 
 ### rollback
 
