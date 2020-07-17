@@ -1,3 +1,5 @@
+import { matcher } from "multi-path-matcher";
+
 /**
  * Transition between routes
  * @param {Router} router
@@ -39,15 +41,20 @@ export class Transition {
     const router = this.router;
 
     try {
-      if (this.saved.route !== undefined) {
-        await this.saved.route.leave(this);
-      }
+      const state = matcher(this.router.routes, this.path);
 
-      router.replace(this.path);
+      if (state.route) {
+        const ancestor = state.route.commonAncestor(this.saved.route);
 
-      if (router.route !== undefined) {
-        console.log("CA",router.route.commonAncestor(this.saved.route));
-        await router.route.enter(this);
+        if (this.saved.route !== undefined) {
+          await this.saved.route.leave(this, ancestor);
+        }
+
+        router.state = state;
+
+        if (router.route !== undefined) {
+          await router.route.enter(this, ancestor);
+        }
       }
     } catch (e) {
       await this.abort(e);
@@ -76,26 +83,24 @@ export class Transition {
   async redirect(path) {
     this.redirected = { state: this.router.replace(path) };
 
-    return new Promise(
-      (resolve, reject) => {
-        this.redirected.continue = async () => {
-          try {
-            this.router.state = this.redirected.state;
-            resolve();
-          } catch (e) {
-            await this.abort(e);
-            reject(e);
-          } finally {
-            this.redirected = undefined;
-          }
-        };
-      
-        this.redirected.abort = () => {
+    return new Promise((resolve, reject) => {
+      this.redirected.continue = async () => {
+        try {
+          this.router.state = this.redirected.state;
+          resolve();
+        } catch (e) {
+          await this.abort(e);
+          reject(e);
+        } finally {
           this.redirected = undefined;
-          reject();
-        };
-      }
-    );
+        }
+      };
+
+      this.redirected.abort = () => {
+        this.redirected = undefined;
+        reject();
+      };
+    });
   }
 
   /**

@@ -1,11 +1,8 @@
 import test from "ava";
 import { Detail, Leaf, setupRouter } from "./helpers/setup.mjs";
 
-
 function rft(t, object, expected) {
   const { router } = setupRouter();
-
- // console.log(router.routes.map(r => `${r.path} ${r.priority}`));
 
   t.is(
     router.routeFor(object),

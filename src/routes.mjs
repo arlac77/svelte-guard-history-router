@@ -5,6 +5,8 @@ const dummyGuard = { toString: () => "", enter: () => {}, leave: () => {} };
 const dummyParent = {
   path: "",
   guard: dummyGuard,
+  enter: () => {},
+  leave: () => {},
   propertiesFor: () => undefined,
   objectFor: () => undefined
 };
@@ -39,18 +41,24 @@ export class SkeletonRoute {
    * Enter the route from a former one.
    * @param {Transition} transition
    */
-  async enter(transition) {
-    await this.parent.guard.enter(transition);
-    return this.guard.enter(transition);
+  async enter(transition, untilRoute) {
+    if (this !== untilRoute) {
+      await this.parent.enter(transition, untilRoute);
+      console.log("ENTER", this.path);
+      return this.guard.enter(transition);
+    }
   }
 
   /**
    * Leave the route to a new one.
    * @param {Transition} transition
    */
-  async leave(transition) {
-    await this.guard.leave(transition);
-    return this.parent.guard.leave(transition);
+  async leave(transition, untilRoute) {
+    if (this !== untilRoute) {
+      await this.guard.leave(transition);
+      console.log("LEAVE", this.path);
+      return this.parent.leave(transition, untilRoute);
+    }
   }
 
   matches(object, properties) {
@@ -87,17 +95,16 @@ export class SkeletonRoute {
     return properties;
   }
 
-  commonAncestor(otherRoute)
-  {
-    for(let op = otherRoute; op; op = op.parent) {
-      for(let p = this; p; p = p.parent) {
-        if(p === op) {
+  commonAncestor(otherRoute) {
+    for (let op = otherRoute; op; op = op.parent) {
+      for (let p = this; p; p = p.parent) {
+        if (p === op) {
           return p;
         }
       }
     }
   }
- 
+
   get subscriptions() {
     return this._subscriptions || dummySet;
   }
@@ -152,8 +159,8 @@ export class IteratorStoreRoute extends SkeletonRoute {
     this.value = [];
   }
 
-  async enter(transition) {
-    await super.enter(transition);
+  async enter(transition, untilRoute) {
+    await super.enter(transition, untilRoute);
 
     const entries = [];
 
@@ -172,8 +179,8 @@ export class IteratorStoreRoute extends SkeletonRoute {
 }
 
 export class ObjectStoreRoute extends SkeletonRoute {
-  async enter(transition) {
-    await super.enter(transition);
+  async enter(transition, untilRoute) {
+    await super.enter(transition, untilRoute);
     const object = await this.objectFor(transition, transition.router.params);
 
     this.value = object;

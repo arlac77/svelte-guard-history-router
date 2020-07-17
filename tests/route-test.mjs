@@ -1,5 +1,8 @@
 import test from "ava";
+import { setupRouter } from "./helpers/setup.mjs";
+
 import { SkeletonRoute, ChildStoreRoute } from "../src/routes.mjs";
+import { Transition } from "../src/transition.mjs";
 
 test("route common ancestor", t => {
   const parentRoute = new SkeletonRoute();
@@ -31,16 +34,27 @@ test("route path", t => {
   t.is(route.path, "/a/b");
 });
 
-test("route guard", t => {
-  let parentGuardEntered = false;
+test("route guard", async t => {
+  const { router } = setupRouter();
+
   const parentRoute = new SkeletonRoute();
-  parentRoute._guard = { enter: x => (parentGuardEntered = x) };
+  parentRoute._path = "/base";
+
+  let parentGuardEntered = false;
+
+  parentRoute._guard = {
+    toString: () => "test",
+    enter: transition => {
+      parentGuardEntered = transition;
+    }
+  };
 
   const route = new SkeletonRoute();
+  route._path = "/a";
   route._parent = parentRoute;
 
-  const transition = {};
-  route.enter(transition);
+  const transition = new Transition(router, "/base/a");
+  await route.enter(transition);
 
   t.deepEqual(parentGuardEntered, transition);
 });
@@ -59,8 +73,11 @@ test("route propertiesFor", t => {
 
 test("route propertiesFor deep refs", t => {
   const route = new SkeletonRoute();
-  route._propertyMapping = { repository: "name", "group" : "owner.name" };
-  t.deepEqual(route.propertiesFor({ name: "r1", owner: { name: "g1"} }), { group: "g1", repository: "r1" });
+  route._propertyMapping = { repository: "name", group: "owner.name" };
+  t.deepEqual(route.propertiesFor({ name: "r1", owner: { name: "g1" } }), {
+    group: "g1",
+    repository: "r1"
+  });
 });
 
 test("route objectFor", t => {
