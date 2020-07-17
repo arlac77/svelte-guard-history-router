@@ -44,7 +44,6 @@ export class SkeletonRoute {
   async enter(transition, untilRoute) {
     if (this !== untilRoute) {
       await this.parent.enter(transition, untilRoute);
-      console.log("ENTER", this.path);
       return this.guard.enter(transition);
     }
   }
@@ -56,7 +55,6 @@ export class SkeletonRoute {
   async leave(transition, untilRoute) {
     if (this !== untilRoute) {
       await this.guard.leave(transition);
-      console.log("LEAVE", this.path);
       return this.parent.leave(transition, untilRoute);
     }
   }
