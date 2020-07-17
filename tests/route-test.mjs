@@ -1,6 +1,23 @@
 import test from "ava";
 import { SkeletonRoute, ChildStoreRoute } from "../src/routes.mjs";
 
+test("route common ancestor", t => {
+  const parentRoute = new SkeletonRoute();
+  parentRoute._path = "/parent";
+  t.is(parentRoute.commonAncestor(parentRoute), parentRoute);
+  t.is(parentRoute.commonAncestor(), undefined);
+
+  const routeA = new SkeletonRoute();
+  routeA._parent = parentRoute;
+  routeA._path = "/a";
+  t.is(routeA.commonAncestor(parentRoute), parentRoute);
+
+  const routeB = new SkeletonRoute();
+  routeB._parent = parentRoute;
+  routeB._path = "/b";
+  t.is(routeB.commonAncestor(routeA), parentRoute);
+});
+
 test("route path", t => {
   const parentRoute = new SkeletonRoute();
   parentRoute._path = "/a";

@@ -87,6 +87,17 @@ export class SkeletonRoute {
     return properties;
   }
 
+  commonAncestor(otherRoute)
+  {
+    for(let op = otherRoute; op; op = op.parent) {
+      for(let p = this; p; p = p.parent) {
+        if(p === op) {
+          return p;
+        }
+      }
+    }
+  }
+ 
   get subscriptions() {
     return this._subscriptions || dummySet;
   }

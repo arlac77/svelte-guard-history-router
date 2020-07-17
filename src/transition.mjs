@@ -46,6 +46,7 @@ export class Transition {
       router.replace(this.path);
 
       if (router.route !== undefined) {
+        console.log("CA",router.route.commonAncestor(this.saved.route));
         await router.route.enter(this);
       }
     } catch (e) {
