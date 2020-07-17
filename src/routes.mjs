@@ -1,11 +1,12 @@
-const dummySet = { forEach: () => {} };
 
-const dummyGuard = { toString: () => "", enter: () => {}, leave: () => {} };
-
+const dummyFunction = () => {}; 
+const dummySet = { forEach: dummyFunction };
+const dummyGuard = { toString: () => "", enter: dummyFunction, leave: dummyFunction };
 const dummyParent = {
   path: "",
   guard: dummyGuard,
-  enter: () => {},
+  enter: dummyFunction,
+  leave: dummyFunction,
   propertiesFor: () => undefined,
   objectFor: () => undefined
 };
