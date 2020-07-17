@@ -120,6 +120,7 @@ npm test
     -   [finalizePush](#finalizepush)
         -   [Parameters](#parameters-3)
     -   [continue](#continue)
+    -   [abort](#abort)
     -   [subscribe](#subscribe)
         -   [Parameters](#parameters-4)
     -   [updateActive](#updateactive)
@@ -139,7 +140,7 @@ npm test
     -   [redirect](#redirect)
         -   [Parameters](#parameters-10)
     -   [continue](#continue-1)
-    -   [rollback](#rollback)
+    -   [abort](#abort-1)
         -   [Parameters](#parameters-11)
 -   [SkeletonRoute](#skeletonroute)
     -   [Properties](#properties-4)
@@ -258,8 +259,14 @@ If path is undefined the transition has been aborderd
 
 ### continue
 
-Continue transition to its original destination.
+Continue a transition to its original destination.
 Shortcut for this.transition.continue()
+Does nothing if there is no transition.
+
+### abort
+
+Abort a transition.
+Shortcut for this.transition.abort()
 Does nothing if there is no transition.
 
 ### subscribe
@@ -360,7 +367,7 @@ The original transition will cept in place and be continued afterwards
 Continue a redirected route to its original destination.
 Does nothing if the transition has not been redirected
 
-### rollback
+### abort
 
 Bring back the router into the state before the transition has started
 
@@ -395,6 +402,7 @@ Enter the route from a former one.
 #### Parameters
 
 -   `transition` **[Transition](#transition)** 
+-   `untilRoute`  
 
 ### leave
 
@@ -403,6 +411,7 @@ Leave the route to a new one.
 #### Parameters
 
 -   `transition` **[Transition](#transition)** 
+-   `untilRoute`  
 
 ### propertiesFor
 
