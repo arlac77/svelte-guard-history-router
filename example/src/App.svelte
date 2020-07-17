@@ -21,7 +21,6 @@
   import Home from "./Home.svelte";
   import NoWay from "./NoWay.svelte";
   import Waiting from "./Waiting.svelte";
-
   import {
     AlwaysThrowGuard,
     session,
