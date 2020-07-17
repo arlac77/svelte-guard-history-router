@@ -6,7 +6,6 @@ const dummyParent = {
   path: "",
   guard: dummyGuard,
   enter: () => {},
-  leave: () => {},
   propertiesFor: () => undefined,
   objectFor: () => undefined
 };
@@ -40,6 +39,7 @@ export class SkeletonRoute {
   /**
    * Enter the route from a former one.
    * @param {Transition} transition
+   * @param {Route} untilRoute the common ancestor with the former route 
    */
   async enter(transition, untilRoute) {
     if (this !== untilRoute) {
@@ -51,6 +51,7 @@ export class SkeletonRoute {
   /**
    * Leave the route to a new one.
    * @param {Transition} transition
+   * @param {Route} untilRoute the common ancestor with the next route 
    */
   async leave(transition, untilRoute) {
     if (this !== untilRoute) {
@@ -93,10 +94,15 @@ export class SkeletonRoute {
     return properties;
   }
 
-  commonAncestor(otherRoute) {
-    for (let op = otherRoute; op; op = op.parent) {
+  /**
+   * Find common ancestor with another Route
+   * @param {Route} other 
+   * @return {Route|undefined} common ancestor Route between receiver and other 
+   */ 
+  commonAncestor(other) {
+    for (let o = other; o; o = o.parent) {
       for (let p = this; p; p = p.parent) {
-        if (p === op) {
+        if (p === o) {
           return p;
         }
       }
