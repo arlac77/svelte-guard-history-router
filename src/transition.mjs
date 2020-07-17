@@ -12,13 +12,10 @@ export class Transition {
   constructor(router, path) {
     let component;
 
-    let context = {};
-
     Object.defineProperties(this, {
       router: { value: router },
       path: { value: path },
       saved: { value: router.state },
-      context: { value: context },
       component: {
         get: () => (this.redirected === undefined ? component : undefined),
         set: value => {
