@@ -8,12 +8,12 @@
 
   export let path;
   export let href = path;
+  export let component;
   export let guards;
   export let propertyMapping;
   export let objectInstance;
   export let iteratorFor;
   export let objectFor;
-  export let component;
   export let linkComponent;
   export let factory = SkeletonRoute;
 
