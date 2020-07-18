@@ -1,6 +1,6 @@
 
 const dummyFunction = () => {}; 
-const dummySet = { forEach: dummyFunction };
+const dummySet = { size: 0, forEach: dummyFunction };
 const dummyGuard = { toString: () => "", enter: dummyFunction, leave: dummyFunction };
 const dummyParent = {
   path: "",

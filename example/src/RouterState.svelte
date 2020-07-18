@@ -80,7 +80,10 @@
 
   <table>
     <thead>
-      <th colspan="4">Routes</th>
+      <th>Routes</th>
+      <th>Guards</th>
+      <th>Keys</th>
+      <th>Component</th>
       <th>Subscriptions</th>
     </thead>
     <tbody>
@@ -90,7 +93,7 @@
           <td id="route.guard">{r.guard}</td>
           <td id="route.key">{r.keys.join(' ')}</td>
           <td id="route.component">{r.component.name}</td>
-          <td id="route.subscriptions">{r.subscriptions.size}</td>
+          <td id="route.subscriptions">{r.subscriptions}</td>
         </tr>
       {/each}
     </tbody>
