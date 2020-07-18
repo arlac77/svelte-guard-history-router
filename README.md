@@ -151,22 +151,24 @@ npm test
         -   [Parameters](#parameters-13)
     -   [propertiesFor](#propertiesfor)
         -   [Parameters](#parameters-14)
+    -   [commonAncestor](#commonancestor)
+        -   [Parameters](#parameters-15)
     -   [propertyMapping](#propertymapping)
     -   [objectFor](#objectfor)
-        -   [Parameters](#parameters-15)
+        -   [Parameters](#parameters-16)
 -   [Guard](#guard)
     -   [enter](#enter-1)
-        -   [Parameters](#parameters-16)
-    -   [leave](#leave-1)
         -   [Parameters](#parameters-17)
+    -   [leave](#leave-1)
+        -   [Parameters](#parameters-18)
 -   [redirectGuard](#redirectguard)
-    -   [Parameters](#parameters-18)
--   [sequenceGuard](#sequenceguard)
     -   [Parameters](#parameters-19)
--   [parallelGuard](#parallelguard)
+-   [sequenceGuard](#sequenceguard)
     -   [Parameters](#parameters-20)
--   [WaitingGuard](#waitingguard)
+-   [parallelGuard](#parallelguard)
     -   [Parameters](#parameters-21)
+-   [WaitingGuard](#waitingguard)
+    -   [Parameters](#parameters-22)
 
 ## Key
 
@@ -402,7 +404,7 @@ Enter the route from a former one.
 #### Parameters
 
 -   `transition` **[Transition](#transition)** 
--   `untilRoute`  
+-   `untilRoute` **Route** the common ancestor with the former route
 
 ### leave
 
@@ -411,7 +413,7 @@ Leave the route to a new one.
 #### Parameters
 
 -   `transition` **[Transition](#transition)** 
--   `untilRoute`  
+-   `untilRoute` **Route** the common ancestor with the next route
 
 ### propertiesFor
 
@@ -422,6 +424,16 @@ Extract properties from object.
 -   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
 Returns **([Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** properties extracted from given objects
+
+### commonAncestor
+
+Find common ancestor with another Route
+
+#### Parameters
+
+-   `other` **Route** 
+
+Returns **(Route | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** common ancestor Route between receiver and other
 
 ### propertyMapping
 
