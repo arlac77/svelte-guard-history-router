@@ -65,7 +65,8 @@
 <div class="background">
   <table>
     <thead>
-      <th colspan="2">Transition</th>
+      <th>Transition</th>
+      <th>Redirection</th>
     </thead>
     <tbody>
       {#if $router.transition !== undefined}
@@ -84,7 +85,6 @@
     <tbody>
       {#each router.routes as r, i (i)}
         <tr class={r === $router.route ? 'current' : ''}>
-          <!--         <td id="route.priority">{r.priority} </td> -->
           <td id="route.path">{r.path}</td>
           <td id="route.guard">{r.guard ? r.guard : ""}</td>
           <td id="route.key">{r.keys.join(' ')}</td>
