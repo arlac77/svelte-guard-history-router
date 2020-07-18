@@ -49,9 +49,7 @@ export class Transition {
 
         router.state = state;
 
-        if (router.route !== undefined) {
-          await router.route.enter(this, ancestor);
-        }
+        await router.route.enter(this, ancestor);
       }
     } catch (e) {
       await this.abort(e);
