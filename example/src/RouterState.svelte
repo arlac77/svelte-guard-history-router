@@ -93,7 +93,7 @@
           <td id="route.guard">{r.guard}</td>
           <td id="route.key">{r.keys.join(' ')}</td>
           <td id="route.component">{r.component.name}</td>
-          <td id="route.subscriptions">{r.subscriptions}</td>
+          <td id="route.subscriptions">{r.subscriptions.size}</td>
         </tr>
       {/each}
     </tbody>
