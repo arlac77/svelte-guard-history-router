@@ -4,15 +4,23 @@ export const articles = Object.fromEntries(
       id: "01",
       name: "Peanutbutter",
       category: "staple",
-      price: 1.98
+      price: 1.98,
+      ingredients: ["peanuts", "water", "salt"]
     },
     {
       id: "02",
       name: "cracked wheat",
       category: "staple",
-      price: 1.29
+      price: 1.29,
+      ingredients: ["wheat"]
     },
-    { id: "03", name: "Milk", category: "staple", price: 1.05 },
+    {
+      id: "03",
+      name: "Milk",
+      category: "staple",
+      price: 1.05,
+      ingredients: ["milk"]
+    },
     { id: "10", name: "Pizza Quattro Stagioni", price: 8.0, category: "pizza" },
     { id: "11", name: "Pizza Salami", price: 7.0, category: "pizza" },
     { id: "12", name: "Pizza Hawaii", price: 7.0, category: "pizza" },
@@ -31,7 +39,8 @@ export const articles = Object.fromEntries(
 );
 
 export const categories = Object.values(articles).reduce((all, c) => {
-  if (!all[c.category]) all[c.category] = { cid: c.category, name: c.category, articles: [] };
+  if (!all[c.category])
+    all[c.category] = { cid: c.category, name: c.category, articles: [] };
   all[c.category].articles.push(c);
   c.category = all[c.category];
   return all;
