@@ -1,7 +1,7 @@
-import { setupRoute } from "./setup.mjs";
+import { setupRoutes } from "./setup.mjs";
 
 async function doit() {
-  const { leaf } = setupRoute();
+  const { leaf } = setupRoutes();
 
   let leafValue;
 
