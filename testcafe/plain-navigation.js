@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { articles, categories } from "../example/src/data.js";
+import { articles } from "../example/src/data.js";
 
 const getLocation = ClientFunction(() => window.location.href);
 const goBack = ClientFunction(() => window.history.back());
