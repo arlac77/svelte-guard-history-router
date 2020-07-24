@@ -2,6 +2,17 @@ import test from "ava";
 import { Transition } from "../src/transition.mjs";
 import { setupRouter } from "./helpers/setup.mjs";
 
+test("transition basics", async t => {
+  const { router } = setupRouter();
+
+  const transition = new Transition(router, "/master");
+  await transition.start();
+
+  t.falsy(transition.redirected);
+
+  t.is(router.route.path, "/master");
+});
+
 test("transition redirect", async t => {
   const { router, noLoginRequired } = setupRouter();
 
