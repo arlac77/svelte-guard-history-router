@@ -129,46 +129,46 @@ npm test
         -   [Parameters](#parameters-6)
     -   [routeFor](#routefor)
         -   [Parameters](#parameters-7)
--   [Transition](#transition)
+-   [nameValueStore](#namevaluestore)
     -   [Parameters](#parameters-8)
     -   [Properties](#properties-2)
+-   [Transition](#transition)
+    -   [Parameters](#parameters-9)
+    -   [Properties](#properties-3)
     -   [start](#start)
     -   [end](#end)
     -   [redirect](#redirect)
-        -   [Parameters](#parameters-9)
+        -   [Parameters](#parameters-10)
     -   [continue](#continue-1)
     -   [abort](#abort-1)
-        -   [Parameters](#parameters-10)
+        -   [Parameters](#parameters-11)
 -   [SkeletonRoute](#skeletonroute)
-    -   [Properties](#properties-3)
+    -   [Properties](#properties-4)
     -   [path](#path)
     -   [enter](#enter)
-        -   [Parameters](#parameters-11)
-    -   [leave](#leave)
         -   [Parameters](#parameters-12)
-    -   [propertiesFor](#propertiesfor)
+    -   [leave](#leave)
         -   [Parameters](#parameters-13)
-    -   [commonAncestor](#commonancestor)
+    -   [propertiesFor](#propertiesfor)
         -   [Parameters](#parameters-14)
+    -   [commonAncestor](#commonancestor)
+        -   [Parameters](#parameters-15)
     -   [propertyMapping](#propertymapping)
     -   [objectFor](#objectfor)
-        -   [Parameters](#parameters-15)
+        -   [Parameters](#parameters-16)
 -   [Guard](#guard)
     -   [enter](#enter-1)
-        -   [Parameters](#parameters-16)
-    -   [leave](#leave-1)
         -   [Parameters](#parameters-17)
+    -   [leave](#leave-1)
+        -   [Parameters](#parameters-18)
 -   [redirectGuard](#redirectguard)
-    -   [Parameters](#parameters-18)
--   [sequenceGuard](#sequenceguard)
     -   [Parameters](#parameters-19)
--   [parallelGuard](#parallelguard)
+-   [sequenceGuard](#sequenceguard)
     -   [Parameters](#parameters-20)
--   [WaitingGuard](#waitingguard)
+-   [parallelGuard](#parallelguard)
     -   [Parameters](#parameters-21)
--   [nameValueStore](#namevaluestore)
+-   [WaitingGuard](#waitingguard)
     -   [Parameters](#parameters-22)
-    -   [Properties](#properties-4)
 
 ## Key
 
@@ -305,6 +305,21 @@ Find Route for a given object
 -   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
 Returns **Route** able to support given object
+
+## nameValueStore
+
+Create a named object wich can act as a store
+
+### Parameters
+
+-   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `initialValue` **any** 
+
+### Properties
+
+-   `value` **any** 
+
+Returns **Store** 
 
 ## Transition
 
@@ -494,21 +509,6 @@ Shows a component during transition
 
 -   `component` **SvelteComponent** to show up during th transition
 -   `rampUpTime` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** initial delay for the componnt to show up (optional, default `300`)
-
-## nameValueStore
-
-Create a named object wich can act as a store
-
-### Parameters
-
--   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `initialValue` **any** 
-
-### Properties
-
--   `value` **any** 
-
-Returns **Store** 
 
 # install
 
