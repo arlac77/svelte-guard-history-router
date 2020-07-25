@@ -29,16 +29,15 @@ export class Transition {
   /**
    * Start the transition
    * - leave old route
-   * - find matching target route @see Router.replace()
+   * - find matching target route @see matcher()
    * - set params
    * - set current route
    * - enter new route
    */
   async start() {
-    const router = this.router;
-
     try {
-      const state = matcher(this.router.routes, this.path);
+      const router = this.router;
+      const state = matcher(router.routes, this.path);
 
       if (state.route) {
         const ancestor = state.route.commonAncestor(this.saved.route);
@@ -110,7 +109,7 @@ export class Transition {
 
   /**
    * Bring back the router into the state before the transition has started
-   * @param {Exception} e
+   * @param {Exception|undefined} e
    */
   async abort(e) {
     if (e) {
