@@ -341,7 +341,7 @@ Transition between routes
 Start the transition
 
 -   leave old route
--   find matching target route @see Router.replace()
+-   find matching target route @see matcher()
 -   set params
 -   set current route
 -   enter new route
@@ -375,7 +375,7 @@ Bring back the router into the state before the transition has started
 
 #### Parameters
 
--   `e` **Exception** 
+-   `e` **(Exception | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** 
 
 ## SkeletonRoute
 
