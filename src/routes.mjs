@@ -8,7 +8,8 @@ const dummyParent = {
   enter: dummyFunction,
   leave: dummyFunction,
   propertiesFor: () => undefined,
-  objectFor: () => undefined
+  objectFor: () => undefined,
+  iteratorFor: () => undefined
 };
 
 function ref(obj, str) {
