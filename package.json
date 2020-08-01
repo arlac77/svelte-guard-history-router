@@ -4,7 +4,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "./src/index.mjs",
   "svelte": "./src/index.svelte",
   "description": "svelte router for SPA (history mode only)",
   "keywords": [
