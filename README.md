@@ -534,7 +534,7 @@ All unresolvable requests are redirected to /sericeBase/index.html
 ```nginx.conf
 location /serviceBase {
   alias /deploymantLocation;
-  try_files $uri$args $uri$args/ /sericeBase/index.html;
+  try_files $uri$args $uri$args/ /serviceBase/index.html;
 }
 ```
 
