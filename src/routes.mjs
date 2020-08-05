@@ -157,6 +157,15 @@ export class SkeletonRoute {
   iteratorFor(transition, properties) {
     return this.parent.iteratorFor(transition, properties);
   }
+
+  set value(v) {
+    this.subscriptions.forEach(subscription => subscription(v));
+    this._value = v;
+  }
+
+  get value() {
+    return this._value;
+  }
 }
 
 export class IteratorStoreRoute extends SkeletonRoute {
@@ -169,8 +178,7 @@ export class IteratorStoreRoute extends SkeletonRoute {
     await super.enter(transition, untilRoute);
 
     const entries = [];
-
-    this.subscriptions.forEach(subscription => subscription(entries));
+    this.value = entries;
 
     const properties = transition.router.params;
 
@@ -179,18 +187,13 @@ export class IteratorStoreRoute extends SkeletonRoute {
     }
 
     this.value = entries;
-
-    this.subscriptions.forEach(subscription => subscription(entries));
   }
 }
 
 export class ObjectStoreRoute extends SkeletonRoute {
   async enter(transition, untilRoute) {
     await super.enter(transition, untilRoute);
-    const object = await this.objectFor(transition, transition.router.params);
-
-    this.value = object;
-    this.subscriptions.forEach(subscription => subscription(object));
+    this.value = await this.objectFor(transition, transition.router.params);
   }
 }
 
