@@ -42,35 +42,37 @@
 <svelte:window on:keyup={handleKeyup} />
 
 <div class="center modal">
-  <form on:submit|preventDefault={submit}>
-    {#if message}
-      <div id="message">{message}</div>
-    {/if}
+  <div class="window">
+    <form on:submit|preventDefault={submit}>
+      {#if message}
+        <div id="message">{message}</div>
+      {/if}
 
-    <label for="username">
-      Username
-      <input
-        id="username"
-        type="text"
-        placeholder="Username"
-        name="username"
-        size="20"
-        required
-        bind:value={username} />
-    </label>
-    <label for="password">
-      Password
-      <input
-        id="password"
-        type="password"
-        placeholder="Password"
-        name="password"
-        size="20"
-        required
-        bind:value={password} />
-    </label>
-    <button id="submit" type="submit" disabled={!username || !password}>
-      Login
-    </button>
-  </form>
+      <label for="username">
+        Username
+        <input
+          id="username"
+          type="text"
+          placeholder="Username"
+          name="username"
+          size="20"
+          required
+          bind:value={username} />
+      </label>
+      <label for="password">
+        Password
+        <input
+          id="password"
+          type="password"
+          placeholder="Password"
+          name="password"
+          size="20"
+          required
+          bind:value={password} />
+      </label>
+      <button id="submit" type="submit" disabled={!username || !password}>
+        Login
+      </button>
+    </form>
+  </div>
 </div>
