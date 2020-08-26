@@ -22,10 +22,10 @@
   "license": "BSD-2-Clause",
   "scripts": {
     "start": "rollup -c example/rollup.config.mjs -w",
-    "test": "ava --timeout 2m && npm run testcafe",
-    "testcafe": "testcafe $BROWSER:headless testcafe/*.js -s test-results --app-init-delay 5000 --app \"rollup -c example/rollup.config.mjs -w\"",
+    "test": "ava --timeout 2m && npm run testcafe && testcafe $BROWSER:headless tests/*-test.js -s test-results --app-init-delay 1000 --app \"rollup -c example/rollup.config.mjs -w\"",
     "docs": "documentation readme ./src/index.mjs --section=API",
-    "lint": "documentation lint ./src/index.mjs"
+    "lint": "documentation lint ./src/index.mjs",
+    "testcafe": "testcafe $BROWSER:headless testcafe/*.js -s test-results --app-init-delay 5000 --app \"rollup -c example/rollup.config.mjs -w\""
   },
   "dependencies": {
     "multi-path-matcher": "^2.1.2"
