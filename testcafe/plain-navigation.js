@@ -5,7 +5,10 @@ const getLocation = ClientFunction(() => window.location.href);
 const goBack = ClientFunction(() => window.history.back());
 
 const al = id => {
-  return { path: `/article/${id}#price`, title: `Article ${articles[id].name}` };
+  return {
+    path: `/article/${id}#price`,
+    title: `Article ${articles[id].name}`
+  };
 };
 
 const links = [
@@ -46,10 +49,7 @@ test("click arund", async t => {
       first = false;
     }
 
-    await t
-      //   .takeScreenshot()
-      .expect(title.innerText)
-      .eql(l.title);
+    await t.expect(title.innerText).eql(l.title);
 
     await t.expect(getLocation()).contains(l.path);
   }
@@ -103,9 +103,8 @@ test("Navigate around", async t => {
   await t.expect(title.innerText).eql("Articles");
 
   console.log(await getLocation());
-  
+
   await t.expect(getLocation()).contains("article");
-  
 
   const a = Selector("a").withAttribute("href", "/article/18#price");
   await t.click(a);
@@ -117,7 +116,7 @@ test("Navigate around", async t => {
   await goBack();
 
   console.log(await getLocation());
- /* await t.expect(getLocation()).contains("article");
+  /* await t.expect(getLocation()).contains("article");
   await t.expect(title.innerText).eql("Articles");
   await t.expect(getLocation()).contains("about");
   await t.expect(title.innerText).eql("About");
