@@ -31,8 +31,6 @@ const base =
 fixture`Getting Started`.page`${base}/index.html`;
 
 test("click arund", async t => {
-  const title = Selector(".routetitle");
-
   let first = true;
 
   for (const l of links) {
@@ -49,6 +47,7 @@ test("click arund", async t => {
       first = false;
     }
 
+    const title = Selector(".routetitle");
     await t.expect(title.innerText).eql(l.title);
 
     await t.expect(getLocation()).contains(l.path);
