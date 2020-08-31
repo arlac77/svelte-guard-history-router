@@ -1,7 +1,6 @@
 build
 tests
 testcafe
-test-results
 rollup.config.*
 example
 doc
@@ -9,7 +8,5 @@ doc
 *.tmp
 .test
 .tmp
-.travis.yml
 .vscode
-ci
 .github
