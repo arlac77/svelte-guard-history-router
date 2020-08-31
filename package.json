@@ -25,7 +25,7 @@
     "test": "ava --timeout 2m && npm run test:cafe",
     "docs": "documentation readme ./src/index.mjs --section=API",
     "lint": "documentation lint ./src/index.mjs",
-    "test:cafe": "testcafe $BROWSER:headless testcafe/*.js -s build/test --app-init-delay 1000 --app \"rollup -c example/rollup.config.mjs -w\""
+    "test:cafe": "testcafe $BROWSER:headless testcafe/*.js -s build/test --app-init-delay 1000 --app \"rollup -c example/rollup.config.mjs -w\" && testcafe $BROWSER:headless tests/cafe/*.js -s build/test --app-init-delay 1000 --app \"rollup -c example/rollup.config.mjs -w\""
   },
   "dependencies": {
     "multi-path-matcher": "^2.1.2"
