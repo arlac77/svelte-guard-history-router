@@ -1,3 +1,5 @@
+import jsdom from "jsdom";
+
 import {
   ChildStoreRoute,
   IteratorStoreRoute,
@@ -7,15 +9,15 @@ import {
 import { BaseRouter } from "../../src/base-router.mjs";
 import { redirectGuard } from "../../src/guard.mjs";
 
-globalThis.window = {
-  location: { pathname: "" },
-  addEventListener: () => {}
-};
+const j = new jsdom.JSDOM(``, {
+  url: "https://example.org/",
+ // referrer: "https://example.com/",
+ // contentType: "text/html",
+ // includeNodeLocations: true
+})
 
-globalThis.history = {
-  pushState: (...args) => {},
-  back: () => {}
-};
+globalThis.window = j.window;
+globalThis.history = j.window.history;
 
 export class Master {
   constructor(details) {
