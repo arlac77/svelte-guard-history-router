@@ -2,7 +2,6 @@ build
 tests
 testcafe
 rollup.config.*
-example
 doc
 *.log
 *.tmp
