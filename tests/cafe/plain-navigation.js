@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { articles } from "../../example/src/data.js";
+import { articles } from "../app/src/data.js";
 
 const getLocation = ClientFunction(() => window.location.href);
 const goBack = ClientFunction(() => window.history.back());
@@ -26,7 +26,7 @@ const links = [
 ];
 
 const base =
-  "http://localhost:5000/components/svelte-guard-history-router/example";
+  "http://localhost:5000/components/svelte-guard-history-router/tests/app";
 
 fixture`Getting Started`.page`${base}/index.html`;
 

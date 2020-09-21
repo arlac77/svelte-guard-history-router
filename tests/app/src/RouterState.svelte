@@ -1,6 +1,6 @@
 <script>
   import { getContext } from "svelte";
-  import { ROUTER } from "../../src/util.mjs";
+  import { ROUTER } from "../../../src/util.mjs";
 
   let router = getContext(ROUTER);
 </script>

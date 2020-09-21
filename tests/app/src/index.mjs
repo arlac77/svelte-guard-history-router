@@ -1,6 +1,6 @@
 import { articles, categories } from "./data.js";
 import App from "./App.svelte";
-import { Guard } from "../../src/index.svelte";
+import { Guard } from "../../../src/index.svelte";
 
 export class AlwaysThrowGuard extends Guard {
   async enter(transition) {

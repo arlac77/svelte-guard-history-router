@@ -1,5 +1,5 @@
 <script>
-  import { ObjectLink } from "../../src/index.svelte";
+  import { ObjectLink } from "../../../src/index.svelte";
 
   export let router;
 

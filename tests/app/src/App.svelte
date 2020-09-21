@@ -8,7 +8,7 @@
     Link,
     WaitingGuard,
     redirectGuard
-  } from "../../src/index.svelte";
+  } from "../../../src/index.svelte";
   import RouterState from "./RouterState.svelte";
   import About from "./About.svelte";
   import Articles from "./Articles.svelte";
@@ -34,7 +34,7 @@
   const enshureSession = redirectGuard("/login", () => !session);
 </script>
 
-<Router base="/components/svelte-guard-history-router/example">
+<Router base="/components/svelte-guard-history-router/tests/app">
   <nav>
     <Route href="/" path="*" component={Home}>Router Example</Route>
     <ul class="left">
