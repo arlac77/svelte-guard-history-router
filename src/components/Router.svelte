@@ -13,7 +13,7 @@
 
   setContext(ROUTER, router);
 
-  onMount(() => router.start());
+  onMount(() => router.push(window.location.pathname.slice(base.length)));
 </script>
 
 <slot />

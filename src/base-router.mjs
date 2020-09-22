@@ -80,7 +80,16 @@ export class BaseRouter {
         }
       }
     });
+    
     this.compile();
+
+    window.addEventListener(NAVIGATION_EVENT, event =>
+      this.push(event.detail.path)
+    );
+
+    window.addEventListener("popstate", event =>
+      this.replace(window.location.pathname.slice(this.base.length))
+    );
   }
 
   compile() {
@@ -94,18 +103,6 @@ export class BaseRouter {
         this.keys[key] = nameValueStore(key);
       });
     }
-  }
-
-  start() {
-    window.addEventListener(NAVIGATION_EVENT, event =>
-      this.push(event.detail.path)
-    );
-
-    window.addEventListener("popstate", event =>
-      this.replace(window.location.pathname.slice(this.base.length))
-    );
-
-    this.push(window.location.pathname.slice(this.base.length));
   }
 
   /**
