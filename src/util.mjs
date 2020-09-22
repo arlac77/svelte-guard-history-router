@@ -51,3 +51,5 @@ export function nameValueStore(name, initialValue) {
 
 export const ROUTE = "@private-ROUTE";
 export const ROUTER = "@private-ROUTER";
+
+export const NAVIGATION_EVENT = "routeLink";

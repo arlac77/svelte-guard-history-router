@@ -1,6 +1,6 @@
 import { compile, matcher } from "multi-path-matcher";
 import { Transition } from "./transition.mjs";
-import { nameValueStore } from "./util.mjs";
+import { nameValueStore, NAVIGATION_EVENT } from "./util.mjs";
 
 /**
  * Keys also act as svelte stores and can be subscribed.
@@ -36,10 +36,6 @@ import { nameValueStore } from "./util.mjs";
  * @property {string} base url
  */
 export class BaseRouter {
-  static get navigationEventType() {
-    return "routerLink";
-  }
-
   constructor(routes = [], base = "") {
     let route;
 
@@ -101,7 +97,7 @@ export class BaseRouter {
   }
 
   start() {
-    window.addEventListener(BaseRouter.navigationEventType, event =>
+    window.addEventListener(NAVIGATION_EVENT, event =>
       this.push(event.detail.path)
     );
 
@@ -188,11 +184,7 @@ export class BaseRouter {
     }
 
     if (path !== undefined) {
-      history.pushState(
-        undefined,
-        undefined,
-        this.base + path
-      );
+      history.pushState(undefined, undefined, this.base + path);
     }
 
     this.linkNodes.forEach(n => this.updateActive(n));

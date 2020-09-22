@@ -1,5 +1,5 @@
 <script>
-  import { BaseRouter } from '../base-router.mjs';
+  import { NAVIGATION_EVENT } from '../util.mjs';
 
   export let href;
 
@@ -7,7 +7,7 @@
     const ct = e.currentTarget;
 
     window.dispatchEvent(
-      new CustomEvent(BaseRouter.navigationEventType, {
+      new CustomEvent(NAVIGATION_EVENT, {
         detail: { path: ct.pathname + ct.hash }
       })
     );
