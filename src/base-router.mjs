@@ -40,7 +40,7 @@ export class BaseRouter {
     return "routerLink";
   }
 
-  constructor(routes=[], base="") {
+  constructor(routes = [], base = "") {
     let route;
 
     this.routes = routes;
@@ -105,11 +105,9 @@ export class BaseRouter {
       this.push(event.detail.path)
     );
 
-    window.addEventListener("popstate", event => {
-      if (event.state) {
-        this.replace(event.state.path);
-      }
-    });
+    window.addEventListener("popstate", event =>
+      this.replace(window.location.pathname.slice(this.base.length))
+    );
 
     this.push(window.location.pathname.slice(this.base.length));
   }
@@ -190,7 +188,11 @@ export class BaseRouter {
     }
 
     if (path !== undefined) {
-      history.pushState({ path }, undefined, this.base + path);
+      history.pushState(
+        undefined,
+        undefined,
+        this.base + path
+      );
     }
 
     this.linkNodes.forEach(n => this.updateActive(n));
