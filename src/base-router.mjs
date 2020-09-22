@@ -84,10 +84,7 @@ export class BaseRouter {
         }
       }
     });
-
     this.compile();
-
-    setTimeout(() => this._start(), 0);
   }
 
   compile() {
@@ -103,7 +100,7 @@ export class BaseRouter {
     }
   }
 
-  _start() {
+  start() {
     window.addEventListener(BaseRouter.navigationEventType, event =>
       this.push(event.detail.path)
     );

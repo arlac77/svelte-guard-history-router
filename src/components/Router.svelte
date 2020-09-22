@@ -1,5 +1,5 @@
 <script>
-  import { setContext } from "svelte";
+  import { setContext, onMount } from "svelte";
   import { ROUTER } from "../util.mjs";
   import { BaseRouter } from "../base-router.mjs";
 
@@ -12,6 +12,8 @@
   }
 
   setContext(ROUTER, router);
+
+  onMount(() => router.start());
 </script>
 
 <slot />
