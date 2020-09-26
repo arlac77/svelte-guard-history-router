@@ -156,7 +156,7 @@ export class BaseRouter {
   }
 
   /**
-   * Leave current route and enter route for given path
+   * Leave current route and enter route for given path.
    * The work is done by a Transition
    * @param {string} path where to go
    * @return {Transition} running transition
@@ -189,12 +189,18 @@ export class BaseRouter {
 
   /**
    * Continue a transition to its original destination.
-   * Shortcut for this.transition.continue()
-   * Does nothing if there is no transition.
+   * Shortcut for this.transition.continue().
+   * If there is no transition ongoing and a fallbackPath is
+   * present it will be entered.
+   * Otherwise does nothing.
+   * @param {string} fallbackPath
    */
-  async continue() {
+  async continue(fallbackPath) {
     if (this.transition) {
       return this.transition.continue();
+    }
+    if(fallbackPath) {
+      return this.push(fallbackPath);
     }
   }
 
@@ -210,7 +216,7 @@ export class BaseRouter {
   }
 
   /**
-   * Router subscription
+   * Router subscription.
    * Changes in the current route will trigger a update
    * @param {Function} subscription
    */
