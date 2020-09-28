@@ -245,7 +245,7 @@ export class BaseRouter {
   }
 
   /**
-   * Add a new route.
+   * Add a new Route.
    * @param {Route} route
    */
   addRoute(route) {
