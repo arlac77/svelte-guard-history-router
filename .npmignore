@@ -1,6 +1,5 @@
 build
 tests
-testcafe
 rollup.config.*
 doc
 *.log
