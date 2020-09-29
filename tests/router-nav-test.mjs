@@ -7,8 +7,8 @@ test("router transition", async t => {
   let subscriptionPath;
 
   router.subscribe(value => {
-  //  console.log("SUBSCRIPTION", value);
-  subscriptionPath = value.path;
+    //  console.log("SUBSCRIPTION", value);
+    subscriptionPath = value.path;
   });
 
   t.is(history.length, 1);
@@ -20,7 +20,7 @@ test("router transition", async t => {
   t.truthy(router.transition);
   t.is(router.transition.path, "/master");
 
-  t.is(subscriptionPath,'/'); // still on old path
+  t.is(subscriptionPath, "/"); // still on old path
 
   await transition;
 
