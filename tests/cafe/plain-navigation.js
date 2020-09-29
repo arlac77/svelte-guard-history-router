@@ -88,7 +88,7 @@ test("Navigate around", async t => {
 
   await t.navigateTo(`${base}/about`).expect(title.innerText).eql("About");
 
-  console.log(await getLocation());
+  //console.log(await getLocation());
 
   await t.navigateTo(`${base}/article`);
 
