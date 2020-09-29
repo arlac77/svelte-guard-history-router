@@ -80,7 +80,7 @@ export class BaseRouter {
         }
       }
     });
-    
+
     this.compile();
 
     window.addEventListener(NAVIGATION_EVENT, event =>
@@ -172,17 +172,13 @@ export class BaseRouter {
    * @param {string} path
    */
   finalizePush(path) {
-    const c = this.component;
     this.transition = undefined;
-
-    // transition had its own tmp component (waiting... or so)
-    if (c !== this.component) {
-      this.notifySubscriptions();
-    }
 
     if (path !== undefined) {
       history.pushState(undefined, undefined, this.base + path);
     }
+
+    this.notifySubscriptions();
 
     this.linkNodes.forEach(n => this.updateActive(n));
   }
@@ -199,7 +195,7 @@ export class BaseRouter {
     if (this.transition) {
       return this.transition.continue();
     }
-    if(fallbackPath) {
+    if (fallbackPath) {
       return this.push(fallbackPath);
     }
   }
@@ -216,7 +212,7 @@ export class BaseRouter {
     if (this.transition) {
       return this.transition.abort();
     }
-    if(fallbackPath) {
+    if (fallbackPath) {
       return this.push(fallbackPath);
     }
   }

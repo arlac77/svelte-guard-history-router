@@ -9,15 +9,19 @@ import {
 import { BaseRouter } from "../../src/base-router.mjs";
 import { redirectGuard } from "../../src/guard.mjs";
 
-const j = new jsdom.JSDOM(``, {
+const dom = new jsdom.JSDOM(``, {
   url: "https://example.org/",
  // referrer: "https://example.com/",
  // contentType: "text/html",
  // includeNodeLocations: true
 })
 
-globalThis.window = j.window;
-globalThis.history = j.window.history;
+globalThis.window = dom.window;
+globalThis.history = dom.window.history;
+
+function Component(name) {
+  return { name };
+}
 
 export class Master {
   constructor(details) {
@@ -62,11 +66,13 @@ export function setupModel() {
 export function setupRoutes() {
   const model = setupModel();
   const master = new IteratorStoreRoute();
+  master.component = Component("MasterComponent");
   master._path = "/master";
   master._objectInstance = Master;
   master.iteratorFor = () => model;
 
   const detail = new ChildStoreRoute();
+  detail.component = Component("DetailComponent");
   detail._path = "/:detail";
   detail._parent = master;
   detail._objectInstance = Detail;
@@ -85,6 +91,8 @@ export function setupRoutes() {
   filler._parent = detail;
 
   const leaf = new ChildStoreRoute();
+  leaf.component = Component("LeafComponent");
+
   leaf._path = "/:leaf";
   leaf._parent = filler;
   leaf._objectInstance = Leaf;
@@ -98,6 +106,7 @@ export function setupRoutes() {
   ext2._parent = leaf;
 
   const login = new SkeletonRoute();
+  login.component = Component("LoginComponent");
   login._path = "/login";
 
   const redirect = new SkeletonRoute();
