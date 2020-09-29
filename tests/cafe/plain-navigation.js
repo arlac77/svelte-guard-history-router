@@ -57,7 +57,7 @@ test("click arund", async t => {
 test("routing failure", async t => {
   await t.click(Selector("a").withAttribute("href", "/about"));
 
-  console.log(await getLocation());
+  //console.log(await getLocation());
 
   const title = Selector(".routetitle");
   const a = Selector("a").withAttribute("href", "/about");
@@ -92,7 +92,7 @@ test("Navigate around", async t => {
 
   await t.navigateTo(`${base}/article`);
 
-  console.log(await getLocation());
+  //console.log(await getLocation());
 
   await t
     .typeText("#username", "user", { replace: true })
@@ -101,7 +101,7 @@ test("Navigate around", async t => {
 
   await t.expect(title.innerText).eql("Articles");
 
-  console.log(await getLocation());
+  //console.log(await getLocation());
 
   await t.expect(getLocation()).contains("article");
 
@@ -110,11 +110,11 @@ test("Navigate around", async t => {
   await t.expect(getLocation()).contains("article/18");
   await t.expect(title.innerText).contains("Pizza Prosciutto");
 
-  console.log(await getLocation());
+  //console.log(await getLocation());
 
   await goBack();
 
-  console.log(await getLocation());
+  //console.log(await getLocation());
   /* await t.expect(getLocation()).contains("article");
   await t.expect(title.innerText).eql("Articles");
   await t.expect(getLocation()).contains("about");
