@@ -1,18 +1,6 @@
-name: Merge me!
-'on':
-  check_suite:
-    types:
-      - completed
-  pull_request:
-    types:
-      - edited
-      - labeled
-      - opened
-      - ready_for_review
-      - reopened
-      - synchronize
-      - unlabeled
-      - unlocked
+name: Auto approve
+on: pull_request
+
 jobs:
   auto-approve:
     runs-on: ubuntu-latest
