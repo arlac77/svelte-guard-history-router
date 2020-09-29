@@ -207,11 +207,17 @@ export class BaseRouter {
   /**
    * Abort a transition.
    * Shortcut for this.transition.abort()
-   * Does nothing if there is no transition.
+   * If there is no transition ongoing and a fallbackPath is
+   * present it will be entered.
+   * Otherwise does nothing.
+   * @param {string} fallbackPath
    */
-  async abort() {
+  async abort(fallbackPath) {
     if (this.transition) {
       return this.transition.abort();
+    }
+    if(fallbackPath) {
+      return this.push(fallbackPath);
     }
   }
 
