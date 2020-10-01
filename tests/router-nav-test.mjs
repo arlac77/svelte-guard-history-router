@@ -1,5 +1,6 @@
 import test from "ava";
 import { setupRouter } from "./helpers/setup.mjs";
+import { matcher } from "multi-path-matcher";
 
 async function rtt(t, items) {
   const { router } = setupRouter();
@@ -27,6 +28,17 @@ async function rtt(t, items) {
 
     t.falsy(router.transition);
 
+    const m = matcher(router.routes, path);
+
+    const properties = {};
+
+    m.route.subscribe(route => {
+      if (route) {
+        properties.id = route.id;
+      }
+      //  console.log("ROUTE", route);
+    });
+
     const transition = router.push(path);
 
     t.truthy(router.transition);
@@ -34,6 +46,9 @@ async function rtt(t, items) {
 
     await transition;
 
+    if (item.properties) {
+      t.deepEqual(item.properties, properties, "properties");
+    }
     t.falsy(router.transition);
     t.is(router.path, path);
     t.is(router.component.name, componentName);
@@ -49,6 +64,7 @@ rtt.title = (providedTitle = "", items) =>
 
 test.serial(rtt, [{ path: "/master", component: "MasterComponent" }]);
 test.serial(rtt, [
-  { path: "/master/1", component: "DetailComponent" },
-  { path: "/master/2", component: "DetailComponent" }
+  { path: "/master/1", component: "DetailComponent", properties: { id: "1" } },
+  { path: "/master/2", component: "DetailComponent", properties: { id: "2" } },
+  { path: "/master/1", component: "DetailComponent", properties: { id: "1" } }
 ]);
