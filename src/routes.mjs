@@ -159,8 +159,8 @@ export class SkeletonRoute {
   }
 
   set value(v) {
-    this.subscriptions.forEach(subscription => subscription(v));
     this._value = v;
+    this.subscriptions.forEach(subscription => subscription(v));
   }
 
   get value() {

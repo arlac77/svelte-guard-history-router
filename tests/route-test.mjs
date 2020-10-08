@@ -112,12 +112,15 @@ test("route objectInstance", t => {
 
 test("route subscription", t => {
   const route = new SkeletonRoute();
+  let changed,routeValue;
+
+  route.subscribe(x => {
+    routeValue = route.value;
+    changed = x;
+  });
 
   route.value = 4711;
 
-  let changed;
-
-  route.subscribe(x => (changed = x));
-
   t.is(changed, 4711);
+  t.is(routeValue, 4711);
 });
