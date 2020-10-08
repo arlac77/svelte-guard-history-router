@@ -23,6 +23,7 @@ async function rtt(t, items) {
 
   for (const item of items) {
     n++;
+
     const path = item.path;
     const componentName = item.component;
 
@@ -39,12 +40,22 @@ async function rtt(t, items) {
       }
     });
 
-    const transition = router.push(path);
+    switch (item.action) {
+      case "back":
+        history.back();
+        break;
+      case "forward":
+        history.forward();
+        break;
 
-    t.truthy(router.transition, "transition ongoing");
-    t.is(router.transition.path, path);
+      default:
+        const transition = router.push(path);
 
-    await transition;
+        t.truthy(router.transition, "transition ongoing");
+        t.is(router.transition.path, path);
+
+        await transition;
+    }
 
     if (item.route) {
       if (item.route.properties) {
@@ -81,12 +92,18 @@ test.serial(rtt, [
     path: "/master/1",
     component: "DetailComponent",
     route: { properties: { id: "1" } }
+  },
+  {
+    //action: "back",
+    path: "/master/2",
+    component: "DetailComponent",
+    route: { properties: { id: "2" } }
   }
 ]);
 test.serial(rtt, [
   {
     path: "/master/2/filler/d",
     component: "LeafComponent",
-    route: { }
+    route: {}
   }
 ]);
