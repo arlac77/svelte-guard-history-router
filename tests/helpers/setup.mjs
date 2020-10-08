@@ -1,20 +1,19 @@
-import jsdom from "jsdom";
+import { JSDOM } from "jsdom";
 
 import {
   ChildStoreRoute,
   IteratorStoreRoute,
   SkeletonRoute
 } from "../../src/routes.mjs";
-
 import { BaseRouter } from "../../src/base-router.mjs";
 import { redirectGuard } from "../../src/guard.mjs";
 
-const dom = new jsdom.JSDOM(``, {
-  url: "https://example.org/",
- // referrer: "https://example.com/",
- // contentType: "text/html",
- // includeNodeLocations: true
-})
+const dom = new JSDOM(``, {
+  url: "https://example.org/"
+  // referrer: "https://example.com/",
+  // contentType: "text/html",
+  // includeNodeLocations: true
+});
 
 globalThis.window = dom.window;
 globalThis.history = dom.window.history;
@@ -110,6 +109,7 @@ export function setupRoutes() {
   login._path = "/login";
 
   const redirect = new SkeletonRoute();
+  redirect.component = Component("ProtectedComponent");
   redirect._path = "/protected";
 
   let needsLogin = true;
