@@ -97,10 +97,9 @@ export class BaseRouter {
 
     for (const route of this.routes) {
       route.keys.forEach(key => {
-        if (this.keys[key]) {
-          return;
+        if (!this.keys[key]) {
+          this.keys[key] = nameValueStore(key);
         }
-        this.keys[key] = nameValueStore(key);
       });
     }
   }
