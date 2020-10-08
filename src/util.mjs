@@ -1,5 +1,5 @@
 export function findClosestAttribute(element, attributeName) {
-    let attribute;
+  let attribute;
   while ((attribute = element.getAttribute(attributeName)) === null) {
     element = element.parentElement;
     if (element === null) {
@@ -51,5 +51,4 @@ export function nameValueStore(name, initialValue) {
 
 export const ROUTE = "@private-ROUTE";
 export const ROUTER = "@private-ROUTER";
-
 export const NAVIGATION_EVENT = "routeLink";
