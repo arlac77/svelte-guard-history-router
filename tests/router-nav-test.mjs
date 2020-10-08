@@ -34,22 +34,25 @@ async function rtt(t, items) {
 
     m.route.subscribe(route => {
       if (route) {
-        properties.id = route.id;
+        Object.assign(properties, route);
+        delete properties.leafs;
       }
-      //  console.log("ROUTE", route);
     });
 
     const transition = router.push(path);
 
-    t.truthy(router.transition);
+    t.truthy(router.transition, "transition ongoing");
     t.is(router.transition.path, path);
 
     await transition;
 
-    if (item.properties) {
-      t.deepEqual(item.properties, properties, "properties");
+    if (item.route) {
+      if (item.route.properties) {
+        t.deepEqual(item.route.properties, properties, "properties");
+      }
     }
-    t.falsy(router.transition);
+
+    t.falsy(router.transition, "transition over");
     t.is(router.path, path);
     t.is(router.component.name, componentName);
     t.is(subscriptionPath, path);
@@ -64,7 +67,26 @@ rtt.title = (providedTitle = "", items) =>
 
 test.serial(rtt, [{ path: "/master", component: "MasterComponent" }]);
 test.serial(rtt, [
-  { path: "/master/1", component: "DetailComponent", properties: { id: "1" } },
-  { path: "/master/2", component: "DetailComponent", properties: { id: "2" } },
-  { path: "/master/1", component: "DetailComponent", properties: { id: "1" } }
+  {
+    path: "/master/1",
+    component: "DetailComponent",
+    route: { properties: { id: "1" } }
+  },
+  {
+    path: "/master/2",
+    component: "DetailComponent",
+    route: { properties: { id: "2" } }
+  },
+  {
+    path: "/master/1",
+    component: "DetailComponent",
+    route: { properties: { id: "1" } }
+  }
+]);
+test.serial(rtt, [
+  {
+    path: "/master/2/filler/d",
+    component: "LeafComponent",
+    route: { }
+  }
 ]);
