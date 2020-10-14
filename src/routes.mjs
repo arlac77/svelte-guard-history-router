@@ -21,15 +21,28 @@ function ref(obj, str) {
 
 /**
  * Route
- * @property {string} _path
+ * @property {string} path
  * @property {SvelteComponent} component target to show
  * @property {SvelteComponent} linkComponent content for {@link ObjectLink}
+ * @property {Object} propertyMapping Map properties to object attributes
+ *           Keys are the property names and values are the keys in the resulting object.
  * @property {number} priority
  * @property {string[]} keys as found in the path
  * @property {RegEx} regex
  * @property {any} value
  */
 export class SkeletonRoute {
+
+  constructor(path)
+  {
+    this._path = path;
+    this.subscriptions = dummySet;
+    this.parent = dummyParent;
+    this.guard = dummyGuard;
+    this.objectInstance = Object;
+    this.propertyMapping = {};
+  }
+
   /**
    * Full path of the Route including all parents
    * @return {string} path
@@ -111,34 +124,9 @@ export class SkeletonRoute {
     }
   }
 
-  get subscriptions() {
-    return this._subscriptions || dummySet;
-  }
-
-  get parent() {
-    return this._parent || dummyParent;
-  }
-
-  get guard() {
-    return this._guard || dummyGuard;
-  }
-
-  /**
-   * Map properties to objects attributes.
-   * Keys are the property names and values are the keys in the resulting object.
-   * @return {Object}
-   */
-  get propertyMapping() {
-    return this._propertyMapping || {};
-  }
-
-  get objectInstance() {
-    return this._objectInstance || Object;
-  }
-
   subscribe(subscription) {
     if (this.subscriptions === dummySet) {
-      this._subscriptions = new Set();
+      this.subscriptions = new Set();
     }
     this.subscriptions.add(subscription);
     subscription(this.value);
@@ -169,8 +157,8 @@ export class SkeletonRoute {
 }
 
 export class IteratorStoreRoute extends SkeletonRoute {
-  constructor() {
-    super();
+  constructor(path) {
+    super(path);
     this.value = [];
   }
 

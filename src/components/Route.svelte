@@ -19,21 +19,14 @@
 
   const parent = getContext(ROUTE);
   const router = getContext(ROUTER);
-  const route = new factory();
+  const route = new factory(path);
 
   setContext(ROUTE, route);
 
-  route._path = path;
   route.component = component;
 
   if (parent) {
-    route._parent = parent;
-  }
-  if (propertyMapping) {
-    route._propertyMapping = propertyMapping;
-  }
-  if (objectInstance) {
-    route._objectInstance = objectInstance;
+    route.parent = parent;
   }
   if (iteratorFor) {
     route.iteratorFor = iteratorFor;
@@ -41,22 +34,27 @@
   if (objectFor) {
     route.objectFor = objectFor;
   }
-
   if (linkComponent) {
     route.linkComponent = linkComponent;
+  }
+  if (propertyMapping) {
+    route.propertyMapping = propertyMapping;
+  }
+  if (objectInstance) {
+    route.objectInstance = objectInstance;
   }
 
   if (guards) {
     if (Array.isArray(guards)) {
       switch (guards.length) {
         case 1:
-          route._guard = guards[0];
+          route.guard = guards[0];
           break;
         default:
-          route._guard = sequenceGuard(guards);
+          route.guard = sequenceGuard(guards);
       }
     } else {
-      route._guard = guards;
+      route.guard = guards;
     }
   }
 
