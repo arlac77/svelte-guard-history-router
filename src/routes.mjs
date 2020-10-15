@@ -1,3 +1,5 @@
+import { sequenceGuard } from "./guard.mjs";
+
 const dummyFunction = () => {};
 const dummySet = { size: 0, forEach: dummyFunction };
 const dummyGuard = {
@@ -55,6 +57,18 @@ export class SkeletonRoute extends RootRoute {
   constructor(path, options = {}) {
     super();
 
+    if (Array.isArray(options.guard)) {
+      switch (options.guard.length) {
+        case 0: delete options.guard;
+        break;
+        case 1:
+          options.guard = options.guard[0];
+          break;
+        default:
+          options.guard = sequenceGuard(options.guard);
+      }
+    }
+
     Object.defineProperties(this, {
       parent: { value: rootRoute },
       path: { get: () => this.parent.path + path },
@@ -64,7 +78,7 @@ export class SkeletonRoute extends RootRoute {
           .map(([k, v]) => [k, { value: v }])
       )
     });
-
+  
     this.subscriptions = dummySet;
   }
 

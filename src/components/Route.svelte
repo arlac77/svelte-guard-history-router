@@ -4,7 +4,6 @@
   import { link } from "../link.mjs";
   import { active } from "../active.mjs";
   import { SkeletonRoute } from "../routes.mjs";
-  import { sequenceGuard } from "../guard.mjs";
 
   export let path;
   export let href = path;
@@ -17,16 +16,6 @@
   export let iteratorFor;
   export let objectFor;
   export let linkComponent;
-
-  if (Array.isArray(guards)) {
-    switch (guards.length) {
-      case 1:
-        guards = guards[0];
-        break;
-      default:
-        guards = sequenceGuard(guards);
-    }
-  }
 
   const route = new factory(path, {
     parent: getContext(ROUTE),
