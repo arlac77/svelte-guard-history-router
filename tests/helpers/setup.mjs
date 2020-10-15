@@ -63,44 +63,46 @@ export function setupModel() {
 
 export function setupRoutes() {
   const model = setupModel();
-  const master = new IteratorStoreRoute("/master");
-  master.component = Component("MasterComponent");
-  master.objectInstance = Master;
-  master.iteratorFor = () => model;
+  const master = new IteratorStoreRoute("/master", {
+    component: Component("MasterComponent"),
+    objectInstance: Master,
+    iteratorFor: () => model
+  });
 
-  const detail = new ChildStoreRoute("/:detail", master);
-  detail.component = Component("DetailComponent");
-  detail.objectInstance = Detail;
-  detail.propertyMapping = { detail: "id" };
-
-  detail.iteratorFor = async function* (transition, properties) {
-    for await (const d of this.parent.iteratorFor(transition, properties)) {
-      if (d.id === properties.detail) {
-        yield* d.leafs;
+  const detail = new ChildStoreRoute("/:detail", {
+    parent: master,
+    component: Component("DetailComponent"),
+    objectInstance: Detail,
+    propertyMapping: { detail: "id" },
+    iteratorFor: async function* (transition, properties) {
+      for await (const d of this.parent.iteratorFor(transition, properties)) {
+        if (d.id === properties.detail) {
+          yield* d.leafs;
+        }
       }
     }
-  };
+  });
 
-  const filler = new SkeletonRoute("/filler",detail);
+  const filler = new SkeletonRoute("/filler", { parent: detail });
+  const leaf = new ChildStoreRoute("/:leaf", {
+    parent: filler,
+    component: Component("LeafComponent"),
+    objectInstance: Leaf,
+    propertyMapping: { leaf: "id" }
+  });
 
-  const leaf = new ChildStoreRoute("/:leaf",filler);
-  leaf.component = Component("LeafComponent");
-
-  leaf.objectInstance = Leaf;
-  leaf.propertyMapping = { leaf: "id" };
-
-  const ext1 = new SkeletonRoute("/ext1",leaf);
-  const ext2 = new SkeletonRoute("/ext2",leaf);
-
-  const login = new SkeletonRoute("/login");
-  login.component = Component("LoginComponent");
-
-  const redirect = new SkeletonRoute("/protected");
-  redirect.component = Component("ProtectedComponent");
+  const ext1 = new SkeletonRoute("/ext1", { parent: leaf });
+  const ext2 = new SkeletonRoute("/ext2", { parent: leaf });
+  const login = new SkeletonRoute("/login", {
+    component: Component("LoginComponent")
+  });
 
   let needsLogin = true;
 
-  redirect.guard = redirectGuard("/login", () => needsLogin);
+  const redirect = new SkeletonRoute("/protected", {
+    component: Component("ProtectedComponent"),
+    guard: redirectGuard("/login", () => needsLogin)
+  });
 
   function noLoginRequired() {
     needsLogin = false;

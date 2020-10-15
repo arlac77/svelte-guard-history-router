@@ -5,15 +5,6 @@ const dummyGuard = {
   enter: dummyFunction,
   leave: dummyFunction
 };
-const dummyParent = {
-  path: "",
-  guard: dummyGuard,
-  enter: dummyFunction,
-  leave: dummyFunction,
-  propertiesFor: () => undefined,
-  objectFor: () => undefined,
-  iteratorFor: () => undefined
-};
 
 function ref(obj, str) {
   for (const part of str.split(".")) {
@@ -21,6 +12,32 @@ function ref(obj, str) {
   }
   return obj;
 }
+
+class RootRoute {
+  get path() {
+    return "";
+  }
+
+  get objectInstance() {
+    return Object;
+  }
+
+  get propertyMapping() {
+    return {};
+  }
+
+  get guard() {
+    return dummyGuard;
+  }
+
+  enter() {}
+  leave() {}
+  propertiesFor() {}
+  objectFor() {}
+  iteratorFor() {}
+}
+
+const rootRoute = new RootRoute();
 
 /**
  * Route
@@ -34,14 +51,21 @@ function ref(obj, str) {
  * @property {RegEx} regex
  * @property {any} value
  */
-export class SkeletonRoute {
-  constructor(path, parent = dummyParent) {
-    Object.defineProperty(this, "path", { get: () => this.parent.path + path });
-    this.parent = parent;
+export class SkeletonRoute extends RootRoute {
+  constructor(path, options = {}) {
+    super();
+
+    Object.defineProperties(this, {
+      parent: { value: rootRoute },
+      path: { get: () => this.parent.path + path },
+      ...Object.fromEntries(
+        Object.entries(options)
+          .filter(([k, v]) => v !== undefined)
+          .map(([k, v]) => [k, { value: v }])
+      )
+    });
+
     this.subscriptions = dummySet;
-    this.guard = dummyGuard;
-    this.objectInstance = Object;
-    this.propertyMapping = {};
   }
 
   /**
@@ -150,8 +174,8 @@ export class SkeletonRoute {
 }
 
 export class IteratorStoreRoute extends SkeletonRoute {
-  constructor(path, parent) {
-    super(path, parent);
+  constructor(path, options) {
+    super(path, options);
     this.value = [];
   }
 

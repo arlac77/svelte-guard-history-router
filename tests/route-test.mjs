@@ -3,44 +3,50 @@ import { setupRouter } from "./helpers/setup.mjs";
 import { SkeletonRoute, ChildStoreRoute } from "../src/routes.mjs";
 import { Transition } from "../src/transition.mjs";
 
-test("route common ancestor", t => {
-  const parentRoute = new SkeletonRoute("/parent");
-  t.is(parentRoute.commonAncestor(parentRoute), parentRoute);
-  t.is(parentRoute.commonAncestor(), undefined);
+test("route constructor", t => {
+  const route = new SkeletonRoute("/a", { guard: 77 });
 
-  const routeA = new SkeletonRoute("/a",parentRoute);
-  t.is(routeA.commonAncestor(parentRoute), parentRoute);
-
-  const routeB = new SkeletonRoute("/b",parentRoute);
-  t.is(routeB.commonAncestor(routeA), parentRoute);
+  t.is(route.path, "/a");
+  t.is(route.guard, 77);
+  t.is(route.objectInstance, Object);
 });
 
 test("route path", t => {
-  const parentRoute = new SkeletonRoute("/a");
+  const parent = new SkeletonRoute("/a");
+  const route = new SkeletonRoute("/b", { parent });
 
-  t.is(parentRoute.path, "/a");
-
-  const route = new SkeletonRoute("/b",parentRoute);
-
+  t.is(parent.path, "/a");
+  t.is(route.parent, parent);
   t.is(route.path, "/a/b");
+});
+
+test("route common ancestor", t => {
+  const parent = new SkeletonRoute("/parent");
+  t.is(parent.commonAncestor(parent), parent);
+  t.is(parent.commonAncestor(), undefined);
+
+  const routeA = new SkeletonRoute("/a", { parent });
+  t.is(routeA.commonAncestor(parent), parent);
+
+  const routeB = new SkeletonRoute("/b", { parent });
+  t.is(routeB.commonAncestor(routeA), parent);
 });
 
 test("route guard", async t => {
   const { router } = setupRouter();
 
-  const parentRoute = new SkeletonRoute("/base");
-
   let parentGuardEntered = false;
 
-  parentRoute.guard = {
-    toString: () => "test",
-    enter: transition => {
-      parentGuardEntered = transition;
+  const parent = new SkeletonRoute("/base", {
+    guard: {
+      toString: () => "test",
+      enter: transition => {
+        parentGuardEntered = transition;
+      }
     }
-  };
+  });
 
-  const route = new SkeletonRoute("/a",parentRoute);
-
+  const route = new SkeletonRoute("/a", { parent });
   const transition = new Transition(router, "/base/a");
   await route.enter(transition);
 
@@ -48,19 +54,21 @@ test("route guard", async t => {
 });
 
 test("route propertiesFor", t => {
-  const parentRoute = new SkeletonRoute();
-  const route = new SkeletonRoute(undefined,parentRoute);
+  const parent = new SkeletonRoute("/a");
+  const route = new SkeletonRoute("/b", {
+    parent,
+    propertyMapping: { repository: "name" }
+  });
 
-  t.deepEqual(route.propertiesFor({ name: "repo1" }), undefined);
-
-  route.propertyMapping = { repository: "name" };
   t.deepEqual(route.propertyMapping, { repository: "name" });
   t.deepEqual(route.propertiesFor({ name: "r1" }), { repository: "r1" });
 });
 
 test("route propertiesFor deep refs", t => {
-  const route = new SkeletonRoute();
-  route.propertyMapping = { repository: "name", group: "owner.name" };
+  const route = new SkeletonRoute("/a", {
+    propertyMapping: { repository: "name", group: "owner.name" }
+  });
+
   t.deepEqual(route.propertiesFor({ name: "r1", owner: { name: "g1" } }), {
     group: "g1",
     repository: "r1"
@@ -68,30 +76,25 @@ test("route propertiesFor deep refs", t => {
 });
 
 test("route objectFor", t => {
-  const parentRoute = new SkeletonRoute();
-
   const object = { x: 77 };
 
-  parentRoute.objectFor = properties => {
-    return object;
-  };
+  const parent = new SkeletonRoute("/a", {
+    objectFor: properties => {
+      return object;
+    }
+  });
 
-  const route = new SkeletonRoute(undefined,parentRoute);
+  const route = new SkeletonRoute("/b", { parent });
 
   t.deepEqual(route.objectFor({ repository: "repo1" }), object);
-  t.deepEqual(parentRoute.objectFor({ repository: "repo1" }), object);
+  t.deepEqual(parent.objectFor({ repository: "repo1" }), object);
 });
 
 test("route objectInstance", t => {
-  const route = new SkeletonRoute();
-  t.is(route.objectInstance, Object);
+  const parent = new SkeletonRoute();
+  t.is(parent.objectInstance, Object);
 
-  route.objectInstance = Number;
-  t.is(route.objectInstance, Number);
-
-  const child = new ChildStoreRoute(undefined,route);
-  child.objectInstance = Date;
-
+  const child = new ChildStoreRoute("c", { parent, objectInstance: Date });
   t.is(child.objectInstance, Date);
 });
 
