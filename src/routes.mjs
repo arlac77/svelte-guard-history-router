@@ -1,7 +1,10 @@
-
-const dummyFunction = () => {}; 
+const dummyFunction = () => {};
 const dummySet = { size: 0, forEach: dummyFunction };
-const dummyGuard = { toString: () => "", enter: dummyFunction, leave: dummyFunction };
+const dummyGuard = {
+  toString: () => "",
+  enter: dummyFunction,
+  leave: dummyFunction
+};
 const dummyParent = {
   path: "",
   guard: dummyGuard,
@@ -21,7 +24,7 @@ function ref(obj, str) {
 
 /**
  * Route
- * @property {string} path
+ * @property {string} path full path of the Route including all parents
  * @property {SvelteComponent} component target to show
  * @property {SvelteComponent} linkComponent content for {@link ObjectLink}
  * @property {Object} propertyMapping Map properties to object attributes
@@ -32,29 +35,19 @@ function ref(obj, str) {
  * @property {any} value
  */
 export class SkeletonRoute {
-
-  constructor(path)
-  {
-    this._path = path;
+  constructor(path, parent = dummyParent) {
+    Object.defineProperty(this, "path", { get: () => this.parent.path + path });
+    this.parent = parent;
     this.subscriptions = dummySet;
-    this.parent = dummyParent;
     this.guard = dummyGuard;
     this.objectInstance = Object;
     this.propertyMapping = {};
   }
 
   /**
-   * Full path of the Route including all parents
-   * @return {string} path
-   */
-  get path() {
-    return this.parent.path + this._path;
-  }
-
-  /**
    * Enter the route from a former one.
    * @param {Transition} transition
-   * @param {Route} untilRoute the common ancestor with the former route 
+   * @param {Route} untilRoute the common ancestor with the former route
    */
   async enter(transition, untilRoute) {
     if (this !== untilRoute) {
@@ -66,7 +59,7 @@ export class SkeletonRoute {
   /**
    * Leave the route to a new one.
    * @param {Transition} transition
-   * @param {Route} untilRoute the common ancestor with the next route 
+   * @param {Route} untilRoute the common ancestor with the next route
    */
   async leave(transition, untilRoute) {
     if (this !== untilRoute) {
@@ -111,9 +104,9 @@ export class SkeletonRoute {
 
   /**
    * Find common ancestor with another Route
-   * @param {Route} other 
-   * @return {Route|undefined} common ancestor Route between receiver and other 
-   */ 
+   * @param {Route} other
+   * @return {Route|undefined} common ancestor Route between receiver and other
+   */
   commonAncestor(other) {
     for (let o = other; o; o = o.parent) {
       for (let p = this; p; p = p.parent) {
@@ -157,8 +150,8 @@ export class SkeletonRoute {
 }
 
 export class IteratorStoreRoute extends SkeletonRoute {
-  constructor(path) {
-    super(path);
+  constructor(path, parent) {
+    super(path, parent);
     this.value = [];
   }
 

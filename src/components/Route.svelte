@@ -17,17 +17,12 @@
   export let linkComponent;
   export let factory = SkeletonRoute;
 
-  const parent = getContext(ROUTE);
-  const router = getContext(ROUTER);
-  const route = new factory(path);
+  const route = new factory(path, getContext(ROUTE));
 
   setContext(ROUTE, route);
 
   route.component = component;
 
-  if (parent) {
-    route.parent = parent;
-  }
   if (iteratorFor) {
     route.iteratorFor = iteratorFor;
   }
@@ -58,6 +53,7 @@
     }
   }
 
+  const router = getContext(ROUTER);
   router.addRoute(route);
 </script>
 

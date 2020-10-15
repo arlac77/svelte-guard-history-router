@@ -1,5 +1,4 @@
 import { JSDOM } from "jsdom";
-
 import {
   ChildStoreRoute,
   IteratorStoreRoute,
@@ -69,9 +68,8 @@ export function setupRoutes() {
   master.objectInstance = Master;
   master.iteratorFor = () => model;
 
-  const detail = new ChildStoreRoute("/:detail");
+  const detail = new ChildStoreRoute("/:detail", master);
   detail.component = Component("DetailComponent");
-  detail.parent = master;
   detail.objectInstance = Detail;
   detail.propertyMapping = { detail: "id" };
 
@@ -83,20 +81,16 @@ export function setupRoutes() {
     }
   };
 
-  const filler = new SkeletonRoute("/filler");
-  filler.parent = detail;
+  const filler = new SkeletonRoute("/filler",detail);
 
-  const leaf = new ChildStoreRoute("/:leaf");
+  const leaf = new ChildStoreRoute("/:leaf",filler);
   leaf.component = Component("LeafComponent");
 
-  leaf.parent = filler;
   leaf.objectInstance = Leaf;
   leaf.propertyMapping = { leaf: "id" };
 
-  const ext1 = new SkeletonRoute("/ext1");
-  ext1.parent = leaf;
-  const ext2 = new SkeletonRoute("/ext2");
-  ext2.parent = leaf;
+  const ext1 = new SkeletonRoute("/ext1",leaf);
+  const ext2 = new SkeletonRoute("/ext2",leaf);
 
   const login = new SkeletonRoute("/login");
   login.component = Component("LoginComponent");

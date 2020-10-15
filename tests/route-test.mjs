@@ -8,12 +8,10 @@ test("route common ancestor", t => {
   t.is(parentRoute.commonAncestor(parentRoute), parentRoute);
   t.is(parentRoute.commonAncestor(), undefined);
 
-  const routeA = new SkeletonRoute("/a");
-  routeA.parent = parentRoute;
+  const routeA = new SkeletonRoute("/a",parentRoute);
   t.is(routeA.commonAncestor(parentRoute), parentRoute);
 
-  const routeB = new SkeletonRoute("/b");
-  routeB.parent = parentRoute;
+  const routeB = new SkeletonRoute("/b",parentRoute);
   t.is(routeB.commonAncestor(routeA), parentRoute);
 });
 
@@ -22,8 +20,7 @@ test("route path", t => {
 
   t.is(parentRoute.path, "/a");
 
-  const route = new SkeletonRoute("/b");
-  route.parent = parentRoute;
+  const route = new SkeletonRoute("/b",parentRoute);
 
   t.is(route.path, "/a/b");
 });
@@ -42,8 +39,7 @@ test("route guard", async t => {
     }
   };
 
-  const route = new SkeletonRoute("/a");
-  route.parent = parentRoute;
+  const route = new SkeletonRoute("/a",parentRoute);
 
   const transition = new Transition(router, "/base/a");
   await route.enter(transition);
@@ -53,8 +49,7 @@ test("route guard", async t => {
 
 test("route propertiesFor", t => {
   const parentRoute = new SkeletonRoute();
-  const route = new SkeletonRoute();
-  route.parent = parentRoute;
+  const route = new SkeletonRoute(undefined,parentRoute);
 
   t.deepEqual(route.propertiesFor({ name: "repo1" }), undefined);
 
@@ -81,8 +76,7 @@ test("route objectFor", t => {
     return object;
   };
 
-  const route = new SkeletonRoute();
-  route.parent = parentRoute;
+  const route = new SkeletonRoute(undefined,parentRoute);
 
   t.deepEqual(route.objectFor({ repository: "repo1" }), object);
   t.deepEqual(parentRoute.objectFor({ repository: "repo1" }), object);
@@ -95,10 +89,9 @@ test("route objectInstance", t => {
   route.objectInstance = Number;
   t.is(route.objectInstance, Number);
 
-  const child = new ChildStoreRoute();
+  const child = new ChildStoreRoute(undefined,route);
   child.objectInstance = Date;
 
-  child.parent = route;
   t.is(child.objectInstance, Date);
 });
 
