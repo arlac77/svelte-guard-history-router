@@ -36,7 +36,7 @@ class RootRoute {
   leave() {}
   propertiesFor() {}
   objectFor() {}
-  async * iteratorFor() {}
+  async *iteratorFor() {}
 }
 
 const rootRoute = new RootRoute();
@@ -183,8 +183,8 @@ export class SkeletonRoute extends RootRoute {
     return this.parent.objectFor(transition, properties);
   }
 
-  iteratorFor(transition, properties) {
-    return this.parent.iteratorFor(transition, properties);
+  async *iteratorFor(transition, properties) {
+    yield* this.parent.iteratorFor(transition, properties);
   }
 }
 
