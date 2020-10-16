@@ -124,7 +124,7 @@ export function setupRoutes() {
 
 export function setupRouter() {
   const all = setupRoutes();
-  const router = new BaseRouter();
+  const router = new BaseRouter([],"");
   router.addRoute(all.master);
   router.addRoute(all.detail);
   router.addRoute(all.filler);

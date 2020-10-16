@@ -36,7 +36,7 @@ import { nameValueStore, NAVIGATION_EVENT } from "./util.mjs";
  * @property {string} base url
  */
 export class BaseRouter {
-  constructor(routes = [], base = "") {
+  constructor(routes, base) {
     let route;
 
     this.routes = routes;
