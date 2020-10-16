@@ -36,7 +36,7 @@ class RootRoute {
   leave() {}
   propertiesFor() {}
   objectFor() {}
-  iteratorFor() {}
+  async * iteratorFor() {}
 }
 
 const rootRoute = new RootRoute();
@@ -59,8 +59,9 @@ export class SkeletonRoute extends RootRoute {
 
     if (Array.isArray(options.guard)) {
       switch (options.guard.length) {
-        case 0: delete options.guard;
-        break;
+        case 0:
+          delete options.guard;
+          break;
         case 1:
           options.guard = options.guard[0];
           break;
@@ -69,16 +70,25 @@ export class SkeletonRoute extends RootRoute {
       }
     }
 
+    let value;
+
     Object.defineProperties(this, {
       parent: { value: rootRoute },
       path: { get: () => this.parent.path + path },
+      value: {
+        set: v => {
+          value = v;
+          this.subscriptions.forEach(subscription => subscription(v));
+        },
+        get: () => value
+      },
       ...Object.fromEntries(
         Object.entries(options)
           .filter(([k, v]) => v !== undefined)
           .map(([k, v]) => [k, { value: v }])
       )
     });
-  
+
     this.subscriptions = dummySet;
   }
 
@@ -175,15 +185,6 @@ export class SkeletonRoute extends RootRoute {
 
   iteratorFor(transition, properties) {
     return this.parent.iteratorFor(transition, properties);
-  }
-
-  set value(v) {
-    this._value = v;
-    this.subscriptions.forEach(subscription => subscription(v));
-  }
-
-  get value() {
-    return this._value;
   }
 }
 
