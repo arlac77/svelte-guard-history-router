@@ -1,6 +1,6 @@
 import test from "ava";
 import { setupRouter } from "./helpers/setup.mjs";
-import { SkeletonRoute, ChildStoreRoute } from "../src/routes.mjs";
+import { SkeletonRoute } from "../src/routes.mjs";
 import { Transition } from "../src/transition.mjs";
 
 test("route constructor", t => {
@@ -94,7 +94,7 @@ test("route objectInstance", t => {
   const parent = new SkeletonRoute();
   t.is(parent.objectInstance, Object);
 
-  const child = new ChildStoreRoute("c", { parent, objectInstance: Date });
+  const child = new SkeletonRoute("c", { parent, objectInstance: Date });
   t.is(child.objectInstance, Date);
 });
 
