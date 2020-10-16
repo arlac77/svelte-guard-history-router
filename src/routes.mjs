@@ -2,12 +2,6 @@ import { sequenceGuard } from "./guard.mjs";
 
 const dummyFunction = () => {};
 const dummySet = { size: 0, forEach: dummyFunction };
-const dummyGuard = {
-  toString: () => "",
-  enter: dummyFunction,
-  leave: dummyFunction
-};
-
 function ref(obj, str) {
   for (const part of str.split(".")) {
     obj = obj[part];
@@ -29,7 +23,11 @@ class RootRoute {
   }
 
   get guard() {
-    return dummyGuard;
+    return {
+      toString: () => "",
+      enter: dummyFunction,
+      leave: dummyFunction
+    };
   }
 
   enter() {}
