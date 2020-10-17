@@ -10,7 +10,7 @@
   export let factory = SkeletonRoute;
 
   export let component;
-  export let guards = undefined;
+  export let guard = undefined;
   export let propertyMapping = undefined;
   export let objectInstance = undefined;
   export let iteratorFor = undefined;
@@ -25,7 +25,7 @@
     linkComponent,
     propertyMapping,
     objectInstance,
-    guard: guards
+    guard
   });
 
   setContext(ROUTE, route);

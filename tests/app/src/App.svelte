@@ -5,7 +5,6 @@
     IteratorStoreRoute,
     ChildStoreRoute,
     Outlet,
-    Link,
     WaitingGuard,
     redirectGuard
   } from "../../../src/index.svelte";
@@ -46,7 +45,7 @@
           path="/article"
           factory={IteratorStoreRoute}
           iteratorFor={articleIterator}
-          guards={[enshureSession, waitingGuard]}
+          guard={[enshureSession, waitingGuard]}
           component={Articles}>
           Articles
           <Route
@@ -62,7 +61,7 @@
           path="/category"
           factory={IteratorStoreRoute}
           iteratorFor={categoryIterator}
-          guards={[enshureSession, waitingGuard]}
+          guard={[enshureSession, waitingGuard]}
           component={Categories}>
           Categories
           <Route
@@ -74,7 +73,7 @@
         </Route>
       </li>
       <li>
-        <Route path="/noway" guards={new AlwaysThrowGuard()} component={NoWay}>
+        <Route path="/noway" guard={new AlwaysThrowGuard()} component={NoWay}>
           Does Not Work
         </Route>
       </li>
