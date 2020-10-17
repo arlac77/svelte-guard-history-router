@@ -115,7 +115,7 @@ export class SkeletonRoute extends RootRoute {
   }
 
   /**
-   * Check is properties againt object.
+   * Check is properties against object.
    * @param {Object} object
    * @param {Object} properties
    * @return {boolean} true if object properties are matching with the given proerties
@@ -189,6 +189,14 @@ export class SkeletonRoute extends RootRoute {
 
   async *iteratorFor(transition, properties) {
     yield* this.parent.iteratorFor(transition, properties);
+  }
+
+  get propertyMapping() {
+    return this.parent.propertyMapping;
+  }
+
+  get objectInstance() {
+    return this.parent.objectInstance;
   }
 }
 
