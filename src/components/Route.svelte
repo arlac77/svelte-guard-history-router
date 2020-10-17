@@ -10,12 +10,12 @@
   export let factory = SkeletonRoute;
 
   export let component;
-  export let guards;
-  export let propertyMapping;
-  export let objectInstance;
-  export let iteratorFor;
-  export let objectFor;
-  export let linkComponent;
+  export let guards = undefined;
+  export let propertyMapping = undefined;
+  export let objectInstance = undefined;
+  export let iteratorFor = undefined;
+  export let objectFor = undefined;
+  export let linkComponent = undefined;
 
   const route = new factory(path, {
     parent: getContext(ROUTE),

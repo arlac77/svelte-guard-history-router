@@ -3,7 +3,7 @@
   import { ROUTER } from "../util.mjs";
   import { BaseRouter } from "../base-router.mjs";
 
-  export let router;
+  export let router = undefined;
   export let routes = [];
   export let base = "";
 
