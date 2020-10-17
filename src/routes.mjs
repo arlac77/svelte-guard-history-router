@@ -114,6 +114,12 @@ export class SkeletonRoute extends RootRoute {
     }
   }
 
+  /**
+   * Check is properties againt object.
+   * @param {Object} object
+   * @param {Object} properties
+   * @return {boolean} true if object properties are matching with the given proerties
+   */
   matches(object, properties) {
     for (const [p, n] of Object.entries(this.propertyMapping)) {
       if (ref(object, n) !== properties[p]) {
@@ -149,7 +155,7 @@ export class SkeletonRoute extends RootRoute {
   }
 
   /**
-   * Find common ancestor with another Route
+   * Find common ancestor with another Route.
    * @param {Route} other
    * @return {Route|undefined} common ancestor Route between receiver and other
    */
