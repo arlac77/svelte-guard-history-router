@@ -48,7 +48,13 @@ test("click arund", async t => {
     }
 
     const title = Selector(".routetitle");
-    await t.expect(title.innerText).eql(l.title);
+    await t
+      .expect(
+        /* https://github.com/DevExpress/testcafe/issues/5449
+      keep comment until fixed */
+        title.innerText
+      )
+      .eql(l.title);
 
     await t.expect(getLocation()).contains(l.path);
   }
