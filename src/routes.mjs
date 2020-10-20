@@ -10,6 +10,11 @@ function ref(obj, str) {
 }
 
 class RootRoute {
+
+  /**
+   * Are there parameters in the path.
+   * @return {boolean} true if route has parameters (:key)
+   */
   get hasParams() {
     return this.keys.length > 0;
   }
