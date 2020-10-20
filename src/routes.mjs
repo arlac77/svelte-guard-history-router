@@ -10,6 +10,10 @@ function ref(obj, str) {
 }
 
 class RootRoute {
+  get hasParams() {
+    return this.keys.length > 0;
+  }
+
   get path() {
     return "";
   }

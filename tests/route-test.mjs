@@ -1,14 +1,24 @@
 import test from "ava";
+import { compile } from "multi-path-matcher";
+
 import { setupRouter } from "./helpers/setup.mjs";
 import { SkeletonRoute } from "../src/routes.mjs";
 import { Transition } from "../src/transition.mjs";
 
 test("route constructor", t => {
   const route = new SkeletonRoute("/a", { guard: 77 });
-
+  compile([route]);
   t.is(route.path, "/a");
   t.is(route.guard, 77);
   t.is(route.objectInstance, Object);
+  t.is(route.hasParams, false);
+});
+
+test("route constructor with params", t => {
+  const route = new SkeletonRoute("/:key", { guard: 77 });
+  compile([route]);
+  t.is(route.path, "/:key");
+  t.is(route.hasParams, true);
 });
 
 test("route path", t => {

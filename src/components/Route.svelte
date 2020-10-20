@@ -34,10 +34,10 @@
   router.addRoute(route);
 </script>
 
-{#if route.keys.length === 0}
+{#if route.hasParams}
+  <slot />
+{:else}
   <a {href} use:link={router} use:active={router}>
     <slot />
   </a>
-{:else}
-  <slot />
 {/if}
