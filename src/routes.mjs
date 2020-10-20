@@ -2,15 +2,17 @@ import { sequenceGuard } from "./guard.mjs";
 
 const dummyFunction = () => {};
 const dummySet = { size: 0, forEach: dummyFunction };
+
 function ref(obj, str) {
   for (const part of str.split(".")) {
     obj = obj[part];
   }
-  return obj;
+  if (obj !== undefined) {
+    return obj.toString();
+  }
 }
 
 class RootRoute {
-
   /**
    * Are there parameters in the path.
    * @return {boolean} true if route has parameters (:key)
@@ -141,6 +143,7 @@ export class SkeletonRoute extends RootRoute {
 
   /**
    * Extract properties from object.
+   * All property values are strings.
    * @param {Object} object
    * @return {Object|undefined} properties extracted from given objects
    */
@@ -156,7 +159,7 @@ export class SkeletonRoute extends RootRoute {
         if (properties === undefined) {
           properties = {};
         }
-        properties[p] = v;
+        properties[p] = v.toString();
       }
     }
 

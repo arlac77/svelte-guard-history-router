@@ -16,12 +16,12 @@ test("DetailRoute objectFor", async t => {
   const router = new BaseRouter([parent, child], "");
   const transition = new Transition(router, "/master/detail/2");
 
-  t.is(await child.objectFor(transition, { did: 7 }), undefined);
+  t.is(await child.objectFor(transition, { did: "7" }), undefined);
 
   await transition.start();
 
   const params = router.state.params;
  // console.log(params);
  // t.deepEqual(params,{ did: 2 });
-  t.is(await child.objectFor(transition, { did: 2 }), values[1]);
+  t.is(await child.objectFor(transition, { did: "2" }), values[1]);
 });
