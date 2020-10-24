@@ -14,4 +14,4 @@
       <ObjectLink object={article}/>
     </li>
   {/each}
-{:else}No such category{/if}
+{:else}<h2 class="routetitle">No such category</h2>{/if}

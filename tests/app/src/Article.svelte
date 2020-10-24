@@ -28,4 +28,4 @@
       Prev
     </Link>
   </div>
-{:else}No such article{/if}
+{:else}<h2 class="routetitle">No such article</h2>{/if}
