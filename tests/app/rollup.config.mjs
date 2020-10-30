@@ -25,7 +25,6 @@ export default {
       dedupe: importee =>
         importee === "svelte" || importee.startsWith("svelte/")
     }),
-    ,
     dev({
       port,
       dirs: [`${basedir}/public`],
