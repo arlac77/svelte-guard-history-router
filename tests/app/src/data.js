@@ -9,7 +9,7 @@ export const articles = Object.fromEntries(
     },
     {
       id: "02",
-      name: "cracked wheat",
+      name: "Cracked Wheat",
       category: "staple",
       price: 1.29,
       ingredients: ["wheat"]
@@ -24,7 +24,13 @@ export const articles = Object.fromEntries(
     { id: 10, name: "Pizza Quattro Stagioni", price: 8.0, category: "pizza" },
     { id: 11, name: "Pizza Salami", price: 7.0, category: "pizza" },
     { id: 12, name: "Pizza Hawaii", price: 7.0, category: "pizza" },
-    { id: 13, name: "Pizza Margherita", price: 5.0, category: "pizza" },
+    {
+      id: 13,
+      name: "Pizza Margherita",
+      price: 5.0,
+      category: "pizza",
+      ingredients: ["cheese", "tomato"]
+    },
     { id: 14, name: "Pizza Funghi", price: 7.0, category: "pizza" },
     { id: 15, name: "Pizza Calzone", price: 7.0, category: "pizza" },
     { id: 16, name: "Pizza Tonno", price: 7.0, category: "pizza" },
