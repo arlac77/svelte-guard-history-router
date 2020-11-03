@@ -6,21 +6,17 @@
   const route = router.route;
 
   let filter;
+
+  $: {
+    if (filter !== undefined && filter.length > 0) {
+      router.push(router.path + "?q=" + filter);
+    }
+  }
 </script>
 
 <h2 class="routetitle">Articles</h2>
 
-<input
-  aria-label="filter"
-  maxlength="75"
-  size="32"
-  autocorrect="off"
-  autocapitalize="off"
-  id="filter"
-  type="text"
-  placeholder="Filter"
-  name="filter"
-  bind:value={filter} />
+<input placeholder="Filter" bind:value={filter} />
 
 <ul>
   {#each $route as article}
