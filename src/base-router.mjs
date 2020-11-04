@@ -154,6 +154,10 @@ export class BaseRouter {
 
     this.state = matcher(this.routes, path);
 
+   // console.log("REPLACE A", this.path, path);
+   // history.replaceState(undefined, undefined, this.base + path);
+   // console.log("REPLACE B", this.path);
+
     return formerState;
   }
 
