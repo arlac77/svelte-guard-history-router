@@ -25,7 +25,7 @@
 
 <h2 class="routetitle">Articles</h2>
 
-<input placeholder="Filter" bind:value={filter} />
+<input id="filter" placeholder="Filter" bind:value={filter} />
 
 <ul>
   {#each $route as article}
