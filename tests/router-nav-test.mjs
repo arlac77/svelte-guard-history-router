@@ -64,15 +64,12 @@ async function rtt(t, items) {
     }
 
     t.falsy(router.transition, "transition over");
-    t.is(router.path, path);
-    t.is(router.component.name, componentName);
-    t.is(subscriptionPath, path);
-    t.is(subscriptionComponent.name, componentName);
-    t.is(history.length, startHistoryLength + n);
-
-
-    const l = window.location;
-    t.is(l.href.slice(l.origin.length), path);
+    t.is(router.path, path, "router path");
+    t.is(router.component.name, componentName, "router component");
+    t.is(subscriptionPath, path, "subscription path");
+    t.is(subscriptionComponent.name, componentName, "subscription component");
+    t.is(history.length, startHistoryLength + n, "history length");
+    t.is(window.location.href.slice(window.location.origin.length), path, "window path");
   }
 }
 
