@@ -28,7 +28,7 @@ export class Transition {
   }
 
   /**
-   * Deliver query params.
+   * Deliver url search params form the target location.
    * @return {URLSearchParams} as extracted from the path
    */
   get searchParams() {

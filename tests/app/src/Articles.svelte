@@ -9,10 +9,7 @@
   let filter;
 
   onMount(() => {
-    const i = router.path.indexOf("?");
-    const sp = new URLSearchParams(i >= 0 ? router.path.substring(i+1) : undefined);
-
-    filter = sp.get('q');
+    filter = router.searchParams.get('q');
     console.log(router.path);
   });
 
