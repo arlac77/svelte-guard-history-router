@@ -1,6 +1,6 @@
 import { Selector, ClientFunction } from "testcafe";
 import { articles } from "../app/src/data.js";
-import { base } from "./helpers/config.js";
+import { base, login } from "./helpers/util.js";
 
 const getLocation = ClientFunction(() => window.location.href);
 const goBack = ClientFunction(() => window.history.back());
@@ -29,21 +29,13 @@ const links = [
 fixture`Getting Started`.page`${base}/index.html`;
 
 test("click arund", async t => {
-  let first = true;
 
   for (const l of links) {
     const a = Selector("a").withAttribute("href", l.path);
 
     await t.click(a);
 
-    if (l.path.startsWith("/article") && first) {
-      await t
-        .typeText("#username", "user", { replace: true })
-        .typeText("#password", "secret", { replace: true })
-        .click("#submit");
-
-      first = false;
-    }
+    await login(t);
 
     const title = Selector(".routetitle");
     await t
@@ -75,10 +67,7 @@ test.page`${base}/about`("about", async t => {
 test.page`${base}/article/10`("article/10#price", async t => {
   const title = Selector(".routetitle");
 
-  await t
-    .typeText("#username", "user", { replace: true })
-    .typeText("#password", "secret", { replace: true })
-    .click("#submit");
+  await login(t);
 
   //console.log(await t.getBrowserConsoleMessages());
 
@@ -96,10 +85,7 @@ test("Navigate around", async t => {
 
   //console.log(await getLocation());
 
-  await t
-    .typeText("#username", "user", { replace: true })
-    .typeText("#password", "secret", { replace: true })
-    .click("#submit");
+  await login(t);
 
   await t.expect(title.innerText).eql("Articles");
 
