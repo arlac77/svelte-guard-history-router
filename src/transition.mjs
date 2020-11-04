@@ -28,6 +28,15 @@ export class Transition {
   }
 
   /**
+   * Deliver query params.
+   * @return {URLSearchParams} as extracted from the path
+   */
+  get searchParams() {
+    const i = this.path.indexOf("?");
+    return new URLSearchParams(i >= 0 ? this.path.substring(i+1) : undefined);
+  }
+
+  /**
    * Start the transition
    * - leave old route
    * - find matching target route @see matcher()

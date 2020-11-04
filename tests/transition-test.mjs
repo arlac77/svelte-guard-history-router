@@ -6,6 +6,9 @@ test("transition basics", async t => {
   const { router } = setupRouter();
 
   const transition = new Transition(router, "/master");
+
+  t.is(transition.searchParams.get("key1"), null);
+
   await transition.start();
 
   t.falsy(transition.redirected);
@@ -20,6 +23,10 @@ test("transition with query parms", async t => {
     router,
     "/master#id?key1=value1&key2=value2"
   );
+
+  t.is(transition.searchParams.get("key1"), "value1");
+  t.is(transition.searchParams.get("key2"), "value2");
+
   await transition.start();
 
   t.falsy(transition.redirected);
@@ -59,7 +66,6 @@ test("transition redirect + abort", async t => {
 
   t.not(router.route.path, "/protected");
 
-
   t.pass("aborted");
   /*
   try {
@@ -68,6 +74,6 @@ test("transition redirect + abort", async t => {
   catch(e) {
   }
 */
-   //t.is(transition.redirected,undefined);
+  //t.is(transition.redirected,undefined);
   //t.is(router.route.path, "/protected");
 });
