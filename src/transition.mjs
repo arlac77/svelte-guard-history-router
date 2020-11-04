@@ -7,6 +7,7 @@ import { matcher } from "multi-path-matcher";
  * @property {Router} router
  * @property {string} path destination
  * @property {string} state
+ * @property {Object} saved state at the beginning
  */
 export class Transition {
   constructor(router, path) {
