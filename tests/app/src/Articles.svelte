@@ -10,12 +10,11 @@
 
   onMount(() => {
     filter = router.searchParams.get('q');
-    console.log(router.path);
   });
 
   $: {
     if (filter && filter.length > 0) {
-      router.push(router.path + "?q=" + filter);
+      router.push(router.path.replace(/\?.*/,'') + "?q=" + filter);
     }
   }
 </script>
