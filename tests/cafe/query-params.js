@@ -10,4 +10,6 @@ test("query params extracted", async t => {
 
   await t.expect(title.innerText).eql("Articles");
   await t.expect(Selector("#filter").value).eql("Pizza");
+
+  await t.typeText("#filter", "Hot", { replace: true });
 });
