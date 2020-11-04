@@ -125,8 +125,13 @@ export class BaseRouter {
     return this.route ? this.route.value : undefined;
   }
 
+  /**
+   *
+   * @return {string} url path with fragment & query
+   */
   get path() {
-    return window.location.pathname.slice(this.base.length);
+    const l = window.location;
+    return l.href.slice(l.origin.length + this.base.length);
   }
 
   /**

@@ -69,7 +69,10 @@ async function rtt(t, items) {
     t.is(subscriptionPath, path);
     t.is(subscriptionComponent.name, componentName);
     t.is(history.length, startHistoryLength + n);
-    t.is(window.location.pathname, path);
+
+
+    const l = window.location;
+    t.is(l.href.slice(l.origin.length), path);
   }
 }
 
@@ -79,7 +82,7 @@ rtt.title = (providedTitle = "", items) =>
 test.serial(rtt, [{ path: "/master", component: "MasterComponent" }]);
 test.serial(rtt, [
   {
-    path: "/master/1",
+    path: "/master/1?q=a",
     component: "DetailComponent",
     route: { properties: { id: "1" } }
   },
