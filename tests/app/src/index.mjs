@@ -23,10 +23,20 @@ async function delay(msecs = 1000) {
 }
 
 export async function* articleIterator(transition, properties) {
+  let q = /.*/;
+
+  const i = transition.path.indexOf("?");
+  if (i >= 0) {
+    const searchParams = new URLSearchParams(transition.path.substring(i));
+    q = new RegExp(searchParams.get("q"), "i");
+  }
+
   await delay(1000);
 
   for (const a of Object.values(articles)) {
-    yield a;
+    if (a.name.match(q)) {
+      yield a;
+    }
   }
 }
 
