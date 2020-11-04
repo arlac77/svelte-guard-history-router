@@ -1,4 +1,5 @@
 <script>
+  import {onMount } from "svelte";
   import { ObjectLink } from "../../../src/index.svelte";
 
   export let router;
@@ -6,6 +7,14 @@
   const route = router.route;
 
   let filter;
+
+  onMount(() => {
+    const i = router.path.indexOf("?");
+    const sp = new URLSearchParams(i >= 0 ? router.path.substring(i+1) : undefined);
+
+    filter = sp.get('q');
+    console.log(router.path);
+  });
 
   $: {
     if (filter !== undefined && filter.length > 0) {
