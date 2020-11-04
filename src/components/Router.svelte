@@ -13,7 +13,11 @@
 
   setContext(ROUTER, router);
 
-  onMount(() => router.push(window.location.pathname.slice(base.length)));
+  onMount(() =>
+    router.push(
+      window.location.href.slice(window.location.origin.length + base.length)
+    )
+  );
 </script>
 
 <slot />
