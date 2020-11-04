@@ -17,7 +17,7 @@
   });
 
   $: {
-    if (filter !== undefined && filter.length > 0) {
+    if (filter && filter.length > 0) {
       router.push(router.path + "?q=" + filter);
     }
   }
