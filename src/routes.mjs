@@ -126,7 +126,7 @@ export class SkeletonRoute extends RootRoute {
   }
 
   /**
-   * Check is properties against object.
+   * Check properties against object.
    * @param {Object} object
    * @param {Object} properties
    * @return {boolean} true if object properties are matching with the given proerties
@@ -144,8 +144,8 @@ export class SkeletonRoute extends RootRoute {
   /**
    * Extract properties from object.
    * All property values are strings.
-   * @param {Object} object
-   * @return {Object|undefined} properties extracted from given objects
+   * @param {Object} object source of the values
+   * @return {Object|undefined} properties extracted from given object
    */
   propertiesFor(object) {
     let properties = this.parent.propertiesFor(object);
