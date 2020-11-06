@@ -25,6 +25,7 @@
     "test": "npm run test:ava && npm run test:cafe",
     "test:ava": "ava --timeout 2m tests/*.mjs",
     "test:cafe": "testcafe $BROWSER:headless tests/cafe/*.js -s build/test --app-init-delay 1000 --app \"rollup -c tests/app/rollup.config.mjs -w\"",
+    "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --timeout 2m && c8 report -r lcov -o build/coverage --temp-directory build/tmp",
     "docs": "documentation readme ./src/index.mjs --section=API",
     "lint": "documentation lint ./src/index.mjs"
   },
@@ -35,6 +36,7 @@
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@rollup/plugin-virtual": "^2.0.3",
     "ava": "^3.13.0",
+    "c8": "^7.3.5",
     "documentation": "^13.0.2",
     "jsdom": "^16.4.0",
     "rollup": "^2.33.1",
@@ -56,6 +58,7 @@
     "inheritFrom": [
       "arlac77/template-arlac77-github",
       "arlac77/template-ava",
+      "arlac77/template-coverage",
       "arlac77/template-svelte-component"
     ]
   }
