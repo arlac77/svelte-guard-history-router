@@ -6,16 +6,17 @@ import { SkeletonRoute } from "../src/routes.mjs";
 import { Transition } from "../src/transition.mjs";
 
 test("route constructor", t => {
-  const route = new SkeletonRoute("/a", { guard: 77 });
+  const guard = {};
+  const route = new SkeletonRoute("/a", { guard });
   compile([route]);
   t.is(route.path, "/a");
-  t.is(route.guard, 77);
+  t.is(route.guard, guard);
   t.is(route.objectInstance, Object);
   t.is(route.hasParams, false);
 });
 
 test("route constructor with params", t => {
-  const route = new SkeletonRoute("/:key", { guard: 77 });
+  const route = new SkeletonRoute("/:key", { });
   compile([route]);
   t.is(route.path, "/:key");
   t.is(route.hasParams, true);
