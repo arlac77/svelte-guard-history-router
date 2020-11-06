@@ -1,27 +1,41 @@
 import test from "ava";
 import { SkeletonRoute } from "../src/routes.mjs";
 
-test("route propertiesFor with", t => {
-  const route = new SkeletonRoute("", {
-    parent: new SkeletonRoute(""),
-    propertyMapping: { repository: "name", id: "id" }
-  });
+function rpt(t, route, object, expected) {
+  t.deepEqual(route.propertiesFor(object), expected);
+}
 
-  t.deepEqual(route.propertyMapping, { repository: "name", id: "id" });
-  t.deepEqual(route.propertiesFor({ name: "r", id: 7 }), {
+rpt.title = (providedTitle = "", route, object, expected) =>
+  `router propertiesFor ${providedTitle} ${JSON.stringify(
+    object
+  )} ${JSON.stringify(expected)}`.trim();
+
+const route1 = new SkeletonRoute("", {
+  propertyMapping: { repository: "name", id: "id" }
+});
+
+test(
+  rpt,
+  route1,
+  { name: "r", id: 7 },
+  {
     repository: "r",
     id: "7"
-  });
-});
+  }
+);
 
-test("route propertiesFor property paths", t => {
-  const route = new SkeletonRoute("", {
+test(rpt, route1, undefined, undefined);
+test(rpt, route1, { name: "r" }, undefined);
+
+test(
+  rpt,
+  new SkeletonRoute("", {
     parent: new SkeletonRoute(""),
     propertyMapping: { repository: "name", group: "group.name" }
-  });
-
-  t.deepEqual(route.propertiesFor({ name: "r", group: { name: "g" } }), {
+  }),
+  { name: "r", group: { name: "g" } },
+  {
     group: "g",
     repository: "r"
-  });
-});
+  }
+);
