@@ -1,14 +1,17 @@
 import test from "ava";
 import { SkeletonRoute } from "../src/routes.mjs";
 
-test("route propertiesFor", t => {
+test("route propertiesFor with", t => {
   const route = new SkeletonRoute("", {
     parent: new SkeletonRoute(""),
-    propertyMapping: { repository: "name" }
+    propertyMapping: { repository: "name", id: "id" }
   });
 
-  t.deepEqual(route.propertyMapping, { repository: "name" });
-  t.deepEqual(route.propertiesFor({ name: "r" }), { repository: "r" });
+  t.deepEqual(route.propertyMapping, { repository: "name", id: "id" });
+  t.deepEqual(route.propertiesFor({ name: "r", id: 7 }), {
+    repository: "r",
+    id: "7"
+  });
 });
 
 test("route propertiesFor property paths", t => {
