@@ -23,17 +23,9 @@ svelte guarded history router
 
 # usage
 
-```js
-import { redirectGuard } from 'svelte-guard-history-router';
-
-let session = undefined;
-
-export const enshureSession = redirectGuard("/login", () => !session);
-```
-
 ```html
 <script>
-  import { Router, Route, Outlet } from "svelte-guard-history-router";
+  import { Router, Route, Outlet, redirectGuard } from "svelte-guard-history-router";
   import About from "./About.svelte";
   import Categories from "./Categories.svelte";
   import Category from "./Category.svelte";
@@ -41,6 +33,9 @@ export const enshureSession = redirectGuard("/login", () => !session);
   import Article from "./Article.svelte";
 
   import { enshureSession } from "./main.mjs";
+
+  export const enshureSession = redirectGuard("/login", () => !session);
+  let session = undefined;
 </script>
 
 <Router base="/base">
