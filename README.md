@@ -12,11 +12,11 @@ svelte guarded history router
 
 # Features
 
--   Named params
+-   Named params `article/:id`
 -   Guards to act when entering / leaving a route
 -   Automatic route ranking
 -   Routes and keys acting as stores
--   Nested Routes
+-   Nested Routes with relative paths for route composition
 -   Route values
 -   Object &lt;=> parameter mapping
 -   Create links from objects
