@@ -125,6 +125,14 @@ location /serviceBase {
 }
 ```
 
+# SPA integrating with a netlify
+
+publush a _redirects file into the app root folder
+
+```_redirects
+/* /index.html 200
+```
+
 # license
 
 BSD-2-Clause
