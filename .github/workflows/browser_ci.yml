@@ -22,7 +22,10 @@ jobs:
         env:
           BROWSER: '${{ matrix.browser }}'
       - run: npm run cover --if-present
-      - run: cat ./build/coverage/lcov.info | npx coveralls
+      - uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: build/coverage/lcov.info
   release:
     needs:
       - test
