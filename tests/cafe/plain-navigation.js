@@ -64,7 +64,7 @@ test.page`${base}/about`("about", async t => {
   await t.expect(title.innerText).eql("About");
 });
 
-test.page`${base}/article/10`("article/10#price", async t => {
+test.page`${base}/article/10#price`("article/10#price", async t => {
   const title = Selector(".routetitle");
 
   await login(t);
