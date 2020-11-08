@@ -56,6 +56,9 @@
   },
   "homepage": "https://github.com/arlac77/svelte-guard-history-router#readme",
   "template": {
+    "properties": {
+      "netlifly.site.id": "e6da37be-57f8-40d4-bf85-07ad688a73b1"
+    },
     "inheritFrom": [
       "arlac77/template-arlac77-github",
       "arlac77/template-ava",
