@@ -1,0 +1,8 @@
+[build]
+publish = "tests/app/public/"
+command = "npm install && npm build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
