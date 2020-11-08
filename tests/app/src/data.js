@@ -22,23 +22,53 @@ export const articles = Object.fromEntries(
       ingredients: ["milk"]
     },
     { id: 10, name: "Pizza Quattro Stagioni", price: 8.0, category: "pizza" },
-    { id: 11, name: "Pizza Salami", price: 7.0, category: "pizza" },
+    {
+      id: 11,
+      name: "Pizza Salami",
+      price: 7.0,
+      category: "pizza",
+      ingredients: ["tomato sauce", "basil", "oregano"]
+    },
     { id: 12, name: "Pizza Hawaii", price: 7.0, category: "pizza" },
     {
       id: 13,
       name: "Pizza Margherita",
       price: 17.0,
       category: "pizza",
-      ingredients: ["tomato sauce", "house-made mozzarella", "basil", "oregano", "chili flake"]
+      ingredients: [
+        "tomato sauce",
+        "house-made mozzarella",
+        "basil",
+        "oregano",
+        "chili flake"
+      ]
     },
     { id: 14, name: "Pizza Funghi", price: 7.0, category: "pizza" },
     { id: 15, name: "Pizza Calzone", price: 7.0, category: "pizza" },
     { id: 16, name: "Pizza Tonno", price: 7.0, category: "pizza" },
     { id: 17, name: "Pizza Frutti di Mare", price: 7.0, category: "pizza" },
     { id: 18, name: "Pizza Prosciutto", price: 7.0, category: "pizza" },
-    { id: 19, name: "Pizza Peperoni", price: 7.0, category: "pizza" },
-    { id: 20, name: "Pizza Chef", price: 7.5, category: "pizza" },
-    { id: 21, name: "Pizza Speciale", price: 8.5, category: "pizza" },
+    {
+      id: 19,
+      name: "Pizza Peperoni",
+      price: 7.0,
+      category: "pizza",
+      ingredients: ["tomato sauce", "basil", "oregano"]
+    },
+    {
+      id: 20,
+      name: "Pizza Chef",
+      price: 7.5,
+      category: "pizza",
+      ingredients: ["tomato sauce", "basil", "oregano"]
+    },
+    {
+      id: 21,
+      name: "Pizza Speciale",
+      price: 8.5,
+      category: "pizza",
+      ingredients: ["tomato sauce", "basil", "oregano"]
+    },
     { id: 23, name: "Hot Dog", price: 2.0, category: "to go" },
     { id: 32, name: "Cheesecake", price: 2.0, category: "dessert" }
   ].map(a => [a.id, a])
@@ -50,7 +80,7 @@ export const categories = Object.values(articles).reduce((all, c) => {
   }
   all[c.category].articles.push(c);
   c.category = all[c.category];
-  if(c.ingredients == undefined) {
+  if (c.ingredients == undefined) {
     c.ingredients = [];
   }
   return all;
