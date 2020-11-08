@@ -3,8 +3,8 @@ publish = "tests/app/public/"
 command = "npm install && npm build"
 
 [[redirects]]
-  from = "/bundle.*"
-  to = "/bundle.:splat"
+  from = "/bundle.main.js"
+  to = "/bundle.main.js"
   status = 200
 
 [[redirects]]
