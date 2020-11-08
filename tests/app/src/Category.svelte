@@ -7,11 +7,17 @@
 </script>
 
 {#if $route}
-  <h2 class="routetitle">Category {$route.name}</h2>
+  <div class="card">
+    <h2 class="card-title routetitle">Category {$route.name}</h2>
 
-  {#each $route.articles as article}
-    <li>
-      <ObjectLink object={article}/>
-    </li>
-  {/each}
-{:else}<h2 class="routetitle">No such category</h2>{/if}
+    <div class="card-content">
+      {#each $route.articles as article}
+        <li>
+          <ObjectLink object={article} />
+        </li>
+      {/each}
+    </div>
+  </div>
+{:else}
+  <h2 class="routetitle">No such category</h2>
+{/if}

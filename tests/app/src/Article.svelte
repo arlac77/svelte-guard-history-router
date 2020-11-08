@@ -13,19 +13,41 @@
 </style>
 
 {#if $route}
-  <h2 class="routetitle">Article {$route.name}</h2>
-  <div>Id: {$route.id}</div>
-  <div id="price" class="price">{$route.price} $</div>
-  <ObjectLink object={$route.category} />
+  <div class="card">
+    <h2 class="card-title routetitle">Article {$route.name} ({$route.id})</h2>
 
-  <div>
-    <Link
-      href="/article/{('00' + (parseInt($route.id) + 1)).replace(/.*(\d\d)$/, '$1')}">
-      Next
-    </Link>
-    <Link
-      href="/article/{('00' + (parseInt($route.id) - 1)).replace(/.*(\d\d)$/, '$1')}">
-      Prev
-    </Link>
+    <img src="images/article/{$route.id}.jpg" alt={$route.name} />
+
+    <div class="card-content">
+      <div class="card-title">Price</div>
+      <div id="price" class="price">{$route.price} $</div>
+    </div>
+
+    <div class="card-content">
+      <div class="card-title">Category</div>
+      <ObjectLink object={$route.category} />
+    </div>
+
+    <div class="card-content">
+      <div class="card-title">ingredients</div>
+      <ul>
+        {#each $route.ingredients as ingredient}
+          <li>{ingredient}</li>
+        {/each}
+      </ul>
+    </div>
+
+    <div class="card-action">
+      <Link
+        href="/article/{('00' + (parseInt($route.id) - 1)).replace(/.*(\d\d)$/, '$1')}">
+        Prev
+      </Link>
+      <Link
+        href="/article/{('00' + (parseInt($route.id) + 1)).replace(/.*(\d\d)$/, '$1')}">
+        Next
+      </Link>
+    </div>
   </div>
-{:else}<h2 class="routetitle">No such article</h2>{/if}
+{:else}
+  <h2 class="routetitle">No such article</h2>
+{/if}

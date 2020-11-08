@@ -27,9 +27,9 @@ export const articles = Object.fromEntries(
     {
       id: 13,
       name: "Pizza Margherita",
-      price: 5.0,
+      price: 17.0,
       category: "pizza",
-      ingredients: ["cheese", "tomato"]
+      ingredients: ["tomato sauce", "house-made mozzarella", "basil", "oregano", "chili flake"]
     },
     { id: 14, name: "Pizza Funghi", price: 7.0, category: "pizza" },
     { id: 15, name: "Pizza Calzone", price: 7.0, category: "pizza" },
@@ -45,9 +45,13 @@ export const articles = Object.fromEntries(
 );
 
 export const categories = Object.values(articles).reduce((all, c) => {
-  if (!all[c.category])
+  if (!all[c.category]) {
     all[c.category] = { cid: c.category, name: c.category, articles: [] };
+  }
   all[c.category].articles.push(c);
   c.category = all[c.category];
+  if(c.ingredients == undefined) {
+    c.ingredients = [];
+  }
   return all;
 }, {});

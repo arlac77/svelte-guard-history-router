@@ -44,7 +44,7 @@ test("click arund", async t => {
       keep comment until fixed */
         title.innerText
       )
-      .eql(l.title);
+      .contains(l.title);
 
     await t.expect(getLocation()).contains(l.path);
   }
@@ -71,7 +71,7 @@ test.page`${base}/article/10#price`("article/10#price", async t => {
 
   //console.log(await t.getBrowserConsoleMessages());
 
-  await t.expect(title.innerText).eql("Article Pizza Quattro Stagioni");
+  await t.expect(title.innerText).contains("Pizza Quattro Stagioni");
 });
 
 test("Navigate around", async t => {
