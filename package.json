@@ -21,14 +21,14 @@
   ],
   "license": "BSD-2-Clause",
   "scripts": {
-    "build": "rollup -c tests/app/rollup.config.mjs",
     "start": "rollup -c tests/app/rollup.config.mjs -w",
     "test": "npm run test:ava && npm run test:cafe",
     "test:ava": "ava --timeout 2m tests/*.mjs",
     "test:cafe": "testcafe $BROWSER:headless tests/cafe/*.js -s build/test --app-init-delay 1000 --app \"rollup -c tests/app/rollup.config.mjs -w\"",
     "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --timeout 2m tests/*.mjs && c8 report -r lcov -o build/coverage --temp-directory build/tmp",
     "docs": "documentation readme ./src/index.mjs --section=API",
-    "lint": "documentation lint ./src/index.mjs"
+    "lint": "documentation lint ./src/index.mjs",
+    "build": "rollup -c tests/app/rollup.config.mjs"
   },
   "dependencies": {
     "multi-path-matcher": "^2.1.2"
@@ -56,10 +56,18 @@
   },
   "homepage": "https://github.com/arlac77/svelte-guard-history-router#readme",
   "template": {
+    "properties": {
+      "netlifly": {
+        "site": {
+          "uuid": "e6da37be-57f8-40d4-bf85-07ad688a73b1"
+        }
+      }
+    },
     "inheritFrom": [
       "arlac77/template-arlac77-github",
       "arlac77/template-ava",
       "arlac77/template-coverage",
+      "arlac77/template-netlify",
       "arlac77/template-svelte-component",
       "arlac77/template-vscode"
     ]

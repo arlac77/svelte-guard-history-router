@@ -1,6 +1,14 @@
 test:
-  - "tests/**/*"
-
+  - tests/**/*
 documentation:
   - docs/**/*
-  - "**/*.md"
+  - '**/*.md'
+ci:
+  - .github/workflows/*
+  - .travis.yml
+npm:
+  - .npmignore
+deployment:
+  - netlify.toml
+labels:
+  - .github/pr_labeler.yml
