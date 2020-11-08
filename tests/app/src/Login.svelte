@@ -1,4 +1,6 @@
 <script>
+  import { onMount } from "svelte";
+
   import { setSession } from "./index.mjs";
 
   export let router;
@@ -29,6 +31,10 @@
       }, 500);
     });
   }
+
+  onMount(() => {
+    document.getElementById("submit").focus();
+  });
 
   const handleKeyup = event => {
     if (event.key === "Escape") {
