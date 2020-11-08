@@ -21,6 +21,7 @@
   ],
   "license": "BSD-2-Clause",
   "scripts": {
+    "build": "rollup -c tests/app/rollup.config.mjs",
     "start": "rollup -c tests/app/rollup.config.mjs -w",
     "test": "npm run test:ava && npm run test:cafe",
     "test:ava": "ava --timeout 2m tests/*.mjs",
