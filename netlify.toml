@@ -1,14 +1,3 @@
 [build]
 publish = "tests/app/public/"
 command = "npm install && npm build"
-
-[[redirects]]
-  from = "/bundle.main.js"
-  to = "/bundle.main.js"
-  status = 200
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
