@@ -33,7 +33,7 @@
   const enshureSession = redirectGuard("/login", () => !session);
 </script>
 
-<Router base="/components/svelte-guard-history-router/tests/app">
+<Router>
   <nav>
     <Route href="/" path="*" component={Home}>Router Example</Route>
     <ul class="left">

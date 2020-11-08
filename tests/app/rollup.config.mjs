@@ -29,7 +29,7 @@ export default {
       port,
       dirs: [`${basedir}/public`],
       spa: `${basedir}/public/index.html`,
-      basePath: `/components/svelte-guard-history-router/${basedir}`
+      basePath: "/"
     })
   ]
 };
