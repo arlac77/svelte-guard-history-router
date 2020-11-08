@@ -21,6 +21,8 @@ jobs:
       - run: npm test
         env:
           BROWSER: '${{ matrix.browser }}'
+      - run: npm run cover --if-present
+      - run: cat ./build/coverage/lcov.info | npx coveralls
   release:
     needs:
       - test
