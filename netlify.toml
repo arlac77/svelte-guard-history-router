@@ -3,6 +3,12 @@ publish = "tests/app/public/"
 command = "npm install && npm build"
 
 [[redirects]]
+  from = "/bundle.*"
+  to = "/bundle.:splat"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
