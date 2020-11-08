@@ -67,5 +67,8 @@
       "arlac77/template-svelte-component",
       "arlac77/template-vscode"
     ]
+  },
+  "scrpts": {
+    "build": "rollup -c tests/app/rollup.config.mjs"
   }
 }
