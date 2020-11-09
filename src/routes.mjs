@@ -66,6 +66,10 @@ export class SkeletonRoute extends RootRoute {
   constructor(path, options = {}) {
     super();
 
+    delete options.path;
+    delete options.href;
+    delete options.factory;
+    
     if (Array.isArray(options.guard)) {
       switch (options.guard.length) {
         case 0:

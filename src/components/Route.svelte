@@ -9,23 +9,10 @@
   export let href = path;
   export let factory = SkeletonRoute;
 
-  export let component;
-  export let guard = undefined;
-  export let propertyMapping = undefined;
-  export let objectInstance = undefined;
-  export let iteratorFor = undefined;
-  export let objectFor = undefined;
-  export let linkComponent = undefined;
 
   const route = new factory(path, {
     parent: getContext(ROUTE),
-    component,
-    iteratorFor,
-    objectFor,
-    linkComponent,
-    propertyMapping,
-    objectInstance,
-    guard
+    ...$$props
   });
 
   setContext(ROUTE, route);
