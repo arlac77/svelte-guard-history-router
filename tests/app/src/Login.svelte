@@ -1,7 +1,6 @@
 <script>
   import { onMount } from "svelte";
-
-  import { setSession } from "./index.mjs";
+  import { setSession } from "./session.mjs";
 
   export let router;
 

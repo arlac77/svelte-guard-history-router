@@ -6,6 +6,7 @@
     ChildStoreRoute,
     Outlet,
     WaitingGuard,
+    Guard,
     redirectGuard
   } from "../../../src/index.svelte";
   import RouterState from "./RouterState.svelte";
@@ -20,17 +21,43 @@
   import Home from "./Home.svelte";
   import NoWay from "./NoWay.svelte";
   import Waiting from "./Waiting.svelte";
-  import {
-    AlwaysThrowGuard,
-    session,
-    articleIterator,
-    categoryIterator
-  } from "./index.mjs";
+  import { articles, categories } from "./data.js";
+  import { session } from "./session.mjs";
 
   let showState = true;
 
   const waitingGuard = new WaitingGuard(Waiting);
   const enshureSession = redirectGuard("/login", () => !session);
+
+  class AlwaysThrowGuard extends Guard {
+    async enter(transition) {
+      throw new Error("never go there");
+    }
+  }
+  async function delay(msecs = 1000) {
+    return new Promise(r => setTimeout(r, msecs));
+  }
+
+  async function* articleIterator(transition, properties) {
+    const v = transition.searchParams.get("q");
+    const q = v ? new RegExp(v, "i") : /.*/;
+
+    await delay(1000);
+
+    for (const a of Object.values(articles)) {
+      if (a.name.match(q)) {
+        yield a;
+      }
+    }
+  }
+
+  async function* categoryIterator(transition, properties) {
+    await delay(800);
+
+    for (const c of Object.values(categories)) {
+      yield c;
+    }
+  }
 </script>
 
 <Router>
