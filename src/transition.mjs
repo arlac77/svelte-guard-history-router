@@ -49,10 +49,11 @@ export class Transition {
   async start() {
     try {
       if (this.route) {
-        const ancestor = this.route.commonAncestor(this.saved.route);
+        const old = this.saved.route;
+        const ancestor = this.route.commonAncestor(old);
 
-        if (this.saved.route !== undefined) {
-          await this.saved.route.leave(this, ancestor);
+        if (old !== undefined) {
+          await old.leave(this, ancestor);
         }
 
         await this.route.enter(this, ancestor);
