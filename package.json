@@ -64,6 +64,7 @@
       }
     },
     "inheritFrom": [
+      "arlac77/tempalte-vscode",
       "arlac77/template-arlac77-github",
       "arlac77/template-ava",
       "arlac77/template-coverage",
