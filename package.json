@@ -68,8 +68,7 @@
       "arlac77/template-ava",
       "arlac77/template-coverage",
       "arlac77/template-netlify",
-      "arlac77/template-svelte-component",
-      "arlac77/template-vscode"
+      "arlac77/template-svelte-component"
     ]
   }
 }
