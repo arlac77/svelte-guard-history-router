@@ -77,8 +77,14 @@ test("transition redirect + abort", async t => {
   const { router } = setupRouter();
 
   const transition = new Transition(router, "/protected");
+
+  t.is(transition.path, "/protected");
+
   const start = transition.start();
   transition.redirect("/login");
+
+  //t.is(transition.path, "/login");
+
   t.truthy(transition.redirected);
 
   await router.abort();
@@ -86,13 +92,13 @@ test("transition redirect + abort", async t => {
   t.not(router.route.path, "/protected");
 
   t.pass("aborted");
-  /*
-  try {
+  
+  /*try {
       await start;
   }
   catch(e) {
-  }
-*/
+  }*/
+
   //t.is(transition.redirected,undefined);
   //t.is(router.route.path, "/protected");
 });
