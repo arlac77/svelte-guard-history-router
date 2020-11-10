@@ -9,7 +9,6 @@
   export let href = path;
   export let factory = SkeletonRoute;
 
-
   const route = new factory(path, {
     parent: getContext(ROUTE),
     ...$$props

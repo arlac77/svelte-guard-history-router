@@ -81,7 +81,7 @@ export class Transition {
   /**
    * Halt current transition and go to another route.
    * To proceed with the original route by calling {@link continue()}
-   * The original transition will cept in place and be continued afterwards
+   * The original transition will keept in place and be continued afterwards.
    * @param {string} path new route to enter temporary
    */
   async redirect(path) {
