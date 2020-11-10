@@ -70,6 +70,9 @@
       "arlac77/template-netlify",
       "arlac77/template-svelte-component",
       "arlac77/template-vscode"
+    ],
+    "usedBy": [
+      "arlac77/svelte-guard-history-router"
     ]
   }
 }
