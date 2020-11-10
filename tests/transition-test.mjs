@@ -7,6 +7,9 @@ test("transition basics", async t => {
 
   const transition = new Transition(router, "/master");
 
+  t.is(transition.path, "/master");
+  t.deepEqual(transition.params, {});
+
   t.is(transition.searchParams.get("key1"), null);
 
   await transition.start();
@@ -14,6 +17,22 @@ test("transition basics", async t => {
   t.falsy(transition.redirected);
 
   t.is(router.route.path, "/master");
+});
+
+test("transition params", async t => {
+  const { router } = setupRouter();
+
+  const transition = new Transition(router, "/master/2");
+
+  t.is(transition.path, "/master/2");
+
+  t.deepEqual(transition.params, { detail: "2" });
+
+  await transition.start();
+
+  t.falsy(transition.redirected);
+
+  t.is(router.route.path, "/master/:detail");
 });
 
 test("transition with query parms", async t => {

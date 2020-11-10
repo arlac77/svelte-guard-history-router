@@ -25,6 +25,8 @@ export class Transition {
         }
       }
     });
+
+    Object.assign(this, matcher(router.routes, path));
   }
 
   /**
@@ -33,7 +35,7 @@ export class Transition {
    */
   get searchParams() {
     const i = this.path.indexOf("?");
-    return new URLSearchParams(i >= 0 ? this.path.substring(i+1) : undefined);
+    return new URLSearchParams(i >= 0 ? this.path.substring(i + 1) : undefined);
   }
 
   /**
@@ -46,9 +48,6 @@ export class Transition {
    */
   async start() {
     try {
-      const router = this.router;
-
-      Object.assign(this,matcher(router.routes, this.path));
       if (this.route) {
         const ancestor = this.route.commonAncestor(this.saved.route);
 
@@ -57,7 +56,7 @@ export class Transition {
         }
 
         await this.route.enter(this, ancestor);
-        router.state = this;
+        this.router.state = this;
       }
     } catch (e) {
       await this.abort(e);
