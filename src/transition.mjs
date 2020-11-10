@@ -3,11 +3,9 @@ import { matcher } from "multi-path-matcher";
 /**
  * Transition between routes
  * @param {Router} router
- * @param {string} path destination
+ * @param {string} path new destination
  * @property {Router} router
- * @property {string} path destination
- * @property {string} state
- * @property {Object} saved state at the beginning
+ * @property {string} path new destination
  */
 export class Transition {
   constructor(router, path) {
@@ -16,7 +14,6 @@ export class Transition {
     Object.defineProperties(this, {
       router: { value: router },
       path: { value: path },
-      saved: { value: router.state },
       component: {
         get: () => (this.redirected === undefined ? component : undefined),
         set: value => {
@@ -49,7 +46,7 @@ export class Transition {
   async start() {
     try {
       if (this.route) {
-        const old = this.saved.route;
+        const old = this.router.route;
         const ancestor = this.route.commonAncestor(old);
 
         if (old !== undefined) {
@@ -129,7 +126,6 @@ export class Transition {
       await this.redirected.abort();
     }
 
-    this.router.state = this.saved;
     history.back();
     setTimeout(() => this.router.finalizePush(), 0);
   }
