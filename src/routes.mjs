@@ -226,11 +226,8 @@ export class IteratorStoreRoute extends SkeletonRoute {
     await super.enter(transition, untilRoute);
 
     const entries = [];
-    this.value = entries;
 
-    const properties = transition.router.params;
-
-    for await (const e of await this.iteratorFor(transition, properties)) {
+    for await (const e of await this.iteratorFor(transition, transition.params)) {
       entries.push(e);
     }
 
@@ -241,7 +238,7 @@ export class IteratorStoreRoute extends SkeletonRoute {
 export class ObjectStoreRoute extends SkeletonRoute {
   async enter(transition, untilRoute) {
     await super.enter(transition, untilRoute);
-    this.value = await this.objectFor(transition, transition.router.params);
+    this.value = await this.objectFor(transition, transition.params);
   }
 }
 

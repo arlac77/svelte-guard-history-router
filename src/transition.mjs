@@ -40,25 +40,24 @@ export class Transition {
    * Start the transition
    * - leave old route
    * - find matching target route @see matcher()
+   * - enter new route
    * - set params
    * - set current route
-   * - enter new route
    */
   async start() {
     try {
       const router = this.router;
-      const state = matcher(router.routes, this.path);
 
-      if (state.route) {
-        const ancestor = state.route.commonAncestor(this.saved.route);
+      Object.assign(this,matcher(router.routes, this.path));
+      if (this.route) {
+        const ancestor = this.route.commonAncestor(this.saved.route);
 
         if (this.saved.route !== undefined) {
           await this.saved.route.leave(this, ancestor);
         }
 
-        router.state = state;
-
-        await router.route.enter(this, ancestor);
+        await this.route.enter(this, ancestor);
+        router.state = this;
       }
     } catch (e) {
       await this.abort(e);
