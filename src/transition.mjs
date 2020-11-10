@@ -1,4 +1,5 @@
 import { matcher } from "multi-path-matcher";
+import { RouterState } from "./router-state.mjs";
 
 /**
  * Transition between routes
@@ -7,8 +8,10 @@ import { matcher } from "multi-path-matcher";
  * @property {Router} router
  * @property {string} path new destination
  */
-export class Transition {
+export class Transition extends RouterState {
   constructor(router, path) {
+    super();
+
     let component;
 
     Object.defineProperties(this, {
@@ -24,15 +27,6 @@ export class Transition {
     });
 
     Object.assign(this, matcher(router.routes, path));
-  }
-
-  /**
-   * Deliver url search params form the target location.
-   * @return {URLSearchParams} as extracted from the path
-   */
-  get searchParams() {
-    const i = this.path.indexOf("?");
-    return new URLSearchParams(i >= 0 ? this.path.substring(i + 1) : undefined);
   }
 
   /**

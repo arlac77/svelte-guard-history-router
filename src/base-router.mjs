@@ -1,5 +1,6 @@
 import { compile, matcher } from "multi-path-matcher";
 import { Transition } from "./transition.mjs";
+import { RouterState } from "./router-state.mjs";
 import { nameValueStore, NAVIGATION_EVENT } from "./util.mjs";
 
 /**
@@ -35,8 +36,10 @@ import { nameValueStore, NAVIGATION_EVENT } from "./util.mjs";
  * @property {Transition} transition ongoing transition
  * @property {string} base url
  */
-export class BaseRouter {
+export class BaseRouter extends RouterState {
   constructor(routes, base) {
+    super();
+
     let route;
 
     this.routes = routes;
@@ -134,15 +137,6 @@ export class BaseRouter {
     return l.href.slice(l.origin.length + this.base.length);
   }
 
-  /**
-   * Deliver url search params form the current location.
-   * @return {URLSearchParams} as extracted from the path
-   */
-  get searchParams() {
-    const path = this.path;
-    const i = path.indexOf("?");
-    return new URLSearchParams(i >= 0 ? path.substring(i+1) : undefined);
-  }
 
   /**
    * Replace current route
