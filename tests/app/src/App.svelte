@@ -38,7 +38,7 @@
     return new Promise(r => setTimeout(r, msecs));
   }
 
-  async function* articleIterator(transition, properties) {
+  async function* articleIterator(transition) {
     const v = transition.searchParams.get("q");
     const q = v ? new RegExp(v, "i") : /.*/;
 
@@ -51,7 +51,7 @@
     }
   }
 
-  async function* categoryIterator(transition, properties) {
+  async function* categoryIterator(transition) {
     await delay(800);
 
     for (const c of Object.values(categories)) {
