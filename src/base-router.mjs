@@ -109,7 +109,7 @@ export class BaseRouter extends RouterState {
 
   /**
    * Current component.
-   * Either from a redirected transition or from the current route
+   * Either from a nested transition or from the current route
    * @return {SvelteComponent}
    */
   get component() {

@@ -14,7 +14,7 @@ test("transition basics", async t => {
 
   await transition.start();
 
-  t.falsy(transition.redirected);
+  t.falsy(transition.nested);
 
   t.is(router.route.path, "/master");
 });
@@ -30,7 +30,7 @@ test("transition params", async t => {
 
   await transition.start();
 
-  t.falsy(transition.redirected);
+  t.falsy(transition.nested);
 
   t.is(router.route.path, "/master/:detail");
 });
@@ -48,7 +48,7 @@ test("transition with query parms", async t => {
 
   await transition.start();
 
-  t.falsy(transition.redirected);
+  t.falsy(transition.nested);
 
   t.is(router.route.path, "/master");
 });
@@ -60,7 +60,7 @@ test("transition redirect", async t => {
   const start = transition.start();
   transition.redirect("/login");
 
-  t.truthy(transition.redirected);
+  t.truthy(transition.nested);
 
   noLoginRequired();
 
@@ -68,7 +68,7 @@ test("transition redirect", async t => {
 
   await start;
 
-  t.falsy(transition.redirected);
+  t.falsy(transition.nested);
 
   t.is(router.route.path, "/protected");
 });
@@ -85,7 +85,7 @@ test("transition redirect + abort", async t => {
 
   //t.is(transition.path, "/login");
 
-  t.truthy(transition.redirected);
+  t.truthy(transition.nested);
 
   await router.abort();
 
@@ -99,6 +99,6 @@ test("transition redirect + abort", async t => {
   catch(e) {
   }*/
 
-  //t.is(transition.redirected,undefined);
+  //t.is(transition.nested,undefined);
   //t.is(router.route.path, "/protected");
 });

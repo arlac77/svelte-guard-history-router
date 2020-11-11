@@ -18,7 +18,7 @@ export class Transition extends RouterState {
       router: { value: router },
       path: { value: path },
       component: {
-        get: () => (this.redirected === undefined ? component : undefined),
+        get: () => (this.nested === undefined ? component : undefined),
         set: value => {
           component = value;
           this.router.notifySubscriptions();
@@ -63,7 +63,7 @@ export class Transition extends RouterState {
    * @see Router.finalizePush
    */
   end() {
-    if (this.redirected === undefined) {
+    if (this.nested === undefined) {
       this.router.finalizePush(this.path);
     }
   }
@@ -75,35 +75,35 @@ export class Transition extends RouterState {
    * @param {string} path new route to enter temporary
    */
   async redirect(path) {
-    this.redirected = { state: this.router.replace(path) };
+    this.nested = { state: this.router.replace(path) };
 
     return new Promise((resolve, reject) => {
-      this.redirected.continue = async () => {
+      this.nested.continue = async () => {
         try {
-          this.router.state = this.redirected.state;
+          this.router.state = this.nested.state;
           resolve();
         } catch (e) {
           await this.abort(e);
           reject(e);
         } finally {
-          this.redirected = undefined;
+          this.nested = undefined;
         }
       };
 
-      this.redirected.abort = () => {
-        this.redirected = undefined;
+      this.nested.abort = () => {
+        this.nested = undefined;
         reject();
       };
     });
   }
 
   /**
-   * Continue a redirected route to its original destination.
-   * Does nothing if the transition has not been redirected
+   * Continue a nested route to its original destination.
+   * Does nothing if the transition has not been nested
    */
   async continue() {
-    if (this.redirected !== undefined) {
-      return this.redirected.continue();
+    if (this.nested !== undefined) {
+      return this.nested.continue();
     }
   }
 
@@ -116,8 +116,8 @@ export class Transition extends RouterState {
       this.router.error(e);
     }
 
-    if (this.redirected !== undefined) {
-      await this.redirected.abort();
+    if (this.nested !== undefined) {
+      await this.nested.abort();
     }
 
     history.back();
