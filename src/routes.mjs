@@ -69,7 +69,7 @@ export class SkeletonRoute extends RootRoute {
     delete options.path;
     delete options.href;
     delete options.factory;
-    
+
     if (Array.isArray(options.guard)) {
       switch (options.guard.length) {
         case 0:
@@ -196,15 +196,15 @@ export class SkeletonRoute extends RootRoute {
 
   /**
    * Deliver object for a given set of properties
-   * @param {Object} properties
+   * @param {Transition} transition
    * @return {Object} for matching properties
    */
-  objectFor(transition, properties) {
-    return this.parent.objectFor(transition, properties);
+  objectFor(transition) {
+    return this.parent.objectFor(transition);
   }
 
-  async *iteratorFor(transition, properties) {
-    yield* this.parent.iteratorFor(transition, properties);
+  async *iteratorFor(transition) {
+    yield* this.parent.iteratorFor(transition);
   }
 
   get propertyMapping() {
@@ -227,7 +227,10 @@ export class IteratorStoreRoute extends SkeletonRoute {
 
     const entries = [];
 
-    for await (const e of await this.iteratorFor(transition, transition.params)) {
+    for await (const e of await this.iteratorFor(
+      transition,
+      transition.params
+    )) {
       entries.push(e);
     }
 
@@ -238,17 +241,16 @@ export class IteratorStoreRoute extends SkeletonRoute {
 export class ObjectStoreRoute extends SkeletonRoute {
   async enter(transition, untilRoute) {
     await super.enter(transition, untilRoute);
-    this.value = await this.objectFor(transition, transition.params);
+    this.value = await this.objectFor(transition);
   }
 }
 
 export class ChildStoreRoute extends ObjectStoreRoute {
-  async objectFor(transition, properties) {
+  async objectFor(transition) {
     for await (const object of this.parent.iteratorFor(
-      transition,
-      properties
+      transition
     )) {
-      if (this.matches(object, properties)) {
+      if (this.matches(object, transition.params)) {
         return object;
       }
     }

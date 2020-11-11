@@ -19,9 +19,7 @@ test("DetailRoute objectFor", async t => {
   
   t.deepEqual(transition.params, { did: "2" });
 
-  t.is(await child.objectFor(transition, { did: "7" }), undefined);
-
   await transition.start();
 
-  t.is(await child.objectFor(transition, { did: "2" }), values[1]);
+  t.is(await child.objectFor(transition), values[1]);
 });

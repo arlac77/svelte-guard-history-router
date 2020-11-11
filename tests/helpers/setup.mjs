@@ -74,9 +74,9 @@ export function setupRoutes() {
     component: Component("DetailComponent"),
     objectInstance: Detail,
     propertyMapping: { detail: "id" },
-    iteratorFor: async function* (transition, properties) {
-      for await (const d of this.parent.iteratorFor(transition, properties)) {
-        if (d.id === properties.detail) {
+    iteratorFor: async function* (transition) {
+      for await (const d of this.parent.iteratorFor(transition)) {
+        if (d.id === transition.params.detail) {
           yield* d.leafs;
         }
       }
