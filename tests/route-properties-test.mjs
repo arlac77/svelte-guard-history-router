@@ -43,3 +43,12 @@ test(
 );
 
 test(rpt, nestesPropsRoute, undefined, undefined);
+
+test(
+  rpt,
+  new SkeletonRoute("/deep", {
+    propertyMapping: { deep: "a.b.c.d" }
+  }),
+  {},
+  undefined
+);

@@ -6,6 +6,9 @@ const dummySet = { size: 0, forEach: dummyFunction };
 function ref(obj, str) {
   for (const part of str.split(".")) {
     obj = obj[part];
+    if(obj === undefined) {
+      return;
+    }
   }
   if (obj !== undefined) {
     return obj.toString();
