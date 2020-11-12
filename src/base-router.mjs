@@ -137,7 +137,6 @@ export class BaseRouter extends BaseTransition {
     return l.href.slice(l.origin.length + this.base.length);
   }
 
-
   /**
    * Replace current route
    * @param {string} path
@@ -148,9 +147,9 @@ export class BaseRouter extends BaseTransition {
 
     this.state = matcher(this.routes, path);
 
-   // console.log("REPLACE A", this.path, path);
-   // history.replaceState(undefined, undefined, this.base + path);
-   // console.log("REPLACE B", this.path);
+    // console.log("REPLACE A", this.path, path);
+    // history.replaceState(undefined, undefined, this.base + path);
+    // console.log("REPLACE B", this.path);
 
     return formerState;
   }
@@ -174,8 +173,7 @@ export class BaseRouter extends BaseTransition {
    * @return {Transition} running transition
    */
   async push(path) {
-    this.nested = new Transition(this, path);
-    return this.nested.start();
+    return this.nest(path, Transition);
   }
 
   /**
@@ -204,7 +202,7 @@ export class BaseRouter extends BaseTransition {
    * @param {string} fallbackPath
    */
   async continue(fallbackPath) {
-    if(!await super.continue() && fallbackPath) {
+    if (!(await super.continue()) && fallbackPath) {
       return this.push(fallbackPath);
     }
   }
@@ -218,7 +216,7 @@ export class BaseRouter extends BaseTransition {
    * @param {string} fallbackPath
    */
   async abort(fallbackPath) {
-    if(!await super.abort() && fallbackPath) {
+    if (!(await super.abort()) && fallbackPath) {
       return this.push(fallbackPath);
     }
   }

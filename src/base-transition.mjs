@@ -2,6 +2,8 @@
  *
  */
 export class BaseTransition {
+  constructor() {
+  }
 
   /**
    * Deliver url search params form the current location.
@@ -11,6 +13,15 @@ export class BaseTransition {
     const path = this.path;
     const i = path.indexOf("?");
     return new URLSearchParams(i >= 0 ? path.substring(i + 1) : undefined);
+  }
+
+  async nest(path, factory) {
+    this.nested = new factory(this, path);
+    return this.nested.start();
+  }
+
+  async start()
+  {
   }
 
   /**
