@@ -4,6 +4,8 @@ import { BaseTransition } from "../src/base-transition.mjs";
 test("BaseTransition static", async t => {
   const bt = new BaseTransition();
 
+  t.falsy(bt.nested);
+
   t.false(await bt.abort());
   t.false(await bt.continue());
 
