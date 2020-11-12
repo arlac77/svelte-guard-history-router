@@ -6,7 +6,7 @@ function rpt(t, route, object, expected) {
 }
 
 rpt.title = (providedTitle = "", route, object, expected) =>
-  `router propertiesFor ${providedTitle} ${JSON.stringify(
+  `router propertiesFor ${providedTitle} '${route.path}' ${JSON.stringify(
     object
   )} ${JSON.stringify(expected)}`.trim();
 
@@ -27,15 +27,19 @@ test(
 test(rpt, route1, undefined, undefined);
 test(rpt, route1, { name: "r" }, undefined);
 
+const nestesPropsRoute = new SkeletonRoute("/group", {
+  parent: new SkeletonRoute("/detail"),
+  propertyMapping: { repository: "name", group: "group.name" }
+});
+
 test(
   rpt,
-  new SkeletonRoute("", {
-    parent: new SkeletonRoute(""),
-    propertyMapping: { repository: "name", group: "group.name" }
-  }),
+  nestesPropsRoute,
   { name: "r", group: { name: "g" } },
   {
     group: "g",
     repository: "r"
   }
 );
+
+test(rpt, nestesPropsRoute, undefined, undefined);
