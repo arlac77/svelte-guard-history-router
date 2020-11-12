@@ -31,6 +31,7 @@ export class BaseTransition {
   async continue() {
     if (this.nested !== undefined) {
       await this.nested.continue();
+      this.nested = undefined;
       return true;
     }
 
