@@ -27,7 +27,7 @@ async function rtt(t, items) {
     const path = item.path;
     const componentName = item.component;
 
-    t.falsy(router.transition);
+    t.falsy(router.nested);
 
     const m = matcher(router.routes, path);
 
@@ -51,8 +51,8 @@ async function rtt(t, items) {
       default:
         const transition = router.push(path);
 
-        t.truthy(router.transition, "transition ongoing");
-        t.is(router.transition.path, path);
+        t.truthy(router.nested, "transition ongoing");
+        t.is(router.nested.path, path);
 
         await transition;
     }
@@ -63,7 +63,7 @@ async function rtt(t, items) {
       }
     }
 
-    t.falsy(router.transition, "transition over");
+    t.falsy(router.nested, "transition over");
     t.is(router.path, path, "router path");
     t.is(router.component.name, componentName, "router component");
     t.is(subscriptionPath, path, "subscription path");

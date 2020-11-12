@@ -1,5 +1,5 @@
 import { matcher } from "multi-path-matcher";
-import { RouterState } from "./router-state.mjs";
+import { BaseTransition } from "./base-transition.mjs";
 
 /**
  * Transition between routes
@@ -8,7 +8,7 @@ import { RouterState } from "./router-state.mjs";
  * @property {Router} router
  * @property {string} path new destination
  */
-export class Transition extends RouterState {
+export class Transition extends BaseTransition {
   constructor(router, path) {
     super();
 
@@ -98,16 +98,6 @@ export class Transition extends RouterState {
   }
 
   /**
-   * Continue a nested route to its original destination.
-   * Does nothing if the transition has not been nested
-   */
-  async continue() {
-    if (this.nested !== undefined) {
-      return this.nested.continue();
-    }
-  }
-
-  /**
    * Bring back the router into the state before the transition has started
    * @param {Exception|undefined} e
    */
@@ -116,9 +106,7 @@ export class Transition extends RouterState {
       this.router.error(e);
     }
 
-    if (this.nested !== undefined) {
-      await this.nested.abort();
-    }
+    await super.abort();
 
     history.back();
     setTimeout(() => this.router.finalizePush(), 0);

@@ -1,6 +1,6 @@
 import { compile, matcher } from "multi-path-matcher";
 import { Transition } from "./transition.mjs";
-import { RouterState } from "./router-state.mjs";
+import { BaseTransition } from "./base-transition.mjs";
 import { nameValueStore, NAVIGATION_EVENT } from "./util.mjs";
 
 /**
@@ -33,10 +33,10 @@ import { nameValueStore, NAVIGATION_EVENT } from "./util.mjs";
  * @property {Object} keys collected keys of all routes
  * @property {Object} params value mapping from keys (from current route)
  * @property {Route} route current
- * @property {Transition} transition ongoing transition
+ * @property {Transition} nested ongoing nested
  * @property {string} base url
  */
-export class BaseRouter extends RouterState {
+export class BaseRouter extends BaseTransition {
   constructor(routes, base) {
     super();
 
@@ -113,7 +113,7 @@ export class BaseRouter extends RouterState {
    * @return {SvelteComponent}
    */
   get component() {
-    for (const o of [this.transition, this.route]) {
+    for (const o of [this.nested, this.route]) {
       if (o !== undefined && o.component !== undefined) {
         return o.component;
       }
@@ -174,8 +174,8 @@ export class BaseRouter extends RouterState {
    * @return {Transition} running transition
    */
   async push(path) {
-    this.transition = new Transition(this, path);
-    return this.transition.start();
+    this.nested = new Transition(this, path);
+    return this.nested.start();
   }
 
   /**
@@ -184,7 +184,7 @@ export class BaseRouter extends RouterState {
    * @param {string} path
    */
   finalizePush(path) {
-    this.transition = undefined;
+    this.nested = undefined;
 
     if (path !== undefined) {
       history.pushState(undefined, undefined, this.base + path);
@@ -204,10 +204,7 @@ export class BaseRouter extends RouterState {
    * @param {string} fallbackPath
    */
   async continue(fallbackPath) {
-    if (this.transition) {
-      return this.transition.continue();
-    }
-    if (fallbackPath) {
+    if(!await super.continue() && fallbackPath) {
       return this.push(fallbackPath);
     }
   }
@@ -221,10 +218,7 @@ export class BaseRouter extends RouterState {
    * @param {string} fallbackPath
    */
   async abort(fallbackPath) {
-    if (this.transition) {
-      return this.transition.abort();
-    }
-    if (fallbackPath) {
+    if(!await super.abort() && fallbackPath) {
       return this.push(fallbackPath);
     }
   }

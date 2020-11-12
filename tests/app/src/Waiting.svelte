@@ -2,4 +2,4 @@
   export let router;
 </script>
 
-<h1 class="routetitle">Waiting for {router.transition.path} to load...</h1>
+<h1 class="routetitle">Waiting for {router.nested.path} to load...</h1>

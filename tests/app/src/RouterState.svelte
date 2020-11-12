@@ -69,10 +69,10 @@
       <th>Redirection</th>
     </thead>
     <tbody>
-      {#if $router.transition !== undefined}
+      {#if $router.nested !== undefined}
         <tr>
-          <td id="route.path">{$router.transition.path}</td>
-          <td id="route.nested">{$router.transition.nested ? $router.route.path : ''}</td>
+          <td id="route.path">{$router.nested.path}</td>
+          <td id="route.nested">{$router.nested.nested ? $router.route.path : ''}</td>
         </tr>
       {/if}
     </tbody>
