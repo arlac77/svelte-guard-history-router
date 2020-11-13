@@ -219,27 +219,6 @@ export class SkeletonRoute extends RootRoute {
   }
 }
 
-export class IteratorStoreRoute extends SkeletonRoute {
-  constructor(path, options) {
-    super(path, options);
-    this.value = [];
-  }
-
-  async enter(transition, untilRoute) {
-    await super.enter(transition, untilRoute);
-
-    const entries = [];
-
-    for await (const e of await this.iteratorFor(
-      transition,
-      transition.params
-    )) {
-      entries.push(e);
-    }
-
-    this.value = entries;
-  }
-}
 
 export class ObjectStoreRoute extends SkeletonRoute {
   async enter(transition, untilRoute) {
@@ -248,14 +227,3 @@ export class ObjectStoreRoute extends SkeletonRoute {
   }
 }
 
-export class ChildStoreRoute extends ObjectStoreRoute {
-  async objectFor(transition) {
-    for await (const object of this.parent.iteratorFor(
-      transition
-    )) {
-      if (this.matches(object, transition.params)) {
-        return object;
-      }
-    }
-  }
-}

@@ -1,5 +1,6 @@
 import test from "ava";
-import { SkeletonRoute, ChildStoreRoute } from "../src/routes.mjs";
+import { SkeletonRoute } from "../src/routes.mjs";
+import { ChildStoreRoute } from "../src/detail-route.mjs";
 import { Transition } from "../src/transition.mjs";
 import { BaseRouter } from "../src/base-router.mjs";
 import { setupRouter } from "./helpers/setup.mjs";

@@ -1,17 +1,13 @@
 import { JSDOM } from "jsdom";
-import {
-  ChildStoreRoute,
-  IteratorStoreRoute,
-  SkeletonRoute
-} from "../../src/routes.mjs";
+import { SkeletonRoute } from "../../src/routes.mjs";
+import { MasterRoute } from "../../src/master-route.mjs";
+import { DetailRoute } from "../../src/detail-route.mjs";
+
 import { BaseRouter } from "../../src/base-router.mjs";
 import { redirectGuard } from "../../src/guard.mjs";
 
 const dom = new JSDOM(``, {
   url: "https://example.org/"
-  // referrer: "https://example.com/",
-  // contentType: "text/html",
-  // includeNodeLocations: true
 });
 
 globalThis.window = dom.window;
@@ -63,13 +59,13 @@ export function setupModel() {
 
 export function setupRoutes() {
   const model = setupModel();
-  const master = new IteratorStoreRoute("/master", {
+  const master = new MasterRoute("/master", {
     component: Component("MasterComponent"),
     objectInstance: Master,
     iteratorFor: () => model
   });
 
-  const detail = new ChildStoreRoute("/:detail", {
+  const detail = new DetailRoute("/:detail", {
     parent: master,
     component: Component("DetailComponent"),
     objectInstance: Detail,
@@ -84,7 +80,7 @@ export function setupRoutes() {
   });
 
   const filler = new SkeletonRoute("/filler", { parent: detail });
-  const leaf = new ChildStoreRoute("/:leaf", {
+  const leaf = new DetailRoute("/:leaf", {
     parent: filler,
     component: Component("LeafComponent"),
     objectInstance: Leaf,
@@ -124,7 +120,7 @@ export function setupRoutes() {
 
 export function setupRouter() {
   const all = setupRoutes();
-  const router = new BaseRouter([],"");
+  const router = new BaseRouter([], "");
   router.addRoute(all.master);
   router.addRoute(all.detail);
   router.addRoute(all.filler);

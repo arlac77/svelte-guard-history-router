@@ -2,8 +2,8 @@
   import {
     Router,
     Route,
-    IteratorStoreRoute,
-    ChildStoreRoute,
+    MasterRoute,
+    DetailRoute,
     Outlet,
     WaitingGuard,
     Guard,
@@ -70,14 +70,14 @@
       <li>
         <Route
           path="/article"
-          factory={IteratorStoreRoute}
+          factory={MasterRoute}
           iteratorFor={articleIterator}
           guard={[enshureSession, waitingGuard]}
           component={Articles}>
           Articles
           <Route
             path="/:article"
-            factory={ChildStoreRoute}
+            factory={DetailRoute}
             propertyMapping={{ article: 'id' }}
             linkComponent={ArticleLink}
             component={Article} />
@@ -86,14 +86,14 @@
       <li>
         <Route
           path="/category"
-          factory={IteratorStoreRoute}
+          factory={MasterRoute}
           iteratorFor={categoryIterator}
           guard={[enshureSession, waitingGuard]}
           component={Categories}>
           Categories
           <Route
             path="/:category"
-            factory={ChildStoreRoute}
+            factory={DetailRoute}
             propertyMapping={{ category: 'cid' }}
             linkComponent={CategoryLink}
             component={Category} />
