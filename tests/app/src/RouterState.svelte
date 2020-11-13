@@ -66,7 +66,7 @@
   <table>
     <thead>
       <th>Transition</th>
-      <th>Redirection</th>
+      <th>Nested</th>
     </thead>
     <tbody>
       {#if $router.nested !== undefined}
