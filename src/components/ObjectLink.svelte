@@ -7,22 +7,35 @@
   export let suffix = "";
 
   const router = getContext(ROUTER);
-  const route = router.routeFor(object);
 
-  let href;
+  async function h() {
+    const o = await object;
+    const route = router.routeFor(o);
+    let href;
 
-  if (route !== undefined) {
-    href = route.pathFor(object, suffix);
+    if (route !== undefined) {
+      href = route.pathFor(o, suffix);
+    }
+    //console.log(href, route, o);
+    return { href, route, object: o };
   }
 </script>
 
-{#if href}
-  <Link {href}>
-    {#if route.linkComponent}
-      <svelte:component this={route.linkComponent} {object} />
-    {/if}
-    <slot />
-  </Link>
-{:else}
+{#await h()}
+  loading...
+{:then result}
+  {#if result.href}
+    <Link href={result.href}>
+      {#if result.route && result.route.linkComponent}
+        <svelte:component
+          this={result.route.linkComponent}
+          object={result.object} />
+      {/if}
+      <slot />
+    </Link>
+  {:else}
+    <slot name="noFound" />
+  {/if}
+{:catch error}
   <slot name="noFound" />
-{/if}
+{/await}
