@@ -12,9 +12,7 @@
   let href;
 
   if (route !== undefined) {
-    const properties = route.propertiesFor(object);
-    href =
-      route.path.replace(/:(\w+)/g, (m, name) => properties[name]) + suffix;
+    href = route.pathFor(object,suffix);
   }
 </script>
 
