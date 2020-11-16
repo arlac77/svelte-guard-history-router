@@ -43,11 +43,41 @@ export const articles = Object.fromEntries(
         "chili flake"
       ]
     },
-    { id: 14, name: "Pizza Funghi", price: 7.0, category: "pizza" },
-    { id: 15, name: "Pizza Calzone", price: 7.0, category: "pizza" },
-    { id: 16, name: "Pizza Tonno", price: 7.0, category: "pizza" },
-    { id: 17, name: "Pizza Frutti di Mare", price: 7.0, category: "pizza" },
-    { id: 18, name: "Pizza Prosciutto", price: 7.0, category: "pizza" },
+    {
+      id: 14,
+      name: "Pizza Funghi",
+      price: 7.0,
+      category: "pizza",
+      ingredients: ["tomato sauce", "basil", "oregano"]
+    },
+    {
+      id: 15,
+      name: "Pizza Calzone",
+      price: 7.0,
+      category: "pizza",
+      ingredients: ["tomato sauce", "basil", "oregano"]
+    },
+    {
+      id: 16,
+      name: "Pizza Tonno",
+      price: 7.0,
+      category: "pizza",
+      ingredients: ["tomato sauce", "basil", "oregano"]
+    },
+    {
+      id: 17,
+      name: "Pizza Frutti di Mare",
+      price: 7.0,
+      category: "pizza",
+      ingredients: ["tomato sauce", "basil", "oregano"]
+    },
+    {
+      id: 18,
+      name: "Pizza Prosciutto",
+      price: 7.0,
+      category: "pizza",
+      ingredients: ["tomato sauce", "basil", "oregano"]
+    },
     {
       id: 19,
       name: "Pizza Peperoni",
@@ -70,7 +100,13 @@ export const articles = Object.fromEntries(
       ingredients: ["tomato sauce", "basil", "oregano"]
     },
     { id: 23, name: "Hot Dog", price: 2.0, category: "to go" },
-    { id: 32, name: "Cheesecake", price: 2.0, category: "dessert" }
+    {
+      id: 32,
+      name: "Cheesecake",
+      price: 2.0,
+      category: "dessert",
+      ingredients: ["wheet", "milk", "eggs"]
+    }
   ].map(a => [a.id, a])
 );
 
