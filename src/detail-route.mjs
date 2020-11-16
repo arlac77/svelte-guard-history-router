@@ -28,6 +28,3 @@ export class DetailRoute extends ObjectStoreRoute {
     }
   }
 }
-
-// TODO compatibility
-export class ChildStoreRoute extends DetailRoute {}

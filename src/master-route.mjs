@@ -57,5 +57,3 @@ export class MasterRoute extends SkeletonRoute {
     }
   }
 }
-
-export class IteratorStoreRoute extends MasterRoute {}

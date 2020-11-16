@@ -1,8 +1,8 @@
 <script context="module">
   import { BaseRouter } from "./base-router.mjs";
   import { SkeletonRoute, ObjectStoreRoute } from "./routes.mjs";
-  import { MasterRoute, IteratorStoreRoute } from "./master-route.mjs";
-  import { DetailRoute, ChildStoreRoute } from "./detail-route.mjs";
+  import { MasterRoute } from "./master-route.mjs";
+  import { DetailRoute } from "./detail-route.mjs";
   import { Transition } from "./transition.mjs";
   import {
     Guard,
@@ -37,8 +37,6 @@
     redirectGuard,
     WaitingGuard,
     active,
-    link,
-    IteratorStoreRoute,
-    ChildStoreRoute
+    link
   };
 </script>
