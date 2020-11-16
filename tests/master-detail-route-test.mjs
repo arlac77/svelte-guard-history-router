@@ -1,6 +1,6 @@
 import test from "ava";
 import { SkeletonRoute } from "../src/routes.mjs";
-import { ChildStoreRoute } from "../src/detail-route.mjs";
+import { DetailRoute } from "../src/detail-route.mjs";
 import { Transition } from "../src/transition.mjs";
 import { BaseRouter } from "../src/base-router.mjs";
 import { setupRouter } from "./helpers/setup.mjs";
@@ -11,7 +11,7 @@ test("DetailRoute objectFor", async t => {
     iteratorFor: transition => values,
     propertyMapping: { did: "id" }
   });
-  const child = new ChildStoreRoute("/detail/:did", {
+  const child = new DetailRoute("/detail/:did", {
     parent
   });
 
