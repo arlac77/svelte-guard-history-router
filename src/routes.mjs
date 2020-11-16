@@ -6,7 +6,7 @@ const dummySet = { size: 0, forEach: dummyFunction };
 function ref(obj, str) {
   for (const part of str.split(".")) {
     obj = obj[part];
-    if(obj === undefined) {
+    if (obj === undefined) {
       return;
     }
   }
@@ -49,6 +49,11 @@ class RootRoute {
   propertiesFor() {}
   objectFor() {}
   async *iteratorFor() {}
+
+  pathFor(object, suffix = "") {
+    const properties = this.propertiesFor(object);
+    return this.path.replace(/:(\w+)/g, (m, name) => properties[name]) + suffix;
+  }
 }
 
 const rootRoute = new RootRoute();
@@ -219,11 +224,9 @@ export class SkeletonRoute extends RootRoute {
   }
 }
 
-
 export class ObjectStoreRoute extends SkeletonRoute {
   async enter(transition, untilRoute) {
     await super.enter(transition, untilRoute);
     this.value = await this.objectFor(transition);
   }
 }
-
