@@ -12,7 +12,7 @@
   let href;
 
   if (route !== undefined) {
-    href = route.pathFor(object,suffix);
+    href = route.pathFor(object, suffix);
   }
 </script>
 
