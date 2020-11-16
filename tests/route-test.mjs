@@ -16,10 +16,16 @@ test("route constructor", t => {
 });
 
 test("route constructor with params", t => {
-  const route = new SkeletonRoute("/:key", { });
+  const route = new SkeletonRoute("/:key", {});
   compile([route]);
   t.is(route.path, "/:key");
   t.is(route.hasParams, true);
+});
+
+test("route pathFor", t => {
+  const route = new SkeletonRoute("/:key", { propertyMapping: { key: "key" } });
+  compile([route]);
+  t.is(route.pathFor({ key: "77" }, "#suffix"), "/77#suffix");
 });
 
 test("route path", t => {
