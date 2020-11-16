@@ -11,6 +11,11 @@ export class DetailRoute extends ObjectStoreRoute {
   {
     return this.master.next();
   }
+  
+  async previous()
+  {
+    return this.master.previous();
+  }
 
   async objectFor(transition) {
     //return this.master.objectFor(transition);

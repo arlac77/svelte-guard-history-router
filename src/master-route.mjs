@@ -1,5 +1,8 @@
 import { SkeletonRoute } from "./routes.mjs";
 
+/**
+ * Route holding a ordered collection of objects
+ */
 export class MasterRoute extends SkeletonRoute {
   constructor(path, options) {
     super(path, options);
@@ -18,10 +21,16 @@ export class MasterRoute extends SkeletonRoute {
     this.value = entries;
   }
 
+  /**
+   * @return 1st. entry
+   */
   async first() {
     return this.value[0];
   }
 
+  /**
+   * @return last entry
+   */
   async last() {
     return this.value[this.value.length - 1];
   }
