@@ -19,16 +19,20 @@ function mdSetup() {
   return { router, master, detail, values };
 }
 
-test("MasterRoute fist last next previous", async t => {
-  const { router, master, values } = mdSetup();
+test("DetailRoute fist last next previous", async t => {
+  const { router, detail, values } = mdSetup();
 
-  const transition = new Transition(router, "/master");
+  let transition = new Transition(router, "/master/detail/2");
   await transition.start();
 
-  t.is(await master.first(), values[0]);
-  t.is(await master.last(), values[1]);
-  t.is(await master.next(values[0]), values[1]);
-  t.is(await master.previous(values[1]), values[0]);
+  t.is(await detail.first(), values[0]);
+  t.is(await detail.last(), values[1]);
+  t.is(await detail.next(), undefined);
+  t.is(await detail.previous(), values[0]);
+
+  transition = new Transition(router, "/master/detail/1");
+  await transition.start();
+  t.is(await detail.next(), values[1]);
 });
 
 test("MasterRoute objectFor", async t => {
@@ -38,7 +42,7 @@ test("MasterRoute objectFor", async t => {
   t.deepEqual(transition.params, { did: "2" });
   await transition.start();
 
-  t.is(await master.objectFor(transition), values[1]);
+  t.is(await master.objectFor(transition), undefined);
 });
 
 test("DetailRoute objectFor", async t => {
