@@ -20,40 +20,4 @@ export class MasterRoute extends SkeletonRoute {
 
     this.value = entries;
   }
-
-  /**
-   * @return 1st. entry
-   */
-  async first() {
-    return this.value[0];
-  }
-
-  /**
-   * @return last entry
-   */
-  async last() {
-    return this.value[this.value.length - 1];
-  }
-
-  async previous(object) {
-    const i = this.value.indexOf(object);
-    if (i > 0) {
-      return this.value[i - 1];
-    }
-  }
-
-  async next(object) {
-    const i = this.value.indexOf(object);
-    if (i >= 0) {
-      return this.value[i + 1];
-    }
-  }
-
-  async objectFor(transition) {
-    for (const object of this.value) {
-      if (this.matches(object, transition.params)) {
-        return object;
-      }
-    }
-  }
 }

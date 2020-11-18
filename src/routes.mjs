@@ -144,13 +144,15 @@ export class SkeletonRoute extends RootRoute {
    * @return {boolean} true if object properties are matching with the given proerties
    */
   matches(object, properties) {
-    for (const [p, n] of Object.entries(this.propertyMapping)) {
-      if (ref(object, n) !== properties[p]) {
-        return false;
+    if (object instanceof this.objectInstance) {
+      for (const [p, n] of Object.entries(this.propertyMapping)) {
+        if (ref(object, n) !== properties[p]) {
+          return false;
+        }
       }
+      return true;
     }
-
-    return object instanceof this.objectInstance;
+    return false;
   }
 
   /**

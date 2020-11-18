@@ -38,14 +38,8 @@
     </div>
 
     <div class="card-action">
-      <Link
-        href="/article/{('00' + (parseInt($route.id) - 1)).replace(/.*(\d\d)$/, '$1')}">
-        Prev
-      </Link>
-      <Link
-        href="/article/{('00' + (parseInt($route.id) + 1)).replace(/.*(\d\d)$/, '$1')}">
-        Next
-      </Link>
+      <ObjectLink object={route.previous()}>Prevoius</ObjectLink>
+      <ObjectLink object={route.next()}>Next</ObjectLink>
     </div>
   </div>
 {:else}
