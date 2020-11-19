@@ -91,7 +91,7 @@
         <tr class={r === $router.route ? 'current' : ''}>
           <td id="route.path">{r.path}</td>
           <td id="route.guard">{r.guard}</td>
-          <td id="route.key">{r.keys.join(' ')}</td>
+          <td id="route.keys">{r.keys.join(' ')}</td>
           <td id="route.component">{r.component.name}</td>
           <td id="route.subscriptions">{r.subscriptions.size}</td>
         </tr>
