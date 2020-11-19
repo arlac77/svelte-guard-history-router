@@ -5,7 +5,7 @@
   export let router;
 
   const route = router.route;
-
+  const articles = route.value;
   let filter;
 
   onMount(() => {
@@ -24,7 +24,7 @@
 <input id="filter" placeholder="Filter" bind:value={filter} />
 
 <ul>
-  {#each $route as article}
+  {#each articles as article}
     <li>
       <ObjectLink object={article} suffix="#price" />
     </li>

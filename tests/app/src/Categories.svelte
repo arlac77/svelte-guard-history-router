@@ -4,12 +4,13 @@
   export let router;
 
   const route = router.route;
+  const categories = route.value;
 </script>
 
 <h2 class="routetitle">Categories</h2>
 
 <ul>
-  {#each $route as category}
+  {#each categories as category}
     <li>
       <ObjectLink object={category}/>
     </li>

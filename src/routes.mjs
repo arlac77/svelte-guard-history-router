@@ -60,6 +60,7 @@ const rootRoute = new RootRoute();
 
 /**
  * Route
+ * Subscriptions on Routes fire when the route value changes.
  * @property {string} path full path of the Route including all parents
  * @property {SvelteComponent} component target to show
  * @property {SvelteComponent} linkComponent content for {@link ObjectLink}
@@ -99,7 +100,7 @@ export class SkeletonRoute extends RootRoute {
       value: {
         set: v => {
           value = v;
-          this.subscriptions.forEach(subscription => subscription(v));
+          this.subscriptions.forEach(subscription => subscription(this));
         },
         get: () => value
       },
@@ -200,7 +201,7 @@ export class SkeletonRoute extends RootRoute {
       this.subscriptions = new Set();
     }
     this.subscriptions.add(subscription);
-    subscription(this.value);
+    subscription(this);
     return () => this.subscriptions.delete(subscription);
   }
 

@@ -7,7 +7,7 @@ test("route master detail subscription", async t => {
 
   let detailValue;
 
-  detail.subscribe(x => (detailValue = x));
+  detail.subscribe(route => (detailValue = route.value));
 
   const transition = new Transition(router, "/master/2");
   t.deepEqual(transition.params, { detail: "2" });
@@ -22,7 +22,7 @@ test("route master detail leaf subscription", async t => {
 
   let leafValue;
 
-  leaf.subscribe(x => (leafValue = x));
+  leaf.subscribe(route => (leafValue = route.value));
 
   const transition = new Transition(router, "/master/2/filler/d");
   t.deepEqual(transition.params, { detail: "2", leaf: "d" });

@@ -97,9 +97,9 @@ test("route subscription", t => {
   const route = new SkeletonRoute();
   let changed, routeValue;
 
-  route.subscribe(x => {
+  route.subscribe(r => {
     routeValue = route.value;
-    changed = x;
+    changed = r.value;
   });
 
   route.value = 4711;

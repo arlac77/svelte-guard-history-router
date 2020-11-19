@@ -35,7 +35,7 @@ async function rtt(t, items) {
 
     m.route.subscribe(route => {
       if (route) {
-        Object.assign(properties, route);
+        Object.assign(properties, route.value);
         delete properties.leafs;
       }
     });

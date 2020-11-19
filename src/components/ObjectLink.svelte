@@ -16,7 +16,7 @@
     if (route !== undefined) {
       href = route.pathFor(o, suffix);
     }
-    //console.log(href, route, o);
+    //console.log("HHHHH",href, route, o);
     return { href, route, object: o };
   }
 </script>

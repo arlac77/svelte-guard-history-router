@@ -1,9 +1,18 @@
 <script>
-  import { ObjectLink, Link } from "../../../src/index.svelte";
+  import { ObjectLink } from "../../../src/index.svelte";
 
   export let router;
+  const route = $router.route;
 
-  const route = router.route;
+  let article,next,previous;
+
+  $: {
+    article = $route.value;
+    next = $route.next();
+    previous = $route.previous();
+    console.log("REACTIVE",next,previous);
+  }
+
 </script>
 
 <style>
@@ -12,34 +21,34 @@
   }
 </style>
 
-{#if $route}
+{#if article}
   <div class="card">
-    <h2 class="card-title routetitle">Article {$route.name} ({$route.id})</h2>
+    <h2 class="card-title routetitle">Article {article.name} ({article.id})</h2>
 
-    <img src="images/article/{$route.id}.jpg" alt={$route.name} />
+    <img src="images/article/{article.id}.jpg" alt={article.name} />
 
     <div class="card-content">
       <div class="card-title">Price</div>
-      <div id="price" class="price">{$route.price} $</div>
+      <div id="price" class="price">{article.price} $</div>
     </div>
 
     <div class="card-content">
       <div class="card-title">Category</div>
-      <ObjectLink object={$route.category} />
+      <ObjectLink object={article.category} />
     </div>
 
     <div class="card-content">
       <div class="card-title">ingredients</div>
       <ul>
-        {#each $route.ingredients as ingredient}
+        {#each article.ingredients as ingredient}
           <li>{ingredient}</li>
         {/each}
       </ul>
     </div>
 
     <div class="card-action">
-      <ObjectLink object={route.previous()}>Prevoius</ObjectLink>
-      <ObjectLink object={route.next()}>Next</ObjectLink>
+      <ObjectLink object={previous}>Prevoius</ObjectLink>
+      <ObjectLink object={next}>Next</ObjectLink>
     </div>
   </div>
 {:else}

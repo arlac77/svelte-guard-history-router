@@ -4,14 +4,15 @@
   export let router;
 
   const route = router.route;
+  const category = route.value;
 </script>
 
-{#if $route}
+{#if category}
   <div class="card">
-    <h2 class="card-title routetitle">Category {$route.name}</h2>
+    <h2 class="card-title routetitle">Category {category.name}</h2>
 
     <div class="card-content">
-      {#each $route.articles as article}
+      {#each category.articles as article}
         <li>
           <ObjectLink object={article} />
         </li>
