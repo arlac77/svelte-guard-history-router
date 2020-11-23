@@ -31,7 +31,7 @@
     "build": "rollup -c tests/app/rollup.config.mjs"
   },
   "dependencies": {
-    "multi-path-matcher": "^2.1.2"
+    "multi-path-matcher": "^2.1.3"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^10.0.0",
