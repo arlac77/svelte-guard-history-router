@@ -17,6 +17,7 @@
   import Outlet from "./components/Outlet.svelte";
   import Link from "./components/Link.svelte";
   import ObjectLink from "./components/ObjectLink.svelte";
+  import NamedObjectLink from "./components/NamedObjectLink.svelte";
   import Route from "./components/Route.svelte";
   import Router from "./components/Router.svelte";
   export {
@@ -25,6 +26,7 @@
     Outlet,
     Link,
     ObjectLink,
+    NamedObjectLink,
     BaseRouter,
     SkeletonRoute,
     MasterRoute,
