@@ -273,6 +273,19 @@ export class BaseRouter extends BaseTransition {
     }
   }
 
+  /**
+   * Find path for a given object
+   * @param {Object} object
+   * @param {String} suffix
+   * @return {String} 
+   */
+  pathFor(object, suffix) {
+    const route = this.routeFor(object);
+    if (route) {
+      return route.pathFor(object, suffix);
+    }
+  }
+
   error(err) {
     console.error(err);
   }
