@@ -7,7 +7,8 @@
     Outlet,
     WaitingGuard,
     Guard,
-    redirectGuard
+    redirectGuard,
+    NamedObjectLink
   } from "../../../src/index.svelte";
   import RouterState from "./RouterState.svelte";
   import About from "./About.svelte";
@@ -16,7 +17,6 @@
   import ArticleLink from "./ArticleLink.svelte";
   import Categories from "./Categories.svelte";
   import Category from "./Category.svelte";
-  import CategoryLink from "./CategoryLink.svelte";
   import Login from "./Login.svelte";
   import Home from "./Home.svelte";
   import NoWay from "./NoWay.svelte";
@@ -95,7 +95,7 @@
             path="/:category"
             factory={DetailRoute}
             propertyMapping={{ category: 'cid' }}
-            linkComponent={CategoryLink}
+            linkComponent={NamedObjectLink}
             component={Category} />
         </Route>
       </li>
