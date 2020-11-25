@@ -4,15 +4,14 @@
   export let router;
   const route = $router.route;
 
-  let article,next,previous;
+  let article, next, previous;
 
   $: {
     article = $route.value;
     next = $route.next();
     previous = $route.previous();
-    console.log("REACTIVE",next,previous);
+   // console.log("REACTIVE", next, previous);
   }
-
 </script>
 
 <style>

@@ -1,6 +1,6 @@
 <script>
   import Link from "./Link.svelte";
-  import { getContext } from "svelte";
+  import { getContext, beforeUpdate } from "svelte";
   import { ROUTER } from "../util.mjs";
 
   export let object;
@@ -8,34 +8,49 @@
 
   const router = getContext(ROUTER);
 
-  async function h() {
-    const o = await object;
-    const route = router.routeFor(o);
-    let href;
+  let subscription;
 
-    if (route !== undefined) {
-      href = route.pathFor(o, suffix);
+  function execute(object) {
+    //console.log("EXECUTE");
+
+    if (subscription) {
+      const route = router.routeFor(object);
+      subscription({
+        object,
+        href: router.pathFor(object, suffix),
+        linkComponent : route ? route.linkComponent : undefined
+      });
     }
-    //console.log("HHHHH",href, route, o);
-    return { href, route, object: o };
   }
+
+  const store = {
+    subscribe: cb => {
+      subscription = cb;
+      execute(object);
+      return () => (subscription = undefined);
+    }
+  };
+
+  beforeUpdate(async () => {
+    const x = await object;
+    if (x !== object) {
+      execute(x);
+      subscription = undefined;
+    } else {
+      //console.log("NO CHANGE");
+    }
+  });
 </script>
 
-{#await h()}
-  loading...
-{:then result}
-  {#if result.href}
-    <Link href={result.href}>
-      {#if result.route && result.route.linkComponent}
-        <svelte:component
-          this={result.route.linkComponent}
-          object={result.object} />
-      {/if}
-      <slot />
-    </Link>
-  {:else}
-    <slot name="noFound" />
-  {/if}
-{:catch error}
+{#if $store.href}
+  <Link href={$store.href}>
+    {#if $store.linkComponent}
+      <svelte:component
+        this={$store.linkComponent}
+        object={$store.object} />
+    {/if}
+    <slot />
+  </Link>
+{:else}
   <slot name="noFound" />
-{/await}
+{/if}
