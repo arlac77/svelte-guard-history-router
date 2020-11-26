@@ -1,8 +1,8 @@
-import postcss from "rollup-plugin-postcss";
 import virtual from "@rollup/plugin-virtual";
 import resolve from "@rollup/plugin-node-resolve";
 import dev from "rollup-plugin-dev";
 import svelte from "rollup-plugin-svelte";
+import postcss from "rollup-plugin-postcss";
 
 const basedir = "tests/app";
 const port = 5000;
