@@ -34,6 +34,7 @@
       throw new Error("never go there");
     }
   }
+  
   async function delay(msecs = 1000) {
     return new Promise(r => setTimeout(r, msecs));
   }
@@ -42,7 +43,7 @@
     const v = transition.searchParams.get("q");
     const q = v ? new RegExp(v, "i") : /.*/;
 
-    await delay(1000);
+    await delay(800);
 
     for (const a of Object.values(articles)) {
       if (a.name.match(q)) {
@@ -52,7 +53,7 @@
   }
 
   async function* categoryIterator(transition) {
-    await delay(800);
+    await delay(600);
 
     for (const c of Object.values(categories)) {
       yield c;
