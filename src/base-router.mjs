@@ -168,7 +168,7 @@ export class BaseRouter extends BaseTransition {
 
   /**
    * Leave current route and enter route for given path.
-   * The work is done by a Transition
+   * The work is done by a Transition.
    * @param {string} path where to go
    * @return {Transition} running transition
    */
@@ -178,7 +178,7 @@ export class BaseRouter extends BaseTransition {
 
   /**
    * Called from a transition to manifest the new destination.
-   * If path is undefined the transition has been aborderd
+   * If path is undefined the transition has been aborderd.
    * @param {string} path
    */
   finalizePush(path) {
@@ -237,7 +237,7 @@ export class BaseRouter extends BaseTransition {
   }
 
   /**
-   * Update the active state of a node
+   * Update the active state of a node.
    * @param {Node} node
    */
   updateActive(node) {
@@ -260,7 +260,7 @@ export class BaseRouter extends BaseTransition {
   }
 
   /**
-   * Find Route for a given object
+   * Find Route for a given object.
    * @param {Object} object
    * @return {Route} able to support given object
    */
@@ -274,7 +274,7 @@ export class BaseRouter extends BaseTransition {
   }
 
   /**
-   * Find path for a given object
+   * Find path for a given object.
    * @param {Object} object
    * @param {String} suffix
    * @return {String} 
