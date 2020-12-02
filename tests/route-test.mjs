@@ -7,10 +7,12 @@ import { Transition } from "../src/transition.mjs";
 
 test("route constructor", t => {
   const guard = {};
-  const route = new SkeletonRoute("/a", { guard });
+  const route = new SkeletonRoute("/a", { guard, '$$scope': {}, '$$slots': {} });
   compile([route]);
   t.is(route.path, "/a");
   t.is(route.guard, guard);
+  t.is(route['$$scope'], undefined);
+  t.is(route['$$slots'], undefined);
   t.is(route.objectInstance, Object);
   t.is(route.hasParams, false);
 });

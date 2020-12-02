@@ -75,9 +75,9 @@ export class SkeletonRoute extends RootRoute {
   constructor(path, options = {}) {
     super();
 
-    delete options.path;
-    delete options.href;
-    delete options.factory;
+    for (const n of ["path", "href", "factory", "$$slots", "$$scope"]) {
+      delete options[n];
+    }
 
     if (Array.isArray(options.guard)) {
       switch (options.guard.length) {
