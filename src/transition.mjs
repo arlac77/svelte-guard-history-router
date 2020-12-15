@@ -21,7 +21,7 @@ export class Transition extends BaseTransition {
         get: () => (this.nested === undefined ? component : undefined),
         set: value => {
           component = value;
-          this.router.notifySubscriptions();
+          this.router.emit();
         }
       }
     });

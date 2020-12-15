@@ -78,7 +78,7 @@ export class BaseRouter extends BaseTransition {
         set(value) {
           if (route !== value) {
             route = value;
-            this.notifySubscriptions();
+            this.emit();
           }
         }
       }
@@ -188,7 +188,7 @@ export class BaseRouter extends BaseTransition {
       history.pushState(undefined, undefined, this.base + path);
     }
 
-    this.notifySubscriptions();
+    this.emit();
 
     this.linkNodes.forEach(n => this.updateActive(n));
   }
@@ -197,7 +197,7 @@ export class BaseRouter extends BaseTransition {
    * Continue a transition to its original destination.
    * Shortcut for this.transition.continue().
    * If there is no transition ongoing and a fallbackPath is
-   * present it will be entered.
+   * present, it will be entered.
    * Otherwise does nothing.
    * @param {string} fallbackPath
    */
@@ -232,7 +232,7 @@ export class BaseRouter extends BaseTransition {
     return () => this.subscriptions.delete(subscription);
   }
 
-  notifySubscriptions() {
+  emit() {
     this.subscriptions.forEach(subscription => subscription(this));
   }
 
