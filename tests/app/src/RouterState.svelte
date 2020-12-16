@@ -5,63 +5,6 @@
   let router = getContext(ROUTER);
 </script>
 
-<style>
-  table {
-    margin-bottom: 1rem;
-    color: #212529;
-    border: 1px solid #dee2e6;
-  }
-
-  thead {
-    vertical-align: middle;
-    border-top-color: inherit;
-    border-right-color: inherit;
-    border-bottom-color: inherit;
-    border-left-color: inherit;
-  }
-
-  tbody {
-    vertical-align: middle;
-    border-top-color: inherit;
-    border-right-color: inherit;
-    border-bottom-color: inherit;
-    border-left-color: inherit;
-  }
-
-  tr {
-    vertical-align: inherit;
-    border-top-color: inherit;
-    border-right-color: inherit;
-    border-bottom-color: inherit;
-    border-left-color: inherit;
-  }
-
-  th {
-    text-align: inherit;
-    font-weight: bold;
-  }
-
-  table thead th {
-    vertical-align: bottom;
-    border-bottom: 1px solid #dee2e6;
-  }
-
-  th,
-  td {
-    padding: 0.2rem;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
-  }
-
-  .current {
-    background-color: bisque;
-  }
-
-  .background {
-    background-color: rgba(165, 181, 190, 0.05);
-  }
-</style>
-
 <div class="background">
   <table>
     <thead>

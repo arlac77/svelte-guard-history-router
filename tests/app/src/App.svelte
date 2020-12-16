@@ -34,7 +34,7 @@
       throw new Error("never go there");
     }
   }
-  
+
   async function delay(msecs = 1000) {
     return new Promise(r => setTimeout(r, msecs));
   }
@@ -117,9 +117,8 @@
 
   <main>
     <Outlet />
+    {#if showState}
+      <RouterState />
+    {/if}
   </main>
-
-  {#if showState}
-    <RouterState />
-  {/if}
 </Router>
