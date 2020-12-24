@@ -26,6 +26,11 @@ jobs:
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
           path-to-lcov: build/coverage/lcov.info
+      - uses: actions/upload-artifact@v2
+        with:
+          path: '${{ github.workspace }}/build/test/**/*'
+          retention-days: 3
+        if: always()
   release:
     needs:
       - test
