@@ -16,31 +16,40 @@ export default {
     format: "esm",
     file: `${basedir}/public/bundle.main.mjs`
   },
-  plugins: [virtual({
-    "node-fetch": "export default fetch",
-    stream: "export class Readable {}",
-    buffer: "export class Buffer {}"
-  }), svelte({
-    dev: !production
-  }), postcss({
-    extract: true,
-    sourceMap: true,
-    minimize: production,
-    plugins: [postcssImport]
-  }), resolve({
-    browser: true,
-    dedupe: importee =>
-      importee === "svelte" || importee.startsWith("svelte/")
-  }), !production &&
+  plugins: [
+    virtual({
+      "node-fetch": "export default fetch",
+      stream: "export class Readable {}",
+      buffer: "export class Buffer {}"
+    }),
+    svelte({
+      compilerOptions: {
+        dev: !production
+      }
+    }),
+    postcss({
+      extract: true,
+      sourceMap: true,
+      minimize: production,
+      plugins: [postcssImport]
+    }),
+    resolve({
+      browser: true,
+      dedupe: importee =>
+        importee === "svelte" || importee.startsWith("svelte/")
+    }),
+    !production &&
+      dev({
+        port,
+        dirs: [`${basedir}/public`],
+        spa: `${basedir}/public/index.html`,
+        basePath: "/"
+      }),
     dev({
       port,
       dirs: [`${basedir}/public`],
       spa: `${basedir}/public/index.html`,
       basePath: "/"
-    }), dev({
-    port,
-    dirs: [`${basedir}/public`],
-    spa: `${basedir}/public/index.html`,
-    basePath: "/"
-  })]
+    })
+  ]
 };
