@@ -26,7 +26,7 @@ export class BaseTransition {
 
   /**
    * Continue a nested route to its original destination.
-   * Does nothing if the transition has not been nested
+   * Does nothing if the transition has not been nested.
    */
   async continue() {
     if (this.nested !== undefined) {
