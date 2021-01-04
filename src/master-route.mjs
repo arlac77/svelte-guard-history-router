@@ -1,7 +1,7 @@
 import { SkeletonRoute } from "./routes.mjs";
 
 /**
- * Route holding a ordered collection of objects
+ * Route holding a ordered collection of objects.
  */
 export class MasterRoute extends SkeletonRoute {
   constructor(path, options) {

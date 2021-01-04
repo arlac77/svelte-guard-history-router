@@ -21,17 +21,17 @@ export class Guard {
 }
 
 /**
- * Redirects to a given url if condition is met
+ * Redirects to a given path if condition is met.
  *
- * @param {string} url
+ * @param {string} path
  * @param {Function} condition redirects when returning true
  */
-export function redirectGuard(url, condition) {
+export function redirectGuard(path, condition) {
   return {
-    toString: () => `redirect(${url})`,
+    toString: () => `redirect(${path})`,
     enter: async transition => {
       if (condition === undefined || condition(transition)) {
-        return transition.redirect(url);
+        return transition.redirect(path);
       }
     },
     leave: () => {}
@@ -39,7 +39,7 @@ export function redirectGuard(url, condition) {
 }
 
 /**
- * Execute guards in a sequence
+ * Execute guards in a sequence.
  * @param {Iterable<Guard>} children
  */
 export function sequenceGuard(children) {
@@ -59,7 +59,7 @@ export function sequenceGuard(children) {
 }
 
 /**
- * Execute guards in a parallel
+ * Execute guards in a parallel.
  * @param {Iterable<Guard>} children
  */
 export function parallelGuard(children) {

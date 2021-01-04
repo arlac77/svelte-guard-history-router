@@ -2,7 +2,7 @@ import { matcher } from "multi-path-matcher";
 import { BaseTransition } from "./base-transition.mjs";
 
 /**
- * Transition between routes
+ * Transition between routes.
  * @param {Router} router
  * @param {string} path new destination
  * @property {Router} router
@@ -98,7 +98,7 @@ export class Transition extends BaseTransition {
   }
 
   /**
-   * Bring back the router into the state before the transition has started
+   * Bring back the router into the state before the transition has started.
    * @param {Exception|undefined} e
    */
   async abort(e) {

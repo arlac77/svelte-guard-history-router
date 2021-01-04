@@ -1,7 +1,7 @@
 import { Guard } from "./guard.mjs";
 
 /**
- * Shows a component during transition
+ * Shows a component during transition.
  * @param {SvelteComponent} component to show up during th transition
  * @param {number} rampUpTime initial delay for the componnt to show up
  */
