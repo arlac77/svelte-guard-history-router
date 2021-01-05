@@ -19,3 +19,11 @@ test("router basics", t => {
   t.is(router.searchParams.get("q"), "a");
   */
 });
+
+test("use encoded path", async t => {
+  const router = new BaseRouter([], "");
+
+  await router.push("/%20with%20spaces");
+
+  t.is(router.path, "/ with spaces");
+});

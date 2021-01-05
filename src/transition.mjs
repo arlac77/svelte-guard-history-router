@@ -11,8 +11,6 @@ import { BaseTransition } from "./base-transition.mjs";
 export class Transition extends BaseTransition {
   constructor(router, path) {
     super();
-    
-    path = decodeURI(path);
 
     let component;
 

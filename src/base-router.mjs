@@ -134,7 +134,7 @@ export class BaseRouter extends BaseTransition {
    */
   get path() {
     const l = window.location;
-    return l.href.slice(l.origin.length + this.base.length);
+    return decodeURI(l.href.slice(l.origin.length + this.base.length));
   }
 
   /**
@@ -145,7 +145,7 @@ export class BaseRouter extends BaseTransition {
   replace(path) {
     const formerState = this.state;
 
-    this.state = matcher(this.routes, path);
+    this.state = matcher(this.routes, decodeURI(path));
 
     // console.log("REPLACE A", this.path, path);
     // history.replaceState(undefined, undefined, this.base + path);
@@ -173,7 +173,7 @@ export class BaseRouter extends BaseTransition {
    * @return {Transition} running transition
    */
   async push(path) {
-    return this.nest(path, Transition);
+    return this.nest(decodeURI(path), Transition);
   }
 
   /**
