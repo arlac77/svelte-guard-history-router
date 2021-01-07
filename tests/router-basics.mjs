@@ -1,6 +1,7 @@
 import test from "ava";
 import { setupRouter } from "./helpers/setup.mjs";
 import { BaseRouter } from "../src/base-router.mjs";
+import { MasterRoute } from "../src/master-route.mjs";
 
 setupRouter();
 
@@ -12,18 +13,22 @@ test("router basics", t => {
   t.is(router.route, undefined, "no route");
   t.is(router.component, undefined, "no component");
   t.is(router.searchParams.get("q"), null);
-
-  /*
-  router.replace("/somewhere?q=a");
-  t.is(router.path, "/somewhere?q=a");
-  t.is(router.searchParams.get("q"), "a");
-  */
 });
 
-test("use encoded path", async t => {
+test("push encoded path", async t => {
   const router = new BaseRouter([], "");
 
-  await router.push("/%20with%20spaces");
+  await router.push("/%20with%20spaces?q=a");
 
-  t.is(router.path, "/ with spaces");
+  t.is(router.path, "/ with spaces?q=a");
+  t.is(router.searchParams.get("q"), "a");
+});
+
+test("replace encoded path", async t => {
+  const router = new BaseRouter([new MasterRoute("/other spaces")], "");
+  await router.replace("/other%20spaces?q=a");
+
+  t.is(router.state.route.path, "/other spaces");
+  // t.is(router.path, "/other spaces?q=a");
+  t.is(router.searchParams.get("q"), "a");
 });
