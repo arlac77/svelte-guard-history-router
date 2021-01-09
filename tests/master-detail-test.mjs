@@ -15,15 +15,21 @@ globalThis.history = dom.window.history;
 function mdSetup() {
   const values = [{ id: 1 }, { id: 2 }];
   const master = new MasterRoute("/master", {
-    iteratorFor: transition => values,
+    iteratorFor: transition => {
+      return values;
+    },
     propertyMapping: { did: "id" }
   });
   const detail = new DetailRoute("/:did", {
     parent: master
   });
 
-  const router = new BaseRouter([master, detail], "");
-  return { router, master, detail, values };
+  return {
+    router: new BaseRouter([master, detail], ""),
+    master,
+    detail,
+    values
+  };
 }
 
 test("DetailRoute fist last next previous", async t => {
@@ -42,24 +48,14 @@ test("DetailRoute fist last next previous", async t => {
   t.is(await detail.next(), values[1]);
 });
 
-test("MasterRoute objectFor", async t => {
-  const { router, master, values } = mdSetup();
+test("master / detail objectFor", async t => {
+  const { router, master, detail, values } = mdSetup();
 
   const transition = new Transition(router, "/master/2");
-  t.deepEqual(transition.params, { did: "2" });
-  await transition.start();
-
-  t.is(await master.objectFor(transition), undefined);
-});
-
-test("DetailRoute objectFor", async t => {
-  const { router, detail, values } = mdSetup();
-
-  const transition = new Transition(router, "/master/2");
-
   t.deepEqual(transition.params, { did: "2" });
 
   await transition.start();
 
+  t.is(await master.objectFor(transition), undefined);
   t.is(await detail.objectFor(transition), values[1]);
 });
