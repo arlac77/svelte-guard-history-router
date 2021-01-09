@@ -58,7 +58,7 @@ export class Transition extends BaseTransition {
   }
 
   /**
-   * Cleanup transition
+   * Cleanup transition.
    * Update Nodes active state
    * @see Router.finalizePush
    */

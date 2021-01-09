@@ -137,23 +137,6 @@ export class BaseRouter extends BaseTransition {
     return decodeURI(l.href.slice(l.origin.length + this.base.length));
   }
 
-  /**
-   * Replace current route
-   * @param {string} path
-   * @return {Object} former state
-   */
-  replace(path) {
-    const formerState = this.state;
-
-    this.state = matcher(this.routes, decodeURI(path));
-
-    // console.log("REPLACE A", this.path, path);
-    // history.replaceState(undefined, undefined, this.base + path);
-    // console.log("REPLACE B", this.path);
-
-    return formerState;
-  }
-
   get state() {
     return {
       params: { ...this.params },
@@ -164,6 +147,21 @@ export class BaseRouter extends BaseTransition {
   set state(state) {
     this.params = state.params;
     this.route = state.route;
+  }
+
+  /**
+   * Replace current route
+   * @param {string} path
+   * @return {Object} former state
+   */
+  replace(path) {
+    const formerState = this.state;
+
+    this.state = matcher(this.routes, decodeURI(path));
+
+    history.replaceState(undefined, undefined, this.base + path);
+
+    return formerState;
   }
 
   /**
@@ -277,7 +275,7 @@ export class BaseRouter extends BaseTransition {
    * Find path for a given object.
    * @param {Object} object
    * @param {String} suffix
-   * @return {String} 
+   * @return {String}
    */
   pathFor(object, suffix) {
     const route = this.routeFor(object);
