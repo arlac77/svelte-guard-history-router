@@ -1,9 +1,16 @@
 import test from "ava";
+import { JSDOM } from "jsdom";
 import { MasterRoute } from "../src/master-route.mjs";
 import { DetailRoute } from "../src/detail-route.mjs";
 import { Transition } from "../src/transition.mjs";
 import { BaseRouter } from "../src/base-router.mjs";
-import { setupRouter } from "./helpers/setup.mjs";
+
+const dom = new JSDOM(``, {
+  url: "https://example.org/"
+});
+
+globalThis.window = dom.window;
+globalThis.history = dom.window.history;
 
 function mdSetup() {
   const values = [{ id: 1 }, { id: 2 }];
@@ -11,7 +18,7 @@ function mdSetup() {
     iteratorFor: transition => values,
     propertyMapping: { did: "id" }
   });
-  const detail = new DetailRoute("/detail/:did", {
+  const detail = new DetailRoute("/:did", {
     parent: master
   });
 
@@ -22,7 +29,7 @@ function mdSetup() {
 test("DetailRoute fist last next previous", async t => {
   const { router, detail, values } = mdSetup();
 
-  let transition = new Transition(router, "/master/detail/2");
+  let transition = new Transition(router, "/master/2");
   await transition.start();
 
   t.is(await detail.first(), values[0]);
@@ -30,7 +37,7 @@ test("DetailRoute fist last next previous", async t => {
   t.is(await detail.next(), undefined);
   t.is(await detail.previous(), values[0]);
 
-  transition = new Transition(router, "/master/detail/1");
+  transition = new Transition(router, "/master/1");
   await transition.start();
   t.is(await detail.next(), values[1]);
 });
@@ -38,7 +45,7 @@ test("DetailRoute fist last next previous", async t => {
 test("MasterRoute objectFor", async t => {
   const { router, master, values } = mdSetup();
 
-  const transition = new Transition(router, "/master/detail/2");
+  const transition = new Transition(router, "/master/2");
   t.deepEqual(transition.params, { did: "2" });
   await transition.start();
 
@@ -48,7 +55,7 @@ test("MasterRoute objectFor", async t => {
 test("DetailRoute objectFor", async t => {
   const { router, detail, values } = mdSetup();
 
-  const transition = new Transition(router, "/master/detail/2");
+  const transition = new Transition(router, "/master/2");
 
   t.deepEqual(transition.params, { did: "2" });
 
