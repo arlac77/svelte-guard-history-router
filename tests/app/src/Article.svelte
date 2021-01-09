@@ -46,7 +46,7 @@
     </div>
 
     <div class="card-action">
-      <ObjectLink object={previous}>Prevoius</ObjectLink>
+      <ObjectLink object={previous}>Previous</ObjectLink>
       <ObjectLink object={next}>Next</ObjectLink>
     </div>
   </div>
