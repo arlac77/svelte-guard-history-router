@@ -9,6 +9,7 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Known Vulnerabilities](https://snyk.io/test/github/arlac77/svelte-guard-history-router/badge.svg)](https://snyk.io/test/github/arlac77/svelte-guard-history-router)
 [![Coverage Status](https://coveralls.io/repos/arlac77/svelte-guard-history-router/badge.svg)](https://coveralls.io/github/arlac77/svelte-guard-history-router)
+[![Tested with TestCafe](https://img.shields.io/badge/tested%20with-TestCafe-2fa4cf.svg)](https://github.com/DevExpress/testcafe)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e6da37be-57f8-40d4-bf85-07ad688a73b1/deploy-status)](https://app.netlify.com/sites/svelte-guard-history-router/deploys)
 
 # svelte-guard-history-router
