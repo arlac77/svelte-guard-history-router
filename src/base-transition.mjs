@@ -15,6 +15,11 @@ export class BaseTransition {
     return new URLSearchParams(i >= 0 ? path.substring(i + 1) : undefined);
   }
 
+  /**
+   * Add another tarnsition nesting level.
+   * @param {string} path
+   * @param {Transition} factory 
+   */
   async nest(path, factory) {
     this.nested = new factory(this, path);
     return this.nested.start();
