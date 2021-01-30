@@ -134,52 +134,54 @@ npm test
         -   [Parameters](#parameters-10)
 -   [BaseTransition](#basetransition)
     -   [searchParams](#searchparams)
+    -   [nest](#nest)
+        -   [Parameters](#parameters-11)
     -   [continue](#continue-1)
 -   [first](#first)
 -   [last](#last)
 -   [Guard](#guard)
     -   [enter](#enter)
-        -   [Parameters](#parameters-11)
-    -   [leave](#leave)
         -   [Parameters](#parameters-12)
+    -   [leave](#leave)
+        -   [Parameters](#parameters-13)
 -   [redirectGuard](#redirectguard)
-    -   [Parameters](#parameters-13)
--   [sequenceGuard](#sequenceguard)
     -   [Parameters](#parameters-14)
--   [parallelGuard](#parallelguard)
+-   [sequenceGuard](#sequenceguard)
     -   [Parameters](#parameters-15)
--   [MasterRoute](#masterroute)
+-   [parallelGuard](#parallelguard)
     -   [Parameters](#parameters-16)
+-   [MasterRoute](#masterroute)
+    -   [Parameters](#parameters-17)
 -   [hasParams](#hasparams)
 -   [SkeletonRoute](#skeletonroute)
-    -   [Parameters](#parameters-17)
+    -   [Parameters](#parameters-18)
     -   [Properties](#properties-2)
     -   [enter](#enter-1)
-        -   [Parameters](#parameters-18)
-    -   [leave](#leave-1)
         -   [Parameters](#parameters-19)
-    -   [matches](#matches)
+    -   [leave](#leave-1)
         -   [Parameters](#parameters-20)
-    -   [propertiesFor](#propertiesfor)
+    -   [matches](#matches)
         -   [Parameters](#parameters-21)
-    -   [commonAncestor](#commonancestor)
+    -   [propertiesFor](#propertiesfor)
         -   [Parameters](#parameters-22)
-    -   [objectFor](#objectfor)
+    -   [commonAncestor](#commonancestor)
         -   [Parameters](#parameters-23)
+    -   [objectFor](#objectfor)
+        -   [Parameters](#parameters-24)
 -   [Transition](#transition)
-    -   [Parameters](#parameters-24)
+    -   [Parameters](#parameters-25)
     -   [Properties](#properties-3)
     -   [start](#start)
     -   [end](#end)
     -   [redirect](#redirect)
-        -   [Parameters](#parameters-25)
-    -   [abort](#abort-1)
         -   [Parameters](#parameters-26)
+    -   [abort](#abort-1)
+        -   [Parameters](#parameters-27)
 -   [nameValueStore](#namevaluestore)
-    -   [Parameters](#parameters-27)
+    -   [Parameters](#parameters-28)
     -   [Properties](#properties-4)
 -   [WaitingGuard](#waitingguard)
-    -   [Parameters](#parameters-28)
+    -   [Parameters](#parameters-29)
 
 ## Key
 
@@ -353,6 +355,15 @@ Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 Deliver url search params form the current location.
 
 Returns **URLSearchParams** as extracted from the path
+
+### nest
+
+Add another tarnsition nesting level.
+
+#### Parameters
+
+-   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `factory` **[Transition](#transition)** 
 
 ### continue
 
