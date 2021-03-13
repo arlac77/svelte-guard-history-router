@@ -42,7 +42,7 @@
     "documentation": "github:arlac77/documentation",
     "jsdom": "^16.4.0",
     "mf-styling": "arlac77/mf-styling",
-    "postcss": "^8.2.7",
+    "postcss": "^8.2.8",
     "postcss-import": "^14.0.0",
     "rollup": "^2.41.2",
     "rollup-plugin-dev": "^1.1.3",
