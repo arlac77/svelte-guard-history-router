@@ -4,7 +4,7 @@
 [![minified size](https://badgen.net/bundlephobia/min/svelte-guard-history-router)](https://bundlephobia.com/result?p=svelte-guard-history-router)
 [![downloads](http://img.shields.io/npm/dm/svelte-guard-history-router.svg?style=flat-square)](https://npmjs.org/package/svelte-guard-history-router)
 [![GitHub Issues](https://img.shields.io/github/issues/arlac77/svelte-guard-history-router.svg?style=flat-square)](https://github.com/arlac77/svelte-guard-history-router/issues)
-[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Farlac77%2Fsvelte-guard-history-router%2Fbadge&style=flat)](https://actions-badge.atrox.dev/arlac77/svelte-guard-history-router/goto)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Farlac77%2Fsvelte-guard-history-router%2Fbadge\&style=flat)](https://actions-badge.atrox.dev/arlac77/svelte-guard-history-router/goto)
 [![Styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Known Vulnerabilities](https://snyk.io/test/github/arlac77/svelte-guard-history-router/badge.svg)](https://snyk.io/test/github/arlac77/svelte-guard-history-router)
@@ -18,15 +18,15 @@ svelte guarded history router
 
 # Features
 
--   Named params `article/:id`
--   Guards to act when entering / leaving a route
--   Automatic route ranking
--   Routes and keys acting as stores
--   Nested Routes with relative paths for route composition
--   Route values
--   Object &lt;=> parameter mapping
--   Create links from objects
--   Standart `<a href="/home">Home</a>` elements
+*   Named params `article/:id`
+*   Guards to act when entering / leaving a route
+*   Automatic route ranking
+*   Routes and keys acting as stores
+*   Nested Routes with relative paths for route composition
+*   Route values
+*   Object <=> parameter mapping
+*   Create links from objects
+*   Standart `<a href="/home">Home</a>` elements
 
 # usage
 
@@ -104,84 +104,84 @@ npm test
 
 ### Table of Contents
 
--   [Key](#key)
-    -   [Properties](#properties)
--   [BaseRouter](#baserouter)
-    -   [Parameters](#parameters)
-    -   [Properties](#properties-1)
-    -   [component](#component)
-    -   [value](#value)
-    -   [path](#path)
-    -   [replace](#replace)
-        -   [Parameters](#parameters-1)
-    -   [push](#push)
-        -   [Parameters](#parameters-2)
-    -   [finalizePush](#finalizepush)
-        -   [Parameters](#parameters-3)
-    -   [continue](#continue)
-        -   [Parameters](#parameters-4)
-    -   [abort](#abort)
-        -   [Parameters](#parameters-5)
-    -   [subscribe](#subscribe)
-        -   [Parameters](#parameters-6)
-    -   [updateActive](#updateactive)
-        -   [Parameters](#parameters-7)
-    -   [addRoute](#addroute)
-        -   [Parameters](#parameters-8)
-    -   [routeFor](#routefor)
-        -   [Parameters](#parameters-9)
-    -   [pathFor](#pathfor)
-        -   [Parameters](#parameters-10)
--   [BaseTransition](#basetransition)
-    -   [searchParams](#searchparams)
-    -   [nest](#nest)
-        -   [Parameters](#parameters-11)
-    -   [continue](#continue-1)
--   [first](#first)
--   [last](#last)
--   [Guard](#guard)
-    -   [enter](#enter)
-        -   [Parameters](#parameters-12)
-    -   [leave](#leave)
-        -   [Parameters](#parameters-13)
--   [redirectGuard](#redirectguard)
-    -   [Parameters](#parameters-14)
--   [sequenceGuard](#sequenceguard)
-    -   [Parameters](#parameters-15)
--   [parallelGuard](#parallelguard)
-    -   [Parameters](#parameters-16)
--   [MasterRoute](#masterroute)
-    -   [Parameters](#parameters-17)
--   [hasParams](#hasparams)
--   [SkeletonRoute](#skeletonroute)
-    -   [Parameters](#parameters-18)
-    -   [Properties](#properties-2)
-    -   [enter](#enter-1)
-        -   [Parameters](#parameters-19)
-    -   [leave](#leave-1)
-        -   [Parameters](#parameters-20)
-    -   [matches](#matches)
-        -   [Parameters](#parameters-21)
-    -   [propertiesFor](#propertiesfor)
-        -   [Parameters](#parameters-22)
-    -   [commonAncestor](#commonancestor)
-        -   [Parameters](#parameters-23)
-    -   [objectFor](#objectfor)
-        -   [Parameters](#parameters-24)
--   [Transition](#transition)
-    -   [Parameters](#parameters-25)
-    -   [Properties](#properties-3)
-    -   [start](#start)
-    -   [end](#end)
-    -   [redirect](#redirect)
-        -   [Parameters](#parameters-26)
-    -   [abort](#abort-1)
-        -   [Parameters](#parameters-27)
--   [nameValueStore](#namevaluestore)
-    -   [Parameters](#parameters-28)
-    -   [Properties](#properties-4)
--   [WaitingGuard](#waitingguard)
-    -   [Parameters](#parameters-29)
+*   [Key](#key)
+    *   [Properties](#properties)
+*   [BaseRouter](#baserouter)
+    *   [Parameters](#parameters)
+    *   [Properties](#properties-1)
+    *   [component](#component)
+    *   [value](#value)
+    *   [path](#path)
+    *   [replace](#replace)
+        *   [Parameters](#parameters-1)
+    *   [push](#push)
+        *   [Parameters](#parameters-2)
+    *   [finalizePush](#finalizepush)
+        *   [Parameters](#parameters-3)
+    *   [continue](#continue)
+        *   [Parameters](#parameters-4)
+    *   [abort](#abort)
+        *   [Parameters](#parameters-5)
+    *   [subscribe](#subscribe)
+        *   [Parameters](#parameters-6)
+    *   [updateActive](#updateactive)
+        *   [Parameters](#parameters-7)
+    *   [addRoute](#addroute)
+        *   [Parameters](#parameters-8)
+    *   [routeFor](#routefor)
+        *   [Parameters](#parameters-9)
+    *   [pathFor](#pathfor)
+        *   [Parameters](#parameters-10)
+*   [BaseTransition](#basetransition)
+    *   [searchParams](#searchparams)
+    *   [nest](#nest)
+        *   [Parameters](#parameters-11)
+    *   [continue](#continue-1)
+*   [first](#first)
+*   [last](#last)
+*   [Guard](#guard)
+    *   [enter](#enter)
+        *   [Parameters](#parameters-12)
+    *   [leave](#leave)
+        *   [Parameters](#parameters-13)
+*   [redirectGuard](#redirectguard)
+    *   [Parameters](#parameters-14)
+*   [sequenceGuard](#sequenceguard)
+    *   [Parameters](#parameters-15)
+*   [parallelGuard](#parallelguard)
+    *   [Parameters](#parameters-16)
+*   [MasterRoute](#masterroute)
+    *   [Parameters](#parameters-17)
+*   [hasParams](#hasparams)
+*   [SkeletonRoute](#skeletonroute)
+    *   [Parameters](#parameters-18)
+    *   [Properties](#properties-2)
+    *   [enter](#enter-1)
+        *   [Parameters](#parameters-19)
+    *   [leave](#leave-1)
+        *   [Parameters](#parameters-20)
+    *   [matches](#matches)
+        *   [Parameters](#parameters-21)
+    *   [propertiesFor](#propertiesfor)
+        *   [Parameters](#parameters-22)
+    *   [commonAncestor](#commonancestor)
+        *   [Parameters](#parameters-23)
+    *   [objectFor](#objectfor)
+        *   [Parameters](#parameters-24)
+*   [Transition](#transition)
+    *   [Parameters](#parameters-25)
+    *   [Properties](#properties-3)
+    *   [start](#start)
+    *   [end](#end)
+    *   [redirect](#redirect)
+        *   [Parameters](#parameters-26)
+    *   [abort](#abort-1)
+        *   [Parameters](#parameters-27)
+*   [nameValueStore](#namevaluestore)
+    *   [Parameters](#parameters-28)
+    *   [Properties](#properties-4)
+*   [WaitingGuard](#waitingguard)
+    *   [Parameters](#parameters-29)
 
 ## Key
 
@@ -201,9 +201,9 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 ### Properties
 
--   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `value` **any** 
--   `subscriptions` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)** 
+*   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `value` **any** 
+*   `subscriptions` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)** 
 
 ## BaseRouter
 
@@ -218,18 +218,18 @@ $aKey // fired if value of aKey changes
 
 ### Parameters
 
--   `routes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;Route>** 
--   `base` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** url
+*   `routes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<Route>** 
+*   `base` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** url
 
 ### Properties
 
--   `linkNodes` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)&lt;[Node](https://developer.mozilla.org/docs/Web/API/Node/nextSibling)>** nodes having their active state updated
--   `routes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;Route>** 
--   `keys` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** collected keys of all routes
--   `params` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** value mapping from keys (from current route)
--   `route` **Route** current
--   `nested` **[Transition](#transition)** ongoing nested
--   `base` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** url
+*   `linkNodes` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)<[Node](https://developer.mozilla.org/docs/Web/API/Node/nextSibling)>** nodes having their active state updated
+*   `routes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<Route>** 
+*   `keys` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** collected keys of all routes
+*   `params` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** value mapping from keys (from current route)
+*   `route` **Route** current
+*   `nested` **[Transition](#transition)** ongoing nested
+*   `base` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** url
 
 ### component
 
@@ -254,7 +254,7 @@ Replace current route
 
 #### Parameters
 
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** former state
 
@@ -265,7 +265,7 @@ The work is done by a Transition.
 
 #### Parameters
 
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** where to go
+*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** where to go
 
 Returns **[Transition](#transition)** running transition
 
@@ -276,7 +276,7 @@ If path is undefined the transition has been aborderd.
 
 #### Parameters
 
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 ### continue
 
@@ -288,7 +288,7 @@ Otherwise does nothing.
 
 #### Parameters
 
--   `fallbackPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `fallbackPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 ### abort
 
@@ -300,7 +300,7 @@ Otherwise does nothing.
 
 #### Parameters
 
--   `fallbackPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `fallbackPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 ### subscribe
 
@@ -309,7 +309,7 @@ Changes in the current route will trigger a update
 
 #### Parameters
 
--   `subscription` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
+*   `subscription` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
 
 ### updateActive
 
@@ -317,7 +317,7 @@ Update the active state of a node.
 
 #### Parameters
 
--   `node` **[Node](https://developer.mozilla.org/docs/Web/API/Node/nextSibling)** 
+*   `node` **[Node](https://developer.mozilla.org/docs/Web/API/Node/nextSibling)** 
 
 ### addRoute
 
@@ -325,7 +325,7 @@ Add a new Route.
 
 #### Parameters
 
--   `route` **Route** 
+*   `route` **Route** 
 
 ### routeFor
 
@@ -333,7 +333,7 @@ Find Route for a given object.
 
 #### Parameters
 
--   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+*   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
 Returns **Route** able to support given object
 
@@ -343,8 +343,8 @@ Find path for a given object.
 
 #### Parameters
 
--   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
--   `suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+*   `suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
@@ -362,8 +362,8 @@ Add another tarnsition nesting level.
 
 #### Parameters
 
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `factory` **[Transition](#transition)** 
+*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `factory` **[Transition](#transition)** 
 
 ### continue
 
@@ -389,7 +389,7 @@ Called while entering a route (current outlet is not yet set)
 
 #### Parameters
 
--   `transition` **[Transition](#transition)** 
+*   `transition` **[Transition](#transition)** 
 
 ### leave
 
@@ -397,7 +397,7 @@ Called before leaving a route
 
 #### Parameters
 
--   `transition` **[Transition](#transition)** 
+*   `transition` **[Transition](#transition)** 
 
 ## redirectGuard
 
@@ -405,8 +405,8 @@ Redirects to a given path if condition is met.
 
 ### Parameters
 
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `condition` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** redirects when returning true
+*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `condition` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** redirects when returning true
 
 ## sequenceGuard
 
@@ -414,7 +414,7 @@ Execute guards in a sequence.
 
 ### Parameters
 
--   `children` **Iterable&lt;[Guard](#guard)>** 
+*   `children` **Iterable<[Guard](#guard)>** 
 
 ## parallelGuard
 
@@ -422,7 +422,7 @@ Execute guards in a parallel.
 
 ### Parameters
 
--   `children` **Iterable&lt;[Guard](#guard)>** 
+*   `children` **Iterable<[Guard](#guard)>** 
 
 ## MasterRoute
 
@@ -432,8 +432,8 @@ Route holding a ordered collection of objects.
 
 ### Parameters
 
--   `path`  
--   `options`  
+*   `path`  
+*   `options`  
 
 ## hasParams
 
@@ -450,20 +450,20 @@ Subscriptions on Routes fire when the route value changes.
 
 ### Parameters
 
--   `path`  
--   `options`   (optional, default `{}`)
+*   `path`  
+*   `options`   (optional, default `{}`)
 
 ### Properties
 
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** full path of the Route including all parents
--   `component` **SvelteComponent** target to show
--   `linkComponent` **SvelteComponent** content for [ObjectLink](ObjectLink)
--   `propertyMapping` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Map properties to object attributes
-              Keys are the property names and values are the keys in the resulting object.
--   `priority` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `keys` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** as found in the path
--   `regex` **RegEx** 
--   `value` **any** 
+*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** full path of the Route including all parents
+*   `component` **SvelteComponent** target to show
+*   `linkComponent` **SvelteComponent** content for [ObjectLink](ObjectLink)
+*   `propertyMapping` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Map properties to object attributes
+    Keys are the property names and values are the keys in the resulting object.
+*   `priority` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
+*   `keys` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** as found in the path
+*   `regex` **RegEx** 
+*   `value` **any** 
 
 ### enter
 
@@ -471,8 +471,8 @@ Enter the route from a former one.
 
 #### Parameters
 
--   `transition` **[Transition](#transition)** 
--   `untilRoute` **Route** the common ancestor with the former route
+*   `transition` **[Transition](#transition)** 
+*   `untilRoute` **Route** the common ancestor with the former route
 
 ### leave
 
@@ -480,8 +480,8 @@ Leave the route to a new one.
 
 #### Parameters
 
--   `transition` **[Transition](#transition)** 
--   `untilRoute` **Route** the common ancestor with the next route
+*   `transition` **[Transition](#transition)** 
+*   `untilRoute` **Route** the common ancestor with the next route
 
 ### matches
 
@@ -489,8 +489,8 @@ Check properties against object.
 
 #### Parameters
 
--   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
--   `properties` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+*   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+*   `properties` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** true if object properties are matching with the given proerties
 
@@ -501,9 +501,9 @@ All property values are strings.
 
 #### Parameters
 
--   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** source of the values
+*   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** source of the values
 
-Returns **([Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** properties extracted from given object
+Returns **([Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object) | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** properties extracted from given object
 
 ### commonAncestor
 
@@ -511,7 +511,7 @@ Find common ancestor with another Route.
 
 #### Parameters
 
--   `other` **Route** 
+*   `other` **Route** 
 
 Returns **(Route | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** common ancestor Route between receiver and other
 
@@ -521,7 +521,7 @@ Deliver object for a given set of properties
 
 #### Parameters
 
--   `transition` **[Transition](#transition)** 
+*   `transition` **[Transition](#transition)** 
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** for matching properties
 
@@ -533,28 +533,27 @@ Transition between routes.
 
 ### Parameters
 
--   `router` **Router** 
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** new destination
+*   `router` **Router** 
+*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** new destination
 
 ### Properties
 
--   `router` **Router** 
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** new destination
+*   `router` **Router** 
+*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** new destination
 
 ### start
 
 Start the transition
 
--   leave old route
--   find matching target route @see matcher()
--   enter new route
--   set params
--   set current route
+*   leave old route
+*   find matching target route @see matcher()
+*   enter new route
+*   set params
+*   set current route
 
 ### end
 
--   **See: Router.finalizePush
-    **
+*   **See**: Router.finalizePush
 
 Cleanup transition.
 Update Nodes active state
@@ -562,12 +561,12 @@ Update Nodes active state
 ### redirect
 
 Halt current transition and go to another route.
-To proceed with the original route by calling [continue()](continue())
+To proceed with the original route by calling [continue()](continue\(\))
 The original transition will keept in place and be continued afterwards.
 
 #### Parameters
 
--   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** new route to enter temporary
+*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** new route to enter temporary
 
 ### abort
 
@@ -575,7 +574,7 @@ Bring back the router into the state before the transition has started.
 
 #### Parameters
 
--   `e` **(Exception | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** 
+*   `e` **(Exception | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** 
 
 ## nameValueStore
 
@@ -583,12 +582,12 @@ Create a named object wich can act as a store.
 
 ### Parameters
 
--   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `initialValue` **any** 
+*   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `initialValue` **any** 
 
 ### Properties
 
--   `value` **any** 
+*   `value` **any** 
 
 Returns **Store** 
 
@@ -600,8 +599,8 @@ Shows a component during transition.
 
 ### Parameters
 
--   `component` **SvelteComponent** to show up during th transition
--   `rampUpTime` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** initial delay for the componnt to show up (optional, default `300`)
+*   `component` **SvelteComponent** to show up during th transition
+*   `rampUpTime` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** initial delay for the componnt to show up (optional, default `300`)
 
 # install
 
@@ -621,8 +620,8 @@ yarn add svelte-guard-history-router
 
 All unresolvable requests are redirected to /sericeBase/index.html
 
--   /deploymantLocation is the location of the frontend in the servers file system
--   /serviceBase is the url path as seen from the browser
+*   /deploymantLocation is the location of the frontend in the servers file system
+*   /serviceBase is the url path as seen from the browser
 
 ```nginx.conf
 location /serviceBase {
