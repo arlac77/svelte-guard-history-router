@@ -38,7 +38,7 @@
     "@rollup/plugin-node-resolve": "^11.2.1",
     "@rollup/plugin-virtual": "^2.0.3",
     "ava": "^3.15.0",
-    "c8": "^7.7.1",
+    "c8": "^7.7.2",
     "documentation": "^13.2.4",
     "jsdom": "^16.4.0",
     "mf-styling": "arlac77/mf-styling",
