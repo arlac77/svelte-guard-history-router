@@ -24,7 +24,7 @@
     "start": "rollup -c tests/app/rollup.config.mjs -w",
     "test": "npm run test:ava && npm run test:cafe",
     "test:ava": "ava --timeout 2m tests/*.mjs",
-    "test:cafe": "testcafe $BROWSER:headless tests/cafe/*.js -s build/test --app-init-delay 2000 --app \"rollup -c tests/app/rollup.config.mjs -w\"",
+    "test:cafe": "testcafe $BROWSER:headless tests/cafe/*.js -s build/test --app-init-delay 2000 --app \"rollup -c tests/app/rollup.config.mjs -w\" && testcafe $BROWSER:headless tests/cafe/*.js -s build/test --app-init-delay 1000 --app \"rollup -c tests/app/rollup.config.mjs -w\"",
     "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --timeout 2m tests/*.mjs && c8 report -r lcov -o build/coverage --temp-directory build/tmp",
     "docs": "documentation readme --section=API ./src/**/*.mjs",
     "lint": "npm run lint:docs",
@@ -49,7 +49,7 @@
     "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-svelte": "^7.1.0",
     "semantic-release": "^17.4.4",
-    "svelte": "^3.41.0",
+    "svelte": "^3.42.0",
     "testcafe": "^1.15.1"
   },
   "repository": {
