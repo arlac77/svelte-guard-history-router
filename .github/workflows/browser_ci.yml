@@ -9,7 +9,7 @@ jobs:
           - ubuntu-latest
         node:
           - 14.17.5
-          - 16.6.0
+          - 16.7.0
         browser:
           - chrome
           - firefox
