@@ -182,7 +182,7 @@ export class SkeletonRoute extends RootRoute {
   }
 
   /**
-   * Find common ancestor with another Route.
+   * Find common ancestor with an other Route.
    * @param {Route} other
    * @return {Route|undefined} common ancestor Route between receiver and other
    */
@@ -206,7 +206,7 @@ export class SkeletonRoute extends RootRoute {
   }
 
   /**
-   * Deliver object for a given set of properties
+   * Deliver object for a given set of properties.
    * @param {Transition} transition
    * @return {Object} for matching properties
    */

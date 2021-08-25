@@ -1,5 +1,8 @@
 import { ObjectStoreRoute } from "./routes.mjs";
 
+/**
+ * Route to represent a slice of the prarent list of objects.
+ */
 export class DetailRoute extends ObjectStoreRoute {
 
   get master()
