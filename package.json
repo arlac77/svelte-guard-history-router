@@ -24,7 +24,7 @@
     "start": "rollup -c tests/app/rollup.config.mjs -w",
     "test": "npm run test:ava && npm run test:cafe",
     "test:ava": "ava --timeout 2m tests/*.mjs",
-    "test:cafe": "testcafe $BROWSER:headless tests/cafe/*.js -s build/test --page-request-timeout 9000 --app-init-delay 2000 --app \"rollup -c tests/app/rollup.config.mjs -w\"",
+    "test:cafe": "testcafe $BROWSER:headless tests/cafe/*.js -s build/test --page-request-timeout 9000 --app-init-delay 3000 --app \"rollup -c tests/app/rollup.config.mjs -w\"",
     "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --timeout 2m tests/*.mjs && c8 report -r lcov -o build/coverage --temp-directory build/tmp",
     "docs": "documentation readme --section=API ./src/**/*.mjs",
     "lint": "npm run lint:docs",
