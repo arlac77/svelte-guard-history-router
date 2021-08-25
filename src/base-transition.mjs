@@ -43,9 +43,18 @@ export class BaseTransition {
     return false;
   }
 
-  async abort() {
+  /**
+   * Abort the transition.
+   * @param error
+   * @return {boolean} truen in case there was a nesten transition
+   */
+  async abort(error) {
+    if(error) {
+      console.error(error);
+    }
+
     if (this.nested !== undefined) {
-      await this.nested.abort();
+      await this.nested.abort(error);
       this.nested = undefined;
       return true;
     }

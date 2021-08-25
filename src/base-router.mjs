@@ -283,8 +283,4 @@ export class BaseRouter extends BaseTransition {
       return route.pathFor(object, suffix);
     }
   }
-
-  error(err) {
-    console.error(err);
-  }
 }

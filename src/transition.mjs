@@ -102,11 +102,7 @@ export class Transition extends BaseTransition {
    * @param {Exception|undefined} e
    */
   async abort(e) {
-    if (e) {
-      this.router.error(e);
-    }
-
-    await super.abort();
+    await super.abort(e);
 
     history.back();
     setTimeout(() => this.router.finalizePush(), 0);
