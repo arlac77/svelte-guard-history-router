@@ -17,6 +17,7 @@ export class BaseTransition {
 
   /**
    * Add another tarnsition nesting level.
+   * Starts a transition from the given factory.
    * @param {string} path
    * @param {Transition} factory 
    */
