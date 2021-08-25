@@ -32,7 +32,7 @@ function mdSetup() {
   };
 }
 
-test.only("DetailRoute first, last, next, previous", async t => {
+test("DetailRoute first, last, next, previous", async t => {
   const { router, detail, values } = mdSetup();
 
   let transition = new Transition(router, "/master/2");
