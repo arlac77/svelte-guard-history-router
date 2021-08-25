@@ -33,7 +33,7 @@ import { nameValueStore, NAVIGATION_EVENT } from "./util.mjs";
  * @property {Object} keys collected keys of all routes
  * @property {Object} params value mapping from keys (from current route)
  * @property {Route} route current
- * @property {Transition} nested ongoing nested
+ * @property {Transition} nested ongoing nested transition
  * @property {string} base url
  */
 export class BaseRouter extends BaseTransition {
