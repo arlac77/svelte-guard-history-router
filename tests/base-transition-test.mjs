@@ -25,6 +25,19 @@ test("BaseTransition abort", async t => {
   t.falsy(bt.nested);
 });
 
+test("BaseTransition abort with err", async t => {
+  const bt = new BaseTransition();
+
+  const nl = bt.nest("a", BaseTransition);
+
+  t.true(bt.nested instanceof BaseTransition);
+
+  await nl;
+
+  await bt.abort(new Error("transition failed"));
+  t.falsy(bt.nested);
+});
+
 test("BaseTransition continue", async t => {
   const bt = new BaseTransition();
 
