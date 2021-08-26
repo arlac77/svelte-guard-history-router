@@ -137,51 +137,54 @@ npm test
     *   [nest](#nest)
         *   [Parameters](#parameters-11)
     *   [continue](#continue-1)
-*   [first](#first)
-*   [last](#last)
+    *   [abort](#abort-1)
+        *   [Parameters](#parameters-12)
+*   [DetailRoute](#detailroute)
+    *   [first](#first)
+    *   [last](#last)
 *   [Guard](#guard)
     *   [enter](#enter)
-        *   [Parameters](#parameters-12)
-    *   [leave](#leave)
         *   [Parameters](#parameters-13)
+    *   [leave](#leave)
+        *   [Parameters](#parameters-14)
 *   [redirectGuard](#redirectguard)
-    *   [Parameters](#parameters-14)
-*   [sequenceGuard](#sequenceguard)
     *   [Parameters](#parameters-15)
-*   [parallelGuard](#parallelguard)
+*   [sequenceGuard](#sequenceguard)
     *   [Parameters](#parameters-16)
-*   [MasterRoute](#masterroute)
+*   [parallelGuard](#parallelguard)
     *   [Parameters](#parameters-17)
+*   [MasterRoute](#masterroute)
+    *   [Parameters](#parameters-18)
 *   [hasParams](#hasparams)
 *   [SkeletonRoute](#skeletonroute)
-    *   [Parameters](#parameters-18)
+    *   [Parameters](#parameters-19)
     *   [Properties](#properties-2)
     *   [enter](#enter-1)
-        *   [Parameters](#parameters-19)
-    *   [leave](#leave-1)
         *   [Parameters](#parameters-20)
-    *   [matches](#matches)
+    *   [leave](#leave-1)
         *   [Parameters](#parameters-21)
-    *   [propertiesFor](#propertiesfor)
+    *   [matches](#matches)
         *   [Parameters](#parameters-22)
-    *   [commonAncestor](#commonancestor)
+    *   [propertiesFor](#propertiesfor)
         *   [Parameters](#parameters-23)
-    *   [objectFor](#objectfor)
+    *   [commonAncestor](#commonancestor)
         *   [Parameters](#parameters-24)
+    *   [objectFor](#objectfor)
+        *   [Parameters](#parameters-25)
 *   [Transition](#transition)
-    *   [Parameters](#parameters-25)
+    *   [Parameters](#parameters-26)
     *   [Properties](#properties-3)
     *   [start](#start)
     *   [end](#end)
     *   [redirect](#redirect)
-        *   [Parameters](#parameters-26)
-    *   [abort](#abort-1)
         *   [Parameters](#parameters-27)
+    *   [abort](#abort-2)
+        *   [Parameters](#parameters-28)
 *   [nameValueStore](#namevaluestore)
-    *   [Parameters](#parameters-28)
+    *   [Parameters](#parameters-29)
     *   [Properties](#properties-4)
 *   [WaitingGuard](#waitingguard)
-    *   [Parameters](#parameters-29)
+    *   [Parameters](#parameters-30)
 
 ## Key
 
@@ -228,7 +231,7 @@ $aKey // fired if value of aKey changes
 *   `keys` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** collected keys of all routes
 *   `params` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** value mapping from keys (from current route)
 *   `route` **Route** current
-*   `nested` **[Transition](#transition)** ongoing nested
+*   `nested` **[Transition](#transition)** ongoing nested transition
 *   `base` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** url
 
 ### component
@@ -359,6 +362,7 @@ Returns **URLSearchParams** as extracted from the path
 ### nest
 
 Add another tarnsition nesting level.
+Starts a transition from the given factory.
 
 #### Parameters
 
@@ -370,11 +374,27 @@ Add another tarnsition nesting level.
 Continue a nested route to its original destination.
 Does nothing if the transition has not been nested.
 
-## first
+### abort
+
+Abort the transition.
+
+#### Parameters
+
+*   `error`  
+
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** truen in case there was a nesten transition
+
+## DetailRoute
+
+**Extends ObjectStoreRoute**
+
+Route to represent a slice of the prarent list of objects.
+
+### first
 
 Returns **any** 1st. entry
 
-## last
+### last
 
 Returns **any** last entry
 
@@ -507,7 +527,7 @@ Returns **([Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 ### commonAncestor
 
-Find common ancestor with another Route.
+Find common ancestor with an other Route.
 
 #### Parameters
 
@@ -517,7 +537,7 @@ Returns **(Route | [undefined](https://developer.mozilla.org/docs/Web/JavaScript
 
 ### objectFor
 
-Deliver object for a given set of properties
+Deliver object for a given set of properties.
 
 #### Parameters
 
