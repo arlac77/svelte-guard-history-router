@@ -106,6 +106,13 @@ export const articles = Object.fromEntries(
       price: 2.0,
       category: "dessert",
       ingredients: ["wheet", "milk", "eggs"]
+    },
+    {
+      id: 33,
+      name: "Panna Cotta",
+      price: 2.0,
+      category: "dessert",
+      ingredients: ["wheet", "milk", "eggs"]
     }
   ].map(a => [a.id, a])
 );
