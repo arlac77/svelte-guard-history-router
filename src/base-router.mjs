@@ -150,7 +150,7 @@ export class BaseRouter extends BaseTransition {
   }
 
   /**
-   * Replace current route
+   * Replace current route.
    * @param {string} path
    * @return {Object} former state
    */
