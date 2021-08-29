@@ -140,6 +140,7 @@ npm test
     *   [abort](#abort-1)
         *   [Parameters](#parameters-12)
 *   [DetailRoute](#detailroute)
+    *   [Properties](#properties-2)
     *   [first](#first)
     *   [last](#last)
 *   [Guard](#guard)
@@ -155,10 +156,11 @@ npm test
     *   [Parameters](#parameters-17)
 *   [MasterRoute](#masterroute)
     *   [Parameters](#parameters-18)
-*   [hasParams](#hasparams)
+*   [RootRoute](#rootroute)
+    *   [hasParams](#hasparams)
 *   [SkeletonRoute](#skeletonroute)
     *   [Parameters](#parameters-19)
-    *   [Properties](#properties-2)
+    *   [Properties](#properties-3)
     *   [enter](#enter-1)
         *   [Parameters](#parameters-20)
     *   [leave](#leave-1)
@@ -173,7 +175,7 @@ npm test
         *   [Parameters](#parameters-25)
 *   [Transition](#transition)
     *   [Parameters](#parameters-26)
-    *   [Properties](#properties-3)
+    *   [Properties](#properties-4)
     *   [start](#start)
     *   [end](#end)
     *   [redirect](#redirect)
@@ -182,7 +184,7 @@ npm test
         *   [Parameters](#parameters-28)
 *   [nameValueStore](#namevaluestore)
     *   [Parameters](#parameters-29)
-    *   [Properties](#properties-4)
+    *   [Properties](#properties-5)
 *   [WaitingGuard](#waitingguard)
     *   [Parameters](#parameters-30)
 
@@ -253,7 +255,7 @@ Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 ### replace
 
-Replace current route
+Replace current route.
 
 #### Parameters
 
@@ -390,6 +392,10 @@ Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 Route to represent a slice of the prarent list of objects.
 
+### Properties
+
+*   `master` **Route** route holding the master records
+
 ### first
 
 Returns **any** 1st. entry
@@ -455,7 +461,12 @@ Route holding a ordered collection of objects.
 *   `path`  
 *   `options`  
 
-## hasParams
+## RootRoute
+
+Route at the root of the route tree.
+has no parent.
+
+### hasParams
 
 Are there parameters in the path.
 
@@ -582,7 +593,7 @@ Update Nodes active state
 
 Halt current transition and go to another route.
 To proceed with the original route by calling [continue()](continue\(\))
-The original transition will keept in place and be continued afterwards.
+The original transition will keept in place and can be continued afterwards.
 
 #### Parameters
 
@@ -591,6 +602,7 @@ The original transition will keept in place and be continued afterwards.
 ### abort
 
 Bring back the router into the state before the transition has started.
+All nested transitions also will be termniated.
 
 #### Parameters
 
