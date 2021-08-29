@@ -15,6 +15,10 @@ function ref(obj, str) {
   }
 }
 
+/**
+ * Route at the root of the route tree.
+ * has no parent.
+ */
 class RootRoute {
   /**
    * Are there parameters in the path.
