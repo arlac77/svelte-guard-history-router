@@ -2,8 +2,6 @@
  *
  */
 export class BaseTransition {
-  constructor() {
-  }
 
   /**
    * Deliver url search params form the current location.
