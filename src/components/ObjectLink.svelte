@@ -52,5 +52,5 @@
     <slot />
   </Link>
 {:else}
-  <slot name="noFound" />
+  <slot name="notFound" />
 {/if}
