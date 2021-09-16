@@ -50,7 +50,6 @@ test("DetailRoute first, last, next, previous", async t => {
   t.is(await detail.last(), values[3]);
   t.is(router.pathFor(await detail.last()), "/master/4");
 
-  
   transition = new Transition(router, "/master/1");
   await transition.start();
   t.is(await detail.next(), values[1]);

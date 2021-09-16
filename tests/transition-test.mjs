@@ -92,7 +92,7 @@ test("transition redirect + abort", async t => {
   t.not(router.route.path, "/protected");
 
   t.pass("aborted");
-  
+
   /*try {
       await start;
   }

@@ -26,7 +26,7 @@ test("route master detail leaf subscription", async t => {
 
   const transition = new Transition(router, "/master/2/filler/d");
   t.deepEqual(transition.params, { detail: "2", leaf: "d" });
-  
+
   await transition.start();
 
   t.deepEqual(leafValue, model.details[1].leafs[1]);

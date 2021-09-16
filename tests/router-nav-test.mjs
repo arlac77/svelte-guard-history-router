@@ -69,7 +69,11 @@ async function rtt(t, items) {
     t.is(subscriptionPath, path, "subscription path");
     t.is(subscriptionComponent.name, componentName, "subscription component");
     t.is(history.length, startHistoryLength + n, "history length");
-    t.is(window.location.href.slice(window.location.origin.length), path, "window path");
+    t.is(
+      window.location.href.slice(window.location.origin.length),
+      path,
+      "window path"
+    );
   }
 }
 
