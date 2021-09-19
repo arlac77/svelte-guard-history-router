@@ -8,9 +8,7 @@
 @import "mf-styling/form.css";
 @import "mf-styling/card.css";
 
-
 .current {
     background-color: var(--color-accent-300);
     font-weight: bold;
 }
-  
