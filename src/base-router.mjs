@@ -175,8 +175,8 @@ export class BaseRouter extends BaseTransition {
   }
 
   /**
-   * Called from a transition to manifest the new destination.
-   * If path is undefined the transition has been aborderd.
+   * Called from a Transition to manifest the new destination.
+   * If path is undefined the Transition has been aborderd.
    * @param {string} path
    */
   finalizePush(path) {
@@ -274,8 +274,8 @@ export class BaseRouter extends BaseTransition {
   /**
    * Find path for a given object.
    * @param {Object} object
-   * @param {String} suffix
-   * @return {String}
+   * @param {String} suffix to be appended
+   * @return {String} path + suffix
    */
   pathFor(object, suffix) {
     const route = this.routeFor(object);
