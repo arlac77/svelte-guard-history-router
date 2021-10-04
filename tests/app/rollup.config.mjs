@@ -38,18 +38,10 @@ export default {
       dedupe: importee =>
         importee === "svelte" || importee.startsWith("svelte/")
     }),
-    !production &&
-      dev({
-        port,
-        dirs: [`${basedir}/public`],
-        spa: `${basedir}/public/index.html`,
-        basePath: "/"
-      }),
     dev({
       port,
       dirs: [`${basedir}/public`],
-      spa: `${basedir}/public/index.html`,
-      basePath: "/"
+      spa: true
     })
   ]
 };
