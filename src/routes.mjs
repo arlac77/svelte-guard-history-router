@@ -3,6 +3,15 @@ import { sequenceGuard } from "./guard.mjs";
 const dummyFunction = () => {};
 const dummySet = { size: 0, forEach: dummyFunction };
 
+/**
+ *
+ */
+const nullGuard = {
+  toString: () => "",
+  enter: dummyFunction,
+  leave: dummyFunction
+};
+
 function ref(obj, str) {
   for (const part of str.split(".")) {
     obj = obj[part];
@@ -16,8 +25,9 @@ function ref(obj, str) {
 }
 
 /**
- * Route at the root of the route tree.
- * has no parent.
+ * Route at the root of the tree.
+ * This route has no parent.
+ * All other routes are below of this one.
  */
 class RootRoute {
   /**
@@ -28,6 +38,9 @@ class RootRoute {
     return this.keys.length > 0;
   }
 
+  /**
+   * @return {string} empty as we are the root
+   */
   get path() {
     return "";
   }
@@ -36,16 +49,18 @@ class RootRoute {
     return Object;
   }
 
+  /**
+   * @return {object} empty object
+   */
   get propertyMapping() {
     return {};
   }
 
+  /**
+   * @return {Guard} empty guard which does nothing
+   */
   get guard() {
-    return {
-      toString: () => "",
-      enter: dummyFunction,
-      leave: dummyFunction
-    };
+    return nullGuard;
   }
 
   enter() {}
@@ -120,6 +135,7 @@ export class SkeletonRoute extends RootRoute {
 
   /**
    * Enter the route from a former one.
+   * All parent routes up to the common ancestor are also entered.
    * @param {Transition} transition
    * @param {Route} untilRoute the common ancestor with the former route
    */
@@ -132,6 +148,7 @@ export class SkeletonRoute extends RootRoute {
 
   /**
    * Leave the route to a new one.
+   * All parent routes up to the common ancestor are also left.
    * @param {Transition} transition
    * @param {Route} untilRoute the common ancestor with the next route
    */
@@ -211,6 +228,7 @@ export class SkeletonRoute extends RootRoute {
 
   /**
    * Deliver object for a given set of properties.
+   * Default implemantation asks the parent route.
    * @param {Transition} transition
    * @return {Object} for matching properties
    */
