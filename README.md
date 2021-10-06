@@ -156,8 +156,12 @@ npm test
     *   [Parameters](#parameters-17)
 *   [MasterRoute](#masterroute)
     *   [Parameters](#parameters-18)
+*   [nullGuard](#nullguard)
 *   [RootRoute](#rootroute)
     *   [hasParams](#hasparams)
+    *   [path](#path-1)
+    *   [propertyMapping](#propertymapping)
+    *   [guard](#guard-1)
 *   [SkeletonRoute](#skeletonroute)
     *   [Parameters](#parameters-19)
     *   [Properties](#properties-3)
@@ -276,8 +280,8 @@ Returns **[Transition](#transition)** running transition
 
 ### finalizePush
 
-Called from a transition to manifest the new destination.
-If path is undefined the transition has been aborderd.
+Called from a Transition to manifest the new destination.
+If path is undefined the Transition has been aborderd.
 
 #### Parameters
 
@@ -349,9 +353,9 @@ Find path for a given object.
 #### Parameters
 
 *   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
-*   `suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** to be appended
 
-Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** path + suffix
 
 ## BaseTransition
 
@@ -461,16 +465,31 @@ Route holding a ordered collection of objects.
 *   `path`  
 *   `options`  
 
+## nullGuard
+
 ## RootRoute
 
-Route at the root of the route tree.
-has no parent.
+Route at the root of the tree.
+This route has no parent.
+All other routes are below of this one.
 
 ### hasParams
 
 Are there parameters in the path.
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** true if route has parameters (:key)
+
+### path
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** empty as we are the root
+
+### propertyMapping
+
+Returns **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** empty object
+
+### guard
+
+Returns **[Guard](#guard)** empty guard which does nothing
 
 ## SkeletonRoute
 
@@ -499,6 +518,7 @@ Subscriptions on Routes fire when the route value changes.
 ### enter
 
 Enter the route from a former one.
+All parent routes up to the common ancestor are also entered.
 
 #### Parameters
 
@@ -508,6 +528,7 @@ Enter the route from a former one.
 ### leave
 
 Leave the route to a new one.
+All parent routes up to the common ancestor are also left.
 
 #### Parameters
 
@@ -549,6 +570,7 @@ Returns **(Route | [undefined](https://developer.mozilla.org/docs/Web/JavaScript
 ### objectFor
 
 Deliver object for a given set of properties.
+Default implemantation asks the parent route.
 
 #### Parameters
 
