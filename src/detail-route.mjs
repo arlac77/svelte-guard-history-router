@@ -1,7 +1,7 @@
 import { ObjectStoreRoute } from "./routes.mjs";
 
 /**
- * Route to represent a slice of the prarent list of objects.
+ * Route to represent a slice of the prarent list of values.
  * 
  * @property {Route} master route holding the master records
  */

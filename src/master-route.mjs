@@ -1,7 +1,9 @@
 import { SkeletonRoute } from "./routes.mjs";
 
 /**
- * Route holding a ordered collection of objects.
+ * Route holding a ordered collection of values.
+ * 
+ * @property {any[]} value
  */
 export class MasterRoute extends SkeletonRoute {
   constructor(path, options) {
@@ -17,12 +19,12 @@ export class MasterRoute extends SkeletonRoute {
   async enter(transition, untilRoute) {
     await super.enter(transition, untilRoute);
 
-    const entries = [];
+    const values = [];
 
     for await (const e of await this.iteratorFor(transition)) {
-      entries.push(e);
+      values.push(e);
     }
 
-    this.value = entries;
+    this.value = values;
   }
 }

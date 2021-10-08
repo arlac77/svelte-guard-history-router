@@ -4,7 +4,7 @@ const dummyFunction = () => {};
 const dummySet = { size: 0, forEach: dummyFunction };
 
 /**
- *
+ * Default empty guard does nothing.
  */
 const nullGuard = {
   toString: () => "",
