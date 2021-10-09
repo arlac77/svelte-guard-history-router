@@ -156,6 +156,7 @@ npm test
     *   [Parameters](#parameters-17)
 *   [MasterRoute](#masterroute)
     *   [Parameters](#parameters-18)
+    *   [Properties](#properties-3)
 *   [nullGuard](#nullguard)
 *   [RootRoute](#rootroute)
     *   [hasParams](#hasparams)
@@ -164,7 +165,7 @@ npm test
     *   [guard](#guard-1)
 *   [SkeletonRoute](#skeletonroute)
     *   [Parameters](#parameters-19)
-    *   [Properties](#properties-3)
+    *   [Properties](#properties-4)
     *   [enter](#enter-1)
         *   [Parameters](#parameters-20)
     *   [leave](#leave-1)
@@ -179,7 +180,7 @@ npm test
         *   [Parameters](#parameters-25)
 *   [Transition](#transition)
     *   [Parameters](#parameters-26)
-    *   [Properties](#properties-4)
+    *   [Properties](#properties-5)
     *   [start](#start)
     *   [end](#end)
     *   [redirect](#redirect)
@@ -188,7 +189,7 @@ npm test
         *   [Parameters](#parameters-28)
 *   [nameValueStore](#namevaluestore)
     *   [Parameters](#parameters-29)
-    *   [Properties](#properties-5)
+    *   [Properties](#properties-6)
 *   [WaitingGuard](#waitingguard)
     *   [Parameters](#parameters-30)
 
@@ -394,7 +395,7 @@ Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 **Extends ObjectStoreRoute**
 
-Route to represent a slice of the prarent list of objects.
+Route to represent a slice of the prarent list of values.
 
 ### Properties
 
@@ -458,14 +459,20 @@ Execute guards in a parallel.
 
 **Extends SkeletonRoute**
 
-Route holding a ordered collection of objects.
+Route holding a ordered collection of values.
 
 ### Parameters
 
 *   `path`  
 *   `options`  
 
+### Properties
+
+*   `value` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<any>** 
+
 ## nullGuard
+
+Default empty guard does nothing.
 
 ## RootRoute
 
