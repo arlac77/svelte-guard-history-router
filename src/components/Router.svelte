@@ -5,12 +5,16 @@
 
   export let routes = [];
   export let base = "";
+  export let initialized = () => {};
 
   const router = new BaseRouter(routes, base);
 
   setContext(ROUTER, router);
 
-  onMount(() => router.push(router.path));
+  onMount(() => {
+    router.push(router.path);
+    initialized(router);
+  });
 </script>
 
 <slot />
