@@ -66,8 +66,9 @@ class RootRoute {
   enter() {}
   leave() {}
   propertiesFor() {}
-  objectFor() {}
-  async *iteratorFor() {}
+
+
+  valueForTransition(transition) {}
 
   pathFor(object, suffix = "") {
     const properties = this.propertiesFor(object);
@@ -232,12 +233,8 @@ export class SkeletonRoute extends RootRoute {
    * @param {Transition} transition
    * @return {Object} for matching properties
    */
-  objectFor(transition) {
-    return this.parent.objectFor(transition);
-  }
-
-  async *iteratorFor(transition) {
-    yield* this.parent.iteratorFor(transition);
+  valueForTransition(transition) {
+    return this.parent.valueForTransition(transition);
   }
 
   get propertyMapping() {
@@ -252,6 +249,6 @@ export class SkeletonRoute extends RootRoute {
 export class ObjectStoreRoute extends SkeletonRoute {
   async enter(transition, untilRoute) {
     await super.enter(transition, untilRoute);
-    this.value = await this.objectFor(transition);
+    this.value = await this.valueForTransition(transition);
   }
 }

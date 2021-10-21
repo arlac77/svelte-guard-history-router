@@ -72,19 +72,19 @@ test("route guard", async t => {
   t.deepEqual(parentGuardEntered, transition);
 });
 
-test("route objectFor", t => {
+test("route valueForTransition", t => {
   const object = { x: 77 };
 
   const parent = new SkeletonRoute("/a", {
-    objectFor: properties => {
+    valueForTransition: properties => {
       return object;
     }
   });
 
   const route = new SkeletonRoute("/b", { parent });
 
-  t.deepEqual(route.objectFor({ repository: "repo1" }), object);
-  t.deepEqual(parent.objectFor({ repository: "repo1" }), object);
+  t.deepEqual(route.valueForTransition({ repository: "repo1" }), object);
+  t.deepEqual(parent.valueForTransition({ repository: "repo1" }), object);
 });
 
 test("route objectInstance", t => {

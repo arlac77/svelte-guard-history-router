@@ -15,7 +15,7 @@ globalThis.history = dom.window.history;
 function mdSetup() {
   const values = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
   const master = new MasterRoute("/master", {
-    iteratorFor: transition => {
+    valueForTransition: transition => {
       return values;
     },
     propertyMapping: { did: "id" }
@@ -63,6 +63,6 @@ test("master / detail objectFor", async t => {
 
   await transition.start();
 
-  t.is(await master.objectFor(transition), undefined);
-  t.is(await detail.objectFor(transition), values[1]);
+  t.is(await master.valueForTransition(transition), undefined);
+  t.is(await detail.valueForTransition(transition), values[1]);
 });

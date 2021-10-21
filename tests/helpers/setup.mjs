@@ -62,7 +62,7 @@ export function setupRoutes() {
   const master = new MasterRoute("/master", {
     component: Component("MasterComponent"),
     objectInstance: Master,
-    iteratorFor: () => model
+    valueForTransition: () => model
   });
 
   const detail = new DetailRoute("/:detail", {
@@ -70,13 +70,13 @@ export function setupRoutes() {
     component: Component("DetailComponent"),
     objectInstance: Detail,
     propertyMapping: { detail: "id" },
-    iteratorFor: async function* (transition) {
-      for await (const d of this.parent.iteratorFor(transition)) {
+  /*  valueForTransition: async function* (transition) {
+      for await (const d of this.parent.valueForTransition(transition)) {
         if (d.id === transition.params.detail) {
           yield* d.leafs;
         }
       }
-    }
+    }*/
   });
 
   const filler = new SkeletonRoute("/filler", { parent: detail });

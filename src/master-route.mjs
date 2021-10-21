@@ -21,7 +21,7 @@ export class MasterRoute extends SkeletonRoute {
 
     const values = [];
 
-    for await (const e of await this.iteratorFor(transition)) {
+    for await (const e of await this.valueForTransition(transition)) {
       values.push(e);
     }
 

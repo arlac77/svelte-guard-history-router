@@ -73,7 +73,7 @@
         <Route
           path="/article"
           factory={MasterRoute}
-          iteratorFor={articleIterator}
+          valueForTransition={articleIterator}
           guard={[enshureSession, waitingGuard]}
           component={Articles}>
           Articles
@@ -89,7 +89,7 @@
         <Route
           path="/category"
           factory={MasterRoute}
-          iteratorFor={categoryIterator}
+          valueForTransition={categoryIterator}
           guard={[enshureSession, waitingGuard]}
           component={Categories}>
           Categories
