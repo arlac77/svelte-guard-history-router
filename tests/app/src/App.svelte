@@ -62,7 +62,7 @@
   }
 </script>
 
-<Router>
+<Router initialized={(router=> console.log(router))}>
   <nav>
     <Route href="/" path="*" component={Home}>Router Example</Route>
     <ul class="left">
