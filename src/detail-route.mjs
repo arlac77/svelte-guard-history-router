@@ -35,15 +35,16 @@ export class DetailRoute extends ObjectStoreRoute {
 
   async next() {
     const i = this.master.value.indexOf(this.value);
+
     if (i >= 0) {
       return this.master.value[i + 1];
     }
   }
 
-  async valueForTransition(transition) {
+  async * valueForTransition(transition) {
     for await (const object of this.master.valueForTransition(transition)) {
       if (this.matches(object, transition.params)) {
-        return object;
+        yield object;
       }
     }
   }
