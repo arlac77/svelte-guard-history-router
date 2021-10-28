@@ -67,7 +67,6 @@ class RootRoute {
   leave() {}
   propertiesFor() {}
 
-
   valueForTransition(transition) {}
 
   pathFor(object, suffix = "") {
@@ -249,6 +248,11 @@ export class SkeletonRoute extends RootRoute {
 export class ObjectStoreRoute extends SkeletonRoute {
   async enter(transition, untilRoute) {
     await super.enter(transition, untilRoute);
-    this.value = await this.valueForTransition(transition);
+
+    let value;
+    for await( value of this.valueForTransition(transition)) {
+    }
+
+    this.value = value;
   }
 }
