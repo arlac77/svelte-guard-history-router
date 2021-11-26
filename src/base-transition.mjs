@@ -14,12 +14,13 @@ export class BaseTransition {
   }
 
   /**
-   * Add another tarnsition nesting level.
+   * Add another transition nesting level.
    * Starts a transition from the given factory.
    * @param {string} path
    * @param {Transition} factory 
    */
   async nest(path, factory) {
+    await this.abort();
     this.nested = new factory(this, path);
     return this.nested.start();
   }
