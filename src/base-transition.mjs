@@ -20,7 +20,9 @@ export class BaseTransition {
    * @param {Transition} factory 
    */
   async nest(path, factory) {
-    await this.abort();
+    if(this.nested) {
+      await this.nested.abort();
+    }
     this.nested = new factory(this, path);
     return this.nested.start();
   }
