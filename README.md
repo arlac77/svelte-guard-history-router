@@ -368,7 +368,7 @@ Returns **URLSearchParams** as extracted from the path
 
 ### nest
 
-Add another tarnsition nesting level.
+Add another transition nesting level.
 Starts a transition from the given factory.
 
 #### Parameters
