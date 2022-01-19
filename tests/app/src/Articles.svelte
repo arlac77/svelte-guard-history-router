@@ -1,5 +1,5 @@
 <script>
-  import {onMount } from "svelte";
+  import { onMount } from "svelte";
   import { ObjectLink } from "../../../src/index.svelte";
 
   export let router;
@@ -7,14 +7,18 @@
   const route = router.route;
   const articles = route.value;
   let filter;
+  let searchParams;
 
   onMount(() => {
-    filter = router.searchParams.get('q');
+    searchParams = router.searchParams;
+    filter = searchParams.get("q");
   });
 
   $: {
     if (filter && filter.length > 0) {
-      router.push(router.path.replace(/\?.*/,'') + "?q=" + filter);
+      searchParams.set("q", filter);
+      router.push(router.path.replace(/\?.*/, "") + `?${searchParams}`);
+      // router.searchParams = searchParams;
     }
   }
 </script>

@@ -2,7 +2,6 @@
  *
  */
 export class BaseTransition {
-
   /**
    * Deliver url search params form the current location.
    * @return {URLSearchParams} as extracted from the path
@@ -13,23 +12,31 @@ export class BaseTransition {
     return new URLSearchParams(i >= 0 ? path.substring(i + 1) : undefined);
   }
 
+    /**
+   * replaces the search part of the path with the given searchParams
+   * @param {URLSearchParams} searchParams
+   */
+  set searchParams(searchParams) {
+    const path = this.path;
+    const i = path.indexOf("?");
+    this.path = (i >= 0 ? path.substring(i + 1) : path) + `?${searchParams}`;
+  }
+
   /**
    * Add another transition nesting level.
    * Starts a transition from the given factory.
    * @param {string} path
-   * @param {Transition} factory 
+   * @param {Transition} factory
    */
   async nest(path, factory) {
-    if(this.nested) {
+    if (this.nested) {
       await this.nested.abort();
     }
     this.nested = new factory(this, path);
     return this.nested.start();
   }
 
-  async start()
-  {
-  }
+  async start() {}
 
   /**
    * Continue a nested route to its original destination.
@@ -51,7 +58,7 @@ export class BaseTransition {
    * @return {boolean} truen in case there was a nesten transition
    */
   async abort(error) {
-    if(error) {
+    if (error) {
       console.error(error);
     }
 
