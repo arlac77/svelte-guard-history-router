@@ -128,15 +128,6 @@ export class BaseRouter extends BaseTransition {
     return this.route ? this.route.value : undefined;
   }
 
-  /**
-   *
-   * @return {string} url path with fragment & query
-   */
-  get path() {
-    const l = window.location;
-    return decodeURI(l.href.slice(l.origin.length + this.base.length));
-  }
-
   get state() {
     return {
       params: { ...this.params },
@@ -150,6 +141,24 @@ export class BaseRouter extends BaseTransition {
   }
 
   /**
+   *
+   * @return {string} url path with fragment & query
+   */
+  get path() {
+    const l = window.location;
+    return decodeURI(l.href.slice(l.origin.length + this.base.length));
+  }
+
+  /**
+   * Replace current route.
+   * @param {string} path
+   */
+   set path(path) {
+    this.state = matcher(this.routes, decodeURI(path));
+    history.replaceState(undefined, undefined, this.base + path);
+  }
+
+  /**
    * Replace current route.
    * @param {string} path
    * @return {Object} former state
@@ -157,9 +166,7 @@ export class BaseRouter extends BaseTransition {
   replace(path) {
     const formerState = this.state;
 
-    this.state = matcher(this.routes, decodeURI(path));
-
-    history.replaceState(undefined, undefined, this.base + path);
+    this.path = path;
 
     return formerState;
   }

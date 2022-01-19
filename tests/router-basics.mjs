@@ -36,18 +36,23 @@ test.serial("push encoded path", async t => {
   t.is(router.searchParams.get("q"), "a");
 });
 
+test.serial("router set path", async t => {
+  const router = new BaseRouter([new MasterRoute("/aRoute")], "");
+  router.path = "/aRoute";
+  t.is(router.path, "/aRoute");
+  t.is(router.state.route.path, "/aRoute");
+});
+
 test.serial("router replace", async t => {
   const router = new BaseRouter([new MasterRoute("/aRoute")], "");
   await router.replace("/aRoute");
-
-  t.is(router.state.route.path, "/aRoute");
   t.is(router.path, "/aRoute");
+  t.is(router.state.route.path, "/aRoute");
 });
 
 test.serial("replace encoded path", async t => {
   const router = new BaseRouter([new MasterRoute("/other spaces")], "");
   await router.replace("/other%20spaces?q=a");
-
   t.is(router.state.route.path, "/other spaces");
   t.is(router.path, "/other spaces?q=a");
   t.is(router.searchParams.get("q"), "a");
