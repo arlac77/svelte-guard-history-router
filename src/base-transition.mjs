@@ -12,6 +12,16 @@ export class BaseTransition {
     return new URLSearchParams(i >= 0 ? path.substring(i + 1) : undefined);
   }
 
+    /**
+   * replaces the search part of the path with the given searchParams
+   * @param {URLSearchParams} searchParams
+   */
+  set searchParams(searchParams) {
+    const path = this.path;
+    const i = path.indexOf("?");
+    this.path = (i >= 0 ? path.substring(i + 1) : path) + `?${searchParams}`;
+  }
+
   /**
    * Replaces the search part of the path with the given searchParams.
    * @param {URLSearchParams} searchParams
@@ -29,7 +39,7 @@ export class BaseTransition {
    * @param {Transition} factory
    */
   async nest(path, factory) {
-    if(this.nested) {
+    if (this.nested) {
       await this.nested.abort();
     }
     this.nested = new factory(this, path);
