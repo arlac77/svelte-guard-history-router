@@ -112,86 +112,90 @@ npm test
     *   [component](#component)
     *   [value](#value)
     *   [path](#path)
-    *   [replace](#replace)
+    *   [path](#path-1)
         *   [Parameters](#parameters-1)
-    *   [push](#push)
+    *   [replace](#replace)
         *   [Parameters](#parameters-2)
-    *   [finalizePush](#finalizepush)
+    *   [push](#push)
         *   [Parameters](#parameters-3)
-    *   [continue](#continue)
+    *   [finalizePush](#finalizepush)
         *   [Parameters](#parameters-4)
-    *   [abort](#abort)
+    *   [continue](#continue)
         *   [Parameters](#parameters-5)
-    *   [subscribe](#subscribe)
+    *   [abort](#abort)
         *   [Parameters](#parameters-6)
-    *   [updateActive](#updateactive)
+    *   [subscribe](#subscribe)
         *   [Parameters](#parameters-7)
-    *   [addRoute](#addroute)
+    *   [updateActive](#updateactive)
         *   [Parameters](#parameters-8)
-    *   [routeFor](#routefor)
+    *   [addRoute](#addroute)
         *   [Parameters](#parameters-9)
-    *   [pathFor](#pathfor)
+    *   [routeFor](#routefor)
         *   [Parameters](#parameters-10)
+    *   [pathFor](#pathfor)
+        *   [Parameters](#parameters-11)
 *   [BaseTransition](#basetransition)
     *   [searchParams](#searchparams)
+    *   [searchParams](#searchparams-1)
+        *   [Parameters](#parameters-12)
     *   [nest](#nest)
-        *   [Parameters](#parameters-11)
+        *   [Parameters](#parameters-13)
     *   [continue](#continue-1)
     *   [abort](#abort-1)
-        *   [Parameters](#parameters-12)
+        *   [Parameters](#parameters-14)
 *   [DetailRoute](#detailroute)
     *   [Properties](#properties-2)
     *   [first](#first)
     *   [last](#last)
 *   [Guard](#guard)
     *   [enter](#enter)
-        *   [Parameters](#parameters-13)
+        *   [Parameters](#parameters-15)
     *   [leave](#leave)
-        *   [Parameters](#parameters-14)
+        *   [Parameters](#parameters-16)
 *   [redirectGuard](#redirectguard)
-    *   [Parameters](#parameters-15)
-*   [sequenceGuard](#sequenceguard)
-    *   [Parameters](#parameters-16)
-*   [parallelGuard](#parallelguard)
     *   [Parameters](#parameters-17)
-*   [MasterRoute](#masterroute)
+*   [sequenceGuard](#sequenceguard)
     *   [Parameters](#parameters-18)
+*   [parallelGuard](#parallelguard)
+    *   [Parameters](#parameters-19)
+*   [MasterRoute](#masterroute)
+    *   [Parameters](#parameters-20)
     *   [Properties](#properties-3)
 *   [nullGuard](#nullguard)
 *   [RootRoute](#rootroute)
     *   [hasParams](#hasparams)
-    *   [path](#path-1)
+    *   [path](#path-2)
     *   [propertyMapping](#propertymapping)
     *   [guard](#guard-1)
 *   [SkeletonRoute](#skeletonroute)
-    *   [Parameters](#parameters-19)
+    *   [Parameters](#parameters-21)
     *   [Properties](#properties-4)
     *   [enter](#enter-1)
-        *   [Parameters](#parameters-20)
-    *   [leave](#leave-1)
-        *   [Parameters](#parameters-21)
-    *   [matches](#matches)
         *   [Parameters](#parameters-22)
-    *   [propertiesFor](#propertiesfor)
+    *   [leave](#leave-1)
         *   [Parameters](#parameters-23)
-    *   [commonAncestor](#commonancestor)
+    *   [matches](#matches)
         *   [Parameters](#parameters-24)
-    *   [objectFor](#objectfor)
+    *   [propertiesFor](#propertiesfor)
         *   [Parameters](#parameters-25)
+    *   [commonAncestor](#commonancestor)
+        *   [Parameters](#parameters-26)
+    *   [objectFor](#objectfor)
+        *   [Parameters](#parameters-27)
 *   [Transition](#transition)
-    *   [Parameters](#parameters-26)
+    *   [Parameters](#parameters-28)
     *   [Properties](#properties-5)
     *   [start](#start)
     *   [end](#end)
     *   [redirect](#redirect)
-        *   [Parameters](#parameters-27)
+        *   [Parameters](#parameters-29)
     *   [abort](#abort-2)
-        *   [Parameters](#parameters-28)
+        *   [Parameters](#parameters-30)
 *   [nameValueStore](#namevaluestore)
-    *   [Parameters](#parameters-29)
+    *   [Parameters](#parameters-31)
     *   [Properties](#properties-6)
 *   [WaitingGuard](#waitingguard)
-    *   [Parameters](#parameters-30)
+    *   [Parameters](#parameters-32)
 
 ## Key
 
@@ -257,6 +261,14 @@ Returns **any**
 ### path
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** url path with fragment & query
+
+### path
+
+Replace current route.
+
+#### Parameters
+
+*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 ### replace
 
@@ -365,6 +377,14 @@ Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 Deliver url search params form the current location.
 
 Returns **URLSearchParams** as extracted from the path
+
+### searchParams
+
+replaces the search part of the path with the given searchParams
+
+#### Parameters
+
+*   `searchParams` **URLSearchParams** 
 
 ### nest
 
