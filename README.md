@@ -380,7 +380,7 @@ Returns **URLSearchParams** as extracted from the path
 
 ### searchParams
 
-replaces the search part of the path with the given searchParams
+Replaces the search part of the path with the given searchParams.
 
 #### Parameters
 
