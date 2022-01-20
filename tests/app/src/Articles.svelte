@@ -17,8 +17,8 @@
   $: {
     if (filter && filter.length > 0) {
       searchParams.set("q", filter);
-      router.push(router.path.replace(/\?.*/, "") + `?${searchParams}`);
-      // router.searchParams = searchParams;
+      router.searchParams = searchParams;
+      //route.emit();
     }
   }
 </script>
