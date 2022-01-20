@@ -119,7 +119,7 @@ export class SkeletonRoute extends RootRoute {
       value: {
         set: v => {
           value = v;
-          this.subscriptions.forEach(subscription => subscription(this));
+          this.emit();
         },
         get: () => value
       },
@@ -131,6 +131,11 @@ export class SkeletonRoute extends RootRoute {
     });
 
     this.subscriptions = dummySet;
+  }
+
+  emit()
+  {
+    this.subscriptions.forEach(subscription => subscription(this));
   }
 
   /**

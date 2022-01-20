@@ -153,7 +153,7 @@ export class BaseRouter extends BaseTransition {
    * Replace current route.
    * @param {string} path
    */
-   set path(path) {
+  set path(path) {
     this.state = matcher(this.routes, decodeURI(path));
     history.replaceState(undefined, undefined, this.base + path);
   }
