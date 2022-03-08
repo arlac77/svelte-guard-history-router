@@ -44,13 +44,13 @@
     "mf-styling": "arlac77/mf-styling",
     "postcss": "^8.4.8",
     "postcss-import": "^14.0.2",
-    "rollup": "^2.69.2",
+    "rollup": "^2.70.0",
     "rollup-plugin-dev": "^2.0.1",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-svelte": "^7.1.0",
     "semantic-release": "^19.0.2",
     "svelte": "^3.46.4",
-    "testcafe": "^15.1.317922"
+    "testcafe": "^1.18.4"
   },
   "repository": {
     "type": "git",
