@@ -10,3 +10,4 @@ doc
 .github
 netlify.toml
 jsconfig.json
+.node-version
