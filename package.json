@@ -41,7 +41,7 @@
     "c8": "^7.11.2",
     "documentation": "^13.2.5",
     "jsdom": "^19.0.0",
-    "mf-styling": "^1.0.14",
+    "mf-styling": "^1.2.4",
     "postcss": "^8.4.13",
     "postcss-import": "^14.1.0",
     "rollup": "^2.73.0",
