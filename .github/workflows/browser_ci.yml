@@ -27,6 +27,9 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: build/coverage/lcov.info
+      - run: npm cit
+        env:
+          BROWSER: ${{ matrix.browser }}
       - uses: actions/upload-artifact@v3
         with:
           path: ${{ github.workspace }}/build/test/**/*
