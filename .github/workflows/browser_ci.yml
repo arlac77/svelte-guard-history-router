@@ -18,19 +18,14 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: npm
-      - run: npm run cover --if-present
-      - uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: build/coverage/lcov.info
       - run: npm cit
         env:
           BROWSER: ${{ matrix.browser }}
       - uses: actions/upload-artifact@v3
         with:
+          name: screenshots
           path: ${{ github.workspace }}/build/test/**/*
           retention-days: 3
-          name: screenshots
         if: always()
   release:
     needs:
