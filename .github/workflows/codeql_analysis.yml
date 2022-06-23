@@ -12,17 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - run: git checkout
         if: ${{ github.event_name == 'pull_request' }}
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v1
+        uses: github/codeql-action/init@v2
         with:
           languages: javascript
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3.3.0
         with:
-          node-version: 16.12.0
+          node-version: 18.4.0
           cache: npm
       - run: npm install
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v1
+        uses: github/codeql-action/analyze@v2
+      - run: npm ci
