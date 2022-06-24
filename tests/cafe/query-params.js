@@ -1,7 +1,7 @@
 import { Selector } from "testcafe";
 import { base, login } from "./helpers/util.js";
 
-fixture`Query Params`.page`${base}/article?q=Pizza`;
+fixture`Query Params`.page`${base}article?q=Pizza`;
 
 test("query params extracted", async t => {
   const title = Selector(".routetitle");
