@@ -56,6 +56,28 @@
     "url": "https://github.com/arlac77/svelte-guard-history-router/issues"
   },
   "homepage": "https://github.com/arlac77/svelte-guard-history-router#readme",
+  "pkgbuild": {
+    "content": {
+      "${install.dir}": "build/",
+      "${nginx.sites.dir}${name}.conf": "pkg/nginx.conf"
+    },
+    "hooks": "pkg/hooks.sh",
+    "groups": "web"
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      [
+        "@semantic-release/exec",
+        {
+          "publishCmd": "npx npm-pkgbuild --available --continue --verbose"
+        }
+      ],
+      "@semantic-release/github"
+    ]
+  },
   "template": {
     "properties": {
       "netlifly": {
