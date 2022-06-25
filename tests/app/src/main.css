@@ -9,6 +9,6 @@
 @import "mf-styling/src/card.css";
 
 .current {
-    background-color: var(--color-accent-300);
-    font-weight: bold;
+  background-color: var(--color-accent-300);
+  font-weight: bold;
 }

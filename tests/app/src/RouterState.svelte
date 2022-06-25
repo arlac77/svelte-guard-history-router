@@ -15,7 +15,9 @@
       {#if $router.nested !== undefined}
         <tr>
           <td id="route.path">{$router.nested.path}</td>
-          <td id="route.nested">{$router.nested.nested ? $router.route.path : ''}</td>
+          <td id="route.nested"
+            >{$router.nested.nested ? $router.route.path : ""}</td
+          >
         </tr>
       {/if}
     </tbody>
@@ -31,10 +33,10 @@
     </thead>
     <tbody>
       {#each router.routes as r, i (i)}
-        <tr class={r === $router.route ? 'current' : ''}>
+        <tr class={r === $router.route ? "current" : ""}>
           <td id="route.path">{r.path}</td>
           <td id="route.guard">{r.guard}</td>
-          <td id="route.keys">{r.keys.join(' ')}</td>
+          <td id="route.keys">{r.keys.join(" ")}</td>
           <td id="route.component">{r.component.name}</td>
           <td id="route.subscriptions">{r.subscriptions.size}</td>
         </tr>
@@ -67,7 +69,7 @@
         <tr>
           <td id="state.key.{key.name}">{key.name}</td>
           <td id="state.key.{key.name}.value">
-            {key.value !== undefined ? key.value : ''}
+            {key.value !== undefined ? key.value : ""}
           </td>
           <td id="state.key.{key.name}.subscriptions">
             {key.subscriptions.size}
