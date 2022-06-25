@@ -15,6 +15,6 @@ async function doit() {
   await leaf.enter(transition);
 
   console.log(leafValue);
-};
+}
 
 doit();

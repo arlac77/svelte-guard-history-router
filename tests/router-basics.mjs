@@ -58,7 +58,6 @@ test.serial("replace encoded path", async t => {
   t.is(router.searchParams.get("q"), "a");
 });
 
-
 test.serial("replace set searchParams", async t => {
   const router = new BaseRouter([new MasterRoute("/other spaces")], "");
   router.path = "/other%20spaces?q=a";
@@ -67,7 +66,7 @@ test.serial("replace set searchParams", async t => {
 
   const searchParams = router.searchParams;
 
-  searchParams.set("q","b");
+  searchParams.set("q", "b");
 
   router.searchParams = searchParams;
   t.is(router.path, "/other spaces?q=b");
