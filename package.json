@@ -37,6 +37,9 @@
     "multi-path-matcher": "^2.1.13"
   },
   "devDependencies": {
+    "@semantic-release/commit-analyzer": "^9.0.2",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/release-notes-generator": "^10.0.3",
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.49",
     "ava": "^4.3.0",
     "c8": "^7.11.3",
@@ -93,6 +96,7 @@
       "arlac77/template-arlac77-github",
       "arlac77/template-ava-coverage",
       "arlac77/template-cloudflare",
+      "arlac77/template-pacman",
       "arlac77/template-svelte-component#next"
     ]
   }
