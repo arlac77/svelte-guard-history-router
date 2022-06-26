@@ -80,7 +80,7 @@ test("navigate around", async t => {
 
   //console.log(await getLocation());
 
-  await t.navigateTo(`${base}/article`);
+  await t.navigateTo(`${base}article`);
 
   //console.log(await getLocation());
 
