@@ -11,3 +11,4 @@ doc
 netlify.toml
 jsconfig.json
 .node-version
+pkg
