@@ -36,9 +36,6 @@
   "dependencies": {
     "multi-path-matcher": "^2.1.13"
   },
-  "optionalDependencies": {
-    "mf-hosting": "^1.6.3"
-  },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.49",
     "ava": "^4.3.0",
@@ -51,6 +48,9 @@
     "svelte": "^3.48.0",
     "testcafe": "^1.19.0",
     "vite": "^2.9.12"
+  },
+  "optionalDependencies": {
+    "mf-hosting": "^1.6.3"
   },
   "repository": {
     "type": "git",
