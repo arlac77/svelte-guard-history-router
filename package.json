@@ -65,7 +65,6 @@
       "${install.dir}": "build/",
       "${nginx.sites.dir}${name}.conf": "pkg/nginx.conf"
     },
-    "hooks": "pkg/hooks.sh",
     "groups": "web"
   },
   "release": {
