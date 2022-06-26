@@ -24,6 +24,7 @@
   import Waiting from "./Waiting.svelte";
   import { articles, categories } from "./data.js";
   import { session } from "./session.mjs";
+  import { base } from "./constants.mjs";
 
   let showState = true;
 
@@ -62,7 +63,7 @@
   }
 </script>
 
-<Router initialized={(router=> console.log(router))}>
+<Router {base}>
   <nav>
     <Route href="/" path="*" component={Home}>Router Example</Route>
     <ul class="left">
