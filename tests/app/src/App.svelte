@@ -1,5 +1,4 @@
 <script>
-  import * as style from "./main.css";
   import {
     Router,
     Route,
@@ -26,7 +25,12 @@
   import { session } from "./session.mjs";
   import { base } from "./constants.mjs";
 
-  let showState = true;
+  let showState =
+    localStorage.showState === undefined ? true : localStorage.showState;
+
+  $: {
+    localStorage.showState = showState;
+  }
 
   const waitingGuard = new WaitingGuard(Waiting);
   const enshureSession = redirectGuard("/login", () => !session);
@@ -76,14 +80,16 @@
           factory={MasterRoute}
           iteratorFor={articleIterator}
           guard={[enshureSession, waitingGuard]}
-          component={Articles}>
+          component={Articles}
+        >
           Articles
           <Route
             path="/:article"
             factory={DetailRoute}
-            propertyMapping={{ article: 'id' }}
+            propertyMapping={{ article: "id" }}
             linkComponent={ArticleLink}
-            component={Article} />
+            component={Article}
+          />
         </Route>
       </li>
       <li>
@@ -92,14 +98,16 @@
           factory={MasterRoute}
           iteratorFor={categoryIterator}
           guard={[enshureSession, waitingGuard]}
-          component={Categories}>
+          component={Categories}
+        >
           Categories
           <Route
             path="/:category"
             factory={DetailRoute}
-            propertyMapping={{ category: 'cid' }}
+            propertyMapping={{ category: "cid" }}
             linkComponent={NamedObjectLink}
-            component={Category} />
+            component={Category}
+          />
         </Route>
       </li>
       <li>
