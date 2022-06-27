@@ -1,6 +1,5 @@
 build
 tests
-rollup.config.*
 doc
 *.log
 *.tmp
@@ -12,3 +11,4 @@ netlify.toml
 jsconfig.json
 .node-version
 pkg
+vite.config.js
