@@ -25,9 +25,11 @@
   import { session } from "./session.mjs";
   import { base } from "./constants.mjs";
 
+  let articleDelay = localStorage.articleDelay === undefined ? 800 : parseInt(localStorage.articleDelay);
+  let categoryDelay = localStorage.categoryDelay === undefined ? 600 : parseInt(localStorage.categoryDelay);
   let showState =
     localStorage.showState === undefined ? true : localStorage.showState;
-
+  
   $: {
     localStorage.showState = showState;
   }
@@ -49,7 +51,7 @@
     const v = transition.searchParams.get("q");
     const q = v ? new RegExp(v, "i") : /.*/;
 
-    await delay(800);
+    await delay(articleDelay);
 
     for (const a of Object.values(articles)) {
       if (a.name.match(q)) {
@@ -59,7 +61,7 @@
   }
 
   async function* categoryIterator(transition) {
-    await delay(600);
+    await delay(categoryDelay);
 
     for (const c of Object.values(categories)) {
       yield c;
