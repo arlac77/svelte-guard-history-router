@@ -41,8 +41,6 @@ export class DetailRoute extends ObjectStoreRoute {
   }
 
   async objectFor(transition) {
-   // return this.master.detailObjectFor(transition);
-
     for await (const object of this.master.iteratorFor(transition)) {
       if (this.matches(object, transition.params)) {
         return object;

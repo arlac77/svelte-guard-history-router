@@ -16,10 +16,19 @@ export class BaseTransition {
    * Replaces the search part of the path with the given searchParams.
    * @param {URLSearchParams} searchParams
    */
-  set searchParams(searchParams) {
-    const path = this.path;
+  set searchParams(searchParams) {  
+    let path = this.path;
     const i = path.indexOf("?");
-    this.path = (i >= 0 ? path.substring(0, i) : path) + `?${searchParams}`;
+
+    if(i >= 0) {
+      path = path.substring(0, i);
+    }
+    
+    if(!searchParams.keys().next().done) {
+      path += `?${searchParams}`;
+    }
+
+    this.path = path;
   }
 
   /**
