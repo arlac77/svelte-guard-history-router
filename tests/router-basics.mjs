@@ -72,7 +72,7 @@ test.serial("replace set searchParams", async t => {
   t.is(router.path, "/other spaces?q=b");
 });
 
-test.serial("replace set searchParams empty", async t => {
+test.serial("delete searchParams empty", async t => {
   const router = new BaseRouter([new MasterRoute("/other spaces")], "");
   router.path = "/other%20spaces?q=a";
 
