@@ -11,9 +11,8 @@ export class MasterRoute extends SkeletonRoute {
     this.value = [];
   }
 
-  propertiesFor(object)
+  propertiesFor(value)
   {
-    return undefined;
   }
 
   async enter(transition, untilRoute) {

@@ -66,11 +66,11 @@ class RootRoute {
   enter() {}
   leave() {}
   propertiesFor() {}
-  objectFor() {}
+  valueFor() {}
   async *iteratorFor() {}
 
-  pathFor(object, suffix = "") {
-    const properties = this.propertiesFor(object);
+  pathFor(value, suffix = "") {
+    const properties = this.propertiesFor(value);
     return this.path.replace(/:(\w+)/g, (m, name) => properties[name]) + suffix;
   }
 }
@@ -165,15 +165,15 @@ export class SkeletonRoute extends RootRoute {
   }
 
   /**
-   * Check properties against object.
+   * Check properties against value.
    * @param {Object} object
    * @param {Object} properties
    * @return {boolean} true if object properties are matching with the given proerties
    */
-  matches(object, properties) {
-    if (object instanceof this.objectInstance) {
+  matches(value, properties) {
+    if (value instanceof this.objectInstance) {
       for (const [p, n] of Object.entries(this.propertyMapping)) {
-        if (ref(object, n) !== properties[p]) {
+        if (ref(value, n) !== properties[p]) {
           return false;
         }
       }
@@ -185,15 +185,15 @@ export class SkeletonRoute extends RootRoute {
   /**
    * Extract properties from object.
    * All property values are strings.
-   * @param {Object} object source of the values
+   * @param {any} value source of the values
    * @return {Object|undefined} properties extracted from given object
    */
-  propertiesFor(object) {
-    let properties = this.parent.propertiesFor(object);
+  propertiesFor(value) {
+    let properties = this.parent.propertiesFor(value);
 
-    if (object instanceof this.objectInstance) {
+    if (value instanceof this.objectInstance) {
       for (const [p, n] of Object.entries(this.propertyMapping)) {
-        const v = ref(object, n);
+        const v = ref(value, n);
         if (v === undefined) {
           return undefined;
         }
@@ -232,13 +232,13 @@ export class SkeletonRoute extends RootRoute {
   }
 
   /**
-   * Deliver object for a given set of properties.
+   * Deliver value for a given set of properties of the transition.
    * Default implemantation asks the parent route.
    * @param {Transition} transition
-   * @return {Object} for matching properties
+   * @return {any} for matching properties
    */
-  objectFor(transition) {
-    return this.parent.objectFor(transition);
+  valueFor(transition) {
+    return this.parent.valueFor(transition);
   }
 
   async *iteratorFor(transition) {
@@ -262,9 +262,9 @@ export class SkeletonRoute extends RootRoute {
   }
 }
 
-export class ObjectStoreRoute extends SkeletonRoute {
+export class ValueStoreRoute extends SkeletonRoute {
   async enter(transition, untilRoute) {
     await super.enter(transition, untilRoute);
-    this.value = await this.objectFor(transition);
+    this.value = await this.valueFor(transition);
   }
 }

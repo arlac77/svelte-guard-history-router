@@ -1,11 +1,11 @@
-import { ObjectStoreRoute } from "./routes.mjs";
+import { ValueStoreRoute } from "./routes.mjs";
 
 /**
  * Route to represent a slice of the prarent list of values.
  * 
  * @property {Route} master route holding the master records
  */
-export class DetailRoute extends ObjectStoreRoute {
+export class DetailRoute extends ValueStoreRoute {
 
   get master()
   {
@@ -40,7 +40,7 @@ export class DetailRoute extends ObjectStoreRoute {
     }
   }
 
-  async objectFor(transition) {
+  async valueFor(transition) {
     for await (const object of this.master.iteratorFor(transition)) {
       if (this.matches(object, transition.params)) {
         return object;

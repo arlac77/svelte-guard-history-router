@@ -1,6 +1,6 @@
 <script context="module">
   export { BaseRouter } from "./base-router.mjs";
-  export { SkeletonRoute, ObjectStoreRoute } from "./routes.mjs";
+  export { SkeletonRoute, ValueStoreRoute } from "./routes.mjs";
   export { MasterRoute } from "./master-route.mjs";
   export { DetailRoute } from "./detail-route.mjs";
   export { Transition } from "./transition.mjs";

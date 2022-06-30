@@ -55,7 +55,7 @@ test("DetailRoute first, last, next, previous", async t => {
   t.is(await detail.next(), values[1]);
 });
 
-test("master / detail objectFor", async t => {
+test("master / detail valueFor", async t => {
   const { router, master, detail, values } = mdSetup();
 
   const transition = new Transition(router, "/master/2");
@@ -63,6 +63,6 @@ test("master / detail objectFor", async t => {
 
   await transition.start();
 
-  t.is(await master.objectFor(transition), undefined);
-  t.is(await detail.objectFor(transition), values[1]);
+  t.is(await master.valueFor(transition), undefined);
+  t.is(await detail.valueFor(transition), values[1]);
 });

@@ -179,7 +179,7 @@ npm test
         *   [Parameters](#parameters-25)
     *   [commonAncestor](#commonancestor)
         *   [Parameters](#parameters-26)
-    *   [objectFor](#objectfor)
+    *   [valueFor](#valueFor)
         *   [Parameters](#parameters-27)
 *   [Transition](#transition)
     *   [Parameters](#parameters-28)
@@ -412,7 +412,7 @@ Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 ## DetailRoute
 
-**Extends ObjectStoreRoute**
+**Extends ValueStoreRoute**
 
 Route to represent a slice of the prarent list of values.
 
@@ -593,7 +593,7 @@ Find common ancestor with an other Route.
 
 Returns **(Route | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** common ancestor Route between receiver and other
 
-### objectFor
+### valueFor
 
 Deliver object for a given set of properties.
 Default implemantation asks the parent route.
