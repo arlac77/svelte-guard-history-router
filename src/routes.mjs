@@ -245,10 +245,18 @@ export class SkeletonRoute extends RootRoute {
     yield* this.parent.iteratorFor(transition);
   }
 
+  /**
+   * Deliver property mapping.
+   * Default implemantation asks the parent route.
+   * @return {Object} for matching properties
+   */
   get propertyMapping() {
     return this.parent.propertyMapping;
   }
 
+  /**
+   * Default implemantation asks the parent route.
+   */
   get objectInstance() {
     return this.parent.objectInstance;
   }
