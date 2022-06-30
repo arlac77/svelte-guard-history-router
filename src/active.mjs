@@ -1,5 +1,5 @@
 /**
- * links the note to the active state.
+ * Keeps the the node active state in sync.
  * @see {Router.updateActive}
  * @param {*} node
  * @param {Router} router
