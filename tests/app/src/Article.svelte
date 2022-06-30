@@ -24,7 +24,7 @@
   <div class="card">
     <h2 class="card-title routetitle">Article {article.name} ({article.id})</h2>
 
-    <img src="images/article/{article.id}.jpg" alt={article.name} />
+    <img src="images/article/{article.id}.webp" alt={article.name} />
 
     <div class="card-content">
       <div class="card-title">Price</div>
