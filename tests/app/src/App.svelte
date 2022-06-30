@@ -25,11 +25,17 @@
   import { session } from "./session.mjs";
   import { base } from "./constants.mjs";
 
-  let articleDelay = localStorage.articleDelay === undefined ? 800 : parseInt(localStorage.articleDelay);
-  let categoryDelay = localStorage.categoryDelay === undefined ? 600 : parseInt(localStorage.categoryDelay);
+  let articleDelay =
+    localStorage.articleDelay === undefined
+      ? 800
+      : parseInt(localStorage.articleDelay);
+  let categoryDelay =
+    localStorage.categoryDelay === undefined
+      ? 600
+      : parseInt(localStorage.categoryDelay);
   let showState =
     localStorage.showState === undefined ? true : localStorage.showState;
-  
+
   $: {
     localStorage.showState = showState;
   }

@@ -12,7 +12,7 @@
 <ul>
   {#each categories as category}
     <li>
-      <ObjectLink object={category}/>
+      <ObjectLink object={category} />
     </li>
   {/each}
 </ul>

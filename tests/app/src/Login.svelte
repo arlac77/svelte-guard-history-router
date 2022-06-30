@@ -62,7 +62,8 @@
           name="username"
           size="20"
           required
-          bind:value={username} />
+          bind:value={username}
+        />
       </label>
       <label for="password">
         Password
@@ -73,7 +74,8 @@
           name="password"
           size="20"
           required
-          bind:value={password} />
+          bind:value={password}
+        />
       </label>
       <button id="submit" type="submit" disabled={!username || !password}>
         Login

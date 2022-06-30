@@ -10,15 +10,9 @@
     article = $route.value;
     next = $route.next();
     previous = $route.previous();
-   // console.log("REACTIVE", next, previous);
+    // console.log("REACTIVE", next, previous);
   }
 </script>
-
-<style>
-  .price {
-    font-weight: bold;
-  }
-</style>
 
 {#if article}
   <div class="card">
@@ -53,3 +47,9 @@
 {:else}
   <h2 class="routetitle">No such article</h2>
 {/if}
+
+<style>
+  .price {
+    font-weight: bold;
+  }
+</style>
