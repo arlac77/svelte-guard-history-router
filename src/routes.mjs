@@ -184,7 +184,7 @@ export class SkeletonRoute extends RootRoute {
 
   /**
    * Extract properties from a value.
-   * All property values are strings.
+   * All property values must be strings.
    * @param {any} value source of the values
    * @return {Object|undefined} properties extracted from given value
    */
@@ -262,6 +262,9 @@ export class SkeletonRoute extends RootRoute {
   }
 }
 
+/**
+ * Route holding a single value
+ */
 export class ValueStoreRoute extends SkeletonRoute {
   async enter(transition, untilRoute) {
     await super.enter(transition, untilRoute);

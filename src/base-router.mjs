@@ -267,29 +267,29 @@ export class BaseRouter extends BaseTransition {
   }
 
   /**
-   * Find Route for a given object.
-   * @param {Object} object
-   * @return {Route} able to support given object
+   * Find Route for a given value.
+   * @param {any} value
+   * @return {Route} able to support given value
    */
-  routeFor(object) {
+  routeFor(value) {
     for (let i = this.routes.length - 1; i >= 0; i--) {
       const r = this.routes[i];
-      if (r.propertiesFor(object)) {
+      if (r.propertiesFor(value)) {
         return r;
       }
     }
   }
 
   /**
-   * Find path for a given object.
-   * @param {Object} object
+   * Find path for a given value.
+   * @param {any} value
    * @param {String} suffix to be appended
    * @return {String} path + suffix
    */
-  pathFor(object, suffix) {
-    const route = this.routeFor(object);
+  pathFor(value, suffix) {
+    const route = this.routeFor(value);
     if (route) {
-      return route.pathFor(object, suffix);
+      return route.pathFor(value, suffix);
     }
   }
 }
