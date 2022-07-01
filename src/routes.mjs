@@ -166,9 +166,9 @@ export class SkeletonRoute extends RootRoute {
 
   /**
    * Check properties against value.
-   * @param {Object} object
+   * @param {any} value
    * @param {Object} properties
-   * @return {boolean} true if object properties are matching with the given proerties
+   * @return {boolean} true if value properties are matching with the given properties
    */
   matches(value, properties) {
     if (value instanceof this.objectInstance) {
