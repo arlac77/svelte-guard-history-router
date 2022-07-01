@@ -41,9 +41,9 @@ export class DetailRoute extends ValueStoreRoute {
   }
 
   async valueFor(transition) {
-    for await (const object of this.master.iteratorFor(transition)) {
-      if (this.matches(object, transition.params)) {
-        return object;
+    for await (const value of this.master.iteratorFor(transition)) {
+      if (this.matches(value, transition.params)) {
+        return value;
       }
     }
   }
