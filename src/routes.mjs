@@ -155,7 +155,7 @@ export class SkeletonRoute extends RootRoute {
    * Leave the route to a new one.
    * All parent routes up to the common ancestor are also left.
    * @param {Transition} transition
-   * @param {Route} untilRoute the common ancestor with the next route
+   * @param {Route} untilRoute the common ancestor with the future route
    */
   async leave(transition, untilRoute) {
     if (this !== untilRoute) {
@@ -165,12 +165,12 @@ export class SkeletonRoute extends RootRoute {
   }
 
   /**
-   * Check properties against value.
-   * @param {any} value
-   * @param {Object} properties
-   * @return {boolean} true if value properties are matching with the given properties
+   * Check value and properties are acceptable for the route.
+   * @param {any} value to be placed into route
+   * @param {Object} properties as presented in the route
+   * @return {boolean} true if value can be accepted
    */
-  matches(value, properties) {
+   isAcceptable(value, properties) {
     if (value instanceof this.objectInstance) {
       for (const [p, n] of Object.entries(this.propertyMapping)) {
         if (ref(value, n) !== properties[p]) {
