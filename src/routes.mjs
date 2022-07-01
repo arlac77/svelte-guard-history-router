@@ -183,10 +183,10 @@ export class SkeletonRoute extends RootRoute {
   }
 
   /**
-   * Extract properties from object.
+   * Extract properties from a value.
    * All property values are strings.
    * @param {any} value source of the values
-   * @return {Object|undefined} properties extracted from given object
+   * @return {Object|undefined} properties extracted from given value
    */
   propertiesFor(value) {
     let properties = this.parent.propertiesFor(value);
