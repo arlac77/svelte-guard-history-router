@@ -12,7 +12,7 @@ const nullGuard = {
   leave: dummyFunction
 };
 
-function ref(obj, str) {
+function valueAtPath(obj, str) {
   for (const part of str.split(".")) {
     obj = obj[part];
     if (obj === undefined) {
@@ -165,15 +165,15 @@ export class SkeletonRoute extends RootRoute {
   }
 
   /**
-   * Check value and properties are acceptable for the route.
+   * Check if value and properties are acceptable for the route.
    * @param {any} value to be placed into route
    * @param {Object} properties as presented in the route
    * @return {boolean} true if value can be accepted
    */
    isAcceptable(value, properties) {
     if (value instanceof this.objectInstance) {
-      for (const [p, n] of Object.entries(this.propertyMapping)) {
-        if (ref(value, n) !== properties[p]) {
+      for (const [key, propertyPath] of Object.entries(this.propertyMapping)) {
+        if (valueAtPath(value, propertyPath) !== properties[key]) {
           return false;
         }
       }
@@ -192,15 +192,15 @@ export class SkeletonRoute extends RootRoute {
     let properties = this.parent.propertiesFor(value);
 
     if (value instanceof this.objectInstance) {
-      for (const [p, n] of Object.entries(this.propertyMapping)) {
-        const v = ref(value, n);
+      for (const [key, propertyPath] of Object.entries(this.propertyMapping)) {
+        const v = valueAtPath(value, propertyPath);
         if (v === undefined) {
-          return undefined;
+          return;
         }
         if (properties === undefined) {
           properties = {};
         }
-        properties[p] = v.toString();
+        properties[key] = v.toString();
       }
     }
 
