@@ -24,21 +24,7 @@
   import { articles, categories } from "./data.js";
   import { session } from "./session.mjs";
   import { base } from "./constants.mjs";
-
-  let articleDelay =
-    localStorage.articleDelay === undefined
-      ? 800
-      : parseInt(localStorage.articleDelay);
-  let categoryDelay =
-    localStorage.categoryDelay === undefined
-      ? 600
-      : parseInt(localStorage.categoryDelay);
-  let showState =
-    localStorage.showState === undefined ? true : localStorage.showState;
-
-  $: {
-    localStorage.showState = showState;
-  }
+  import { articleDelay, categoryDelay, showState } from "./localStore.mjs";
 
   const waitingGuard = new WaitingGuard(Waiting);
   const enshureSession = redirectGuard("/login", () => !session);
@@ -122,12 +108,6 @@
         <Route path="/noway" guard={new AlwaysThrowGuard()} component={NoWay}>
           Does Not Work
         </Route>
-      </li>
-    </ul>
-    <ul>
-      <li>
-        Router
-        <input type="checkbox" bind:checked={showState} id="state" />
       </li>
     </ul>
   </nav>
