@@ -103,62 +103,64 @@ npm test
 
 ### Table of Contents
 
+*   [active](#active)
+    *   [Parameters](#parameters)
 *   [Key](#key)
     *   [Properties](#properties)
 *   [BaseRouter](#baserouter)
-    *   [Parameters](#parameters)
+    *   [Parameters](#parameters-1)
     *   [Properties](#properties-1)
     *   [component](#component)
     *   [value](#value)
     *   [path](#path)
     *   [path](#path-1)
-        *   [Parameters](#parameters-1)
-    *   [replace](#replace)
         *   [Parameters](#parameters-2)
-    *   [push](#push)
+    *   [replace](#replace)
         *   [Parameters](#parameters-3)
-    *   [finalizePush](#finalizepush)
+    *   [push](#push)
         *   [Parameters](#parameters-4)
-    *   [continue](#continue)
+    *   [finalizePush](#finalizepush)
         *   [Parameters](#parameters-5)
-    *   [abort](#abort)
+    *   [continue](#continue)
         *   [Parameters](#parameters-6)
-    *   [subscribe](#subscribe)
+    *   [abort](#abort)
         *   [Parameters](#parameters-7)
-    *   [updateActive](#updateactive)
+    *   [subscribe](#subscribe)
         *   [Parameters](#parameters-8)
-    *   [addRoute](#addroute)
+    *   [updateActive](#updateactive)
         *   [Parameters](#parameters-9)
-    *   [routeFor](#routefor)
+    *   [addRoute](#addroute)
         *   [Parameters](#parameters-10)
-    *   [pathFor](#pathfor)
+    *   [routeFor](#routefor)
         *   [Parameters](#parameters-11)
+    *   [pathFor](#pathfor)
+        *   [Parameters](#parameters-12)
 *   [BaseTransition](#basetransition)
     *   [searchParams](#searchparams)
     *   [searchParams](#searchparams-1)
-        *   [Parameters](#parameters-12)
-    *   [nest](#nest)
         *   [Parameters](#parameters-13)
+    *   [nest](#nest)
+        *   [Parameters](#parameters-14)
     *   [continue](#continue-1)
     *   [abort](#abort-1)
-        *   [Parameters](#parameters-14)
+        *   [Parameters](#parameters-15)
 *   [DetailRoute](#detailroute)
     *   [Properties](#properties-2)
     *   [first](#first)
     *   [last](#last)
 *   [Guard](#guard)
     *   [enter](#enter)
-        *   [Parameters](#parameters-15)
-    *   [leave](#leave)
         *   [Parameters](#parameters-16)
+    *   [leave](#leave)
+        *   [Parameters](#parameters-17)
 *   [redirectGuard](#redirectguard)
-    *   [Parameters](#parameters-17)
-*   [sequenceGuard](#sequenceguard)
     *   [Parameters](#parameters-18)
-*   [parallelGuard](#parallelguard)
+*   [sequenceGuard](#sequenceguard)
     *   [Parameters](#parameters-19)
-*   [MasterRoute](#masterroute)
+*   [parallelGuard](#parallelguard)
     *   [Parameters](#parameters-20)
+*   [MasterRoute](#masterroute)
+    *   [Parameters](#parameters-21)
     *   [Properties](#properties-3)
 *   [nullGuard](#nullguard)
 *   [RootRoute](#rootroute)
@@ -167,34 +169,49 @@ npm test
     *   [propertyMapping](#propertymapping)
     *   [guard](#guard-1)
 *   [SkeletonRoute](#skeletonroute)
-    *   [Parameters](#parameters-21)
+    *   [Parameters](#parameters-22)
     *   [Properties](#properties-4)
     *   [enter](#enter-1)
-        *   [Parameters](#parameters-22)
-    *   [leave](#leave-1)
         *   [Parameters](#parameters-23)
-    *   [matches](#matches)
+    *   [leave](#leave-1)
         *   [Parameters](#parameters-24)
-    *   [propertiesFor](#propertiesfor)
+    *   [matches](#matches)
         *   [Parameters](#parameters-25)
-    *   [commonAncestor](#commonancestor)
+    *   [propertiesFor](#propertiesfor)
         *   [Parameters](#parameters-26)
-    *   [objectFor](#objectfor)
+    *   [commonAncestor](#commonancestor)
         *   [Parameters](#parameters-27)
+    *   [objectFor](#objectfor)
+        *   [Parameters](#parameters-28)
+    *   [propertyMapping](#propertymapping-1)
+    *   [objectInstance](#objectinstance)
 *   [Transition](#transition)
-    *   [Parameters](#parameters-28)
+    *   [Parameters](#parameters-29)
     *   [Properties](#properties-5)
     *   [start](#start)
     *   [end](#end)
     *   [redirect](#redirect)
-        *   [Parameters](#parameters-29)
-    *   [abort](#abort-2)
         *   [Parameters](#parameters-30)
+    *   [abort](#abort-2)
+        *   [Parameters](#parameters-31)
+*   [findClosestAttribute](#findclosestattribute)
+    *   [Parameters](#parameters-32)
 *   [nameValueStore](#namevaluestore)
-    *   [Parameters](#parameters-31)
+    *   [Parameters](#parameters-33)
     *   [Properties](#properties-6)
 *   [WaitingGuard](#waitingguard)
-    *   [Parameters](#parameters-32)
+    *   [Parameters](#parameters-34)
+
+## active
+
+*   **See**: {Router.updateActive}
+
+Keeps the the node active state in sync.
+
+### Parameters
+
+*   `node` **any** 
+*   `router` **Router** 
 
 ## Key
 
@@ -231,7 +248,7 @@ $aKey // fired if value of aKey changes
 
 ### Parameters
 
-*   `routes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<Route>** 
+*   `routes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<Route>** all managed routes
 *   `base` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** url
 
 ### Properties
@@ -604,6 +621,17 @@ Default implemantation asks the parent route.
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** for matching properties
 
+### propertyMapping
+
+Deliver property mapping.
+Default implemantation asks the parent route.
+
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** for matching properties
+
+### objectInstance
+
+Default implemantation asks the parent route.
+
 ## Transition
 
 **Extends BaseTransition**
@@ -655,6 +683,17 @@ All nested transitions also will be termniated.
 #### Parameters
 
 *   `e` **(Exception | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** 
+
+## findClosestAttribute
+
+Walks up the dom tree parents unti a node with a given attribute is found or the root node is reached.
+
+### Parameters
+
+*   `element` **[Element](https://developer.mozilla.org/docs/Web/API/Element)** 
+*   `attributeName` **stringg** 
+
+Returns **[Element](https://developer.mozilla.org/docs/Web/API/Element)** 
 
 ## nameValueStore
 
