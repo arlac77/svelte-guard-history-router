@@ -2,8 +2,10 @@ import test from "ava";
 import { Transition } from "../src/transition.mjs";
 import { setupRouter } from "./helpers/setup.mjs";
 
-test("route master detail subscription", async t => {
-  const { router, detail, model } = setupRouter();
+test.only("route master detail subscription", async t => {
+  const { router, detail, model, master } = setupRouter();
+
+  t.deepEqual(master.value, []);
 
   let detailValue;
 
@@ -15,6 +17,7 @@ test("route master detail subscription", async t => {
   await transition.start();
 
   t.deepEqual(detailValue, model.details[1]);
+  t.deepEqual(master.value, model.details);
 });
 
 test("route master detail leaf subscription", async t => {

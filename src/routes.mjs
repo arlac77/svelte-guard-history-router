@@ -133,8 +133,7 @@ export class SkeletonRoute extends RootRoute {
     this.subscriptions = dummySet;
   }
 
-  emit()
-  {
+  emit() {
     this.subscriptions.forEach(subscription => subscription(this));
   }
 
@@ -170,7 +169,7 @@ export class SkeletonRoute extends RootRoute {
    * @param {Object} properties as presented in the route
    * @return {boolean} true if value can be accepted
    */
-   isAcceptable(value, properties) {
+  isAcceptable(value, properties) {
     if (value instanceof this.objectInstance) {
       for (const [key, propertyPath] of Object.entries(this.propertyMapping)) {
         if (valueAtPath(value, propertyPath) !== properties[key]) {
@@ -239,6 +238,15 @@ export class SkeletonRoute extends RootRoute {
    */
   valueFor(transition) {
     return this.parent.valueFor(transition);
+  }
+
+  /**
+   * Deliver route value.
+   * Default implemantation asks the parent route.
+   * @return {any}
+   */
+  get value() {
+    return this.parent.value;
   }
 
   async *iteratorFor(transition) {
