@@ -11,9 +11,8 @@ export class MasterRoute extends SkeletonRoute {
     this.value = [];
   }
 
-  propertiesFor(object)
+  propertiesFor(value)
   {
-    return undefined;
   }
 
   async enter(transition, untilRoute) {
@@ -21,8 +20,8 @@ export class MasterRoute extends SkeletonRoute {
 
     const values = [];
 
-    for await (const e of await this.iteratorFor(transition)) {
-      values.push(e);
+    for await (const value of await this.iteratorFor(transition)) {
+      values.push(value);
     }
 
     this.value = values;

@@ -1,6 +1,6 @@
 <script context="module">
   export { BaseRouter } from "./base-router.mjs";
-  export { SkeletonRoute, ObjectStoreRoute } from "./routes.mjs";
+  export { SkeletonRoute, ValueStoreRoute } from "./routes.mjs";
   export { MasterRoute } from "./master-route.mjs";
   export { DetailRoute } from "./detail-route.mjs";
   export { Transition } from "./transition.mjs";
@@ -13,6 +13,7 @@
   export { WaitingGuard } from "./waiting-guard.mjs";
   export { active } from "./active.mjs";
   export { link } from "./link.mjs";
+  export { ROUTE, ROUTER } from "./util.mjs";
 
   import Outlet from "./components/Outlet.svelte";
   import Link from "./components/Link.svelte";

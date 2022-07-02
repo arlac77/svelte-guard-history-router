@@ -21,7 +21,13 @@ export const articles = Object.fromEntries(
       price: 1.05,
       ingredients: ["milk"]
     },
-    { id: 10, name: "Pizza Quattro Stagioni", price: 8.0, category: "pizza" },
+    {
+      id: 10,
+      name: "Pizza Quattro Stagioni",
+      price: 8.0,
+      category: "pizza",
+      ingredients: ["tomato sauce", "basil", "oregano"]
+    },
     {
       id: 11,
       name: "Pizza Salami",
@@ -29,7 +35,13 @@ export const articles = Object.fromEntries(
       category: "pizza",
       ingredients: ["tomato sauce", "basil", "oregano"]
     },
-    { id: 12, name: "Pizza Hawaii", price: 7.0, category: "pizza" },
+    {
+      id: 12,
+      name: "Pizza Hawaii",
+      price: 7.0,
+      category: "pizza",
+      ingredients: ["tomato sauce", "basil", "oregano"]
+    },
     {
       id: 13,
       name: "Pizza Margherita",
@@ -55,7 +67,7 @@ export const articles = Object.fromEntries(
       name: "Pizza Calzone",
       price: 7.0,
       category: "pizza",
-      ingredients: ["tomato sauce", "basil", "oregano"]
+      ingredients: ["tomato sauce", "basil", "oregano", "eggs"]
     },
     {
       id: 16,
@@ -69,7 +81,7 @@ export const articles = Object.fromEntries(
       name: "Pizza Frutti di Mare",
       price: 7.0,
       category: "pizza",
-      ingredients: ["tomato sauce", "basil", "oregano"]
+      ingredients: ["tomato sauce", "basil", "oregano", "scampi"]
     },
     {
       id: 18,
@@ -83,7 +95,7 @@ export const articles = Object.fromEntries(
       name: "Pizza Peperoni",
       price: 7.0,
       category: "pizza",
-      ingredients: ["tomato sauce", "basil", "oregano"]
+      ingredients: ["tomato sauce", "basil", "oregano", "peperoni"]
     },
     {
       id: 20,
@@ -99,7 +111,13 @@ export const articles = Object.fromEntries(
       category: "pizza",
       ingredients: ["tomato sauce", "basil", "oregano"]
     },
-    { id: 23, name: "Hot Dog", price: 2.0, category: "to go" },
+    {
+      id: 23,
+      name: "Hot Dog",
+      price: 2.0,
+      category: "to go",
+      ingredients: ["pork"]
+    },
     {
       id: 32,
       name: "Cheesecake",

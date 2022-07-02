@@ -12,11 +12,9 @@
   } from "../../../src/index.svelte";
   import RouterState from "./RouterState.svelte";
   import About from "./About.svelte";
-  import Articles from "./Articles.svelte";
-  import Article from "./Article.svelte";
-  import ArticleLink from "./ArticleLink.svelte";
   import Categories from "./Categories.svelte";
   import Category from "./Category.svelte";
+  import ArticlesRoute from "./ArticlesRoute.svelte";
   import Login from "./Login.svelte";
   import Home from "./Home.svelte";
   import NoWay from "./NoWay.svelte";
@@ -24,21 +22,7 @@
   import { articles, categories } from "./data.js";
   import { session } from "./session.mjs";
   import { base } from "./constants.mjs";
-
-  let articleDelay =
-    localStorage.articleDelay === undefined
-      ? 800
-      : parseInt(localStorage.articleDelay);
-  let categoryDelay =
-    localStorage.categoryDelay === undefined
-      ? 600
-      : parseInt(localStorage.categoryDelay);
-  let showState =
-    localStorage.showState === undefined ? true : localStorage.showState;
-
-  $: {
-    localStorage.showState = showState;
-  }
+  import { articleDelay, categoryDelay, showState } from "./localStore.mjs";
 
   const waitingGuard = new WaitingGuard(Waiting);
   const enshureSession = redirectGuard("/login", () => !session);
@@ -83,22 +67,12 @@
         <Route path="/about" component={About}>About</Route>
       </li>
       <li>
-        <Route
-          path="/article"
-          factory={MasterRoute}
-          iteratorFor={articleIterator}
+        <ArticlesRoute
           guard={[enshureSession, waitingGuard]}
-          component={Articles}
+          source={articleIterator}
         >
           Articles
-          <Route
-            path="/:article"
-            factory={DetailRoute}
-            propertyMapping={{ article: "id" }}
-            linkComponent={ArticleLink}
-            component={Article}
-          />
-        </Route>
+        </ArticlesRoute>
       </li>
       <li>
         <Route
@@ -115,19 +89,15 @@
             propertyMapping={{ category: "cid" }}
             linkComponent={NamedObjectLink}
             component={Category}
-          />
+          >
+            <ArticlesRoute />
+          </Route>
         </Route>
       </li>
       <li>
         <Route path="/noway" guard={new AlwaysThrowGuard()} component={NoWay}>
           Does Not Work
         </Route>
-      </li>
-    </ul>
-    <ul>
-      <li>
-        Router
-        <input type="checkbox" bind:checked={showState} id="state" />
       </li>
     </ul>
   </nav>
