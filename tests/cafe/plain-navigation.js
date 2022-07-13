@@ -26,7 +26,7 @@ const links = [
   al("12")
 ];
 
-fixture`Getting Started`.page`${base}index.html`;
+fixture`Getting Started`.page`${base}`;
 
 test("click arund", async t => {
   for (const l of links) {
