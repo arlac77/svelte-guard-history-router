@@ -30,11 +30,6 @@ export default defineConfig(async ({ command, mode }) => {
         }
       })
     ],
-    optimizeDeps: {
-      exclude: [
-        ...Object.keys(pkg.dependencies).filter(d => d.startsWith("svelte"))
-      ]
-    },
     server: { host: true },
     build: {
       outDir: "../../../build",
