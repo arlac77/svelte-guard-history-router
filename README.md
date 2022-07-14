@@ -175,17 +175,18 @@ npm test
         *   [Parameters](#parameters-23)
     *   [leave](#leave-1)
         *   [Parameters](#parameters-24)
-    *   [matches](#matches)
+    *   [isAcceptable](#isacceptable)
         *   [Parameters](#parameters-25)
     *   [propertiesFor](#propertiesfor)
         *   [Parameters](#parameters-26)
     *   [commonAncestor](#commonancestor)
-    *   [valueFor](#valueFor)
         *   [Parameters](#parameters-27)
-    *   [objectFor](#objectfor)
+    *   [valueFor](#valuefor)
         *   [Parameters](#parameters-28)
+    *   [value](#value-1)
     *   [propertyMapping](#propertymapping-1)
     *   [objectInstance](#objectinstance)
+*   [ValueStoreRoute](#valuestoreroute)
 *   [Transition](#transition)
     *   [Parameters](#parameters-29)
     *   [Properties](#properties-5)
@@ -368,21 +369,21 @@ Add a new Route.
 
 ### routeFor
 
-Find Route for a given object.
+Find Route for a given value.
 
 #### Parameters
 
-*   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+*   `value` **any** 
 
-Returns **Route** able to support given object
+Returns **Route** able to support given value
 
 ### pathFor
 
-Find path for a given object.
+Find path for a given value.
 
 #### Parameters
 
-*   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+*   `value` **any** 
 *   `suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** to be appended
 
 Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** path + suffix
@@ -432,7 +433,7 @@ Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 **Extends ValueStoreRoute**
 
-Route to represent a slice of the prarent list of values.
+Route to represent a slice of the masters list of values.
 
 ### Properties
 
@@ -577,29 +578,29 @@ All parent routes up to the common ancestor are also left.
 #### Parameters
 
 *   `transition` **[Transition](#transition)** 
-*   `untilRoute` **Route** the common ancestor with the next route
+*   `untilRoute` **Route** the common ancestor with the future route
 
-### matches
+### isAcceptable
 
-Check properties against object.
+Check if value and properties are acceptable for the route.
 
 #### Parameters
 
-*   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
-*   `properties` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+*   `value` **any** to be placed into route
+*   `properties` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** as presented in the route
 
-Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** true if object properties are matching with the given proerties
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** true if value can be accepted
 
 ### propertiesFor
 
-Extract properties from object.
-All property values are strings.
+Extract properties from a value.
+All property values must be strings.
 
 #### Parameters
 
-*   `object` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** source of the values
+*   `value` **any** source of the values
 
-Returns **([Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object) | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** properties extracted from given object
+Returns **([Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object) | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** properties extracted from given value
 
 ### commonAncestor
 
@@ -613,14 +614,21 @@ Returns **(Route | [undefined](https://developer.mozilla.org/docs/Web/JavaScript
 
 ### valueFor
 
-Deliver object for a given set of properties.
+Deliver value for a given set of properties of the transition.
 Default implemantation asks the parent route.
 
 #### Parameters
 
 *   `transition` **[Transition](#transition)** 
 
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** for matching properties
+Returns **any** for matching properties
+
+### value
+
+Deliver route value.
+Default implemantation asks the parent route.
+
+Returns **any** 
 
 ### propertyMapping
 
@@ -632,6 +640,12 @@ Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 ### objectInstance
 
 Default implemantation asks the parent route.
+
+## ValueStoreRoute
+
+**Extends SkeletonRoute**
+
+Route holding a single value
 
 ## Transition
 
