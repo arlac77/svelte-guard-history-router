@@ -1,5 +1,4 @@
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-//import { extractFromPackage } from "npm-pkgbuild/src/module.mjs";
 import { defineConfig } from "vite";
 
 export default defineConfig(async ({ command, mode }) => {
