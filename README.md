@@ -146,8 +146,11 @@ npm test
         *   [Parameters](#parameters-15)
 *   [DetailRoute](#detailroute)
     *   [Properties](#properties-2)
+    *   [master](#master)
     *   [first](#first)
     *   [last](#last)
+    *   [previous](#previous)
+    *   [next](#next)
 *   [Guard](#guard)
     *   [enter](#enter)
         *   [Parameters](#parameters-16)
@@ -290,7 +293,7 @@ Replace current route.
 
 ### replace
 
-Replace current route.
+Replace current route without updating the state.
 
 #### Parameters
 
@@ -439,6 +442,12 @@ Route to represent a slice of the masters list of values.
 
 *   `master` **Route** route holding the master records
 
+### master
+
+Route holding the list ov values
+
+Returns **Route** our master
+
 ### first
 
 Returns **any** 1st. entry
@@ -446,6 +455,14 @@ Returns **any** 1st. entry
 ### last
 
 Returns **any** last entry
+
+### previous
+
+Returns **any** previous value
+
+### next
+
+Returns **any** next value
 
 ## Guard
 
@@ -683,7 +700,7 @@ Update Nodes active state
 ### redirect
 
 Halt current transition and go to another route.
-To proceed with the original route by calling [continue()](continue\(\))
+To proceed with the original route call [continue()](continue\(\))
 The original transition will keept in place and can be continued afterwards.
 
 #### Parameters
