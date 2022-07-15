@@ -23,7 +23,6 @@ export default defineConfig(async ({ command, mode }) => {
   return {
     base,
     root: "tests/app/src",
-    appType: "custom", // "spa", "mpa"
     worker: { format: "es" },
     plugins: [
       svelte({
