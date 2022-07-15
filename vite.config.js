@@ -18,9 +18,12 @@ export default defineConfig(async ({ command, mode }) => {
   process.env["VITE_DESCRIPTION"] = properties.description;
   process.env["VITE_VERSION"] = properties.version;
 
+  const open = process.env.CI ? {} : { open: base };
+
   return {
     base,
     root: "tests/app/src",
+    appType: "custom", // "spa", "mpa"
     worker: { format: "es" },
     plugins: [
       svelte({
@@ -29,7 +32,7 @@ export default defineConfig(async ({ command, mode }) => {
         }
       })
     ],
-    server: { host: true },
+    server: { host: true, ...open },
     build: {
       outDir: "../../../build",
       target: "esnext",
