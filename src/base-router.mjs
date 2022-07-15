@@ -125,9 +125,7 @@ export class BaseRouter extends BaseTransition {
    * @return {any}
    */
   get value() {
-    if (this.route) {
-      return this.route.value;
-    }
+    return this.route && this.route.value;
   }
 
   get state() {
