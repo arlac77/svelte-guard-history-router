@@ -70,7 +70,7 @@ export class Transition extends BaseTransition {
 
   /**
    * Halt current transition and go to another route.
-   * To proceed with the original route by calling {@link continue()}
+   * To proceed with the original route call {@link continue()}
    * The original transition will keept in place and can be continued afterwards.
    * @param {string} path new route to enter temporary
    */
