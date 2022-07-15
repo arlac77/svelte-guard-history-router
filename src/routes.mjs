@@ -139,7 +139,7 @@ export class SkeletonRoute extends RootRoute {
 
   /**
    * Enter the route from a former one.
-   * All parent routes up to the common ancestor are also entered.
+   * All parent routes up to the common ancestor are entered first.
    * @param {Transition} transition
    * @param {Route} untilRoute the common ancestor with the former route
    */
@@ -152,7 +152,7 @@ export class SkeletonRoute extends RootRoute {
 
   /**
    * Leave the route to a new one.
-   * All parent routes up to the common ancestor are also left.
+   * All parent routes up to the common ancestor are left.
    * @param {Transition} transition
    * @param {Route} untilRoute the common ancestor with the future route
    */
@@ -184,7 +184,7 @@ export class SkeletonRoute extends RootRoute {
   /**
    * Extract properties from a value.
    * All property values must be strings.
-   * @param {any} value source of the values
+   * @param {any} value source of the properties
    * @return {Object|undefined} properties extracted from given value
    */
   propertiesFor(value) {
