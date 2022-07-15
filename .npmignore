@@ -7,7 +7,6 @@ doc
 .tmp
 .vscode
 .github
-jsconfig.json
 .node-version
 pkg
 vite.config.js
