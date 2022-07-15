@@ -7,7 +7,6 @@ doc
 .tmp
 .vscode
 .github
-netlify.toml
 jsconfig.json
 .node-version
 pkg
