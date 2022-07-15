@@ -23,7 +23,7 @@
   "license": "BSD-2-Clause",
   "scripts": {
     "prepare": "vite build",
-    "start": "vite preview",
+    "start": "vite",
     "test": "npm run test:ava && npm run test:cafe",
     "test:ava": "ava --timeout 2m tests/*.mjs",
     "test:cafe": "testcafe $BROWSER:headless tests/cafe/*.js -s build/test --page-request-timeout 9000 --app-init-delay 30000 --app \"vite preview\"",
