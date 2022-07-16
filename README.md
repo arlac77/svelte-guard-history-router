@@ -580,7 +580,7 @@ Subscriptions on Routes fire when the route value changes.
 ### enter
 
 Enter the route from a former one.
-All parent routes up to the common ancestor are also entered.
+All parent routes up to the common ancestor are entered first.
 
 #### Parameters
 
@@ -590,7 +590,7 @@ All parent routes up to the common ancestor are also entered.
 ### leave
 
 Leave the route to a new one.
-All parent routes up to the common ancestor are also left.
+All parent routes up to the common ancestor are left.
 
 #### Parameters
 
@@ -615,7 +615,7 @@ All property values must be strings.
 
 #### Parameters
 
-*   `value` **any** source of the values
+*   `value` **any** source of the properties
 
 Returns **([Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object) | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** properties extracted from given value
 
