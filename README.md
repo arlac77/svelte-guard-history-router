@@ -357,6 +357,7 @@ Changes in the current route will trigger a update
 ### updateActive
 
 Update the active state of a node.
+A node is considered active if it shared the path prefix with the current route.
 
 #### Parameters
 
