@@ -37,6 +37,9 @@ import { nameValueStore, NAVIGATION_EVENT } from "./util.mjs";
  * @property {string} base url
  */
 export class BaseRouter extends BaseTransition {
+
+  linkNodes = new Set();
+
   constructor(routes, base) {
     super();
 
@@ -49,7 +52,6 @@ export class BaseRouter extends BaseTransition {
 
     Object.defineProperties(this, {
       base: { value: base },
-      linkNodes: { value: new Set() },
       subscriptions: { value: new Set() },
       keys: { value: keys },
       params: {
@@ -243,6 +245,7 @@ export class BaseRouter extends BaseTransition {
 
   /**
    * Update the active state of a node.
+   * A node is considered active if it shared the path prefix with the current route.
    * @param {Node} node
    */
   updateActive(node) {
@@ -250,7 +253,7 @@ export class BaseRouter extends BaseTransition {
 
     const href = node.getAttribute("href");
 
-    if (this.path === href) {
+    if (this.path.startsWith(href)) {
       node.classList.add("active");
     }
   }
