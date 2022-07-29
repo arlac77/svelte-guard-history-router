@@ -26,7 +26,7 @@
     "start": "vite",
     "test": "npm run test:ava && npm run test:cafe",
     "test:ava": "ava --timeout 2m tests/*.mjs",
-    "test:cafe": "testcafe $BROWSER:headless tests/cafe/*.js -s build/test --page-request-timeout 3000 --app-init-delay 3000 --app \"vite preview\"",
+    "test:cafe": "testcafe $BROWSER:headless tests/cafe/*.js -s build/test --page-request-timeout 3000 --app-init-delay 3000 --app vite",
     "cover": "c8 -x 'tests/**/*' --temp-directory build/tmp ava --timeout 2m tests/*.mjs && c8 report -r lcov -o build/coverage --temp-directory build/tmp",
     "docs": "documentation readme --section=API ./src/**/*.mjs",
     "lint": "npm run lint:docs",
@@ -46,11 +46,11 @@
     "documentation": "^13.2.5",
     "jsdom": "^20.0.0",
     "mf-styling": "^1.2.43",
-    "npm-pkgbuild": "^10.13.2",
+    "npm-pkgbuild": "^10.13.3",
     "semantic-release": "^19.0.3",
     "svelte": "^3.49.0",
     "testcafe": "^1.20.0",
-    "vite": "^3.0.3"
+    "vite": "^3.0.4"
   },
   "optionalDependencies": {
     "mf-hosting": "^1.7.1"
