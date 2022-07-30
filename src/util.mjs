@@ -20,13 +20,12 @@ export function findClosestAttribute(element, attributeName) {
 /**
  * Create a named object wich can act as a store.
  * @param {string} name
- * @param {any} initialValue
+ * @param {any} value initial value
  * @property {any} value
  * @return {Store}
  */
-export function nameValueStore(name, initialValue) {
+export function nameValueStore(name, value) {
   const subscriptions = new Set();
-  let value = initialValue;
 
   const o = {
     name,

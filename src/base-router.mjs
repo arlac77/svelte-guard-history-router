@@ -39,24 +39,23 @@ import { nameValueStore, NAVIGATION_EVENT } from "./util.mjs";
 export class BaseRouter extends BaseTransition {
 
   linkNodes = new Set();
+  subscriptions = new Set();
+  base;
+  keys = {};
 
   constructor(routes, base) {
     super();
 
-    let route;
-
     this.routes = routes;
+    this.base = base;
 
-    const keys = {};
+    let route;
     const params = {};
 
     Object.defineProperties(this, {
-      base: { value: base },
-      subscriptions: { value: new Set() },
-      keys: { value: keys },
       params: {
         set(np) {
-          for (const key of Object.keys(keys)) {
+          for (const key of Object.keys(this.keys)) {
             const value = np[key];
             if (params[key] !== value) {
               if (value === undefined) {
@@ -64,7 +63,7 @@ export class BaseRouter extends BaseTransition {
               } else {
                 params[key] = value;
               }
-              const k = keys[key];
+              const k = this.keys[key];
               k.value = value;
             }
           }
