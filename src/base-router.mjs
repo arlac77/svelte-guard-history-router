@@ -115,7 +115,7 @@ export class BaseRouter extends BaseTransition {
    */
   get component() {
     for (const o of [this.nested, this.route]) {
-      if (o !== undefined && o.component !== undefined) {
+      if (o?.component !== undefined) {
         return o.component;
       }
     }
@@ -126,7 +126,7 @@ export class BaseRouter extends BaseTransition {
    * @return {any}
    */
   get value() {
-    return this.route && this.route.value;
+    return this.route?.value;
   }
 
   get state() {
