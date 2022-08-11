@@ -91,6 +91,10 @@ const rootRoute = new RootRoute();
  * @property {any} value
  */
 export class SkeletonRoute extends RootRoute {
+
+  subscriptions = dummySet;
+  parent = rootRoute;
+
   constructor(path, options = {}) {
     super();
 
@@ -114,7 +118,6 @@ export class SkeletonRoute extends RootRoute {
     let value;
 
     Object.defineProperties(this, {
-      parent: { value: rootRoute },
       path: { get: () => this.parent.path + path },
       value: {
         set: v => {
@@ -129,8 +132,6 @@ export class SkeletonRoute extends RootRoute {
           .map(([k, v]) => [k, { value: v }])
       )
     });
-
-    this.subscriptions = dummySet;
   }
 
   emit() {
