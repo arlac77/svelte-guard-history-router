@@ -9,4 +9,4 @@ doc
 .github
 .node-version
 pkg
-vite.config.js
+vite.config.mts
