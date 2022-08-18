@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { ObjectLink } from "../../../src/index.svelte";
+  import { Link, ObjectLink } from "../../../src/index.svelte";
 
   export let router;
 
@@ -27,10 +27,21 @@
 
 <input id="filter" placeholder="Filter" bind:value={filter} />
 
-<ul>
-  {#each articles as article}
-    <li>
-      <ObjectLink object={article} suffix="#price" />
-    </li>
-  {/each}
-</ul>
+<table class="bordered">
+  <thead>
+    <th>Name</th>
+    <th>Price</th>
+  </thead>
+  <tbody>
+    {#each articles as article}
+      <tr>
+        <td>
+          <ObjectLink object={article} suffix="#price" />
+        </td>
+        <td>
+          <Link href={router.pathFor(article)}>{article.price}</Link>
+        </td>
+      </tr>
+    {/each}
+  </tbody>
+</table>
