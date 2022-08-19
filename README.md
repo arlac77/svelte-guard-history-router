@@ -218,11 +218,13 @@ npm test
         *   [Parameters](#parameters-31)
 *   [findClosestAttribute](#findclosestattribute)
     *   [Parameters](#parameters-32)
-*   [nameValueStore](#namevaluestore)
+*   [dispatchNavigationEvent](#dispatchnavigationevent)
     *   [Parameters](#parameters-33)
+*   [nameValueStore](#namevaluestore)
+    *   [Parameters](#parameters-34)
     *   [Properties](#properties-6)
 *   [WaitingGuard](#waitingguard)
-    *   [Parameters](#parameters-34)
+    *   [Parameters](#parameters-35)
 
 ## active
 
@@ -744,6 +746,14 @@ Walks up the dom tree parents unti a node with a given attribute is found or the
 *   `attributeName` **stringg** 
 
 Returns **[Element](https://developer.mozilla.org/docs/Web/API/Element)** 
+
+## dispatchNavigationEvent
+
+Dispatches a NAVIGATION_EVENT with pathname and hash
+
+### Parameters
+
+*   `event` **[Event](https://developer.mozilla.org/docs/Web/API/Event)** 
 
 ## nameValueStore
 
