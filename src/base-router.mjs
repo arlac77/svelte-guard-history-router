@@ -40,7 +40,6 @@ export class BaseRouter extends BaseTransition {
 
   linkNodes = new Set();
   subscriptions = new Set();
-  base;
   keys = {};
 
   constructor(routes, base) {
