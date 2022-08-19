@@ -1,8 +1,7 @@
-
 /**
  * Walks up the dom tree parents unti a node with a given attribute is found or the root node is reached.
- * @param {Element} element 
- * @param {stringg} attributeName 
+ * @param {Element} element
+ * @param {stringg} attributeName
  * @returns {Element}
  */
 export function findClosestAttribute(element, attributeName) {
@@ -15,6 +14,22 @@ export function findClosestAttribute(element, attributeName) {
   }
 
   return attribute;
+}
+
+/**
+ * Dispatches a NAVIGATION_EVENT with pathname and hash
+ * @param {Event} event
+ */
+export function dispatchNavigationEvent(event) {
+  event.preventDefault();
+
+  const ct = event.currentTarget;
+
+  window.dispatchEvent(
+    new CustomEvent(NAVIGATION_EVENT, {
+      detail: { path: ct.pathname + ct.hash }
+    })
+  );
 }
 
 /**
