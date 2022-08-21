@@ -34,7 +34,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "multi-path-matcher": "^2.1.14"
+    "multi-path-matcher": "^2.2.0"
   },
   "devDependencies": {
     "@semantic-release/commit-analyzer": "^9.0.2",
