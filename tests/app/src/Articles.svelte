@@ -1,5 +1,7 @@
 <script>
   import { onMount } from "svelte";
+  import { writable } from "svelte/store";
+  import { sortable, sorter } from "svelte-common";
   import { Link, ObjectLink } from "../../../src/index.svelte";
 
   export let router;
@@ -21,6 +23,8 @@
       //route.emit();
     }
   }
+  
+  const sortBy = writable({});
 </script>
 
 <h2 class="routetitle">Articles</h2>
@@ -29,11 +33,11 @@
 
 <table class="bordered">
   <thead>
-    <th>Name</th>
-    <th>Price</th>
+    <th id="name" use:sortable={sortBy}>Name</th>
+    <th id="price" use:sortable={sortBy}>Price</th>
   </thead>
   <tbody>
-    {#each articles as article}
+    {#each articles.sort(sorter($sortBy)) as article (article.name)}
       <tr>
         <td>
           <ObjectLink object={article} suffix="#price" />
