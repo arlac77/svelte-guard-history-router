@@ -234,8 +234,8 @@ Keeps the the node active state in sync.
 
 ### Parameters
 
-*   `node` **any** 
-*   `router` **Router** 
+*   `node` **any**&#x20;
+*   `router` **Router**&#x20;
 
 ## Key
 
@@ -255,9 +255,9 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 
 ### Properties
 
-*   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-*   `value` **any** 
-*   `subscriptions` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)** 
+*   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
+*   `value` **any**&#x20;
+*   `subscriptions` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)**&#x20;
 
 ## BaseRouter
 
@@ -278,7 +278,7 @@ $aKey // fired if value of aKey changes
 ### Properties
 
 *   `linkNodes` **[Set](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set)<[Node](https://developer.mozilla.org/docs/Web/API/Node/nextSibling)>** nodes having their active state updated
-*   `routes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<Route>** 
+*   `routes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<Route>**&#x20;
 *   `keys` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** collected keys of all routes
 *   `params` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** value mapping from keys (from current route)
 *   `route` **Route** current
@@ -290,13 +290,13 @@ $aKey // fired if value of aKey changes
 Current component.
 Either from a nested transition or from the current route
 
-Returns **SvelteComponent** 
+Returns **SvelteComponent**&#x20;
 
 ### value
 
 Value if the current route
 
-Returns **any** 
+Returns **any**&#x20;
 
 ### path
 
@@ -308,7 +308,7 @@ Replace current route.
 
 #### Parameters
 
-*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
 ### replace
 
@@ -316,7 +316,7 @@ Replace current route without updating the state.
 
 #### Parameters
 
-*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
 Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** former state
 
@@ -338,7 +338,7 @@ If path is undefined the Transition has been aborderd.
 
 #### Parameters
 
-*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
 ### continue
 
@@ -350,7 +350,7 @@ Otherwise does nothing.
 
 #### Parameters
 
-*   `fallbackPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `fallbackPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
 ### abort
 
@@ -362,7 +362,7 @@ Otherwise does nothing.
 
 #### Parameters
 
-*   `fallbackPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `fallbackPath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
 ### subscribe
 
@@ -371,7 +371,7 @@ Changes in the current route will trigger a update
 
 #### Parameters
 
-*   `subscription` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** 
+*   `subscription` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)**&#x20;
 
 ### updateActive
 
@@ -380,7 +380,7 @@ A node is considered active if it shared the path prefix with the current route.
 
 #### Parameters
 
-*   `node` **[Node](https://developer.mozilla.org/docs/Web/API/Node/nextSibling)** 
+*   `node` **[Node](https://developer.mozilla.org/docs/Web/API/Node/nextSibling)**&#x20;
 
 ### addRoute
 
@@ -388,7 +388,7 @@ Add a new Route.
 
 #### Parameters
 
-*   `route` **Route** 
+*   `route` **Route**&#x20;
 
 ### routeFor
 
@@ -396,7 +396,7 @@ Find Route for a given value.
 
 #### Parameters
 
-*   `value` **any** 
+*   `value` **any**&#x20;
 
 Returns **Route** able to support given value
 
@@ -406,7 +406,7 @@ Find path for a given value.
 
 #### Parameters
 
-*   `value` **any** 
+*   `value` **any**&#x20;
 *   `suffix` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** to be appended
 
 Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** path + suffix
@@ -425,7 +425,7 @@ Replaces the search part of the path with the given searchParams.
 
 #### Parameters
 
-*   `searchParams` **URLSearchParams** 
+*   `searchParams` **URLSearchParams**&#x20;
 
 ### nest
 
@@ -434,8 +434,8 @@ Starts a transition from the given factory.
 
 #### Parameters
 
-*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-*   `factory` **[Transition](#transition)** 
+*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
+*   `factory` **[Transition](#transition)**&#x20;
 
 ### continue
 
@@ -448,7 +448,7 @@ Abort the transition.
 
 #### Parameters
 
-*   `error`  
+*   `error` &#x20;
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** truen in case there was a nesten transition
 
@@ -495,7 +495,7 @@ Called while entering a route (current outlet is not yet set)
 
 #### Parameters
 
-*   `transition` **[Transition](#transition)** 
+*   `transition` **[Transition](#transition)**&#x20;
 
 ### leave
 
@@ -503,7 +503,7 @@ Called before leaving a route
 
 #### Parameters
 
-*   `transition` **[Transition](#transition)** 
+*   `transition` **[Transition](#transition)**&#x20;
 
 ## redirectGuard
 
@@ -511,7 +511,7 @@ Redirects to a given path if condition is met.
 
 ### Parameters
 
-*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 *   `condition` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** redirects when returning true
 
 ## sequenceGuard
@@ -520,7 +520,7 @@ Execute guards in a sequence.
 
 ### Parameters
 
-*   `children` **Iterable<[Guard](#guard)>** 
+*   `children` **Iterable<[Guard](#guard)>**&#x20;
 
 ## parallelGuard
 
@@ -528,7 +528,7 @@ Execute guards in a parallel.
 
 ### Parameters
 
-*   `children` **Iterable<[Guard](#guard)>** 
+*   `children` **Iterable<[Guard](#guard)>**&#x20;
 
 ## MasterRoute
 
@@ -538,12 +538,12 @@ Route holding a ordered collection of values.
 
 ### Parameters
 
-*   `path`  
-*   `options`  
+*   `path` &#x20;
+*   `options` &#x20;
 
 ### Properties
 
-*   `value` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<any>** 
+*   `value` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<any>**&#x20;
 
 ## nullGuard
 
@@ -582,7 +582,7 @@ Subscriptions on Routes fire when the route value changes.
 
 ### Parameters
 
-*   `path`  
+*   `path` &#x20;
 *   `options`   (optional, default `{}`)
 
 ### Properties
@@ -592,10 +592,10 @@ Subscriptions on Routes fire when the route value changes.
 *   `linkComponent` **SvelteComponent** content for [ObjectLink](ObjectLink)
 *   `propertyMapping` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Map properties to object attributes
     Keys are the property names and values are the keys in the resulting object.
-*   `priority` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
+*   `priority` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)**&#x20;
 *   `keys` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** as found in the path
-*   `regex` **RegEx** 
-*   `value` **any** 
+*   `regex` **RegEx**&#x20;
+*   `value` **any**&#x20;
 
 ### enter
 
@@ -604,7 +604,7 @@ All parent routes up to the common ancestor are entered first.
 
 #### Parameters
 
-*   `transition` **[Transition](#transition)** 
+*   `transition` **[Transition](#transition)**&#x20;
 *   `untilRoute` **Route** the common ancestor with the former route
 
 ### leave
@@ -614,7 +614,7 @@ All parent routes up to the common ancestor are left.
 
 #### Parameters
 
-*   `transition` **[Transition](#transition)** 
+*   `transition` **[Transition](#transition)**&#x20;
 *   `untilRoute` **Route** the common ancestor with the future route
 
 ### isAcceptable
@@ -645,7 +645,7 @@ Find common ancestor with an other Route.
 
 #### Parameters
 
-*   `other` **Route** 
+*   `other` **Route**&#x20;
 
 Returns **(Route | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** common ancestor Route between receiver and other
 
@@ -656,7 +656,7 @@ Default implemantation asks the parent route.
 
 #### Parameters
 
-*   `transition` **[Transition](#transition)** 
+*   `transition` **[Transition](#transition)**&#x20;
 
 Returns **any** for matching properties
 
@@ -665,7 +665,7 @@ Returns **any** for matching properties
 Deliver route value.
 Default implemantation asks the parent route.
 
-Returns **any** 
+Returns **any**&#x20;
 
 ### propertyMapping
 
@@ -692,12 +692,12 @@ Transition between routes.
 
 ### Parameters
 
-*   `router` **Router** 
+*   `router` **Router**&#x20;
 *   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** new destination
 
 ### Properties
 
-*   `router` **Router** 
+*   `router` **Router**&#x20;
 *   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** new destination
 
 ### start
@@ -734,7 +734,7 @@ All nested transitions also will be termniated.
 
 #### Parameters
 
-*   `e` **(Exception | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))** 
+*   `e` **(Exception | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))**&#x20;
 
 ## findClosestAttribute
 
@@ -742,18 +742,18 @@ Walks up the dom tree parents unti a node with a given attribute is found or the
 
 ### Parameters
 
-*   `element` **[Element](https://developer.mozilla.org/docs/Web/API/Element)** 
-*   `attributeName` **stringg** 
+*   `element` **[Element](https://developer.mozilla.org/docs/Web/API/Element)**&#x20;
+*   `attributeName` **stringg**&#x20;
 
-Returns **[Element](https://developer.mozilla.org/docs/Web/API/Element)** 
+Returns **[Element](https://developer.mozilla.org/docs/Web/API/Element)**&#x20;
 
 ## dispatchNavigationEvent
 
-Dispatches a NAVIGATION_EVENT with pathname and hash
+Dispatches a NAVIGATION\_EVENT with pathname and hash
 
 ### Parameters
 
-*   `event` **[Event](https://developer.mozilla.org/docs/Web/API/Event)** 
+*   `event` **[Event](https://developer.mozilla.org/docs/Web/API/Event)**&#x20;
 
 ## nameValueStore
 
@@ -761,14 +761,14 @@ Create a named object wich can act as a store.
 
 ### Parameters
 
-*   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+*   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 *   `value` **any** initial value
 
 ### Properties
 
-*   `value` **any** 
+*   `value` **any**&#x20;
 
-Returns **Store** 
+Returns **Store**&#x20;
 
 ## WaitingGuard
 
