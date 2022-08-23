@@ -23,7 +23,7 @@
       //route.emit();
     }
   }
-  
+
   const sortBy = writable({});
 </script>
 
