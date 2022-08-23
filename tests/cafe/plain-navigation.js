@@ -37,13 +37,19 @@ test("click arund", async t => {
     await login(t);
 
     const title = Selector(".routetitle");
+
+    await t.wait(2000);
+
+    await t.expect(title.innerText).contains(l.title);
+
+    /*
     await t
-      .expect(
+      .expect(*/
         /* https://github.com/DevExpress/testcafe/issues/5449
       keep comment until fixed */
-        title.innerText
+     /*   title.innerText
       )
-      .contains(l.title);
+      .contains(l.title);*/
 
     await t.expect(getLocation()).contains(l.path);
   }
