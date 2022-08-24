@@ -16,8 +16,8 @@ const links = [
   { path: "/about", title: "About" },
   // { path: "/index.html", redirect:"/", title: "Home" },
   { path: "/article", title: "Articles" },
-  al("01"),
-  { path: "/article", title: "Articles" },
+  //  al("01"),
+  //  { path: "/article", title: "Articles" },
   al("02"),
   { path: "/about", title: "About" },
   { path: "/article", title: "Articles" },
@@ -38,16 +38,16 @@ test("click arund", async t => {
 
     const title = Selector(".routetitle");
 
-    await t.wait(2000);
+    await t.wait(3000);
 
     await t.expect(title.innerText).contains(l.title);
 
     /*
     await t
       .expect(*/
-        /* https://github.com/DevExpress/testcafe/issues/5449
+    /* https://github.com/DevExpress/testcafe/issues/5449
       keep comment until fixed */
-     /*   title.innerText
+    /*   title.innerText
       )
       .contains(l.title);*/
 
