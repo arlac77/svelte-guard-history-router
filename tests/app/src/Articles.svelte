@@ -17,27 +17,33 @@
   });
 
   $: {
-    if (filter && filter.length > 0) {
+    if (searchParams) {
       searchParams.set("q", filter);
       router.searchParams = searchParams;
-      //route.emit();
+      route.emit();
     }
+  }
+
+  function doFilter(x) {
+    return filter ? x.name.match(filter) : true;
   }
 
   const sortBy = writable({});
 </script>
 
 <h2 class="routetitle">Articles</h2>
-
-<input id="filter" placeholder="Filter" bind:value={filter} />
-
 <table class="bordered">
   <thead>
-    <th id="name" use:sortable={sortBy}>Name</th>
+    <th id="name" use:sortable={sortBy}
+      >Name
+      <input id="filter" placeholder="Filter" bind:value={filter} />
+    </th>
     <th id="price" use:sortable={sortBy}>Price</th>
   </thead>
   <tbody>
-    {#each articles.sort(sorter($sortBy)) as article (article.name)}
+    {#each articles
+      .filter(doFilter)
+      .sort(sorter($sortBy)) as article (article.name)}
       <tr>
         <td>
           <ObjectLink object={article} suffix="#price" />
