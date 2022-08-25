@@ -11,9 +11,12 @@
   let filter;
   let searchParams;
 
+  const sortBy = writable({});
+
   onMount(() => {
     searchParams = router.searchParams;
     filter = searchParams.get("q");
+    sortBy.set(searchParams); 
   });
 
   $: {
@@ -28,7 +31,6 @@
     return filter ? x.name.match(filter) : true;
   }
 
-  const sortBy = writable({});
 </script>
 
 <h2 class="routetitle">Articles</h2>
