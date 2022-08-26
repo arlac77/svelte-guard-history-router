@@ -7,24 +7,15 @@
   export let router;
 
   const route = router.route;
-  let searchParams;
 
-  const sortBy   = writable({});
+  const sortBy = writable({});
   const filterBy = writable({});
-  
-  onMount(() => {
-    searchParams = router.searchParams;
-    //filterBy.name = searchParams.get("name");
-    filterBy.set(searchParams); 
-  });
 
-  $: {
-    if (searchParams && filterBy.name) {
-      searchParams.set("name", filterBy.name);
-      router.searchParams = searchParams;
-      route.emit();
-    }
-  }
+  onMount(() => {
+    //console.log("onMount",router.searchParams, router.path);
+    filterBy.set(Object.fromEntries(router.searchParams.entries()));
+    filterBy.subscribe(s => (router.searchParams = s));
+  });
 </script>
 
 <h2 class="routetitle">Articles</h2>
