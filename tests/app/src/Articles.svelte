@@ -14,9 +14,8 @@
   
   onMount(() => {
     searchParams = router.searchParams;
-    filterBy.name = searchParams.get("name");
-
-    sortBy.set(searchParams); 
+    //filterBy.name = searchParams.get("name");
+    filterBy.set(searchParams); 
   });
 
   $: {
