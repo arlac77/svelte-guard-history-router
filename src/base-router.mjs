@@ -37,9 +37,10 @@ import { nameValueStore, NAVIGATION_EVENT } from "./util.mjs";
  * @property {string} base url
  */
 export class BaseRouter extends BaseTransition {
-
   linkNodes = new Set();
   subscriptions = new Set();
+  searchParamSubscriptions = new Set();
+
   keys = {};
 
   constructor(routes, base) {
@@ -156,6 +157,10 @@ export class BaseRouter extends BaseTransition {
   set path(path) {
     this.state = matcher(this.routes, decodeURI(path));
     history.replaceState(undefined, undefined, this.base + path);
+
+    this.searchParamSubscriptions.forEach(subscription =>
+      subscription(Object.fromEntries(this.searchParams))
+    );
   }
 
   /**
@@ -239,6 +244,18 @@ export class BaseRouter extends BaseTransition {
 
   emit() {
     this.subscriptions.forEach(subscription => subscription(this));
+  }
+
+  get searchParamStore() {
+    return {
+      set: searchParams => (this.searchParams = searchParams),
+
+      subscribe: subscription => {
+        this.searchParamSubscriptions.add(subscription);
+        subscription(Object.fromEntries(this.searchParams));
+        return () => this.searchParamSubscriptions.delete(subscription);
+      }
+    };
   }
 
   /**

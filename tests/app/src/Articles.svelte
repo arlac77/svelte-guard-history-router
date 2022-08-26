@@ -9,13 +9,7 @@
   const route = router.route;
 
   const sortBy = writable({});
-  const filterBy = writable({});
-
-  onMount(() => {
-    //console.log("onMount",router.searchParams, router.path);
-    filterBy.set(Object.fromEntries(router.searchParams.entries()));
-    filterBy.subscribe(s => (router.searchParams = s));
-  });
+  const filterBy = router.searchParamStore;
 </script>
 
 <h2 class="routetitle">Articles</h2>
