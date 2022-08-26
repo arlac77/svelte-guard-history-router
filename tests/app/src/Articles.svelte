@@ -7,7 +7,6 @@
   export let router;
 
   const route = router.route;
-  const articles = route.value;
   let filter;
   let searchParams;
 
@@ -30,7 +29,6 @@
   function doFilter(x) {
     return filter ? x.name.match(filter) : true;
   }
-
 </script>
 
 <h2 class="routetitle">Articles</h2>
@@ -43,7 +41,7 @@
     <th id="price" use:sortable={sortBy}>Price</th>
   </thead>
   <tbody>
-    {#each articles
+    {#each route.value
       .filter(doFilter)
       .sort(sorter($sortBy)) as article (article.name)}
       <tr>
