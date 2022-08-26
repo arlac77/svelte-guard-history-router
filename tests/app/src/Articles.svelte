@@ -9,8 +9,8 @@
   const route = router.route;
   let searchParams;
 
-  const sortBy = writable({});
-  const filterBy = writeable({});
+  const sortBy   = writable({});
+  const filterBy = writable({});
   
   onMount(() => {
     searchParams = router.searchParams;
