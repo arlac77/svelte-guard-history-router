@@ -1,33 +1,30 @@
 <script>
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
-  import { sortable, sorter } from "svelte-common";
+  import { sortable, sorter, filter } from "svelte-common";
   import { Link, ObjectLink } from "../../../src/index.svelte";
 
   export let router;
 
   const route = router.route;
-  let filter;
   let searchParams;
 
   const sortBy = writable({});
-
+  const filterBy = writeable({});
+  
   onMount(() => {
     searchParams = router.searchParams;
-    filter = searchParams.get("name");
+    filterBy.name = searchParams.get("name");
+
     sortBy.set(searchParams); 
   });
 
   $: {
-    if (searchParams) {
-      searchParams.set("name", filter);
+    if (searchParams && filterBy.name) {
+      searchParams.set("name", filterBy.name);
       router.searchParams = searchParams;
       route.emit();
     }
-  }
-
-  function doFilter(x) {
-    return filter ? x.name.match(filter) : true;
   }
 </script>
 
@@ -36,13 +33,13 @@
   <thead>
     <th id="name" use:sortable={sortBy}
       >Name
-      <input id="filter" placeholder="Filter" bind:value={filter} />
+      <input id="filter" placeholder="Filter" bind:value={$filterBy.name} />
     </th>
     <th id="price" use:sortable={sortBy}>Price</th>
   </thead>
   <tbody>
     {#each route.value
-      .filter(doFilter)
+      .filter(filter($filterBy))
       .sort(sorter($sortBy)) as article (article.name)}
       <tr>
         <td>
