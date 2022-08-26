@@ -24,13 +24,11 @@ export class BaseTransition {
       path = path.substring(0, i);
     }
 
-    const sp =
+    const sp = (
       searchParams instanceof URLSearchParams
-        ? searchParams.toString()
-        : Object.entries(searchParams)
-            .filter(([k, v]) => v.length > 0)
-            .map(([k, v]) => `${k}=${v}`)
-            .join("&");
+        ? searchParams
+        : new URLSearchParams(Object.entries(searchParams))
+    ).toString();
 
     this.path = sp.length > 0 ? `${path}?${sp}` : path;
   }
