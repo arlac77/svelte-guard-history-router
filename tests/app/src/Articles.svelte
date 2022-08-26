@@ -14,13 +14,13 @@
 
   onMount(() => {
     searchParams = router.searchParams;
-    filter = searchParams.get("q");
+    filter = searchParams.get("name");
     sortBy.set(searchParams); 
   });
 
   $: {
     if (searchParams) {
-      searchParams.set("q", filter);
+      searchParams.set("name", filter);
       router.searchParams = searchParams;
       route.emit();
     }
