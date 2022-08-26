@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from "svelte";
   import { writable } from "svelte/store";
   import { sortable, sorter, filter } from "svelte-common";
   import { Link, ObjectLink } from "../../../src/index.svelte";
@@ -15,11 +14,18 @@
 <h2 class="routetitle">Articles</h2>
 <table class="bordered">
   <thead>
-    <th id="name" use:sortable={sortBy}
-      >Name
-      <input id="filter" placeholder="Filter" bind:value={$filterBy.name} />
-    </th>
-    <th id="price" use:sortable={sortBy}>Price</th>
+    <tr>
+      <th id="name" use:sortable={sortBy}>Name </th>
+      <th id="price" use:sortable={sortBy}>Price</th>
+    </tr>
+    <tr>
+      <th>
+        <input id="filter" placeholder="Filter" bind:value={$filterBy.name} />
+      </th>
+      <th>
+        <input id="filter" placeholder="Filter" bind:value={$filterBy.price} />
+      </th>
+    </tr>
   </thead>
   <tbody>
     {#each route.value

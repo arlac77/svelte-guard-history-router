@@ -27,7 +27,11 @@ export class BaseTransition {
     const sp = (
       searchParams instanceof URLSearchParams
         ? searchParams
-        : new URLSearchParams(Object.entries(searchParams))
+        : new URLSearchParams(
+            Object.fromEntries(
+              Object.entries(searchParams).filter(([k, v]) => v?.length > 0)
+            )
+          )
     ).toString();
 
     this.path = sp.length > 0 ? `${path}?${sp}` : path;
