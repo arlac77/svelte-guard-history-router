@@ -6,7 +6,6 @@
   export let router;
 
   const route = router.route;
-  const categories = route.value;
 
   const sortBy = writable({});
 </script>
@@ -18,7 +17,7 @@
     <th id="name" use:sortable={sortBy}>Name</th>
   </thead>
   <tbody>
-    {#each categories.sort(sorter($sortBy)) as category (category.name)}
+    {#each route.value.sort(sorter($sortBy)) as category (category.name)}
       <tr>
         <td>
           <ObjectLink object={category} />
