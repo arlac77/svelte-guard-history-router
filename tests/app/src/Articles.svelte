@@ -15,7 +15,7 @@
 <table class="bordered">
   <thead>
     <tr>
-      <th id="name" use:sortable={sortBy}>Name </th>
+      <th id="name" use:sortable={sortBy}>Name</th>
       <th id="price" use:sortable={sortBy}>Price</th>
     </tr>
     <tr>
