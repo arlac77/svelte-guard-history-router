@@ -5,8 +5,6 @@
 
   export let router;
 
-  const route = router.route;
-
   const sortBy = writable({});
   const filterBy = router.searchParamStore;
 </script>
@@ -28,7 +26,7 @@
     </tr>
   </thead>
   <tbody>
-    {#each route.value
+    {#each router.value
       .filter(filter($filterBy))
       .sort(sorter($sortBy)) as article (article.name)}
       <tr>
