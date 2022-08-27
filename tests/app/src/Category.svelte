@@ -3,8 +3,7 @@
 
   export let router;
 
-  const route = router.route;
-  const category = route.value;
+  const category = router.value;
 </script>
 
 {#if category}
