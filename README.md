@@ -425,7 +425,7 @@ Replaces the search part of the path with the given searchParams.
 
 #### Parameters
 
-*   `searchParams` **URLSearchParams**&#x20;
+*   `searchParams` **(URLSearchParams | [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object))**&#x20;
 
 ### nest
 
