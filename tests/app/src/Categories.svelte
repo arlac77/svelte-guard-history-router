@@ -1,11 +1,10 @@
 <script>
-  import { writable } from "svelte/store";
   import { sortable, sorter } from "svelte-common";
   import { ObjectLink } from "../../../src/index.svelte";
 
   export let router;
 
-  const sortBy = writable({});
+  const sortBy = router.searchParamStore;
 </script>
 
 <h2 class="routetitle">Categories</h2>
