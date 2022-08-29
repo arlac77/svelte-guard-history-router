@@ -38,7 +38,7 @@ test("click arund", async t => {
 
     const title = Selector(".routetitle");
 
-    await t.wait(3000);
+    await t.wait(3500);
 
     await t.expect(title.innerText).contains(l.title);
 
