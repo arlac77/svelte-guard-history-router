@@ -45,7 +45,7 @@
     "c8": "^7.12.0",
     "documentation": "^14.0.0",
     "jsdom": "^20.0.0",
-    "mf-styling": "^1.7.4",
+    "mf-styling": "^1.7.5",
     "npm-pkgbuild": "^10.14.8",
     "semantic-release": "^19.0.5",
     "svelte": "^3.49.0",
