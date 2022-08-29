@@ -40,6 +40,14 @@ export class BaseRouter extends BaseTransition {
   linkNodes = new Set();
   subscriptions = new Set();
   searchParamSubscriptions = new Set();
+  #searchParmStore = {
+    set: searchParams => (this.searchParams = searchParams),
+    subscribe: subscription => {
+      this.searchParamSubscriptions.add(subscription);
+      subscription(Object.fromEntries(this.searchParams));
+      return () => this.searchParamSubscriptions.delete(subscription);
+    }
+  };
 
   keys = {};
 
@@ -94,6 +102,10 @@ export class BaseRouter extends BaseTransition {
     window.addEventListener("popstate", event =>
       this.replace(window.location.pathname.slice(this.base.length))
     );
+  }
+
+  get searchParmStore() {
+    return this.#searchParmStore;
   }
 
   compile() {
@@ -244,18 +256,6 @@ export class BaseRouter extends BaseTransition {
 
   emit() {
     this.subscriptions.forEach(subscription => subscription(this));
-  }
-
-  get searchParamStore() {
-    return {
-      set: searchParams => (this.searchParams = searchParams),
-
-      subscribe: subscription => {
-        this.searchParamSubscriptions.add(subscription);
-        subscription(Object.fromEntries(this.searchParams));
-        return () => this.searchParamSubscriptions.delete(subscription);
-      }
-    };
   }
 
   /**
