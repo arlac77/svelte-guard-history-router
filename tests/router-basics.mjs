@@ -89,7 +89,7 @@ test.serial("searchParamsStore", async t => {
 
   let sp;
 
-  router.searchParmStore.subscribe(params => {
+  router.searchParamStore.subscribe(params => {
     sp = params;
   });
 

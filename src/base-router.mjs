@@ -40,7 +40,7 @@ export class BaseRouter extends BaseTransition {
   linkNodes = new Set();
   subscriptions = new Set();
   searchParamSubscriptions = new Set();
-  #searchParmStore = {
+  #searchParamStore = {
     set: searchParams => (this.searchParams = searchParams),
     subscribe: subscription => {
       this.searchParamSubscriptions.add(subscription);
@@ -104,8 +104,8 @@ export class BaseRouter extends BaseTransition {
     );
   }
 
-  get searchParmStore() {
-    return this.#searchParmStore;
+  get searchParamStore() {
+    return this.#searchParamStore;
   }
 
   compile() {
