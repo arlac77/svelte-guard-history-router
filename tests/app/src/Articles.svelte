@@ -1,12 +1,11 @@
 <script>
-  import { writable } from "svelte/store";
-  import { sortable, sorter, filter } from "svelte-common";
+  import { sortable, sorter, filter, keyPrefixStore } from "svelte-common";
   import { Link, ObjectLink } from "../../../src/index.svelte";
 
   export let router;
 
-  const sortBy = writable({});
-  const filterBy = router.searchParamStore;
+  const sortBy = keyPrefixStore(router.searchParamStore, "sort.");
+  const filterBy = keyPrefixStore(router.searchParamStore, "filter.");
 </script>
 
 <h2 class="routetitle">Articles</h2>
@@ -18,10 +17,18 @@
     </tr>
     <tr>
       <th>
-        <input id="filter" placeholder="Filter name" bind:value={$filterBy.name} />
+        <input
+          id="filter"
+          placeholder="Filter name"
+          bind:value={$filterBy.name}
+        />
       </th>
       <th>
-        <input id="filter" placeholder="Filter price" bind:value={$filterBy.price} />
+        <input
+          id="filter"
+          placeholder="Filter price"
+          bind:value={$filterBy.price}
+        />
       </th>
     </tr>
   </thead>
