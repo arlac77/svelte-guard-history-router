@@ -18,14 +18,14 @@
     <tr>
       <th>
         <input
-          id="filter"
+          id="filter.name"
           placeholder="Filter name"
           bind:value={$filterBy.name}
         />
       </th>
       <th>
         <input
-          id="filter"
+          id="filter.price"
           placeholder="Filter price"
           bind:value={$filterBy.price}
         />
