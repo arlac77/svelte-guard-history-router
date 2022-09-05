@@ -33,7 +33,7 @@ export function dispatchNavigationEvent(event) {
 }
 
 /**
- * Create a named object wich can act as a store.
+ * Create a named object which also acts as a store.
  * @param {string} name
  * @param {any} value initial value
  * @property {any} value
