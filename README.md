@@ -757,7 +757,7 @@ Dispatches a NAVIGATION\_EVENT with pathname and hash
 
 ## nameValueStore
 
-Create a named object wich can act as a store.
+Create a named object which also acts as a store.
 
 ### Parameters
 
