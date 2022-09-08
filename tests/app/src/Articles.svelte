@@ -12,24 +12,20 @@
 <table class="bordered">
   <thead>
     <tr>
-      <th id="name" use:sortable={sortBy}>Name</th>
-      <th id="price" use:sortable={sortBy}>Price</th>
-    </tr>
-    <tr>
-      <th>
-        <input
-          id="filter.name"
+      <th id="name" use:sortable={sortBy}
+        >Name<input
+          id="filter_name"
           placeholder="Filter name"
           bind:value={$filterBy.name}
-        />
-      </th>
-      <th>
-        <input
-          id="filter.price"
+        /></th
+      >
+      <th id="price" use:sortable={sortBy}
+        >Price<input
+          id="filter_price"
           placeholder="Filter price"
           bind:value={$filterBy.price}
-        />
-      </th>
+        /></th
+      >
     </tr>
   </thead>
   <tbody>
