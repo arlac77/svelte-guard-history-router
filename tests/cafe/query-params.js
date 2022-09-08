@@ -1,7 +1,7 @@
 import { Selector } from "testcafe";
 import { base, login } from "./helpers/util.js";
 
-fixture`Query Params`.page`${base}article?name=Pizza`;
+fixture`Query Params`.page`${base}article?filter.name=Pizza`;
 
 test("query params extracted", async t => {
   const title = Selector(".routetitle");
@@ -9,7 +9,8 @@ test("query params extracted", async t => {
   await login(t);
 
   await t.expect(title.innerText).eql("Articles");
-  await t.expect(Selector("#filter").value).eql("Pizza");
+  
+  await t.expect(Selector("#filter.name").value).eql("Pizza");
 
-  await t.typeText("#filter", "Hot", { replace: true });
+  await t.typeText("#filter.name", "Hot", { replace: true });
 });
