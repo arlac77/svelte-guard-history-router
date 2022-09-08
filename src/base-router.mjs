@@ -265,7 +265,7 @@ export class BaseRouter extends BaseTransition {
 
     const href = node.getAttribute("href");
 
-    if (this.path.startsWith(href)) {
+    if (href !== "/" && this.path.startsWith(href)) {
       node.classList.add("active");
     }
   }
