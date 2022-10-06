@@ -46,12 +46,12 @@
     "documentation": "^14.0.0",
     "jsdom": "^20.0.0",
     "mf-styling": "^1.7.23",
-    "npm-pkgbuild": "^10.15.2",
+    "npm-pkgbuild": "^10.15.3",
     "semantic-release": "^19.0.5",
     "svelte": "^3.50.1",
     "svelte-common": "^4.19.7",
     "testcafe": "^2.0.1",
-    "vite": "^3.1.4"
+    "vite": "^3.1.5"
   },
   "optionalDependencies": {
     "mf-hosting": "^1.7.3"
