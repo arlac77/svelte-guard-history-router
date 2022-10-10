@@ -51,7 +51,7 @@
     "svelte": "^3.50.1",
     "svelte-common": "^4.19.7",
     "testcafe": "^2.0.1",
-    "vite": "^3.1.6"
+    "vite": "^3.1.7"
   },
   "optionalDependencies": {
     "mf-hosting": "^1.7.3"
