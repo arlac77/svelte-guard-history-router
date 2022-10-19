@@ -46,7 +46,7 @@
     "documentation": "^14.0.0",
     "jsdom": "^20.0.0",
     "mf-styling": "^1.7.23",
-    "npm-pkgbuild": "^10.15.6",
+    "npm-pkgbuild": "^10.15.7",
     "semantic-release": "^19.0.5",
     "svelte": "^3.52.0",
     "svelte-common": "^4.19.7",
