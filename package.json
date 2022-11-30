@@ -49,7 +49,7 @@
     "npm-pkgbuild": "^10.15.17",
     "semantic-release": "^19.0.5",
     "svelte": "^3.53.1",
-    "svelte-common": "^4.19.13",
+    "svelte-common": "^4.19.14",
     "testcafe": "^2.1.0",
     "vite": "^3.2.4"
   },
