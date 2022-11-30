@@ -45,11 +45,11 @@
     "c8": "^7.12.0",
     "documentation": "^14.0.0",
     "jsdom": "^20.0.3",
-    "mf-styling": "^1.7.24",
+    "mf-styling": "^1.7.26",
     "npm-pkgbuild": "^10.15.17",
     "semantic-release": "^19.0.5",
     "svelte": "^3.53.1",
-    "svelte-common": "^4.19.17",
+    "svelte-common": "^4.19.18",
     "testcafe": "^2.1.0",
     "vite": "^3.2.4"
   },
