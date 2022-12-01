@@ -2,4 +2,6 @@
   export let router;
 </script>
 
-<h1 class="routetitle">Waiting for {router.nested.path} to load...</h1>
+<div class="canvas">
+  <h1 class="routetitle">Waiting for {router.nested.path} to load...</h1>
+</div>

@@ -13,3 +13,7 @@
   background-color: var(--color-accent-300);
   font-weight: bold;
 }
+
+.canvas {
+  margin: 1em;
+}
