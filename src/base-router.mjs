@@ -42,14 +42,6 @@ export class BaseRouter extends BaseTransition {
   keys = {};
 
   #searchParamSubscriptions = new Set();
-  searchParamStore = {
-    set: searchParams => (this.searchParams = searchParams),
-    subscribe: subscription => {
-      this.#searchParamSubscriptions.add(subscription);
-      subscription(Object.fromEntries(this.searchParams));
-      return () => this.#searchParamSubscriptions.delete(subscription);
-    }
-  };
 
   constructor(routes, base) {
     super();
@@ -102,6 +94,15 @@ export class BaseRouter extends BaseTransition {
     window.addEventListener("popstate", event =>
       this.replace(window.location.pathname.slice(this.base.length))
     );
+
+    this.searchParamStore = {
+      set: searchParams => (this.searchParams = searchParams),
+      subscribe: subscription => {
+        this.#searchParamSubscriptions.add(subscription);
+        subscription(Object.fromEntries(this.searchParams));
+        return () => this.#searchParamSubscriptions.delete(subscription);
+      }
+    };
   }
 
   compile() {
