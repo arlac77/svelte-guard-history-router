@@ -85,13 +85,12 @@ test.serial("delete searchParams empty", async t => {
 
 test.serial("searchParamsStore", async t => {
   const router = new BaseRouter([new MasterRoute("/other spaces")], "");
-  router.path = "/other%20spaces?q=a";
 
   let sp;
 
-  router.searchParamStore.subscribe(params => {
-    sp = params;
-  });
+  router.searchParamStore.subscribe(params => (sp = params));
+
+  router.path = "/other%20spaces?q=a";
 
   t.deepEqual(sp, { q: "a" });
 });
