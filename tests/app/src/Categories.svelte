@@ -13,7 +13,11 @@
 
   <table class="bordered">
     <thead>
-      <th id="name" use:sortable={sortBy}>Name</th>
+      <th id="name" use:sortable={sortBy}>Name<input
+        id="filter_name"
+        placeholder="Filter name"
+        bind:value={$filterBy.name}
+      /></th>
     </thead>
     <tbody>
       {#each router.value
