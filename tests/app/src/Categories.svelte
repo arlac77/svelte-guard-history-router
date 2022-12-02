@@ -4,8 +4,8 @@
 
   export let router;
 
-  const sortBy = keyPrefixStore(router.searchParamStore, "sort.");
-  const filterBy = keyPrefixStore(router.searchParamStore, "filter.");
+  const sortBy = keyPrefixStore(router.searchParamStore, "sort:");
+  const filterBy = keyPrefixStore(router.searchParamStore, "filter:");
 </script>
 
 <div class="canvas">
