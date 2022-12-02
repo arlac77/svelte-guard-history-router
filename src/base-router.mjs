@@ -41,7 +41,7 @@ export class BaseRouter extends BaseTransition {
   subscriptions = new Set();
   keys = {};
 
-  #searchParamSubscriptions = new Set();
+  searchParamSubscriptions = new Set();
 
   constructor(routes, base) {
     super();
@@ -98,9 +98,9 @@ export class BaseRouter extends BaseTransition {
     this.searchParamStore = {
       set: searchParams => (this.searchParams = searchParams),
       subscribe: subscription => {
-        this.#searchParamSubscriptions.add(subscription);
+        this.searchParamSubscriptions.add(subscription);
         subscription(Object.fromEntries(this.searchParams));
-        return () => this.#searchParamSubscriptions.delete(subscription);
+        return () => this.searchParamSubscriptions.delete(subscription);
       }
     };
   }
@@ -256,7 +256,7 @@ export class BaseRouter extends BaseTransition {
 
   emitSearchParams()
   {
-    this.#searchParamSubscriptions.forEach(subscription =>
+    this.searchParamSubscriptions.forEach(subscription =>
       subscription(Object.fromEntries(this.searchParams))
     );
   }
