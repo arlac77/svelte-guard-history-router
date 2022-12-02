@@ -102,7 +102,6 @@ export class BaseRouter extends BaseTransition {
         return () => this.searchParamSubscriptions.delete(subscription);
       }
     };
-  
   }
 
   compile() {
@@ -167,9 +166,7 @@ export class BaseRouter extends BaseTransition {
     this.state = matcher(this.routes, decodeURI(path));
     history.replaceState(undefined, undefined, this.base + path);
 
-    this.searchParamSubscriptions.forEach(subscription =>
-      subscription(Object.fromEntries(this.searchParams))
-    );
+    this.emitSearchParams();
   }
 
   /**
@@ -208,6 +205,7 @@ export class BaseRouter extends BaseTransition {
     }
 
     this.emit();
+    this.emitSearchParams();
 
     this.linkNodes.forEach(n => this.updateActive(n));
   }
@@ -253,6 +251,13 @@ export class BaseRouter extends BaseTransition {
 
   emit() {
     this.subscriptions.forEach(subscription => subscription(this));
+  }
+
+  emitSearchParams()
+  {
+    this.searchParamSubscriptions.forEach(subscription =>
+      subscription(Object.fromEntries(this.searchParams))
+    );
   }
 
   /**
