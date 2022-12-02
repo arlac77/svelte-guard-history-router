@@ -12,6 +12,7 @@
   setContext(ROUTER, router);
 
   onMount(() => {
+    router.push(router.path);
     initialized(router);
   });
 </script>
