@@ -17,15 +17,15 @@ svelte guarded history router
 
 # Features
 
-*   Named params `article/:id`
-*   Guards to act when entering or leaving a route
-*   Automatic route ranking (more specific routes have higher priority)
-*   Routes and keys acting as stores
-*   Nested Routes with relative paths for route composition (Shared Leave Routes)
-*   Route values
-*   Object <=> parameter mapping
-*   Create links from objects
-*   Standart `<a href="/home">Home</a>` elements
+* Named params `article/:id`
+* Guards to act when entering or leaving a route
+* Automatic route ranking (more specific routes have higher priority)
+* Routes and keys acting as stores
+* Nested Routes with relative paths for route composition (Shared Leave Routes)
+* Route values
+* Object <=> parameter mapping
+* Create links from objects
+* Standart `<a href="/home">Home</a>` elements
 
 ## Shared Leave Routes
 
