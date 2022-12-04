@@ -2,6 +2,7 @@ import test from "ava";
 import { JSDOM } from "jsdom";
 import { BaseRouter } from "../src/base-router.mjs";
 import { MasterRoute } from "../src/master-route.mjs";
+import {} from "./helpers/jsdom.mjs";
 
 test.beforeEach(() => {
   const dom = new JSDOM(``, {

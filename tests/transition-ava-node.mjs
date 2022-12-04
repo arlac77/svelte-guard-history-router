@@ -1,6 +1,7 @@
 import test from "ava";
 import { Transition } from "../src/transition.mjs";
 import { setupRouter } from "./helpers/setup.mjs";
+import {} from "./helpers/jsdom.mjs";
 
 test("transition basics", async t => {
   const { router } = setupRouter();

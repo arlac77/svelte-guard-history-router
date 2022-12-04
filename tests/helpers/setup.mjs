@@ -1,16 +1,8 @@
-import { JSDOM } from "jsdom";
 import { SkeletonRoute } from "../../src/routes.mjs";
 import { MasterRoute } from "../../src/master-route.mjs";
 import { DetailRoute } from "../../src/detail-route.mjs";
 import { BaseRouter } from "../../src/base-router.mjs";
 import { redirectGuard } from "../../src/guard.mjs";
-
-const dom = new JSDOM(``, {
-  url: "https://example.org/"
-});
-
-globalThis.window = dom.window;
-globalThis.history = dom.window.history;
 
 function Component(name) {
   return { name };

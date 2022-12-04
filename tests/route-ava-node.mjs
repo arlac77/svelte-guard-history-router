@@ -2,8 +2,10 @@ import test from "ava";
 import { compile } from "multi-path-matcher";
 
 import { setupRouter } from "./helpers/setup.mjs";
+import {} from "./helpers/jsdom.mjs";
 import { SkeletonRoute } from "../src/routes.mjs";
 import { Transition } from "../src/transition.mjs";
+
 
 test("route constructor", t => {
   const guard = {};
