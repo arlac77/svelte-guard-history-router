@@ -1,5 +1,6 @@
 import test from "ava";
 import { Transition } from "../src/transition.mjs";
+import { SkeletonRoute } from "../src/routes.mjs";
 import { setupRouter } from "./helpers/setup.mjs";
 import {} from "./helpers/jsdom.mjs";
 
@@ -102,4 +103,25 @@ test("transition redirect + abort", async t => {
 
   //t.is(transition.nested,undefined);
   //t.is(router.route.path, "/protected");
+});
+
+test("route guard", async t => {
+  const { router } = setupRouter();
+
+  let parentGuardEntered = false;
+
+  const parent = new SkeletonRoute("/base", {
+    guard: {
+      toString: () => "test",
+      enter: transition => {
+        parentGuardEntered = transition;
+      }
+    }
+  });
+
+  const route = new SkeletonRoute("/a", { parent });
+  const transition = new Transition(router, "/base/a");
+  await route.enter(transition);
+
+  t.deepEqual(parentGuardEntered, transition);
 });

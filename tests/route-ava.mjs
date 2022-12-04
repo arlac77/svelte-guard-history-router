@@ -1,10 +1,6 @@
 import test from "ava";
 import { compile } from "multi-path-matcher";
-
-import { setupRouter } from "./helpers/setup.mjs";
-import {} from "./helpers/jsdom.mjs";
 import { SkeletonRoute } from "../src/routes.mjs";
-import { Transition } from "../src/transition.mjs";
 
 
 test("route constructor", t => {
@@ -51,27 +47,6 @@ test("route common ancestor", t => {
 
   const routeB = new SkeletonRoute("/b", { parent });
   t.is(routeB.commonAncestor(routeA), parent);
-});
-
-test("route guard", async t => {
-  const { router } = setupRouter();
-
-  let parentGuardEntered = false;
-
-  const parent = new SkeletonRoute("/base", {
-    guard: {
-      toString: () => "test",
-      enter: transition => {
-        parentGuardEntered = transition;
-      }
-    }
-  });
-
-  const route = new SkeletonRoute("/a", { parent });
-  const transition = new Transition(router, "/base/a");
-  await route.enter(transition);
-
-  t.deepEqual(parentGuardEntered, transition);
 });
 
 test("route valueFor", t => {
