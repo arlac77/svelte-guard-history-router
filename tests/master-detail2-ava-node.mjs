@@ -3,7 +3,7 @@ import { Transition } from "../src/transition.mjs";
 import { setupRouter } from "./helpers/setup.mjs";
 import {} from "./helpers/jsdom.mjs";
 
-test.only("route master detail subscription", async t => {
+test("route master detail subscription", async t => {
   const { router, detail, model, master } = setupRouter();
 
   t.deepEqual(master.value, []);
