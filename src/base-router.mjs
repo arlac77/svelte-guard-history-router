@@ -123,11 +123,7 @@ export class BaseRouter extends BaseTransition {
    * @return {SvelteComponent}
    */
   get component() {
-    for (const o of [this.nested, this.route]) {
-      if (o?.component !== undefined) {
-        return o.component;
-      }
-    }
+    return this.nested?.component || this.route?.component;
   }
 
   /**
