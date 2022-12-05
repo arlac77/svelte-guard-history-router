@@ -2,7 +2,7 @@ import { Selector } from "testcafe";
 import { base, login } from "./helpers/util.js";
 
 fixture`Query Params`
-  .page`${base}article?filter:name=Pizza&sort:name=descending`;
+  .page`${base}article?filter:name=Pizza&sort.name=descending`;
 
 test("query params extracted", async t => {
   const title = Selector(".routetitle");
