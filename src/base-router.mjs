@@ -302,8 +302,8 @@ export class BaseRouter extends BaseTransition {
   /**
    * Find path for a given value.
    * @param {any} value
-   * @param {String} suffix to be appended
-   * @return {String} path + suffix
+   * @param {string} suffix to be appended
+   * @return {string} path + suffix
    */
   pathFor(value, suffix) {
     const route = this.routeFor(value);

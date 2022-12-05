@@ -50,7 +50,7 @@ class RootRoute {
   }
 
   /**
-   * @return {object} empty object
+   * @return {Object} empty object
    */
   get propertyMapping() {
     return {};
