@@ -141,7 +141,7 @@ export const categories = Object.values(articles).reduce((all, c) => {
   }
   all[c.category].articles.push(c);
   c.category = all[c.category];
-  if (c.ingredients == undefined) {
+  if (c.ingredients === undefined) {
     c.ingredients = [];
   }
   return all;
