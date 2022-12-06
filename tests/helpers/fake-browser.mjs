@@ -1,19 +1,22 @@
 if (!globalThis.window) {
-    const window = {
-      addEventListener() {},
-      location: {
-        pathname: "",
-        href: ""
-      }
-    };
-  
-    globalThis.window = window;
-  
-    const history = {
-      replaceState() {},
-      pushState() {}
-    };
-  
-    globalThis.history = history;
-  }
-  
+
+  const base = "http://example.com";
+
+  const window = {
+    addEventListener() {},
+
+    location: new URL(base)
+  };
+
+  globalThis.window = window;
+
+  const history = {
+    back() {},
+    replaceState(a, b, location) {
+      window.location = new URL(location, base);
+    },
+    pushState() {}
+  };
+
+  globalThis.history = history;
+}
