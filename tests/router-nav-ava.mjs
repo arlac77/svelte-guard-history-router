@@ -1,7 +1,7 @@
 import test from "ava";
 import { setupRouter } from "./helpers/setup.mjs";
 import { matcher } from "multi-path-matcher";
-import {} from "./helpers/jsdom.mjs";
+import {} from "./helpers/fake-browser.mjs";
 
 async function rtt(t, items) {
   const { router } = setupRouter();

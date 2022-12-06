@@ -1,5 +1,5 @@
 if (!globalThis.window) {
-  const base = "http://example.com";
+  const base = "https://example.org/";
   const listeners = { popstate: [], routeLink: [] };
 
   const window = {
@@ -50,6 +50,7 @@ if (!globalThis.window) {
       window.location = url;
     },
     pushState(state, unused, url) {
+      url = new URL(url, base);
       cs += 1;
       states.push({ state, url });
       window.location = url;

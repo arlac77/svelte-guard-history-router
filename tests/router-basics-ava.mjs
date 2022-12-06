@@ -1,22 +1,8 @@
 import test from "ava";
-import { JSDOM } from "jsdom";
 import { BaseRouter } from "../src/base-router.mjs";
 import { MasterRoute } from "../src/master-route.mjs";
-import {} from "./helpers/jsdom.mjs";
+import {} from "./helpers/fake-browser.mjs";
 
-test.beforeEach(() => {
-  const dom = new JSDOM(``, {
-    url: "https://example.org/"
-  });
-
-  globalThis.window = dom.window;
-  globalThis.history = dom.window.history;
-});
-
-/*test.afterEach(() => {
-  delete globalThis.window;
-  delete globalThis.history;
-});*/
 
 test.serial("router basics", t => {
   const router = new BaseRouter([], "/base");
