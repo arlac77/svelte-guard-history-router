@@ -2,7 +2,7 @@ import test from "ava";
 import { Transition } from "../src/transition.mjs";
 import { SkeletonRoute } from "../src/routes.mjs";
 import { setupRouter } from "./helpers/setup.mjs";
-import {} from "./helpers/jsdom.mjs";
+import {} from "./helpers/fake-browser.mjs";
 
 test("transition basics", async t => {
   const { router } = setupRouter();

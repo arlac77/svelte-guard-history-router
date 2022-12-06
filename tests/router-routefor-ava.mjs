@@ -1,6 +1,6 @@
 import test from "ava";
 import { Detail, Leaf, setupRouter } from "./helpers/setup.mjs";
-import {} from "./helpers/jsdom.mjs";
+import {} from "./helpers/fake-browser.mjs";
 
 function rft(t, object, expected) {
   const { router } = setupRouter();

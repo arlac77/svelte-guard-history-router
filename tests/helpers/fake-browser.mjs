@@ -2,7 +2,8 @@ if (!globalThis.window) {
     const window = {
       addEventListener() {},
       location: {
-        pathname: ""
+        pathname: "",
+        href: ""
       }
     };
   
