@@ -1,16 +1,9 @@
 import test from "ava";
-import { JSDOM } from "jsdom";
 import { MasterRoute } from "../src/master-route.mjs";
 import { DetailRoute } from "../src/detail-route.mjs";
 import { Transition } from "../src/transition.mjs";
 import { BaseRouter } from "../src/base-router.mjs";
-
-const dom = new JSDOM(``, {
-  url: "https://example.org/"
-});
-
-globalThis.window = dom.window;
-globalThis.history = dom.window.history;
+import {} from "./helpers/fake-browser.mjs";
 
 function mdSetup() {
   const values = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
