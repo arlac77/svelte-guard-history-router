@@ -50,6 +50,7 @@ export function setupModel() {
 
 export function setupRoutes() {
   const model = setupModel();
+
   const master = new MasterRoute("/master", {
     component: Component("MasterComponent"),
     objectInstance: Master,
@@ -95,7 +96,7 @@ export function setupRoutes() {
     needsLogin = false;
   }
 
-  return {
+  const routes = {
     master,
     detail,
     filler,
@@ -104,22 +105,31 @@ export function setupRoutes() {
     ext2,
     redirect,
     login,
-    model,
+    model
+  };
+
+  return {
+    ...routes,
+    routes,
     noLoginRequired
   };
 }
 
 export function setupRouter() {
   const all = setupRoutes();
-  const router = new BaseRouter([], "");
-  router.addRoute(all.master);
-  router.addRoute(all.detail);
-  router.addRoute(all.filler);
-  router.addRoute(all.leaf);
-  router.addRoute(all.ext1);
-  router.addRoute(all.ext2);
-  router.addRoute(all.redirect);
-  router.addRoute(all.login);
+  const router = new BaseRouter(
+   [
+      all.master,
+      all.detail,
+      all.filler,
+      all.leaf,
+      all.ext1,
+      all.ext2,
+      all.redirect,
+      all.login
+    ],
+    ""
+  );
 
   all.router = router;
   return all;
