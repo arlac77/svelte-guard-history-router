@@ -3,9 +3,13 @@ import { defineConfig } from "vite";
 import { extractFromPackage } from "npm-pkgbuild";
 
 export default defineConfig(async ({ command, mode }) => {
-  const res = extractFromPackage({
-    dir: new URL("./", import.meta.url).pathname
-  });
+  const res = extractFromPackage(
+    {
+      dir: new URL("./", import.meta.url).pathname,
+      mode
+    },
+    process.env
+  );
   const first = await res.next();
   const pkg = first.value;
   const properties = pkg.properties;
@@ -31,7 +35,7 @@ export default defineConfig(async ({ command, mode }) => {
     server: { host: true, ...open },
     build: {
       outDir: "../../../build",
-      target: "esnext",
+      target: "safari16",
       emptyOutDir: true,
       minify: production,
       sourcemap: true
