@@ -18,7 +18,7 @@
       subscription({
         object,
         href: router.pathFor(object, suffix),
-        linkComponent : route ? route.linkComponent : undefined
+        linkComponent : route?.linkComponent
       });
     }
   }
