@@ -1,7 +1,7 @@
 import { Selector } from "testcafe";
 
 export const base =
-  "http://localhost:4173/examples/svelte-guard-history-router/";
+  "http://localhost:5173/";
 
 export async function login(t) {
   if (await Selector("#submit").exists) {

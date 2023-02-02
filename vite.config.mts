@@ -20,8 +20,6 @@ export default defineConfig(async ({ command, mode }) => {
   process.env["VITE_DESCRIPTION"] = properties.description;
   process.env["VITE_VERSION"] = properties.version;
 
-  const open = process.env.CI ? {} : { open: base };
-
   return {
     base,
     root: "tests/app/src",
@@ -32,7 +30,7 @@ export default defineConfig(async ({ command, mode }) => {
         }
       })
     ],
-    server: { host: true, ...open },
+    server: { host: true },
     build: {
       outDir: "../../../build",
       target: "safari16",
