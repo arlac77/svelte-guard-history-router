@@ -1,5 +1,5 @@
 import { Selector } from "testcafe";
-import { base, login } from "./helpers/util.js";
+import { base, login } from "./helpers/util.mjs";
 
 fixture`Query Params`
   .page`${base}article?filter.name=Pizza&sort.name=descending`;

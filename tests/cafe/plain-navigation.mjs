@@ -1,6 +1,6 @@
 import { Selector, ClientFunction } from "testcafe";
-import { articles } from "../app/src/data.js";
-import { base, login } from "./helpers/util.js";
+import { articles } from "../app/src/data.mjs";
+import { base, login } from "./helpers/util.mjs";
 
 const getLocation = ClientFunction(() => window.location.href);
 const goBack = ClientFunction(() => window.history.back());

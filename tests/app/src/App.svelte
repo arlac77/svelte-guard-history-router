@@ -19,7 +19,7 @@
   import Home from "./Home.svelte";
   import NoWay from "./NoWay.svelte";
   import Waiting from "./Waiting.svelte";
-  import { articles, categories } from "./data.js";
+  import { articles, categories } from "./data.mjs";
   import { session } from "./session.mjs";
   import { base } from "./constants.mjs";
   import { articleDelay, categoryDelay, showState } from "./localStore.mjs";
