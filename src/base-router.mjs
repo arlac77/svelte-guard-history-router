@@ -39,9 +39,8 @@ import { nameValueStore, NAVIGATION_EVENT } from "./util.mjs";
 export class BaseRouter extends BaseTransition {
   linkNodes = new Set();
   subscriptions = new Set();
-  keys = {};
-
   searchParamSubscriptions = new Set();
+  keys = {};
 
   constructor(routes, base) {
     super();
