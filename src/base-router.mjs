@@ -54,7 +54,7 @@ export class BaseRouter extends BaseTransition {
     Object.defineProperties(this, {
       params: {
         set(np) {
-          for (const key of Object.keys(this.keys)) {
+          for (const [key, v] of Object.entries(this.keys)) {
             const value = np[key];
             if (params[key] !== value) {
               if (value === undefined) {
@@ -62,8 +62,7 @@ export class BaseRouter extends BaseTransition {
               } else {
                 params[key] = value;
               }
-              const k = this.keys[key];
-              k.value = value;
+              v.value = value;
             }
           }
         },
@@ -249,8 +248,7 @@ export class BaseRouter extends BaseTransition {
     this.subscriptions.forEach(subscription => subscription(this));
   }
 
-  emitSearchParams()
-  {
+  emitSearchParams() {
     this.searchParamSubscriptions.forEach(subscription =>
       subscription(Object.fromEntries(this.searchParams))
     );
