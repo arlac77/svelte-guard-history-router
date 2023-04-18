@@ -299,9 +299,6 @@ export class BaseRouter extends BaseTransition {
    * @return {string} path + suffix
    */
   pathFor(value, suffix) {
-    const route = this.routeFor(value);
-    if (route) {
-      return route.pathFor(value, suffix);
-    }
+    return this.routeFor(value)?.pathFor(value, suffix);
   }
 }

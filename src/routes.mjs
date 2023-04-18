@@ -71,7 +71,7 @@ class RootRoute {
 
   pathFor(value, suffix = "") {
     const properties = this.propertiesFor(value);
-    return this.path.replace(/:(\w+)/g, (m, name) => properties[name]) + suffix;
+    return properties && this.path.replace(/:(\w+)/g, (m, name) => properties[name]) + suffix;
   }
 }
 

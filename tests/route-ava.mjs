@@ -28,6 +28,12 @@ test("route pathFor", t => {
   t.is(route.pathFor({ key: "77" }, "#suffix"), "/77#suffix");
 });
 
+test("route pathFor unknown", t => {
+  const route = new SkeletonRoute("/:key", { propertyMapping: { key: "key" } });
+  compile([route]);
+  t.is(route.pathFor({ something: "else" }, "#suffix"), undefined);
+});
+
 test("route path", t => {
   const parent = new SkeletonRoute("/a");
   const route = new SkeletonRoute("/b", { parent });
