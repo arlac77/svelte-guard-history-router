@@ -1,5 +1,5 @@
 /**
- * Keeps the the node active state in sync.
+ * Keeps the node active state in sync.
  * @see {Router.updateActive}
  * @param {*} node
  * @param {Router} router
