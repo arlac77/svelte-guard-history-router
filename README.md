@@ -230,7 +230,7 @@ npm test
 
 *   **See**: {Router.updateActive}
 
-Keeps the the node active state in sync.
+Keeps the node active state in sync.
 
 ### Parameters
 
