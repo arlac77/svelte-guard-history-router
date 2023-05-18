@@ -15,7 +15,7 @@ export class DetailRoute extends ValueStoreRoute {
   }
 
   /**
-   * @return {any} 1st. entry
+   * @return {Promise<any>} 1st. entry
    */
   async first() {
     return this.master.value[0];
@@ -39,7 +39,7 @@ export class DetailRoute extends ValueStoreRoute {
   }
 
   /**
-   * @return {any} next value
+   * @return {Promise<any>} next value
    */
   async next() {
     const i = this.master.value.indexOf(this.value);

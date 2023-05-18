@@ -70,7 +70,7 @@ export class BaseTransition {
   /**
    * Abort the transition.
    * @param error
-   * @return {boolean} truen in case there was a nesten transition
+   * @return {Promise<boolean>} truen in case there was a nesten transition
    */
   async abort(error) {
     if (error) {

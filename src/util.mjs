@@ -1,7 +1,7 @@
 /**
  * Walks up the dom tree parents unti a node with a given attribute is found or the root node is reached.
  * @param {Element} element
- * @param {stringg} attributeName
+ * @param {string} attributeName
  * @returns {Element}
  */
 export function findClosestAttribute(element, attributeName) {
