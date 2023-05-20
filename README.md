@@ -450,7 +450,7 @@ Abort the transition.
 
 *   `error` &#x20;
 
-Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** truen in case there was a nesten transition
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)>** truen in case there was a nesten transition
 
 ## DetailRoute
 
@@ -470,7 +470,7 @@ Returns **Route** our master
 
 ### first
 
-Returns **any** 1st. entry
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<any>** 1st. entry
 
 ### last
 
@@ -482,7 +482,7 @@ Returns **any** previous value
 
 ### next
 
-Returns **any** next value
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<any>** next value
 
 ## Guard
 
@@ -743,7 +743,7 @@ Walks up the dom tree parents unti a node with a given attribute is found or the
 ### Parameters
 
 *   `element` **[Element](https://developer.mozilla.org/docs/Web/API/Element)**&#x20;
-*   `attributeName` **stringg**&#x20;
+*   `attributeName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
 Returns **[Element](https://developer.mozilla.org/docs/Web/API/Element)**&#x20;
 
