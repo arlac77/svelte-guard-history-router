@@ -159,7 +159,7 @@ export class BaseRouter extends BaseTransition {
    */
   set path(path) {
     this.state = matcher(this.routes, decodeURI(path));
-    history.replaceState(undefined, undefined, this.base + path);
+    history.replaceState(null, "", this.base + path);
 
     this.emitSearchParams();
   }
@@ -196,7 +196,7 @@ export class BaseRouter extends BaseTransition {
     this.nested = undefined;
 
     if (path !== undefined) {
-      history.pushState(undefined, undefined, this.base + path);
+      history.pushState(null, "", this.base + path);
     }
 
     this.emit();
@@ -257,7 +257,7 @@ export class BaseRouter extends BaseTransition {
   /**
    * Update the active state of a node.
    * A node is considered active if it shared the path prefix with the current route.
-   * @param {Node} node
+   * @param {Element} node
    */
   updateActive(node) {
     node.classList.remove("active");

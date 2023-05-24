@@ -1,7 +1,7 @@
 /**
  * Keeps the node active state in sync.
  * @see {Router.updateActive}
- * @param {*} node
+ * @param {Element} node
  * @param {Router} router
  */
 export function active(node, router) {
