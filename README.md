@@ -234,7 +234,7 @@ Keeps the node active state in sync.
 
 ### Parameters
 
-*   `node` **any**&#x20;
+*   `node` **[Element](https://developer.mozilla.org/docs/Web/API/Element)**&#x20;
 *   `router` **Router**&#x20;
 
 ## Key
@@ -380,7 +380,7 @@ A node is considered active if it shared the path prefix with the current route.
 
 #### Parameters
 
-*   `node` **[Node](https://developer.mozilla.org/docs/Web/API/Node/nextSibling)**&#x20;
+*   `node` **[Element](https://developer.mozilla.org/docs/Web/API/Element)**&#x20;
 
 ### addRoute
 
@@ -745,7 +745,7 @@ Walks up the dom tree parents unti a node with a given attribute is found or the
 *   `element` **[Element](https://developer.mozilla.org/docs/Web/API/Element)**&#x20;
 *   `attributeName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**&#x20;
 
-Returns **[Element](https://developer.mozilla.org/docs/Web/API/Element)**&#x20;
+Returns **([Element](https://developer.mozilla.org/docs/Web/API/Element) | [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined))**&#x20;
 
 ## dispatchNavigationEvent
 
