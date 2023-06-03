@@ -37,7 +37,7 @@
     "multi-path-matcher": "^2.3.3"
   },
   "devDependencies": {
-    "@semantic-release/commit-analyzer": "^9.0.2",
+    "@semantic-release/commit-analyzer": "^10.0.0",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/release-notes-generator": "^11.0.2",
     "@sveltejs/vite-plugin-svelte": "^2.4.1",
@@ -46,7 +46,7 @@
     "documentation": "^14.0.2",
     "mf-styling": "^1.7.57",
     "npm-pkgbuild": "^11.8.6",
-    "semantic-release": "^21.0.2",
+    "semantic-release": "^21.0.3s",
     "svelte": "^3.59.1",
     "svelte-common": "^4.22.21",
     "testcafe": "^2.6.2",
