@@ -46,7 +46,7 @@
     "documentation": "^14.0.2",
     "mf-styling": "^1.7.57",
     "npm-pkgbuild": "^11.8.6",
-    "semantic-release": "^21.0.3s",
+    "semantic-release": "^21.0.5",
     "svelte": "^3.59.1",
     "svelte-common": "^4.22.22",
     "testcafe": "^2.6.2",
