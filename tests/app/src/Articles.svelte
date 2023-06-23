@@ -37,7 +37,7 @@
           <td>
             <ObjectLink object={article} suffix="#price" />
           </td>
-          <td>
+          <td class="price">
             <Link href={router.pathFor(article)}>{article.price}</Link>
           </td>
         </tr>

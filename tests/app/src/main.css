@@ -17,3 +17,7 @@
 .canvas {
   margin: 1em;
 }
+
+.price {
+  text-align: right;
+}
