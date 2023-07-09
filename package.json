@@ -48,11 +48,11 @@
     "ava": "^5.3.1",
     "c8": "^8.0.0",
     "documentation": "^14.0.2",
-    "mf-styling": "^2.0.2",
+    "mf-styling": "^2.0.3",
     "npm-pkgbuild": "^11.8.14",
     "semantic-release": "^21.0.7",
     "svelte": "^4.0.5",
-    "svelte-common": "^6.1.0",
+    "svelte-common": "^6.1.2",
     "testcafe": "^3.0.1",
     "vite": "^4.4.2"
   },
