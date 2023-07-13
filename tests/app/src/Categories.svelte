@@ -19,7 +19,7 @@
         bind:value={$filterBy.name}
       /></th>
     </thead>
-    <tbody>
+    <tbody class="stiped hoverable">
       {#each router.value
         .filter(filter($filterBy))
         .sort(sorter($sortBy)) as category (category.name)}
