@@ -48,6 +48,8 @@ export class BaseRouter extends BaseTransition {
     this.routes = routes;
     this.base = base;
 
+    console.log("BASE", this.base);
+    
     let route;
     const params = {};
 

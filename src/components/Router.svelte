@@ -3,11 +3,10 @@
   import { ROUTER } from "../util.mjs";
   import { BaseRouter } from "../base-router.mjs";
 
-  export let routes = [];
-  export let base = "";
+  export let base;
   export let initialized = () => {};
 
-  const router = new BaseRouter(routes, base);
+  const router = new BaseRouter([], base || new URL('../..',import.meta.url).pathname);
 
   setContext(ROUTER, router);
 
