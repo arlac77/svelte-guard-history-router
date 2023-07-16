@@ -46,8 +46,8 @@ export class BaseRouter extends BaseTransition {
     super();
 
     this.routes = routes;
-    this.base = base;
 
+    this.base = base || new URL('../',import.meta.url).pathname;
     console.log("BASE", this.base);
     
     let route;

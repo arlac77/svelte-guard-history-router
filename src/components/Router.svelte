@@ -6,7 +6,7 @@
   export let base;
   export let initialized = () => {};
 
-  const router = new BaseRouter([], base || new URL('../..',import.meta.url).pathname);
+  const router = new BaseRouter([], base);
 
   setContext(ROUTER, router);
 
