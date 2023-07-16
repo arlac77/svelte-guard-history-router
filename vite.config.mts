@@ -21,7 +21,7 @@ export default defineConfig(async ({ command, mode }) => {
   process.env["VITE_VERSION"] = properties.version;
 
   return {
-   // base,
+    base,
     root: "tests/app/src",
     plugins: [
       svelte({
