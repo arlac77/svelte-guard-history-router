@@ -49,12 +49,12 @@
     "c8": "^8.0.0",
     "documentation": "^14.0.2",
     "mf-styling": "^3.0.1",
-    "npm-pkgbuild": "^11.8.14",
+    "npm-pkgbuild": "^11.9.1",
     "semantic-release": "^21.0.7",
     "svelte": "^4.0.5",
     "svelte-common": "^6.3.2",
     "testcafe": "^3.0.1",
-    "vite": "^4.4.2"
+    "vite": "^4.4.4"
   },
   "optionalDependencies": {
     "mf-hosting-cloudflare": "^1.0.5",
