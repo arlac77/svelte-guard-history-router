@@ -4,7 +4,6 @@
   import { BaseRouter } from "../base-router.mjs";
 
   export let base;
-  export let initialized = () => {};
 
   const router = new BaseRouter([], base);
 
@@ -12,7 +11,6 @@
 
   onMount(() => {
     router.push(router.path);
-    initialized(router);
   });
 </script>
 
