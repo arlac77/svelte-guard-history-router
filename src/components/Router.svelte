@@ -9,9 +9,7 @@
 
   setContext(ROUTER, router);
 
-  onMount(() => {
-    router.push(router.path);
-  });
+  onMount(() => router.push(router.path));
 </script>
 
 <slot />
