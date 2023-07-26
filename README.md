@@ -273,7 +273,7 @@ $aKey // fired if value of aKey changes
 ### Parameters
 
 *   `routes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<Route>** all managed routes
-*   `base` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** url
+*   `base` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** url (optional, default `new URL("../",import.meta.url).pathname`)
 
 ### Properties
 
