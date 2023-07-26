@@ -42,13 +42,12 @@ export class BaseRouter extends BaseTransition {
   searchParamSubscriptions = new Set();
   keys = {};
 
-  constructor(routes, base) {
+  constructor(routes, base=new URL("../", import.meta.url).pathname) {
     super();
 
     this.routes = routes;
+    this.base = base.replace(/\/$/,"");
 
-    this.base = base === undefined ? new URL('../',import.meta.url).pathname : base
-    
     let route;
     const params = {};
 
