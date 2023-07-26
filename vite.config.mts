@@ -30,7 +30,7 @@ export default defineConfig(async ({ command, mode }) => {
         }
       })
     ],
-    server: { host: true },
+    server: { host: true, hmr: { overlay: false } },
     build: {
       outDir: "../../../build",
       emptyOutDir: true,
