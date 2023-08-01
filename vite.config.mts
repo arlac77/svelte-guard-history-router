@@ -1,5 +1,6 @@
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { defineConfig } from "vite";
+import { compression } from "vite-plugin-compression2";
 import { extractFromPackage } from "npm-pkgbuild";
 
 export default defineConfig(async ({ command, mode }) => {
@@ -28,6 +29,11 @@ export default defineConfig(async ({ command, mode }) => {
         compilerOptions: {
           dev: !production
         }
+      }),
+      compression({
+        algorithm: "brotliCompress",
+        exclude: [/\.(br)$/, /\.(gz)$/, /\.(png)$/, /\.(jpg)$/],
+        threshold: 500
       })
     ],
     server: { host: true, hmr: { overlay: false } },

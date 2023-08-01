@@ -54,7 +54,8 @@
     "svelte": "^4.1.1",
     "svelte-common": "^6.5.0",
     "testcafe": "^3.0.1",
-    "vite": "^4.4.7"
+    "vite": "^4.4.7",
+    "vite-plugin-compression2": "^0.10.3"
   },
   "optionalDependencies": {
     "mf-hosting-cloudflare": "^1.0.5",
