@@ -50,11 +50,11 @@
     "documentation": "^14.0.2",
     "mf-styling": "^3.1.2",
     "npm-pkgbuild": "^13.0.7",
-    "semantic-release": "^22.0.9",
+    "semantic-release": "^22.0.10",
     "svelte": "^4.2.8",
     "svelte-common": "^6.9.4",
     "testcafe": "^3.4.0",
-    "vite": "^5.0.4",
+    "vite": "^5.0.6",
     "vite-plugin-compression2": "^0.11.0"
   },
   "optionalDependencies": {
