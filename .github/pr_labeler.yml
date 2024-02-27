@@ -2,7 +2,7 @@ test:
   - tests/**/*
 documentation:
   - docs/**/*
-  - '**/*.md'
+  - "**/*.md"
 ci:
   - .github/workflows/*
   - .travis.yml
@@ -29,9 +29,9 @@ vscode:
 openapi:
   - openapi/*
 styling:
-  - '**/*.css'
+  - "**/*.css"
 systemd:
-  - '**/*.service'
-  - '**/*.path'
-  - '**/*.socket'
-  - '**/*.timer'
+  - "**/*.service"
+  - "**/*.path"
+  - "**/*.socket"
+  - "**/*.timer"
