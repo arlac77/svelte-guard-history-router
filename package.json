@@ -52,7 +52,7 @@
     "documentation": "^14.0.3",
     "mf-styling": "^3.1.6",
     "npm-pkgbuild": "^15.3.8",
-    "semantic-release": "^23.0.8",
+    "semantic-release": "^23.1.1",
     "svelte": "^4.2.16",
     "svelte-common": "^6.10.6",
     "testcafe": "^3.6.0",
