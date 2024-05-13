@@ -13,11 +13,15 @@
 
   <table class="bordered">
     <thead>
-      <th id="name" use:sortable={sortBy}>Name<input
-        id="filter_name"
-        placeholder="Filter name"
-        bind:value={$filterBy.name}
-      /></th>
+      <tr>
+        <th id="name" use:sortable={sortBy}
+          >Name<input
+            id="filter_name"
+            placeholder="Filter name"
+            bind:value={$filterBy.name}
+          /></th
+        >
+      </tr>
     </thead>
     <tbody class="stiped hoverable">
       {#each router.value

@@ -8,8 +8,10 @@
 <div class="background">
   <table>
     <thead>
-      <th>Transition</th>
-      <th>Nested</th>
+      <tr>
+        <th>Transition</th>
+        <th>Nested</th>
+      </tr>
     </thead>
     <tbody>
       {#if $router.nested !== undefined}
@@ -25,11 +27,13 @@
 
   <table>
     <thead>
-      <th>Routes</th>
-      <th>Guards</th>
-      <th>Keys</th>
-      <th>Component</th>
-      <th>Subscriptions</th>
+      <tr>
+        <th>Routes</th>
+        <th>Guards</th>
+        <th>Keys</th>
+        <th>Component</th>
+        <th>Subscriptions</th>
+      </tr>
     </thead>
     <tbody>
       {#each router.routes as r, i (i)}
@@ -46,7 +50,9 @@
 
   <table>
     <thead>
-      <th colspan="2">Properties</th>
+      <tr>
+        <th colspan="2">Properties</th>
+      </tr>
     </thead>
     <tbody>
       {#each Object.entries($router.params) as e (e[0])}
@@ -60,9 +66,11 @@
 
   <table>
     <thead>
-      <th>Key</th>
-      <th>Value</th>
-      <th>Subscriptions</th>
+      <tr>
+        <th>Key</th>
+        <th>Value</th>
+        <th>Subscriptions</th>
+      </tr>
     </thead>
     <tbody>
       {#each Object.values($router.keys) as key}
