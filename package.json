@@ -51,7 +51,7 @@
     "c8": "^9.1.0",
     "documentation": "^14.0.3",
     "mf-styling": "^3.1.6",
-    "npm-pkgbuild": "^15.3.10",
+    "npm-pkgbuild": "^15.3.12",
     "semantic-release": "^23.1.1",
     "svelte": "^5.0.0-next.131",
     "svelte-common": "^6.10.11",
