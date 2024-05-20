@@ -8,7 +8,8 @@
   "exports": {
     ".": {
       "svelte": "./src/index.svelte"
-    }
+    },
+    "./css": "./src/entitlement.css"
   },
   "description": "svelte router for SPA (history mode only)",
   "keywords": [
@@ -40,7 +41,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "multi-path-matcher": "^4.1.1"
+    "multi-path-matcher": "^4.1.1",
+    "svelte-dnd-action": "^0.9.47"
   },
   "devDependencies": {
     "@semantic-release/commit-analyzer": "^12.0.0",
