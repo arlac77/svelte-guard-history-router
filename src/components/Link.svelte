@@ -4,6 +4,6 @@
   export let href;
 </script>
 
-<a {href} on:click={dispatchNavigationEvent}>
+<a {href} onclick={dispatchNavigationEvent}>
   <slot />
 </a>
