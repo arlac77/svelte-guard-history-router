@@ -1,4 +1,4 @@
-[![Svelte v4](https://img.shields.io/badge/svelte-v4-orange.svg)](https://svelte.dev)
+[![Svelte v5](https://img.shields.io/badge/svelte-v5-orange.svg)](https://svelte.dev)
 [![npm](https://img.shields.io/npm/v/svelte-guard-history-router.svg)](https://www.npmjs.com/package/svelte-guard-history-router)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![bundlejs](https://deno.bundlejs.com/?q=svelte-guard-history-router\&badge=detailed)](https://bundlejs.com/?q=svelte-guard-history-router)
