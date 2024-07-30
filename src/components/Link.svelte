@@ -1,7 +1,6 @@
 <script>
   import { dispatchNavigationEvent } from "../util.mjs";
-
-  export let href;
+  let { href } = $props();
 </script>
 
 <a {href} onclick={dispatchNavigationEvent}>

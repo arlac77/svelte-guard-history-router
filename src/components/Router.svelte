@@ -3,7 +3,7 @@
   import { ROUTER } from "../util.mjs";
   import { BaseRouter } from "../base-router.mjs";
 
-  export let base;
+  let { base } = $props();
 
   const router = new BaseRouter([], base);
 

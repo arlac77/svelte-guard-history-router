@@ -5,13 +5,11 @@
   import { active } from "../active.mjs";
   import { SkeletonRoute } from "../routes.mjs";
 
-  export let path;
-  export let href = path;
-  export let factory = SkeletonRoute;
+  let { path, href=path, factory=SkeletonRoute, ...props } = $props();
 
   const route = new factory(path, {
     parent: getContext(ROUTE),
-    ...$$props
+    ...props
   });
 
   setContext(ROUTE, route);

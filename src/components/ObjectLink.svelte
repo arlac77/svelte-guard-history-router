@@ -1,10 +1,9 @@
 <script>
   import Link from "./Link.svelte";
-  import { getContext, beforeUpdate } from "svelte";
+  import { getContext } from "svelte";
   import { ROUTER } from "../util.mjs";
 
-  export let object;
-  export let suffix = "";
+  let { object, suffix = "" } = $props();
 
   const router = getContext(ROUTER);
 
@@ -18,7 +17,7 @@
       subscription({
         object,
         href: router.pathFor(object, suffix),
-        linkComponent : route?.linkComponent
+        linkComponent: route?.linkComponent
       });
     }
   }
@@ -31,7 +30,7 @@
     }
   };
 
-  beforeUpdate(async () => {
+  $effect.pre(async () => {
     const x = await object;
     if (x !== object) {
       execute(x);
@@ -45,9 +44,7 @@
 {#if $store.href}
   <Link href={$store.href}>
     {#if $store.linkComponent}
-      <svelte:component
-        this={$store.linkComponent}
-        object={$store.object} />
+      <svelte:component this={$store.linkComponent} object={$store.object} />
     {/if}
     <slot />
   </Link>
