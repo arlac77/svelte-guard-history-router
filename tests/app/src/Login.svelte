@@ -2,13 +2,15 @@
   import { onMount } from "svelte";
   import { setSession } from "./session.mjs";
 
-  export let router;
+  let { router } = $props();
 
-  let username = "user";
-  let password = "secret";
-  let message;
+  let username = $state("user");
+  let password = $state("secret");
+  let message = $state();
 
-  async function submit() {
+  async function onsubmit(event) {
+    event.preventDefault();
+
     try {
       await login(username, password);
       setSession({ username });
@@ -35,7 +37,7 @@
     document.getElementById("submit").focus();
   });
 
-  const handleKeyup = event => {
+  const onkeyup = event => {
     if (event.key === "Escape") {
       event.preventDefault();
       router.abort();
@@ -44,11 +46,11 @@
   };
 </script>
 
-<svelte:window on:keyup={handleKeyup} />
+<svelte:window {onkeyup} />
 
 <div class="center modal">
   <div class="window">
-    <form on:submit|preventDefault={submit}>
+    <form {onsubmit}>
       {#if message}
         <div id="message">{message}</div>
       {/if}

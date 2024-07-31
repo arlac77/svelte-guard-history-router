@@ -2,7 +2,7 @@
   import { sortable, sorter, filter, keyPrefixStore } from "svelte-common";
   import { Link, ObjectLink } from "../../../src/index.svelte";
 
-  export let router;
+  let { router } = $props();
 
   const sortBy = keyPrefixStore(router.searchParamStore, "sort.");
   const filterBy = keyPrefixStore(router.searchParamStore, "filter.");

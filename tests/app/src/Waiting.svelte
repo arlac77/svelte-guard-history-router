@@ -1,5 +1,5 @@
 <script>
-  export let router;
+  let { router } = $props();
 </script>
 
 <div class="canvas">

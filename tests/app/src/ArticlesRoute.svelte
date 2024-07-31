@@ -4,8 +4,7 @@
   import Article from "./Article.svelte";
   import ArticleLink from "./ArticleLink.svelte";
 
-  export let source;
-  export let guard;
+  let { source, guard } = $props();
 </script>
 
 <Route

@@ -1,17 +1,17 @@
 <script>
   import { ObjectLink } from "../../../src/index.svelte";
 
-  export let router;
+  let { router } = $props();
+
   const route = $router.route;
 
-  let article, next, previous;
+  let article = $state(),
+    next = $state(),
+    previous = $state();
 
-  $: {
-    article = $route.value;
-    next = $route.next();
-    previous = $route.previous();
-    // console.log("REACTIVE", next, previous);
-  }
+  article = route.value;
+  next = route.next();
+  previous = route.previous();
 </script>
 
 {#if article}
