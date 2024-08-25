@@ -1,4 +1,4 @@
-<script context="module">
+<script module>
   export { BaseRouter } from "./base-router.mjs";
   export { SkeletonRoute, ValueStoreRoute } from "./routes.mjs";
   export { MasterRoute } from "./master-route.mjs";
