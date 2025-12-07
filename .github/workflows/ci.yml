@@ -1,0 +1,76 @@
+name: CI
+on:
+  push:
+    branches:
+      - master
+      - next
+  pull_request:
+    branches:
+      - master
+      - next
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  test-node:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          - 24.11.1
+    steps:
+      - name: checkout
+        uses: actions/checkout@v6.0.1
+      - name: prepare node
+        uses: actions/setup-node@v6.1.0
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: --delete--
+          cache-dependency-path: --delete--
+      - name: install
+        run: npm ci
+      - name: test and coverage
+        run: npm run cover --if-present
+      - name: coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          flag-name: run-${{ matrix.test_number }}
+          path-to-lcov: build/coverage/lcov.info
+          parallel: true
+        continue-on-error: true
+  release:
+    needs:
+      - test-node
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: checkout
+        uses: actions/checkout@v6.0.1
+      - name: prepare node
+        uses: actions/setup-node@v6.1.0
+        with:
+          node-version: 24.11.1
+          cache: --delete--
+          cache-dependency-path: --delete--
+      - name: install
+        run: npm ci
+      - name: install dependencies
+        run: |
+          if [ ! -f /usr/bin/pacman ]
+          then
+          sudo apt-get update
+          sudo apt-get install ksh curl
+          wget https://github.com/ThePoorPilot/pacman-utils/releases/download/5.2.2-3_2.31-0/pacman-utils_5.2.2-3_amd64.deb
+          sudo apt-get install -f ./pacman-utils_5.2.2-3_amd64.deb
+          fi
+      - name: release
+        run: npx semantic-release
+        env:
+          CI: "true"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PKGBUILD_PUBLISH: ${{ secrets.PKGBUILD_PUBLISH }}
+          PKGEXT: .pkg.tar.xz
