@@ -1,10 +1,15 @@
-import { Selector, ClientFunction } from "testcafe";
+import { test, expect } from "@playwright/test";
 import { articles } from "../app/src/data.mjs";
 import { base, login } from "./helpers/util.mjs";
 
+test("test", async ({ page }) => {
+  await page.goto("http://localhost:5173/");
+});
+
+/*
 const getLocation = ClientFunction(() => window.location.href);
 const goBack = ClientFunction(() => window.history.back());
-
+*/
 const al = id => {
   return {
     path: `/article/${id}#price`,
@@ -26,8 +31,19 @@ const links = [
   al("12")
 ];
 
-fixture`Getting Started`.page`${base}`;
+test("click arund", async ({ page }) => {
+  await page.goto("http://localhost:5173/");
 
+  await page.getByRole("link", { name: "About" }).click();
+
+  await expect(page.getByRole("heading", { name: "About" })).toBeVisible();
+
+  const url = await page.url();
+
+  expect(url).toEqual("http://localhost:5173/about");
+});
+
+/*
 test("click arund", async t => {
   for (const l of links) {
     const a = Selector("a").withAttribute("href", l.path);
@@ -41,15 +57,6 @@ test("click arund", async t => {
     await t.wait(3500);
 
     await t.expect(title.innerText).contains(l.title);
-
-    /*
-    await t
-      .expect(*/
-    /* https://github.com/DevExpress/testcafe/issues/5449
-      keep comment until fixed */
-    /*   title.innerText
-      )
-      .contains(l.title);*/
 
     await t.expect(getLocation()).contains(l.path);
   }
@@ -74,7 +81,6 @@ test.page`${base}article/10#price`("article/10#price", async t => {
 
   await login(t);
 
-  //console.log(await t.getBrowserConsoleMessages());
 
   await t.expect(title.innerText).contains("Pizza Quattro Stagioni");
 });
@@ -84,17 +90,14 @@ test("navigate around", async t => {
 
   await t.navigateTo(`${base}about`).expect(title.innerText).eql("About");
 
-  //console.log(await getLocation());
 
   await t.navigateTo(`${base}article`);
 
-  //console.log(await getLocation());
 
   await login(t);
 
   await t.expect(title.innerText).eql("Articles");
 
-  //console.log(await getLocation());
 
   await t.expect(getLocation()).contains("article");
 
@@ -103,14 +106,7 @@ test("navigate around", async t => {
   await t.expect(getLocation()).contains("article/18");
   await t.expect(title.innerText).contains("Pizza Prosciutto");
 
-  //console.log(await getLocation());
-
   await goBack();
 
-  //console.log(await getLocation());
-  /* await t.expect(getLocation()).contains("article");
-  await t.expect(title.innerText).eql("Articles");
-  await t.expect(getLocation()).contains("about");
-  await t.expect(title.innerText).eql("About");
-*/
 });
+*/
