@@ -46,7 +46,7 @@
     "svelte-dnd-action": "^0.9.49"
   },
   "devDependencies": {
-    "@playwright/test": "^1.61.0",
+    "@playwright/test": "^1.61.1",
     "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/exec": "^7.1.0",
     "@semantic-release/github": "^12.0.8",
@@ -57,11 +57,11 @@
     "documentation": "^14.0.3",
     "mf-styling": "^3.3.21",
     "npm-pkgbuild": "^20.7.7",
-    "playwright": "^1.61.0",
+    "playwright": "^1.61.1",
     "semantic-release": "^25.0.5",
-    "svelte": "^5.56.3",
+    "svelte": "^5.56.4",
     "svelte-common": "^6.19.80",
-    "vite": "^8.0.16",
+    "vite": "^8.1.0",
     "vite-plugin-compression2": "^2.5.3"
   },
   "peerDependencies": {
